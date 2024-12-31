@@ -1,8 +1,22 @@
-<bundle-side-card class="bundle-side-card--wrapper">
+<bundle-side-card class="bundle-side-card--wrapper is-empty animate--slide-in">
   <div class="card-header--wrapper">
     <h1>Card</h1>
+    <div class="header-right--wrapper">
+      <span class="cart-qty">1</span>
+      <span class="cart-subtotal">$0.00</span>
+      <button class="bundle button button--full-width">Add To Cart</button>
+      <button class="button-sidecart-toggle">
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </button>
+    </div>
   </div>
-  <div class="card-items--wrapper">
+  <div class="cart-empty--wrapper">
+    <h3 class="center">
+      Your cart is empty
+    </h3>
+  </div>
+  <div class="card-items--wrapper js-items">
+    {% comment %}
     {% for i in (1..5) %}
       <side-card-item class="card-item">
         <div class="image--wrapper">
@@ -24,6 +38,7 @@
         </div>
       </side-card-item>
     {% endfor %}
+    {% endcomment %}
   </div>
   <div class="card-footer--wrapper">
     <div class="subtotal--wrapper">

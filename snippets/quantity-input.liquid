@@ -23,7 +23,11 @@
     type="number"
     name="updates[{{ variant_id }}]"
     {% # theme-check-disable %}
+    {% if value %}
+      value="{{ value }}"
+    {% else %}
     value="{{ cart | item_count_for_variant: variant.id }}"
+    {% endif %}
     data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}"
     min="{{ min }}"
     data-min="{{ variant.quantity_rule.min }}"
