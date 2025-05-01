@@ -307,6 +307,7 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
+    =={{ template.name }}
     {% unless template.name == "print" %}
     {% sections 'header-group' %}
     {% endunless %}
