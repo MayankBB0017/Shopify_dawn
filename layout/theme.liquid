@@ -307,8 +307,7 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    =={{ template.name }}
-    {% unless template.name == "print" %}
+    {% unless template.suffix == "print" %}
     {% sections 'header-group' %}
     {% endunless %}
 
@@ -316,7 +315,7 @@
       {{ content_for_layout }}
     </main>
 
-    {% unless template.name == "print" %}
+    {% unless template.suffix == "print" %}
     {% sections 'footer-group' %}
     {% endunless %}
 
