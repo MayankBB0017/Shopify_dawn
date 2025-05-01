@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <product-info
   id="MainProduct-{{ section.id }}"
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
@@ -725,6 +727,29 @@
     </script>
   </div>
 </product-info>
+
+
+<script>
+  document.querySelector('.js-download-pdf').addEventListener('click',() => {
+    console.log('PDF Downloading...');
+    const element = document.getElementById('shopify-section-{{ section.id }}');
+      const options = {
+        margin: 1,
+        filename: 'my-document.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+
+      // Promise-based usage:
+      html2pdf().set(options).from(element).save();
+
+
+      // Old monolithic-style usage:
+      // html2pdf(element, options);
+  });
+  </script>
 
 {% schema %}
 {
