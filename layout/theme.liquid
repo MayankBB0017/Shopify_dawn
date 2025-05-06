@@ -426,8 +426,8 @@ async function getCustomerCount() {
     });
     
     const data = await response.json();
-    console.log('Total customers:', data.data.customers.totalCount);
-    return data.data.customers.totalCount;
+    console.log('Total customers:', data);
+    return data;
   } catch (error) {
     console.error('Error fetching customer count:', error);
   }
