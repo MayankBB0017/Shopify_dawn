@@ -385,10 +385,12 @@
       
 // GraphQL query to get customer count
 const query = `
-query{
-  customersCount{
-    count
-  }
+{
+ query{
+    customersCount{
+      count
+    }
+  } 
 }`;
 
 // Function to fetch customer count
