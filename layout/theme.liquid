@@ -385,30 +385,10 @@
       
 // GraphQL query to get customer count
 const query = `
-{
-  customers(first: 1) {
-    edges {
-      node {
-        id
-        firstName
-        lastName
-        email
-        defaultAddress {
-          address1
-          address2
-          city
-          province
-          country
-          zip
-          phone
-        }
-      }
-    }
-    pageInfo {
-      hasNextPage
-    }
+query{
+  customersCount{
+    count
   }
-
 }`;
 
 // Function to fetch customer count
