@@ -376,5 +376,43 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script>
+      // Replace these with your actual app credentials
+      const apiKey = '7a881ff7289e992785c98b3fb7eab07e';
+      const apiSecretKey = '5bb6e7b9e61c5407d64d3647a7a4be93';
+      const shopDomain = 'mayank-solanki.myshopify.com';
+      
+      // Base64 encode the API key and secret for Basic Auth
+      const credentials = Buffer.from(`${apiKey}:${apiSecretKey}`).toString('base64');
+      
+      // GraphQL query to get customer count
+      const query = `
+      {
+        customers(first: 1) {
+          pageInfo {
+            hasNextPage
+          }
+          totalCount
+        }
+      }`;
+      
+      // Make the API request
+      fetch(`https://${shopDomain}/admin/api/2023-10/graphql.json`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${credentials}`
+        },
+        body: JSON.stringify({ query })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Total customers:', data.data.customers.totalCount);
+      })
+      .catch(error => {
+        console.error('Error fetching customer count:', error);
+      });
+
+    </script>
   </body>
 </html>
