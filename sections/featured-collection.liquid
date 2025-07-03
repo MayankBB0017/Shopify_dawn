@@ -94,7 +94,7 @@
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
       >
-        ==={{ section.settings.collection.title }} == {{ section.settings.collection.sort_by }}
+        ==={{ section.settings.collection.title }} == {{ section.settings.collection.sort_by }} == {{ collection.sort_by }}
         {% assign skip_card_product_styles = false %}
         {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
           <li
