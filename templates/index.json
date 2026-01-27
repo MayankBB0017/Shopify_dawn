@@ -298,6 +298,48 @@
             "logo_image": "shopify://shop_images/VOGUE_LOGO.png",
             "logo_link": ""
           }
+        },
+        "logo_WPtJRV": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Marie_Claire_logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_MfFqaH": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Vector.png",
+            "logo_link": ""
+          }
+        },
+        "logo_KKd89P": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Vanity_Fair_Logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_AtD3Uz": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Revista__Hola__logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_qiFbrr": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Glamour-Logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_8ArmxJ": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/VOGUE_LOGO.png",
+            "logo_link": ""
+          }
         }
       },
       "block_order": [
@@ -306,7 +348,13 @@
         "logo_8xUC3h",
         "logo_Rn6izj",
         "logo_q6Je3t",
-        "logo_mFhJRz"
+        "logo_mFhJRz",
+        "logo_WPtJRV",
+        "logo_MfFqaH",
+        "logo_KKd89P",
+        "logo_AtD3Uz",
+        "logo_qiFbrr",
+        "logo_8ArmxJ"
       ],
       "name": "Logo Slider",
       "settings": {
