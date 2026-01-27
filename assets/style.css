@@ -438,3 +438,7 @@ border-bottom:1px solid #000;  flex: 1;
 .logo-slider .logo-slide img:hover {
   transform: scale(1.1);
 }
+.logo-slider {
+    display: flex;
+    justify-content: center;
+}
