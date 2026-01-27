@@ -1,11 +1,60 @@
 <!-- Footer Top Section -->
 <div class="footer-top">
   <div class="footer-top-text">
-    <span>Free Standard Shipping Over $300</span>
+    <span id="shipping-text">Free Standard Shipping Over $300</span>
     <span class="divider">|</span>
-    <span>Easy Returns</span>
+    <span id="returns-text">Easy Returns</span>
     <span class="divider">|</span>
-    <span>Afterpay & Klarna available</span>
+    <span id="payment-text">Afterpay & Klarna available</span>
   </div>
 </div>
+
+<style>
+  .footer-top {
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+
+  .footer-top-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .footer-top-text span {
+    white-space: nowrap;
+  }
+
+  .divider {
+    margin: 0 5px;
+    color: #ccc;
+  }
+
+  @media (max-width: 500px) {
+    .footer-top-text {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .divider {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Example of dynamic text update
+  const shippingText = "Free Standard Shipping Over $300";
+  const returnsText = "Easy Returns";
+  const paymentText = "Afterpay & Klarna available";
+
+  document.getElementById('shipping-text').innerText = shippingText;
+  document.getElementById('returns-text').innerText = returnsText;
+  document.getElementById('payment-text').innerText = paymentText;
+</script>
 
