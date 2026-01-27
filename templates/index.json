@@ -205,8 +205,8 @@
       "settings": {
         "footer_bg_color": "#111111",
         "text_color": "#ffffff",
-        "col1_title": "About Us",
-        "col1_description": "This is your store description. Add something about your brand.",
+        "col1_title": "Únete a nuestra Newsletter",
+        "col1_description": "Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin",
         "col1_form_name_placeholder": "Name",
         "col1_form_email_placeholder": "Email",
         "col2_menu": "left-menu",
