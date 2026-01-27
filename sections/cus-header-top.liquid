@@ -1,0 +1,69 @@
+<header class="site-header">
+  {% if section.settings.announcement_text != blank %}
+    <div class="announcement-bar">
+      {{ section.settings.announcement_text }}
+    </div>
+  {% endif %}
+
+  <div class="header-main">
+    <!-- LEFT MENU -->
+    <nav class="header-nav header-nav--left">
+      {% for link in section.settings.left_menu.links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <!-- LOGO -->
+    <div class="header-logo">
+      <a href="{{ routes.root_url }}">
+        {% if section.settings.logo != blank %}
+          <img
+            src="{{ section.settings.logo | image_url: width: 300 }}"
+            alt="{{ shop.name }}"
+          >
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      </a>
+    </div>
+
+    <!-- RIGHT MENU -->
+    <nav class="header-nav header-nav--right">
+      {% for link in section.settings.right_menu.links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+      <a href="{{ routes.cart_url }}">
+        Cesta ({{ cart.item_count }})
+      </a>
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Custom Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement bar text",
+      "default": "España y Portugal Península Envíos gratis"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "left_menu",
+      "label": "Left menu"
+    },
+    {
+      "type": "link_list",
+      "id": "right_menu",
+      "label": "Right menu"
+    }
+  ]
+}
+{% endschema %}
