@@ -140,6 +140,41 @@
       "name": "Three Image Banner",
       "settings": {}
     },
+    "best_sellers_tabs_MwMPwr": {
+      "type": "best-sellers-tabs",
+      "blocks": {
+        "tab_block_e3bnJh": {
+          "type": "tab_block",
+          "settings": {
+            "tab_name": "SWIMWEAR",
+            "collection": "swimwear"
+          }
+        },
+        "tab_block_4NTrQt": {
+          "type": "tab_block",
+          "settings": {
+            "tab_name": "INIMIATES",
+            "collection": "inimiates"
+          }
+        },
+        "tab_block_hFj78K": {
+          "type": "tab_block",
+          "settings": {
+            "tab_name": "ACCESSORIES",
+            "collection": "accessories"
+          }
+        }
+      },
+      "block_order": [
+        "tab_block_e3bnJh",
+        "tab_block_4NTrQt",
+        "tab_block_hFj78K"
+      ],
+      "name": "Best Sellers Tabs",
+      "settings": {
+        "title": "Best Sellers"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -173,6 +208,7 @@
     "image_banner",
     "1769500558a61f9778",
     "three_image_banner_LW9Jmk",
+    "best_sellers_tabs_MwMPwr",
     "featured_collection"
   ]
 }
