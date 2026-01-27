@@ -427,7 +427,7 @@ border-bottom:1px solid #000;  flex: 1;
 }
 .logo-slider .logo-slide {
   text-align: center;
-  padding: 10px;
+  padding: 0; margin-right: 75px;
 }
 .logo-slider .logo-slide img {
   max-width: 150px;
