@@ -399,10 +399,10 @@ border-bottom:1px solid #000;  flex: 1;
   left: 50%;
   transform: translateX(-50%);
   color: #fff;
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
   padding: 8px 15px;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   width: calc(100% - 20px);
 }
