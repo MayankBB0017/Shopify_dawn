@@ -223,15 +223,15 @@
           "settings": {
             "image": "shopify://shop_images/image.png",
             "text": "Bikinis top baLCONETTE",
-            "link": ""
+            "link": "#"
           }
         },
         "image_text_VgPP7W": {
           "type": "image_text",
           "settings": {
-            "image": "shopify://shop_images/category_images_b8325dfe-f19a-42d0-99fb-f014f686aeb1.png",
-            "text": "Sample Text",
-            "link": ""
+            "image": "shopify://shop_images/image_03ee45d0-c5a6-4873-9b0c-b18971dca940.png",
+            "text": "Bikinis top bandeau",
+            "link": "#"
           }
         },
         "image_text_QDQnNf": {
