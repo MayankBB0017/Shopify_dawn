@@ -1,3 +1,65 @@
+/* HEADER */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  color: #fff;
+}
+
+/* ANNOUNCEMENT */
+.announcement-bar {
+  text-align: center;
+  font-size: 12px;
+  padding: 8px 16px;
+  letter-spacing: 0.03em;
+}
+
+/* MAIN */
+.header-main {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+/* MENUS */
+.header-nav {
+  display: flex;
+  gap: 18px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.header-nav--right {
+  justify-content: flex-end;
+}
+
+/* LOGO */
+.header-logo img {
+  max-height: 36px;
+}
+
+.header-logo a {
+  font-size: 28px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* LINKS */
+.site-header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-header a:hover {
+  opacity: 0.7;
+}
+
+
 .hero-new-arrivals {
   width: 100%;
   position: relative;
