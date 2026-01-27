@@ -63,6 +63,9 @@
   .overlay-text {
     font-size: 14px;
   }
+  .logo-slider .logo-slide img {
+    max-width: 100px;
+  }
 }
 
 @media (max-width: 480px) {
