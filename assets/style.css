@@ -232,4 +232,37 @@
   margin: 0;
 }
 
+.bst-header {
+  display: flex;
+  justify-content: space-between; /* title left, tabs right */
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* allows stacking on small screens */
+  gap: 10px; /* spacing for mobile wrap */
+}
+
+.bst-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.bst-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap; /* tabs wrap if too small */
+}
+
+.bst-tab {
+  background: none;
+  border: 1px solid #333;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.bst-tab.active {
+  background: #333;
+  color: #fff;
+}
+
+
 
