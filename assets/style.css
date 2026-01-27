@@ -458,10 +458,11 @@ border-bottom:1px solid #000;  flex: 1;
     align-items: center;
     flex-wrap: wrap; /* makes it responsive */
     gap: 5px; /* space between items */
+    color: #000;font-size:14px;
   }
 
   .footer-top-text span {
-    white-space: nowrap;
+    white-space: nowrap;color: var(--primary-color);
   }
 
   .divider {
