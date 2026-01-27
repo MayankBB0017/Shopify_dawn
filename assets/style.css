@@ -125,6 +125,7 @@
 .hero-link:hover {
   opacity: 0.7;
 }
+
 .three-image-banner {
   width: 100%;
 }
@@ -139,6 +140,7 @@
 
 .banner-image {
   flex: 1 1 33.3333%;
+  position: relative; /* needed for label positioning */
 }
 
 .banner-image img {
@@ -148,3 +150,14 @@
   display: block;
 }
 
+/* IMAGE LABEL */
+.image-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
