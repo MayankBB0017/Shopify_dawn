@@ -355,3 +355,54 @@ border-bottom:1px solid #000;  flex: 1;
 .ai-content-section__buttons-aty9hbzjpm3zrcvbtzaigenblock0f90437tfxkmd a{text-decoration:underline;}
 .hero-content h2{font-size:40px;color: #fff;font-weight:400;}
 .ai-bestseller-header-amwp4l2dca1fiv2pkcaigenblockae845d8gpcypy{justify-content: flex-start;}
+
+/*image section*/
+
+.four-images-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.four-images-section .section-title {
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.four-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.image-block {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.image-block img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.image-block:hover img {
+  transform: scale(1.05);
+}
+
+.overlay-text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  width: calc(100% - 20px);
+}
