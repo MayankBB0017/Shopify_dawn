@@ -258,11 +258,29 @@
             "text": "Bikinis top baLCONETTE",
             "link": ""
           }
+        },
+        "image_text_VgPP7W": {
+          "type": "image_text",
+          "settings": {
+            "image": "shopify://shop_images/category_images_b8325dfe-f19a-42d0-99fb-f014f686aeb1.png",
+            "text": "Sample Text",
+            "link": ""
+          }
+        },
+        "image_text_QDQnNf": {
+          "type": "image_text",
+          "settings": {
+            "image": "shopify://shop_images/category_images_e8112300-b37c-463f-937a-162b26454167.png",
+            "text": "Sample Text",
+            "link": ""
+          }
         }
       },
       "block_order": [
         "image_text_eEHq4k",
-        "image_text_XHrWta"
+        "image_text_XHrWta",
+        "image_text_VgPP7W",
+        "image_text_QDQnNf"
       ],
       "name": "4 Images with Text",
       "settings": {
