@@ -5,13 +5,15 @@
         {% if block.settings.image != blank %}
           <a href="{{ block.settings.link }}">
             <img src="{{ block.settings.image | image_url: width: 2000 }}" alt="{{ block.settings.alt_text }}">
+            {% if block.settings.label_text != blank %}
+              <span class="image-label">{{ block.settings.label_text }}</span>
+            {% endif %}
           </a>
         {% endif %}
       </div>
     {% endfor %}
   </div>
 </section>
-
 
 
 {% schema %}
@@ -37,6 +39,11 @@
           "type": "text",
           "id": "alt_text",
           "label": "Alt text"
+        },
+        {
+          "type": "text",
+          "id": "label_text",
+          "label": "Top-left small text"
         }
       ]
     }
@@ -44,7 +51,7 @@
   "max_blocks": 3,
   "presets": [
     {
-      "name": "Three Image Banner",
+      "name": "Three Image Banner with Labels",
       "category": "Banner"
     }
   ]
