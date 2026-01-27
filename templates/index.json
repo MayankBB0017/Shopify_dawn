@@ -107,7 +107,7 @@
         "image_block_En78nF": {
           "type": "image_block",
           "settings": {
-            "image": "shopify://shop_images/categoryx2.png",
+            "image": "shopify://shop_images/bikini_2_1.png",
             "link": "shopify://collections/bikinis",
             "alt_text": "BIKINIS",
             "label_text": "BIKINIS"
@@ -116,7 +116,7 @@
         "image_block_Qn4rnp": {
           "type": "image_block",
           "settings": {
-            "image": "shopify://shop_images/categoryx2_34742a78-ae43-4230-a7a7-359be8a840d7.png",
+            "image": "shopify://shop_images/clothing_3_2_9ccf03c3-e8c3-4077-b15a-d42195b07ce0.png",
             "link": "shopify://collections/ropa-de-playa",
             "alt_text": "ROPA DE PLAYA",
             "label_text": "ROPA DE PLAYA"
@@ -125,7 +125,7 @@
         "image_block_QRDAmD": {
           "type": "image_block",
           "settings": {
-            "image": "shopify://shop_images/categoryx2_d05e8981-7641-46bb-b235-99b0a3dcf4f7.png",
+            "image": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png",
             "link": "shopify://collections/ropa-de-playa",
             "alt_text": "BAÑADORES",
             "label_text": "BAÑADORES"
