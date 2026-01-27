@@ -157,6 +157,25 @@
           "link_2_text": "Optional link",
           "link_2_url": ""
         }
+      },
+      "custom-footer": {
+        "type": "custom-footer",
+        "settings": {
+          "footer_bg_color": "#111111",
+          "text_color": "#ffffff",
+          "col1_title": "About Us",
+          "col1_description": "This is your store description. Add something about your brand.",
+          "col1_form_name_placeholder": "Name",
+          "col1_form_email_placeholder": "Email",
+          "col2_menu": "left-menu",
+          "col3_menu": "right-menu",
+          "col4_title": "Contact Us",
+          "col4_address": "123 Main Street, City, Country",
+          "col4_email": "info@example.com",
+          "facebook_link": "",
+          "twitter_link": "",
+          "instagram_link": ""
+        }
       }
     },
     "content_for_index": [],
