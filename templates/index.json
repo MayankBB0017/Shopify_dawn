@@ -198,6 +198,26 @@
       "type": "best-sellers-tabs",
       "name": "Best Sellers Tabs",
       "settings": {}
+    },
+    "custom_footer_64ztVW": {
+      "type": "custom-footer",
+      "name": "Custom Footer",
+      "settings": {
+        "footer_bg_color": "#111111",
+        "text_color": "#ffffff",
+        "col1_title": "About Us",
+        "col1_description": "This is your store description. Add something about your brand.",
+        "col1_form_name_placeholder": "Name",
+        "col1_form_email_placeholder": "Email",
+        "col2_menu": "left-menu",
+        "col3_menu": "right-menu",
+        "col4_title": "Contact Us",
+        "col4_address": "123 Main Street, City, Country",
+        "col4_email": "info@example.com",
+        "facebook_link": "",
+        "twitter_link": "",
+        "instagram_link": ""
+      }
     }
   },
   "order": [
@@ -205,6 +225,7 @@
     "1769500558a61f9778",
     "three_image_banner_LW9Jmk",
     "17695055536197cd41",
-    "best_sellers_tabs_MwMPwr"
+    "best_sellers_tabs_MwMPwr",
+    "custom_footer_64ztVW"
   ]
 }
