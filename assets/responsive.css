@@ -34,6 +34,15 @@
   .banner-image {
     flex: 1 1 100%;
   }
+   .banner-image {
+    flex: 1 1 100%;
+  }
+  .image-label {
+    font-size: 11px;
+    padding: 3px 6px;
+    top: 10px;
+    left: 10px;
+  }
 }
 
 @media (max-width: 480px) {
