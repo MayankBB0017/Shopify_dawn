@@ -31,6 +31,9 @@
   .hero-links {
     gap: 1.2rem;
   }
+  .banner-image {
+    flex: 1 1 100%;
+  }
 }
 
 @media (max-width: 480px) {
