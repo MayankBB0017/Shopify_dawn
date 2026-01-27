@@ -35,6 +35,16 @@
         "enable_language_selector": false
       }
     },
+    "cus_header_top_fVj34F": {
+      "type": "cus-header-top",
+      "name": "Custom Header",
+      "settings": {
+        "announcement_text": "España y Portugal Península Envíos gratis",
+        "logo": "shopify://shop_images/Logo_5240e62b-c252-4d1a-8050-524d85e15594.svg",
+        "left_menu": "left-menu",
+        "right_menu": "right-menu"
+      }
+    },
     "hero_new_arrivals_Kctb3E": {
       "type": "hero-new-arrivals",
       "name": "Hero – New Arrivals",
@@ -70,6 +80,7 @@
   },
   "order": [
     "announcement-bar",
+    "cus_header_top_fVj34F",
     "hero_new_arrivals_Kctb3E",
     "header"
   ]
