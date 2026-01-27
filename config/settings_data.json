@@ -176,6 +176,22 @@
           "twitter_link": "",
           "instagram_link": ""
         }
+      },
+      "image-section": {
+        "type": "image-section",
+        "settings": {
+          "section_heading": ""
+        }
+      },
+      "logo-slider": {
+        "type": "logo-slider",
+        "settings": {
+          "section_title": "Our Partners"
+        }
+      },
+      "footer-top": {
+        "type": "footer-top",
+        "settings": {}
       }
     },
     "content_for_index": [],
