@@ -254,6 +254,65 @@
         "section_heading": ""
       }
     },
+    "logo_slider_C4X3wn": {
+      "type": "logo-slider",
+      "blocks": {
+        "logo_hCwWV4": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Marie_Claire_logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_nTCQBG": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Vector.png",
+            "logo_link": ""
+          }
+        },
+        "logo_8xUC3h": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Vanity_Fair_Logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_Rn6izj": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Revista__Hola__logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_q6Je3t": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/Glamour-Logo.png",
+            "logo_link": ""
+          }
+        },
+        "logo_mFhJRz": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "shopify://shop_images/VOGUE_LOGO.png",
+            "logo_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_hCwWV4",
+        "logo_nTCQBG",
+        "logo_8xUC3h",
+        "logo_Rn6izj",
+        "logo_q6Je3t",
+        "logo_mFhJRz"
+      ],
+      "name": "Logo Slider",
+      "settings": {
+        "section_title": "Our Partners"
+      }
+    },
     "custom_footer_64ztVW": {
       "type": "custom-footer",
       "name": "Custom Footer",
@@ -283,6 +342,7 @@
     "best_sellers_tabs_MwMPwr",
     "three_image_banner_Yf9UiU",
     "image_section_P7Lntd",
+    "logo_slider_C4X3wn",
     "custom_footer_64ztVW"
   ]
 }
