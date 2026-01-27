@@ -60,7 +60,7 @@
             "content_width": 550,
             "button_primary_label": "OPTIONAL LINK",
             "button_primary_link": "#",
-            "button_primary_bg": "#FFFFFF",
+            "button_primary_bg": "#ffffff",
             "button_primary_color": "#000000",
             "button_primary_border": "#ffffff",
             "button_primary_hover_bg": "#f3f3f3",
@@ -68,10 +68,10 @@
             "button_primary_hover_border": "#000000",
             "button_secondary_label": "OPTIONAL LINK",
             "button_secondary_link": "#",
-            "button_secondary_bg": "#FFFFFF",
+            "button_secondary_bg": "#ffffff",
             "button_secondary_color": "#000000",
             "button_secondary_border": "#ffffff",
-            "button_secondary_hover_bg": "#F3F3F3",
+            "button_secondary_hover_bg": "#f3f3f3",
             "button_secondary_hover_color": "#000000",
             "button_secondary_hover_border": "#000000",
             "button_font_size": 16,
@@ -85,7 +85,7 @@
             "description_size": 16,
             "title_spacing": 16,
             "description_spacing": 24,
-            "background_color": "#FFFFFF",
+            "background_color": "#ffffff",
             "title_color": "#121212",
             "description_color": "#121212",
             "padding_top": 40,
@@ -99,6 +99,42 @@
       "block_order": [
         "ai_gen_block_0f90437_tFxkMd"
       ],
+      "settings": {}
+    },
+    "three_image_banner_LW9Jmk": {
+      "type": "three-image-banner",
+      "blocks": {
+        "image_block_En78nF": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/64d368b082a5456e2f760267dcccf692d4663f40_466301dc-700b-4537-8b34-b5fce83e9786.jpg",
+            "link": "",
+            "alt_text": ""
+          }
+        },
+        "image_block_Qn4rnp": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/clothing_3_2.png",
+            "link": "",
+            "alt_text": ""
+          }
+        },
+        "image_block_QRDAmD": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/banadores_1_2.png",
+            "link": "",
+            "alt_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_block_En78nF",
+        "image_block_Qn4rnp",
+        "image_block_QRDAmD"
+      ],
+      "name": "Three Image Banner",
       "settings": {}
     },
     "featured_collection": {
@@ -133,6 +169,7 @@
   "order": [
     "image_banner",
     "1769500558a61f9778",
+    "three_image_banner_LW9Jmk",
     "featured_collection"
   ]
 }
