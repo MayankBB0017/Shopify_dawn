@@ -250,10 +250,19 @@
             "text": "Bikinis top triángulo",
             "link": "#"
           }
+        },
+        "image_text_XHrWta": {
+          "type": "image_text",
+          "settings": {
+            "image": "shopify://shop_images/image.png",
+            "text": "Bikinis top baLCONETTE",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "image_text_eEHq4k"
+        "image_text_eEHq4k",
+        "image_text_XHrWta"
       ],
       "name": "4 Images with Text",
       "settings": {
