@@ -68,6 +68,18 @@
   }
 }
 
+/* Responsive adjustments for smaller screens */
+  @media (max-width: 500px) {
+    .footer-top-text {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .divider {
+      display: none; /* hide divider on very small screens */
+    }
+  }
+
 @media (max-width: 480px) {
   .hero-wrapper {
     min-height: 60vh;
