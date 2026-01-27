@@ -405,5 +405,5 @@ border-bottom:1px solid #000;  flex: 1;
   font-size: 18px;
   text-align: center;
   width: calc(100% - 20px);
-  color: #fff;
+  color: #fff;text-transform: uppercase;
 }
