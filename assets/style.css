@@ -46,7 +46,7 @@
 
 /* LOGO */
 .header-logo img {
-  max-height: 36px;
+  max-height: 36px;filter: invert(1);
 }
 
 .header-logo a {
