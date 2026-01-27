@@ -163,7 +163,9 @@
             ],
             "tab_3_enabled": true,
             "tab_3_label": "ACCESSORIES",
-            "tab_3_products": [],
+            "tab_3_products": [
+              "accessories"
+            ],
             "tab_bg_color": "#ffffff",
             "tab_text_color": "#000000",
             "tab_border_color": "#ffffff",
