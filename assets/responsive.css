@@ -1,5 +1,25 @@
 /* Responsive */
+@media (max-width: 1024px) {
+  .header-nav--left {
+    display: none;
+  }
+}
+
+
+
+
 @media (max-width: 768px) {
+.header-main {
+    padding: 16px 20px;
+  }
+
+  .header-logo img {
+    max-height: 28px;
+  }
+
+  .header-nav--right a:not(:last-child) {
+    display: none;
+  }
   .hero-wrapper {
     min-height: 70vh;
   }
