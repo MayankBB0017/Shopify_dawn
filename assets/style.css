@@ -449,7 +449,7 @@ border-bottom:1px solid #000;  flex: 1;
     padding: 24px 20px;
     text-align: center;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 14px;border-bottom: 1px solid #000;
   }
 
   .footer-top-text {
