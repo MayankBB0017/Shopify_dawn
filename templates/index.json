@@ -158,7 +158,9 @@
             ],
             "tab_2_enabled": true,
             "tab_2_label": "INIMIATES",
-            "tab_2_products": [],
+            "tab_2_products": [
+              "inimiates"
+            ],
             "tab_3_enabled": true,
             "tab_3_label": "ACCESSORIES",
             "tab_3_products": [],
