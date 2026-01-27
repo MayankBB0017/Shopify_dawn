@@ -211,12 +211,12 @@
         "col1_form_email_placeholder": "Email",
         "col2_menu": "left-menu",
         "col3_menu": "right-menu",
-        "col4_title": "Contact Us",
-        "col4_address": "123 Main Street, City, Country",
-        "col4_email": "info@example.com",
-        "facebook_link": "",
-        "twitter_link": "",
-        "instagram_link": ""
+        "col4_title": "Contacto",
+        "col4_address": "Lunes a Viernes 10-17h <br>\nWhatsapp",
+        "col4_email": "info@robincollection.com",
+        "facebook_link": "https://www.facebook.com/",
+        "twitter_link": "https://twitter.com/",
+        "instagram_link": "https://www.instagram.com/"
       }
     }
   },
