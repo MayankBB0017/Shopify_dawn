@@ -43,6 +43,8 @@
     top: 10px;
     left: 10px;
   }
+  .bst-header { flex-direction: column; align-items: flex-start; gap:10px; }
+  .bst-product { min-width: 100%; }
 }
 
 @media (max-width: 480px) {
