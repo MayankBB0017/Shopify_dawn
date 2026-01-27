@@ -308,10 +308,9 @@
 .footer-form input{width:50%;border:0;border-bottom:1px solid #000;}
 .footer-{{ footer_id }} .footer-form input[type="text"],
 .footer-{{ footer_id }} .footer-form input[type="email"] {
-  padding: 10px;
+  padding: 5px;
   border: none;
-  border-radius: 4px;
-  flex: 1;
+border-bottom:1px solid #000;  flex: 1;
 }
 .footer-{{ footer_id }} .footer-form button {
   padding: 0 15px;
