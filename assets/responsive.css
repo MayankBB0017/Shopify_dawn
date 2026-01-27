@@ -4,6 +4,12 @@
     display: none;
   }
    .bst-product { min-width: 48%; }
+    .footer-{{ footer_id }} .footer-container {
+    flex-direction: column;
+  }
+  .footer-{{ footer_id }} .footer-col-1 {
+    flex: 1;
+  }
 }
 
 
