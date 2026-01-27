@@ -350,6 +350,6 @@
 .footer-col h3{
   font-size:16px;font-weight:500;color#000;font-family: "Jost", sans-serif;
 }
-.footer-col p{color: #000; font-size: 14px; font-weight:400;font-family: "Jost", sans-serif;}
+.footer-col p{color: #000; font-size: 14px; font-weight:400;var(--font-family)}
 
 
