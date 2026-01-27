@@ -108,24 +108,24 @@
           "type": "image_block",
           "settings": {
             "image": "shopify://shop_images/64d368b082a5456e2f760267dcccf692d4663f40_466301dc-700b-4537-8b34-b5fce83e9786.jpg",
-            "link": "",
-            "alt_text": ""
+            "link": "shopify://collections/bikinis",
+            "alt_text": "BIKINIS"
           }
         },
         "image_block_Qn4rnp": {
           "type": "image_block",
           "settings": {
             "image": "shopify://shop_images/clothing_3_2.png",
-            "link": "",
-            "alt_text": ""
+            "link": "shopify://collections/ropa-de-playa",
+            "alt_text": "ROPA DE PLAYA"
           }
         },
         "image_block_QRDAmD": {
           "type": "image_block",
           "settings": {
             "image": "shopify://shop_images/banadores_1_2.png",
-            "link": "",
-            "alt_text": ""
+            "link": "shopify://collections/ropa-de-playa",
+            "alt_text": "BAÑADORES"
           }
         }
       },
