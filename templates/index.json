@@ -153,7 +153,9 @@
             "container_width": 1400,
             "tab_1_enabled": true,
             "tab_1_label": "SWIMWEAR",
-            "tab_1_products": [],
+            "tab_1_products": [
+              "swimwear"
+            ],
             "tab_2_enabled": true,
             "tab_2_label": "INIMIATES",
             "tab_2_products": [],
