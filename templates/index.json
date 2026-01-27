@@ -237,9 +237,9 @@
         "image_text_QDQnNf": {
           "type": "image_text",
           "settings": {
-            "image": "shopify://shop_images/category_images_e8112300-b37c-463f-937a-162b26454167.png",
+            "image": "shopify://shop_images/image_64426c2f-247a-4489-a0f2-f669705ca824.png",
             "text": "Sample Text",
-            "link": ""
+            "link": "#"
           }
         }
       },
