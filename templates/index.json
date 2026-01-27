@@ -203,40 +203,7 @@
     },
     "three_image_banner_Yf9UiU": {
       "type": "three-image-banner",
-      "blocks": {
-        "image_block_mjBnNW": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/category_images.png",
-            "link": "",
-            "alt_text": "",
-            "label_text": ""
-          }
-        },
-        "image_block_zGVeD3": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/category_images_bab38655-d6ca-4171-8e3a-1f08852bf146.png",
-            "link": "",
-            "alt_text": "",
-            "label_text": ""
-          }
-        },
-        "image_block_NWnDcJ": {
-          "type": "image_block",
-          "settings": {
-            "image": "shopify://shop_images/category_images_b8325dfe-f19a-42d0-99fb-f014f686aeb1.png",
-            "link": "",
-            "alt_text": "",
-            "label_text": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_block_mjBnNW",
-        "image_block_zGVeD3",
-        "image_block_NWnDcJ"
-      ],
+      "disabled": true,
       "name": "Three Image Banner with Labels",
       "settings": {}
     },
