@@ -1,3 +1,49 @@
+<div class="logo-slider-section">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <h2 class="logo-slider-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+    <div class="logo-slider">
+      {% for block in section.blocks %}
+        {% if block.settings.logo_image != blank %}
+          <div class="logo-slide">
+            {% if block.settings.logo_link != blank %}
+              <a href="{{ block.settings.logo_link }}">
+                <img src="{{ block.settings.logo_image | img_url: '300x' }}" alt="Logo" />
+              </a>
+            {% else %}
+              <img src="{{ block.settings.logo_image | img_url: '300x' }}" alt="Logo" />
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<!-- Slick slider JS initialization -->
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof jQuery !== 'undefined' && jQuery('.logo-slider').length) {
+      jQuery('.logo-slider').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+        dots: false,
+        responsive: [
+          { breakpoint: 1200, settings: { slidesToShow: 5 } },
+          { breakpoint: 992, settings: { slidesToShow: 4 } },
+          { breakpoint: 768, settings: { slidesToShow: 3 } },
+          { breakpoint: 480, settings: { slidesToShow: 2 } }
+        ]
+      });
+    }
+  });
+</script>
+
 {% schema %}
 {
   "name": "Logo Slider",
@@ -37,81 +83,6 @@
 }
 {% endschema %}
 
-<div class="logo-slider-section">
-  <div class="container">
-    {% if section.settings.section_title != blank %}
-      <h2 class="logo-slider-title">{{ section.settings.section_title }}</h2>
-    {% endif %}
-    <div class="logo-slider">
-      {% for block in section.blocks %}
-        {% if block.settings.logo_image != blank %}
-          <div class="logo-slide">
-            {% if block.settings.logo_link != blank %}
-              <a href="{{ block.settings.logo_link }}">
-                <img src="{{ block.settings.logo_image | img_url: '300x' }}" alt="Logo" />
-              </a>
-            {% else %}
-              <img src="{{ block.settings.logo_image | img_url: '300x' }}" alt="Logo" />
-            {% endif %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</div>
 
-<style>
-.logo-slider-section {
-  padding: 40px 0;
-  background: #f9f9f9;
-}
-.logo-slider-section .container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-.logo-slider-title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
-  font-weight: 600;
-}
-.logo-slider .logo-slide {
-  text-align: center;
-  padding: 10px;
-}
-.logo-slider .logo-slide img {
-  max-width: 150px;
-  height: auto;
-  display: inline-block;
-  transition: transform 0.3s;
-}
-.logo-slider .logo-slide img:hover {
-  transform: scale(1.1);
-}
-@media (max-width: 768px) {
-  
-}
-</style>
 
-<!-- Slick slider JS initialization -->
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-    if (typeof jQuery !== 'undefined' && jQuery('.logo-slider').length) {
-      jQuery('.logo-slider').slick({
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        arrows: false,
-        dots: false,
-        responsive: [
-          { breakpoint: 1200, settings: { slidesToShow: 5 } },
-          { breakpoint: 992, settings: { slidesToShow: 4 } },
-          { breakpoint: 768, settings: { slidesToShow: 3 } },
-          { breakpoint: 480, settings: { slidesToShow: 2 } }
-        ]
-      });
-    }
-  });
-</script>
+
