@@ -301,7 +301,7 @@
   margin-bottom: 15px;
 }
 .footer-{{ footer_id }} .footer-form {
-  display: flex;
+  display: inline-block;
   gap: 10px;
   margin-bottom: 20px;
 }
