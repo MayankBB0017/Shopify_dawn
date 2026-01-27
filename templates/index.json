@@ -140,6 +140,56 @@
       "name": "Three Image Banner",
       "settings": {}
     },
+    "17695055536197cd41": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ae845d8_GpCYpY": {
+          "type": "ai_gen_block_ae845d8",
+          "settings": {
+            "section_title": "Best Sellers",
+            "title_size": 32,
+            "title_color": "#121212",
+            "background_color": "#ffffff",
+            "container_width": 1200,
+            "tab_1_enabled": true,
+            "tab_1_label": "SWIMWEAR",
+            "tab_1_products": [],
+            "tab_2_enabled": true,
+            "tab_2_label": "INIMIATES",
+            "tab_2_products": [],
+            "tab_3_enabled": true,
+            "tab_3_label": "ACCESSORIES",
+            "tab_3_products": [],
+            "tab_bg_color": "#ffffff",
+            "tab_text_color": "#000000",
+            "tab_border_color": "#121212",
+            "tab_hover_bg_color": "#f3f3f3",
+            "tab_hover_text_color": "#121212",
+            "tab_active_bg_color": "#ffffff",
+            "tab_active_text_color": "#ffffff",
+            "tab_active_border_color": "#ffffff",
+            "tab_border_radius": 0,
+            "product_gap": 20,
+            "product_bg_color": "#ffffff",
+            "product_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#121212",
+            "product_price_size": 14,
+            "product_price_color": "#121212",
+            "nav_bg_color": "#121212",
+            "nav_icon_color": "#ffffff",
+            "nav_hover_bg_color": "#333333",
+            "nav_hover_icon_color": "#ffffff",
+            "columns_mobile": "2"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ae845d8_GpCYpY"
+      ],
+      "settings": {}
+    },
     "best_sellers_tabs_MwMPwr": {
       "type": "best-sellers-tabs",
       "blocks": {
@@ -147,7 +197,7 @@
           "type": "tab_block",
           "settings": {
             "tab_name": "SWIMWEAR",
-            "collection": "bikinis"
+            "collection": "swimwear"
           }
         },
         "tab_block_4NTrQt": {
@@ -208,6 +258,7 @@
     "image_banner",
     "1769500558a61f9778",
     "three_image_banner_LW9Jmk",
+    "17695055536197cd41",
     "best_sellers_tabs_MwMPwr",
     "featured_collection"
   ]
