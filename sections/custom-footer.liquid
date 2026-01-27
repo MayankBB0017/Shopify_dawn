@@ -1,0 +1,173 @@
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "footer_bg_color",
+      "label": "Background Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "col1_title",
+      "label": "Column 1 Title",
+      "default": "About Us"
+    },
+    {
+      "type": "textarea",
+      "id": "col1_description",
+      "label": "Column 1 Description",
+      "default": "This is your store description. Add something about your brand."
+    },
+    {
+      "type": "text",
+      "id": "col1_form_name_placeholder",
+      "label": "Form Name Placeholder",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "col1_form_email_placeholder",
+      "label": "Form Email Placeholder",
+      "default": "Email"
+    },
+    {
+      "type": "link_list",
+      "id": "col2_menu",
+      "label": "Column 2 Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "col3_menu",
+      "label": "Column 3 Menu"
+    },
+    {
+      "type": "text",
+      "id": "col4_title",
+      "label": "Column 4 Title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "textarea",
+      "id": "col4_address",
+      "label": "Address",
+      "default": "123 Main Street, City, Country"
+    },
+    {
+      "type": "text",
+      "id": "col4_email",
+      "label": "Email",
+      "default": "info@example.com"
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Facebook URL",
+    },
+    {
+      "type": "url",
+      "id": "twitter_link",
+      "label": "Twitter URL",
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram URL",
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Footer"
+    }
+  ]
+}
+{% endschema %}
+
+{% assign footer_id = section.id | replace: '_', '' %}
+
+
+
+
+
+<footer class="footer-{{ footer_id }}">
+  <div class="footer-container">
+    <!-- Column 1 -->
+    <div class="footer-col footer-col-1">
+      <h3>{{ section.settings.col1_title }}</h3>
+      <p>{{ section.settings.col1_description }}</p>
+      <form method="post" action="/contact#contact_form" class="footer-form">
+        <input type="text" name="contact[name]" placeholder="{{ section.settings.col1_form_name_placeholder }}">
+        <input type="email" name="contact[email]" placeholder="{{ section.settings.col1_form_email_placeholder }}">
+        <button type="submit">&#10148;</button>
+      </form>
+      <div class="social-icons">
+  {% assign fb = section.settings.facebook_link %}
+  {% assign tw = section.settings.twitter_link %}
+  {% assign ig = section.settings.instagram_link %}
+
+  {% if fb != blank and fb != "https://" %}
+    <a href="{{ fb }}" target="_blank">
+      <img src="{{ 'facebook-icon.svg' | asset_url }}" alt="Facebook">
+    </a>
+  {% else %}
+    <img src="{{ 'facebook-icon.svg' | asset_url }}" alt="Facebook">
+  {% endif %}
+
+  {% if tw != blank and tw != "https://" %}
+    <a href="{{ tw }}" target="_blank">
+      <img src="{{ 'twitter-icon.svg' | asset_url }}" alt="Twitter">
+    </a>
+  {% else %}
+    <img src="{{ 'twitter-icon.svg' | asset_url }}" alt="Twitter">
+  {% endif %}
+
+  {% if ig != blank and ig != "https://" %}
+    <a href="{{ ig }}" target="_blank">
+      <img src="{{ 'instagram-icon.svg' | asset_url }}" alt="Instagram">
+    </a>
+  {% else %}
+    <img src="{{ 'instagram-icon.svg' | asset_url }}" alt="Instagram">
+  {% endif %}
+</div>
+
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-col footer-menu">
+      <h3>Menu 1</h3>
+      {% if section.settings.col2_menu != blank %}
+        <ul>
+        {% for link in linklists[section.settings.col2_menu].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <!-- Column 3 -->
+    <div class="footer-col footer-menu">
+      <h3>Menu 2</h3>
+      {% if section.settings.col3_menu != blank %}
+        <ul>
+        {% for link in linklists[section.settings.col3_menu].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <!-- Column 4 -->
+    <div class="footer-col footer-contact">
+      <h3>{{ section.settings.col4_title }}</h3>
+      <p>{{ section.settings.col4_address }}</p>
+      <p>{{ section.settings.col4_email }}</p>
+    </div>
+  </div>
+</footer>
