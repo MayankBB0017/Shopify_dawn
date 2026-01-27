@@ -35,6 +35,18 @@
         "enable_language_selector": false
       }
     },
+    "hero_new_arrivals_Kctb3E": {
+      "type": "hero-new-arrivals",
+      "name": "Hero – New Arrivals",
+      "settings": {
+        "hero_image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1_2x_ea252745-9c4b-4edc-9f12-e682aeff4846.png",
+        "heading": "New arrivals",
+        "link_1_text": "Optional link",
+        "link_1_url": "",
+        "link_2_text": "Optional link",
+        "link_2_url": ""
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -57,6 +69,7 @@
   },
   "order": [
     "announcement-bar",
+    "hero_new_arrivals_Kctb3E",
     "header"
   ]
 }
