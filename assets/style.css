@@ -279,7 +279,7 @@
   font-family: sans-serif;
 }
 .footer-{{ footer_id }} .footer-container {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
