@@ -469,3 +469,5 @@ border-bottom:1px solid #000;  flex: 1;
     margin: 0 5px;
     color: #ccc; /* light gray divider */
   }
+
+  .three-image-wrapper .image-label{background: transparent;font-size: 18px; color: #fff;}
