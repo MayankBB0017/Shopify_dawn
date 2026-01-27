@@ -271,7 +271,7 @@
 }
 
 /*footer*/
-
+footer{padding: 60px 20px;}
 .footer-{{ footer_id }} {
   background-color: {{ section.settings.footer_bg_color }};
   color: {{ section.settings.text_color }};
