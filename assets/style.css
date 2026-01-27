@@ -161,3 +161,75 @@
   padding: 4px 8px;
   border-radius: 4px;
 }
+
+/*best saller*/
+
+.best-sellers-tabs {
+  width: 100%;
+  margin: 40px 0;
+  font-family: sans-serif;
+}
+.bst-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.bst-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.bst-tabs {
+  display: flex;
+  gap: 12px;
+}
+.bst-tab {
+  background: none;
+  border: 1px solid #333;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.bst-tab.active {
+  background: #333;
+  color: #fff;
+}
+
+/* Products slider */
+.bst-products-wrapper {
+  position: relative;
+}
+.bst-products-tab {
+  display: none;
+}
+.bst-products-tab.active {
+  display: flex;
+}
+.bst-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+.bst-product {
+  min-width: 23%;
+  flex: 0 0 auto;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.bst-product img {
+  width: 100%;
+  display: block;
+  margin-bottom: 8px;
+}
+.bst-product h3 {
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+.bst-product p {
+  font-size: 13px;
+  color: #555;
+  margin: 0;
+}
+
+
