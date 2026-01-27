@@ -308,7 +308,7 @@
 {{ 'responsive.css' | asset_url | stylesheet_tag }}
 
   </head>
-{% section 'cus-header-top' %}
+
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
@@ -319,6 +319,8 @@
     {%- endif -%}
 
     {% sections 'header-group' %}
+
+    {% section 'cus-header-top' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
