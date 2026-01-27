@@ -440,5 +440,5 @@ border-bottom:1px solid #000;  flex: 1;
 }
 .logo-slider {
     display: flex;
-    justify-content: center;
+    justify-content: center;align-items: center;
 }
