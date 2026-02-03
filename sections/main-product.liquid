@@ -715,8 +715,7 @@
                 event.preventDefault();
 
                 const formData = new FormData(form);
-
-                // Collect bundle product titles
+                
                 const bundleTitles = [];
                 checkedBundles.forEach((checkbox) => {
                   bundleTitles.push(checkbox.dataset.title);
@@ -731,8 +730,7 @@
                     }
                   }
                 ];
-
-                // Add bundled items normally (no properties)
+                
                 checkedBundles.forEach((checkbox) => {
                   items.push({
                     id: checkbox.value,
