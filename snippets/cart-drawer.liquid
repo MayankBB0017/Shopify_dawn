@@ -78,14 +78,14 @@
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   const addCartButtons = document.querySelectorAll('.btn-add-cart');
 
   addCartButtons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
 
-      const productId = this.dataset.productId;
+      const variantId = this.dataset.variantId;
 
       fetch('/cart/add.js', {
         method: 'POST',
@@ -94,7 +94,7 @@
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          id: productId,
+          id: variantId,
           quantity: 1
         })
       })
@@ -102,7 +102,6 @@
       .then(data => {
         console.log('Added to cart:', data);
         alert(`${data.title} has been added to your cart!`);
-        // Optional: update cart icon or drawer here
       })
       .catch(error => {
         console.error('Error adding to cart:', error);
@@ -111,6 +110,7 @@
     });
   });
 });
+
 
 </script>
 
