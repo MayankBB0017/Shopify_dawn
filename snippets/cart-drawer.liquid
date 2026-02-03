@@ -58,94 +58,89 @@
 
       <div class="drawer__content-wrapper">
         
-       {%- unless cart == empty -%}
-  <div class="cart-recommendations">
-    <h3>You might also like:</h3>
-    <div class="recommendation-carousel">
-      {% assign recommended_handles = product.metafields.custom.recommend_product.value | split: ',' %}
-      {% for handle in recommended_handles %}
-        {% assign product_item = all_products[handle] %}
-        {% if product_item %}
-          {% assign first_variant = product_item.variants.first %}
-          {% if first_variant %}
-            <div class="recommended-item">
-              <a href="{{ product_item.url }}">
-                <img src="{{ product_item.featured_image | img_url: 'medium' }}" alt="{{ product_item.title }}">
-                <div class="recommended-info">
-                  <div class="title">{{ product_item.title }}</div>
-                  <div class="price">{{ first_variant.price | money }}</div>
+        {%- unless cart == empty -%}
+      <div class="cart-recommendations">
+        <h3>You might also like:</h3>
+          <div class="recommendation-carousel">
+            {% for product in product.metafields.custom.recommend_product.value %}
+              {% assign first_variant = product.variants.first %}
+              {% if first_variant %}
+                <div class="recommended-item">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+                    <div class="recommended-info">
+                      <div class="title">{{ product.title }}</div>
+                      <div class="price">{{ first_variant.price | money }}</div>
+                    </div>
+                  </a>
+                  <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
+                    Add to Cart
+                  </button>
                 </div>
-              </a>
-              <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
-                Add to Cart
-              </button>
-            </div>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-{% endunless %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endunless %}
+      <div class="cart-header">
+        Cart (<span class="cart-count">{{ cart.item_count }}</span>)
+      </div>
 
-<div class="cart-header">
-  Cart (<span class="cart-count">{{ cart.item_count }}</span>)
-</div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+    function updateCartUI() {
+      fetch('/cart.js')
+        .then(res => res.json())
+        .then(cart => {
+          const cartCountElem = document.querySelector('.cart-count');
+          if (cartCountElem) {
+            cartCountElem.textContent = cart.item_count;
+          }
+          console.log('Cart updated:', cart);
+        });
+    }
 
-  function updateCartUI() {
-    fetch('/cart.js')
-      .then(res => res.json())
-      .then(cart => {
-        const cartCountElem = document.querySelector('.cart-count');
-        if (cartCountElem) {
-          cartCountElem.textContent = cart.item_count;
+    const addCartButtons = document.querySelectorAll('.btn-add-cart');
+
+    addCartButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const variantId = this.dataset.variantId;
+
+        if (!variantId) {
+          console.error('No variant ID found!');
+          alert('Cannot add this product to cart.');
+          return;
         }
-        console.log('Cart updated:', cart);
-      });
-  }
-
-  const addCartButtons = document.querySelectorAll('.btn-add-cart');
-
-  addCartButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-
-      const variantId = this.dataset.variantId;
-
-      if (!variantId) {
-        console.error('No variant ID found!');
-        alert('Cannot add this product to cart.');
-        return;
-      }
-
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ id: variantId, quantity: 1 })
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Network response not ok');
-        return res.json();
-      })
-      .then(data => {
-        console.log('Added to cart:', data);
-        updateCartUI();
-      })
-      .catch(err => {
-        console.error('Add to cart error:', err);
-        alert('Oops! Could not add to cart.');
+        
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+        .then(res => {
+          if (!res.ok) throw new Error('Network response not ok');
+          return res.json();
+        })
+        .then(data => {
+          console.log('Added to cart:', data);        
+          {% comment %} alert(`${data.title} has been added to your cart!`);{% endcomment %}
+          updateCartUI();
+        })
+        .catch(err => {
+          console.error('Add to cart error:', err);
+          alert('Oops! Could not add to cart.');
+        });
       });
     });
+
   });
-
-});
-</script>
-
+  </script>
 
         <div class="cart-main-content">
           <div class="drawer-wrapper">
