@@ -77,6 +77,63 @@
           </ul>
         </div>
 
+           <style>
+      .cart-recommendations {
+        margin-top: 30px;
+      }
+      .cart-recommendations h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+      }
+      .recommendation-carousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding-bottom: 10px;
+      }
+      .recommendation-carousel::-webkit-scrollbar {
+        height: 8px;
+      }
+      .recommendation-carousel::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.3);
+        border-radius: 4px;
+      }
+      .recommended-item {
+        min-width: 150px;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        text-align: center;
+        flex-shrink: 0;
+        padding: 10px;
+      }
+      .recommended-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+      .recommended-info .title {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+      .recommended-info .price {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .btn-add-cart {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+      .btn-add-cart:hover {
+        background-color: #333;
+      }
+    </style>
+
       <div class="drawer__header">
         <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
         <button
