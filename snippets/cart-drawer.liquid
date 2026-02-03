@@ -74,6 +74,7 @@
                     </div>
                   </a>
                   <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
+                    {{- 'icon-padlock.svg' | inline_asset_content -}}
                     Add to Cart
                   </button>
                 </div>
@@ -103,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(err => console.error('Error fetching cart:', err));
   }
 
-  // Select all Add to Cart buttons
   const addCartButtons = document.querySelectorAll('.btn-add-cart');
 
   addCartButtons.forEach(button => {
