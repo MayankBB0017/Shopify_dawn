@@ -683,11 +683,9 @@
   <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--2-col-desktop">
     {% for bundle_product in product.metafields.custom.product_bundle.value %}
       <li class="grid__item">
-        <label class="bundle-item">
-          <!-- Hidden input to store main product price for JS -->
+        <label class="bundle-item">          
           <input type="hidden" id="main-product-price" value="{{ product.selected_or_first_available_variant.price | money }}">
-
-          <!-- Bundle checkbox -->
+          
           <input
             type="checkbox"
             class="bundle-checkbox"
@@ -711,15 +709,11 @@
 {% endif %}
 
 <script>
-// ----------------------
-// Parse money string to number
 function parseMoney(moneyStr) {
   // Remove $ or commas, parse as float
   return parseFloat(moneyStr.replace(/[^0-9.]/g, '')) || 0;
 }
 
-// ----------------------
-// Update total price on page
 function updateTotalPrice() {
   const mainPrice = parseMoney(document.getElementById('main-product-price').value);
 
@@ -732,21 +726,15 @@ function updateTotalPrice() {
 
   const total = mainPrice + bundleTotal;
 
-  // Update the price display element
   const priceEl = document.querySelector('.price.price--end');
   if (priceEl) priceEl.textContent = `$${total.toFixed(2)}`;
 }
-
-// Attach change event to all bundle checkboxes
 document.querySelectorAll('.bundle-checkbox').forEach(cb => {
   cb.addEventListener('change', updateTotalPrice);
 });
 
-// Run on page load
 updateTotalPrice();
 
-// ----------------------
-// Add to cart functionality with bundle properties
 document.addEventListener('submit', function (event) {
   const form = event.target;
   if (!form.matches('form[action="/cart/add"]')) return;
@@ -780,7 +768,6 @@ document.addEventListener('submit', function (event) {
     }
   ];
 
-  // Add the bundle products as separate items
   checkedBundles.forEach(checkbox => {
     items.push({
       id: checkbox.value,
