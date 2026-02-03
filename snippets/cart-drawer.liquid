@@ -56,10 +56,7 @@
         </div>
       {%- endif -%}
 
-      <!-- START TWO-COLUMN WRAPPER -->
       <div class="drawer__content-wrapper">
-
-        <!-- LEFT COLUMN: Recommendations -->
         <div class="cart-recommendations">
           <h3>You might also like:</h3>
           <div class="recommendation-carousel">
@@ -77,8 +74,6 @@
             {% endfor %}
           </div>
         </div>
-
-        <!-- RIGHT COLUMN: Main Cart Content -->
         <div class="cart-main-content">
           <div class="drawer-wrapper">
             <div class="drawer__header">
@@ -149,8 +144,7 @@
                           role="cell"
                           headers="CartDrawer-ColumnProductImage"
                         >
-                          {% if item.image %}
-                            {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
+                          {% if item.image %}                            
                             <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
                             <img
                               class="cart-item__image"
@@ -492,8 +486,7 @@
                 <div id="CartDrawer-CartErrors" role="alert"></div>
               </form>
             </cart-drawer-items>
-
-            <!-- Footer: totals, discounts, checkout button -->
+            
              <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
@@ -514,10 +507,6 @@
             </cart-note>
           </details>
         {%- endif -%}
-
-        <!-- Start blocks -->
-        <!-- Subtotals -->
-
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
           <div>
             {%- if cart.cart_level_discount_applications.size > 0 -%}
@@ -579,8 +568,6 @@
           </small>
         </div>
 
-        <!-- CTAs -->
-
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
             type="submit"
@@ -600,7 +587,6 @@
         </div>
 
       </div>
-      <!-- END TWO-COLUMN WRAPPER -->
 
     </div>
   </div>
