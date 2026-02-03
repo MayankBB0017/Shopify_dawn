@@ -713,21 +713,28 @@
                 return parseFloat(moneyStr.replace(/[^0-9.]/g, '')) || 0;
               }
 
-              function updateTotalPrice() {
-                const mainPrice = parseMoney(document.getElementById('main-product-price').value);
+            function updateTotalPrice() {
+  const mainPrice = parseMoney(document.getElementById('main-product-price').value);
 
-                const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-                let bundleTotal = 0;
+  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+  let bundleTotal = 0;
 
-                checkedBundles.forEach(checkbox => {
-                  bundleTotal += parseMoney(checkbox.dataset.price);
-                });
+  checkedBundles.forEach(checkbox => {
+    bundleTotal += parseMoney(checkbox.dataset.price);
+  });
 
-                const total = mainPrice + bundleTotal;
+  const total = mainPrice + bundleTotal;
 
-                const priceEl = document.querySelector('.price.price--end');
-                if (priceEl) priceEl.textContent = `$${total.toFixed(2)}`;
-              }
+  const priceEl = document.querySelector('.price.price--end');
+  if (priceEl) {
+    if (bundleTotal > 0) {
+      priceEl.textContent = `$${total.toFixed(2)} (Bundle: $${bundleTotal.toFixed(2)})`;
+    } else {
+      priceEl.textContent = `$${total.toFixed(2)}`;
+    }
+  }
+}
+
               document.querySelectorAll('.bundle-checkbox').forEach(cb => {
                 cb.addEventListener('change', updateTotalPrice);
               });
