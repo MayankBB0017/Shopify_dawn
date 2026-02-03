@@ -712,11 +712,15 @@
                 if (checkedBundles.length === 0) return;
 
                 event.preventDefault();
+                event.stopImmediatePropagation(); //
+
                 const formData = new FormData(form);
+
                 const items = [{
                   id: formData.get('id'),
-                  quantity: formData.get('quantity') || 1
+                  quantity: Number(formData.get('quantity')) || 1
                 }];
+
                 checkedBundles.forEach((checkbox) => {
                   items.push({
                     id: checkbox.value,
@@ -726,9 +730,7 @@
 
                 fetch('/cart/add.js', {
                   method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
+                  headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ items })
                 })
                 .then(() => {
@@ -736,7 +738,8 @@
                 })
                 .catch(console.error);
               });
-              </script>    
+              </script>
+   
 
             {%- endcase -%}
           {%- endfor -%}
