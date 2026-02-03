@@ -760,7 +760,7 @@
                 checkedBundles.forEach(checkbox => {
                   bundleTitles.push(checkbox.dataset.title);
                   const price = parseMoney(checkbox.dataset.price);
-                  if (!isNaN(price)) bundleTotalPrice += mainPrice;
+                  if (!isNaN(price)) bundleTotalPrice += price;
                 });
 
                 const items = [
