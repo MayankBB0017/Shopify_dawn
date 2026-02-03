@@ -77,6 +77,43 @@
 </div>
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const addCartButtons = document.querySelectorAll('.btn-add-cart');
+
+  addCartButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const productId = this.dataset.productId;
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          id: productId,
+          quantity: 1
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Added to cart:', data);
+        alert(`${data.title} has been added to your cart!`);
+        // Optional: update cart icon or drawer here
+      })
+      .catch(error => {
+        console.error('Error adding to cart:', error);
+        alert('Oops! Could not add to cart.');
+      });
+    });
+  });
+});
+
+</script>
+
         <div class="cart-main-content">
           <div class="drawer-wrapper">
             <div class="drawer__header">
