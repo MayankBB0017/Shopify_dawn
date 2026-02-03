@@ -712,11 +712,18 @@
                 if (checkedBundles.length === 0) return;
 
                 event.preventDefault();
+
                 const formData = new FormData(form);
-                const items = [{
-                  id: formData.get('id'),
-                  quantity: formData.get('quantity') || 1
-                }];
+                const mainProductId = formData.get('id');
+                const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
+
+                const items = [
+                  {
+                    id: mainProductId,
+                    quantity: mainQuantity
+                  }
+                ];
+
                 checkedBundles.forEach((checkbox) => {
                   items.push({
                     id: checkbox.value,
@@ -731,12 +738,13 @@
                   },
                   body: JSON.stringify({ items })
                 })
-                .then(() => {
-                  document.dispatchEvent(new CustomEvent('cart:refresh'));
-                })
-                .catch(console.error);
+                  .then(() => {
+                    document.dispatchEvent(new CustomEvent('cart:refresh'));
+                  })
+                  .catch(console.error);
               });
-              </script>    
+              </script>
+   
 
             {%- endcase -%}
           {%- endfor -%}
