@@ -711,8 +711,7 @@
                   if (!form.matches('form[action="/cart/add"]')) return;
 
                   const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-
-                  // Only proceed if at least one bundle checked
+                  
                   if (checkedBundles.length === 0) return;
 
                   event.preventDefault();
@@ -720,8 +719,7 @@
                   const formData = new FormData(form);
                   const mainProductId = formData.get('id');
                   const mainQuantity = parseInt(formData.get('quantity') || 1);
-
-                  // Collect bundle info
+                  
                   let bundleTitles = [];
                   let bundleTotalPrice = 0;
 
