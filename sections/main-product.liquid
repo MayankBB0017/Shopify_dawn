@@ -709,24 +709,20 @@
               {% endif %}
 
               <script>
-/**
- * Helper to parse a money string like "$12.99" into a float
- */
 function parseMoney(moneyStr) {
   return parseFloat(moneyStr.replace(/[^0-9.]/g, '')) || 0;
 }
 
 /**
- * Updates the displayed total price on the product page
+ * Update the product page price dynamically
  */
 function updateTotalPrice() {
   const mainPrice = parseMoney(document.getElementById('main-product-price').value);
-
   const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
   let bundleTotal = 0;
 
-  checkedBundles.forEach(checkbox => {
-    bundleTotal += parseMoney(checkbox.dataset.price);
+  checkedBundles.forEach(cb => {
+    bundleTotal += parseMoney(cb.dataset.price);
   });
 
   const total = mainPrice + bundleTotal;
@@ -739,20 +735,21 @@ function updateTotalPrice() {
       priceEl.textContent = `$${total.toFixed(2)}`;
     }
   }
+
+  // Save total for cart submission
+  document.getElementById('main-product-price').dataset.total = total.toFixed(2);
 }
 
-// Attach change event to all bundle checkboxes
-document.querySelectorAll('.bundle-checkbox').forEach(cb => {
-  cb.addEventListener('change', updateTotalPrice);
-});
+// Attach change event
+document.querySelectorAll('.bundle-checkbox').forEach(cb => cb.addEventListener('change', updateTotalPrice));
 
-// Initialize total price on page load
+// Initialize
 updateTotalPrice();
 
 /**
- * Handle form submission to add product + bundle info to cart
+ * Add product to cart with total price as a property
  */
-document.addEventListener('submit', function (event) {
+document.addEventListener('submit', function(event) {
   const form = event.target;
   if (!form.matches('form[action="/cart/add"]')) return;
 
@@ -762,19 +759,19 @@ document.addEventListener('submit', function (event) {
   const mainProductId = formData.get('id');
   const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
 
-  // Collect selected bundles
   const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
   let bundleTitles = [];
   let bundleTotalPrice = 0;
 
-  checkedBundles.forEach(checkbox => {
-    bundleTitles.push(checkbox.dataset.title);
-    const price = parseMoney(checkbox.dataset.price);
+  checkedBundles.forEach(cb => {
+    bundleTitles.push(cb.dataset.title);
+    const price = parseMoney(cb.dataset.price);
     if (!isNaN(price)) bundleTotalPrice += price;
   });
 
-  // Build the main product item with properties
   const mainPrice = parseMoney(document.getElementById('main-product-price').value);
+  const totalPrice = mainPrice + bundleTotalPrice;
+
   const item = {
     id: mainProductId,
     quantity: mainQuantity,
@@ -784,17 +781,35 @@ document.addEventListener('submit', function (event) {
   if (bundleTitles.length > 0) {
     item.properties["Bundle Includes"] = bundleTitles.join(', ');
     item.properties["Bundle Value"] = `$${bundleTotalPrice.toFixed(2)}`;
-    item.properties["Total Price"] = `$${(mainPrice + bundleTotalPrice).toFixed(2)}`;
+    item.properties["Total Price"] = `$${totalPrice.toFixed(2)}`; // store total for reference
   }
 
-  // Add main product to cart via AJAX
   fetch('/cart/add.js', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ items: [item] })
   })
-  .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
+  .then(() => {
+    document.dispatchEvent(new CustomEvent('cart:refresh'));
+  })
   .catch(console.error);
+});
+
+/**
+ * Update mini-cart / cart page displayed price dynamically
+ * (if using Shopify Ajax cart)
+ */
+document.addEventListener('cart:refresh', function() {
+  // Loop through cart items
+  document.querySelectorAll('.cart__row').forEach(row => {
+    const totalProp = row.querySelector('.cart-item-property[data-key="Total Price"]');
+    if (totalProp) {
+      const priceEl = row.querySelector('.price.price--end');
+      if (priceEl) {
+        priceEl.textContent = totalProp.textContent; // show total including bundle
+      }
+    }
+  });
 });
 </script>
 
