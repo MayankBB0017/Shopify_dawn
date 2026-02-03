@@ -713,24 +713,17 @@
 <script>
 document.addEventListener('submit', function (event) {
   const form = event.target;
-
-  // Only run on product forms
   if (!form.matches('form[action="/cart/add"]')) return;
 
   const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
   if (checkedBundles.length === 0) return;
 
-  event.preventDefault(); // pause default ATC
-
+  event.preventDefault();
   const formData = new FormData(form);
-
-  // Main product
   const items = [{
     id: formData.get('id'),
     quantity: formData.get('quantity') || 1
   }];
-
-  // Bundle products
   checkedBundles.forEach((checkbox) => {
     items.push({
       id: checkbox.value,
@@ -746,7 +739,6 @@ document.addEventListener('submit', function (event) {
     body: JSON.stringify({ items })
   })
   .then(() => {
-    // Trigger Dawn cart update (drawer or redirect)
     document.dispatchEvent(new CustomEvent('cart:refresh'));
   })
   .catch(console.error);
