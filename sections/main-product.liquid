@@ -708,82 +708,82 @@
 </div>
 {% endif %}
 
-<script>
-function parseMoney(moneyStr) {
-  // Remove $ or commas, parse as float
-  return parseFloat(moneyStr.replace(/[^0-9.]/g, '')) || 0;
-}
+        <script>
+        function parseMoney(moneyStr) {
+          // Remove $ or commas, parse as float
+          return parseFloat(moneyStr.replace(/[^0-9.]/g, '')) || 0;
+        }
 
-function updateTotalPrice() {
-  const mainPrice = parseMoney(document.getElementById('main-product-price').value);
+        function updateTotalPrice() {
+          const mainPrice = parseMoney(document.getElementById('main-product-price').value);
 
-  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-  let bundleTotal = 0;
+          const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+          let bundleTotal = 0;
 
-  checkedBundles.forEach(checkbox => {
-    bundleTotal += parseMoney(checkbox.dataset.price);
-  });
+          checkedBundles.forEach(checkbox => {
+            bundleTotal += parseMoney(checkbox.dataset.price);
+          });
 
-  const total = mainPrice + bundleTotal;
+          const total = mainPrice + bundleTotal;
 
-  const priceEl = document.querySelector('.price.price--end');
-  if (priceEl) priceEl.textContent = `$${total.toFixed(2)}`;
-}
-document.querySelectorAll('.bundle-checkbox').forEach(cb => {
-  cb.addEventListener('change', updateTotalPrice);
-});
+          const priceEl = document.querySelector('.price.price--end');
+          if (priceEl) priceEl.textContent = `$${total.toFixed(2)}`;
+        }
+        document.querySelectorAll('.bundle-checkbox').forEach(cb => {
+          cb.addEventListener('change', updateTotalPrice);
+        });
 
-updateTotalPrice();
+        updateTotalPrice();
 
-document.addEventListener('submit', function (event) {
-  const form = event.target;
-  if (!form.matches('form[action="/cart/add"]')) return;
+        document.addEventListener('submit', function (event) {
+          const form = event.target;
+          if (!form.matches('form[action="/cart/add"]')) return;
 
-  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-  if (checkedBundles.length === 0) return;
+          const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+          if (checkedBundles.length === 0) return;
 
-  event.preventDefault();
+          event.preventDefault();
 
-  const formData = new FormData(form);
-  const mainProductId = formData.get('id');
-  const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
+          const formData = new FormData(form);
+          const mainProductId = formData.get('id');
+          const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
 
-  let bundleTitles = [];
-  let bundleTotalPrice = 0;
+          let bundleTitles = [];
+          let bundleTotalPrice = 0;
 
-  checkedBundles.forEach(checkbox => {
-    bundleTitles.push(checkbox.dataset.title);
-    const price = parseMoney(checkbox.dataset.price);
-    if (!isNaN(price)) bundleTotalPrice += price;
-  });
+          checkedBundles.forEach(checkbox => {
+            bundleTitles.push(checkbox.dataset.title);
+            const price = parseMoney(checkbox.dataset.price);
+            if (!isNaN(price)) bundleTotalPrice += price;
+          });
 
-  const items = [
-    {
-      id: mainProductId,
-      quantity: mainQuantity,
-      properties: {
-        "Bundle Includes": bundleTitles.join(', '),
-        "Bundle Value": `$${bundleTotalPrice.toFixed(2)}`
-      }
-    }
-  ];
+          const items = [
+            {
+              id: mainProductId,
+              quantity: mainQuantity,
+              properties: {
+                "Bundle Includes": bundleTitles.join(', '),
+                "Bundle Value": `$${bundleTotalPrice.toFixed(2)}`
+              }
+            }
+          ];
 
-  checkedBundles.forEach(checkbox => {
-    items.push({
-      id: checkbox.value,
-      quantity: 1
-    });
-  });
+          checkedBundles.forEach(checkbox => {
+            items.push({
+              id: checkbox.value,
+              quantity: 1
+            });
+          });
 
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ items })
-  })
-  .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
-  .catch(console.error);
-});
-</script>
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items })
+          })
+          .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
+          .catch(console.error);
+        });
+        </script>
 
 
 
