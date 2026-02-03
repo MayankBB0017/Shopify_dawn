@@ -62,19 +62,25 @@
   <h3>You might also like:</h3>
   <div class="recommendation-carousel">
     {% for product in product.metafields.custom.recommend_product.value %}
-      <div class="recommended-item">
-        <a href="{{ product.url }}">
-          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-          <div class="recommended-info">
-            <div class="title">{{ product.title }}</div>
-            <div class="price">{{ product.price | money }}</div>
-          </div>
-        </a>
-        <button class="btn-add-cart" data-product-id="{{ product.id }}">Add to Cart</button>
-      </div>
+      {% assign first_variant = product.variants.first %}
+      {% if first_variant %}
+        <div class="recommended-item">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <div class="recommended-info">
+              <div class="title">{{ product.title }}</div>
+              <div class="price">{{ first_variant.price | money }}</div>
+            </div>
+          </a>
+          <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
+            Add to Cart
+          </button>
+        </div>
+      {% endif %}
     {% endfor %}
   </div>
 </div>
+
 
 
 <script>
@@ -99,10 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: 1
-        })
+        body: JSON.stringify({ id: variantId, quantity: 1 })
       })
       .then(res => {
         if (!res.ok) throw new Error('Network response not ok');
@@ -119,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
 </script>
 
         <div class="cart-main-content">
