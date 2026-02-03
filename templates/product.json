@@ -54,6 +54,10 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "bundle_F8aYJL": {
+          "type": "bundle",
+          "settings": {}
         }
       },
       "block_order": [
@@ -64,7 +68,8 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "share"
+        "share",
+        "bundle_F8aYJL"
       ],
       "settings": {
         "enable_sticky_info": true,
