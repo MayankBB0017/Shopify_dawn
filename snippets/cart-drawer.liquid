@@ -64,7 +64,7 @@
             {% for product in product.metafields.custom.recommend_product.value %}
               <div class="recommended-item">
                 <a href="{{ product.url }}">
-                  <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+                  <img src="{{ product.featured_image | img_url: '100x' }}" alt="{{ product.title }}">
                   <div class="recommended-info">
                     <div class="title">{{ product.title }}</div>
                     <div class="price">{{ product.price | money }}</div>
