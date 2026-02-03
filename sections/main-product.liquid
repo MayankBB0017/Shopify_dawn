@@ -708,55 +708,37 @@
               {% endif %}              
               
             <script>
-            document.addEventListener('submit', function (event) {
-              const form = event.target;
-              if (!form.matches('form[action="/cart/add"]')) return;
+function parseMoney(moneyStr) {
+  // Remove anything that is not a number or dot, then parse as float
+  return parseFloat(moneyStr.replace(/[^0-9.]/g, '')) || 0;
+}
 
-              const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-              if (checkedBundles.length === 0) return;
+function updateTotalPrice() {
+  const mainPrice = parseMoney(document.getElementById('main-product-price').value);
 
-              event.preventDefault();
+  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+  let bundleTotal = 0;
 
-              const formData = new FormData(form);
-              const mainProductId = formData.get('id');
-              const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
+  checkedBundles.forEach(checkbox => {
+    bundleTotal += parseMoney(checkbox.dataset.price);
+  });
 
-              let bundleTitles = [];
-              let bundleTotalPrice = 0;
+  const total = mainPrice + bundleTotal;
 
-              checkedBundles.forEach(checkbox => {
-                bundleTitles.push(checkbox.dataset.title);
-                const price = parseInt(checkbox.dataset.price, 10);
-                if (!isNaN(price)) bundleTotalPrice += price;
-              });
+  // Update price on page
+  const priceEl = document.querySelector('.price.price--end');
+  if (priceEl) priceEl.textContent = `$${total.toFixed(2)}`;
+}
 
-              const items = [
-                {
-                  id: mainProductId,
-                  quantity: mainQuantity,
-                  properties: {
-                    "Bundle Includes": bundleTitles.join(', '),
-                    "Bundle Value": `$${(bundleTotalPrice / 100).toFixed(2)}`
-                  }
-                }
-              ];
+// Run every time a checkbox changes
+document.querySelectorAll('.bundle-checkbox').forEach(cb => {
+  cb.addEventListener('change', updateTotalPrice);
+});
 
-              checkedBundles.forEach(checkbox => {
-                items.push({
-                  id: checkbox.value,
-                  quantity: 1
-                });
-              });
+// Run on page load
+updateTotalPrice();
+</script>
 
-              fetch('/cart/add.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ items })
-              })
-              .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
-              .catch(console.error);
-            });
-            </script>
 
 
             {%- endcase -%}
