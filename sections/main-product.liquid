@@ -771,17 +771,14 @@
                   item.properties["Bundle Includes"] = bundleTitles.join(', ');
                   item.properties["Bundle Value"] = `$${bundleTotalPrice.toFixed(2)}`;
                 }
-fetch('/cart/add.js', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ items: [item] })
-})
-.then(() => {
-  // Instead of triggering cart notification, just reload or update cart
-  document.dispatchEvent(new CustomEvent('cart:refresh'));
-})
-.catch(console.error);
 
+                fetch('/cart/add.js', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ items: [item] })
+                })
+                .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
+                .catch(console.error);
               });
               </script>
 
