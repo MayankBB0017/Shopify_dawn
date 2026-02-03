@@ -58,36 +58,57 @@
 
       <div class="drawer__content-wrapper">
 
-        <div class="cart-recommendations">
-        <h3>You might also like:</h3>
-        <div class="recommendation-carousel">
-          {% for product in product.metafields.custom.recommend_product.value %}
-            {% assign first_variant = product.variants.first %}
-            {% if first_variant %}
-              <div class="recommended-item">
-                <a href="{{ product.url }}">
-                  <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                  <div class="recommended-info">
-                    <div class="title">{{ product.title }}</div>
-                    <div class="price">{{ first_variant.price | money }}</div>
-                  </div>
-                </a>
-                <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
-                  Add to Cart
-                </button>
-              </div>
-            {% endif %}
-          {% endfor %}
+      <div class="cart-recommendations">
+  <h3>You might also like:</h3>
+  <div class="recommendation-carousel">
+    {% for product in product.metafields.custom.recommend_product.value %}
+      {% assign first_variant = product.variants.first %}
+      {% if first_variant %}
+        <div class="recommended-item">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <div class="recommended-info">
+              <div class="title">{{ product.title }}</div>
+              <div class="price">{{ first_variant.price | money }}</div>
+            </div>
+          </a>
+          <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
+            Add to Cart
+          </button>
         </div>
-      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Optional Cart Count in Header -->
+<div class="cart-header">
+  Cart (<span class="cart-count">{{ cart.item_count }}</span>)
+</div>
+
 
 
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const buttons = document.querySelectorAll('.btn-add-cart');
 
-  buttons.forEach(button => {
+  // Function to update cart count dynamically
+  function updateCartUI() {
+    fetch('/cart.js')
+      .then(res => res.json())
+      .then(cart => {
+        const cartCountElem = document.querySelector('.cart-count');
+        if (cartCountElem) {
+          cartCountElem.textContent = cart.item_count;
+        }
+        console.log('Cart updated:', cart);
+      });
+  }
+
+  // Attach click events to all recommendation add buttons
+  const addCartButtons = document.querySelectorAll('.btn-add-cart');
+
+  addCartButtons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
 
@@ -99,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
+      // AJAX add to cart
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {
@@ -113,7 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(data => {
         console.log('Added to cart:', data);
+        // Notify user
         alert(`${data.title} has been added to your cart!`);
+        // Update cart count immediately
+        updateCartUI();
       })
       .catch(err => {
         console.error('Add to cart error:', err);
@@ -121,7 +146,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+
 });
+
 
 </script>
 
