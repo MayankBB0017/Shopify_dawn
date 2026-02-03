@@ -62,23 +62,36 @@
         </div>
       {%- endif -%}
       
-    <div class="cart-recommendations">
-      <h3>You might also like:</h3>
-      <div class="recommendation-carousel">
-        {% for product in product.metafields.custom.recommend_product.value %}
-          <div class="recommended-item">
-            <a href="{{ product.url }}">
-              <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-              <div class="recommended-info">
-                <div class="title">{{ product.title }}</div>
-                <div class="price">{{ product.price | money }}</div>
-              </div>
-            </a>
-            <button class="btn-add-cart">Add to Cart</button>
-          </div>
-        {% endfor %}
-      </div>
+
+
+
+    <div class="drawer__content-wrapper">
+  <div class="cart-recommendations">
+    <h3>You might also like:</h3>
+    <div class="recommendation-carousel">
+      {% for product in product.metafields.custom.recommend_product.value %}
+        <div class="recommended-item">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <div class="recommended-info">
+              <div class="title">{{ product.title }}</div>
+              <div class="price">{{ product.price | money }}</div>
+            </div>
+          </a>
+          <button class="btn-add-cart">Add to Cart</button>
+        </div>
+      {% endfor %}
     </div>
+  </div>
+
+  <div class="cart-main-content">
+    <!-- The rest of your cart drawer (cart items, totals, checkout) goes here -->
+    <div class="drawer-wrapper">
+      <!-- existing cart drawer content -->
+    </div>
+  </div>
+</div>
+
          
 
     <div class="drawer-wrapper">
