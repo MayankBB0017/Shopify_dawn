@@ -264,7 +264,7 @@ cart-items {
 
   .recommended-info .title {
     font-size: 0.9rem;
-    margin-bottom: 5px;
+    margin: 0;
     height: 36px;
     overflow: hidden;
   }
