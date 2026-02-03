@@ -79,13 +79,19 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const addCartButtons = document.querySelectorAll('.btn-add-cart');
+  const buttons = document.querySelectorAll('.btn-add-cart');
 
-  addCartButtons.forEach(button => {
+  buttons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
 
       const variantId = this.dataset.variantId;
+
+      if (!variantId) {
+        console.error('No variant ID found!');
+        alert('Cannot add this product to cart.');
+        return;
+      }
 
       fetch('/cart/add.js', {
         method: 'POST',
@@ -98,20 +104,21 @@ document.addEventListener('DOMContentLoaded', function() {
           quantity: 1
         })
       })
-      .then(response => response.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Network response not ok');
+        return res.json();
+      })
       .then(data => {
         console.log('Added to cart:', data);
         alert(`${data.title} has been added to your cart!`);
       })
-      .catch(error => {
-        console.error('Error adding to cart:', error);
+      .catch(err => {
+        console.error('Add to cart error:', err);
         alert('Oops! Could not add to cart.');
       });
     });
   });
 });
-
-
 </script>
 
         <div class="cart-main-content">
