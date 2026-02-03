@@ -286,7 +286,7 @@ cart-items {
   }
 
   .btn-add-cart:hover {
-    background-color: #333;
+    background-color: beige;
   }
   .drawer__inner {    
     width: 70rem;
