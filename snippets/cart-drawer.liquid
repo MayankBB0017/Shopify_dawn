@@ -61,6 +61,22 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+      {% if recommended_products.size > 0 %}
+  <div class="cart-recommendations">
+    <h3>You might also like:</h3>
+    <ul class="recommended-products">
+      {% for product in recommended_products %}
+        <li>
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <span>{{ product.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
       <div class="drawer__header">
         <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
         <button
