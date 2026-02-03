@@ -70,6 +70,7 @@
                 <a href="{{ product.url }}">
                   <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
                   <span>{{ product.title }}</span>
+                  <span>{{ product.price | money }}</span>
                 </a>
               </li>
             {% endfor %}
