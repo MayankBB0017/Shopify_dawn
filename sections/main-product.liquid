@@ -684,13 +684,18 @@
                     {% for bundle_product in product.metafields.custom.product_bundle.value %}
                       <li class="grid__item">
                         <label class="bundle-item">
+                          <!-- Main product price -->
+                          <input type="hidden" id="main-product-price" value="{{ product.selected_or_first_available_variant.price | money }}">
+
+                          <!-- Bundle checkboxes -->
                           <input
-                              type="checkbox"
-                              class="bundle-checkbox"
-                              value="{{ bundle_product.selected_or_first_available_variant.id }}"
-                              data-title="{{ bundle_product.title }}"
-                              data-price="{{ bundle_product.selected_or_first_available_variant.price | money }}" 
-                            >
+                            type="checkbox"
+                            class="bundle-checkbox"
+                            value="{{ bundle_product.selected_or_first_available_variant.id }}"
+                            data-title="{{ bundle_product.title }}"
+                            data-price="{{ bundle_product.selected_or_first_available_variant.price | money }}"
+                          >
+
                           {% render 'card-product',
                             card_product: bundle_product,
                             media_aspect_ratio: settings.card_image_ratio,
