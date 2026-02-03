@@ -5,7 +5,7 @@
   {% render 'cart-drawer' %}
 {% endcomment %}
 
-{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+{% comment %} {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
@@ -579,7 +579,7 @@
       </div>
     </div>
   </div>
-</cart-drawer>
+</cart-drawer> {% endcomment %}
 
 
 {% comment %}
