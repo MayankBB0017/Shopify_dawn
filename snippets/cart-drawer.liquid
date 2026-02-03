@@ -116,8 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Cannot add this product to cart.');
         return;
       }
-
-      // AJAX add to cart
+      
       fetch('/cart/add.js', {
         method: 'POST',
         headers: {
@@ -131,10 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return res.json();
       })
       .then(data => {
-        console.log('Added to cart:', data);
-        // Notify user
-        alert(`${data.title} has been added to your cart!`);
-        // Update cart count immediately
+        console.log('Added to cart:', data);        
+        {% comment %} alert(`${data.title} has been added to your cart!`);{% endcomment %}
         updateCartUI();
       })
       .catch(err => {
