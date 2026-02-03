@@ -703,39 +703,40 @@
                 </div>
               {% endif %}              
 
-             <script>
-document.addEventListener('submit', function (event) {
-  const form = event.target;
-  if (!form.matches('form[action="/cart/add"]')) return;
+              <script>
+              document.addEventListener('submit', function (event) {
+                const form = event.target;
+                if (!form.matches('form[action="/cart/add"]')) return;
 
-  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-  if (checkedBundles.length === 0) return; 
+                const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+                if (checkedBundles.length === 0) return;
 
-  event.preventDefault();
+                event.preventDefault();
+                const formData = new FormData(form);
+                const items = [{
+                  id: formData.get('id'),
+                  quantity: formData.get('quantity') || 1
+                }];
+                checkedBundles.forEach((checkbox) => {
+                  items.push({
+                    id: checkbox.value,
+                    quantity: 1
+                  });
+                });
 
-  const items = [];
-
-  checkedBundles.forEach((checkbox) => {
-    items.push({
-      id: checkbox.value,
-      quantity: 1
-    });
-  });
-
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ items })
-  })
-  .then(() => {
-    document.dispatchEvent(new CustomEvent('cart:refresh'));
-  })
-  .catch(console.error);
-});
-</script>
-
+                fetch('/cart/add.js', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ items })
+                })
+                .then(() => {
+                  document.dispatchEvent(new CustomEvent('cart:refresh'));
+                })
+                .catch(console.error);
+              });
+              </script>    
 
             {%- endcase -%}
           {%- endfor -%}
