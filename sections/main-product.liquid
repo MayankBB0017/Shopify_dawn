@@ -689,6 +689,7 @@
                               class="bundle-checkbox"
                               value="{{ bundle_product.selected_or_first_available_variant.id }}"
                               data-title="{{ bundle_product.title }}"
+                              data-price="{{ bundle_product.selected_or_first_available_variant.price }}"                              
                             >
                           {% render 'card-product',
                             card_product: bundle_product,
@@ -713,7 +714,7 @@
                 if (checkedBundles.length === 0) return;
 
                 event.preventDefault();
-                
+
                 const formData = new FormData(form);                
                 const bundleTitles = [];
                 checkedBundles.forEach((checkbox) => {
