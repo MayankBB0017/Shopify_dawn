@@ -86,63 +86,61 @@
         Cart (<span class="cart-count">{{ cart.item_count }}</span>)
       </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
 
-  // Function to update cart count dynamically
-  function updateCartUI() {
-    fetch('/cart.js')
-      .then(res => res.json())
-      .then(cart => {
-        const cartCountElem = document.querySelector('.cart-count');
-        if (cartCountElem) {
-          cartCountElem.textContent = cart.item_count;
-        }
-        console.log('Cart updated:', cart);
-      });
-  }
-
-  // Attach click events to all recommendation add buttons
-  const addCartButtons = document.querySelectorAll('.btn-add-cart');
-
-  addCartButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-
-      const variantId = this.dataset.variantId;
-
-      if (!variantId) {
-        console.error('No variant ID found!');
-        alert('Cannot add this product to cart.');
-        return;
+      function updateCartUI() {
+        fetch('/cart.js')
+          .then(res => res.json())
+          .then(cart => {
+            const cartCountElem = document.querySelector('.cart-count');
+            if (cartCountElem) {
+              cartCountElem.textContent = cart.item_count;
+            }
+            console.log('Cart updated:', cart);
+          });
       }
-      
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ id: variantId, quantity: 1 })
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Network response not ok');
-        return res.json();
-      })
-      .then(data => {
-        console.log('Added to cart:', data);        
-        {% comment %} alert(`${data.title} has been added to your cart!`);{% endcomment %}
-        updateCartUI();
-      })
-      .catch(err => {
-        console.error('Add to cart error:', err);
-        alert('Oops! Could not add to cart.');
-      });
-    });
-  });
 
-});
-</script>
+      const addCartButtons = document.querySelectorAll('.btn-add-cart');
+
+      addCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          const variantId = this.dataset.variantId;
+
+          if (!variantId) {
+            console.error('No variant ID found!');
+            alert('Cannot add this product to cart.');
+            return;
+          }
+          
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ id: variantId, quantity: 1 })
+          })
+          .then(res => {
+            if (!res.ok) throw new Error('Network response not ok');
+            return res.json();
+          })
+          .then(data => {
+            console.log('Added to cart:', data);        
+            {% comment %} alert(`${data.title} has been added to your cart!`);{% endcomment %}
+            updateCartUI();
+          })
+          .catch(err => {
+            console.error('Add to cart error:', err);
+            alert('Oops! Could not add to cart.');
+          });
+        });
+      });
+
+    });
+    </script>
 
         <div class="cart-main-content">
           <div class="drawer-wrapper">
