@@ -62,25 +62,26 @@
         </div>
       {%- endif -%}
       
-        <div class="cart-recommendations">
-  <h3>You might also like:</h3>
-  <div class="recommendation-carousel">
-    {% for product in product.metafields.custom.recommend_product.value %}
-      <div class="recommended-item">
-        <a href="{{ product.url }}">
-          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-          <div class="recommended-info">
-            <div class="title">{{ product.title }}</div>
-            <div class="price">{{ product.price | money }}</div>
+    <div class="cart-recommendations">
+      <h3>You might also like:</h3>
+      <div class="recommendation-carousel">
+        {% for product in product.metafields.custom.recommend_product.value %}
+          <div class="recommended-item">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+              <div class="recommended-info">
+                <div class="title">{{ product.title }}</div>
+                <div class="price">{{ product.price | money }}</div>
+              </div>
+            </a>
+            <button class="btn-add-cart">Add to Cart</button>
           </div>
-        </a>
-        <button class="btn-add-cart">Add to Cart</button>
+        {% endfor %}
       </div>
-    {% endfor %}
-  </div>
-</div>
+    </div>
          
 
+    <div class="drawer-wrapper">
       <div class="drawer__header">
         <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
         <button
@@ -596,6 +597,7 @@
           </button>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </cart-drawer>
