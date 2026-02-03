@@ -674,6 +674,69 @@
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
+              {%- when 'bundle' -%}
+      {% if product.metafields.custom.product_bundle != blank %}
+        <div class="page-width bundle-wrapper">
+          <h2 class="title h2">Bundle products</h2>
+
+          <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--4-col-desktop">
+            {% for bundle_product in product.metafields.custom.product_bundle.value %}
+              <li class="grid__item">
+                <label class="bundle-item">
+                  <input
+                    type="checkbox"
+                    class="bundle-checkbox"
+                    value="{{ bundle_product.selected_or_first_available_variant.id }}"
+                  >
+                  {% render 'card-product',
+                    card_product: bundle_product,
+                    media_aspect_ratio: settings.card_image_ratio,
+                    show_secondary_image: true,
+                    show_vendor: false,
+                    show_rating: false
+                  %}
+                </label>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <script>
+      document.addEventListener('submit', function (event) {
+        const form = event.target;
+        if (!form.matches('form[action="/cart/add"]')) return;
+
+        const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+        if (checkedBundles.length === 0) return;
+
+        event.preventDefault();
+        const formData = new FormData(form);
+        const items = [{
+          id: formData.get('id'),
+          quantity: formData.get('quantity') || 1
+        }];
+        checkedBundles.forEach((checkbox) => {
+          items.push({
+            id: checkbox.value,
+            quantity: 1
+          });
+        });
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ items })
+        })
+        .then(() => {
+          document.dispatchEvent(new CustomEvent('cart:refresh'));
+        })
+        .catch(console.error);
+      });
+      </script>    
+
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -681,70 +744,7 @@
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </a>
         </section>
-      </div>
-      {% if product.metafields.custom.product_bundle != blank %}
-  <div class="page-width bundle-wrapper">
-    <h2 class="title h2">Bundle products</h2>
-
-    <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--4-col-desktop">
-      {% for bundle_product in product.metafields.custom.product_bundle.value %}
-        <li class="grid__item">
-          <label class="bundle-item">
-            <input
-              type="checkbox"
-              class="bundle-checkbox"
-              value="{{ bundle_product.selected_or_first_available_variant.id }}"
-            >
-            {% render 'card-product',
-              card_product: bundle_product,
-              media_aspect_ratio: settings.card_image_ratio,
-              show_secondary_image: true,
-              show_vendor: false,
-              show_rating: false
-            %}
-          </label>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
-
-<script>
-document.addEventListener('submit', function (event) {
-  const form = event.target;
-  if (!form.matches('form[action="/cart/add"]')) return;
-
-  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-  if (checkedBundles.length === 0) return;
-
-  event.preventDefault();
-  const formData = new FormData(form);
-  const items = [{
-    id: formData.get('id'),
-    quantity: formData.get('quantity') || 1
-  }];
-  checkedBundles.forEach((checkbox) => {
-    items.push({
-      id: checkbox.value,
-      quantity: 1
-    });
-  });
-
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ items })
-  })
-  .then(() => {
-    document.dispatchEvent(new CustomEvent('cart:refresh'));
-  })
-  .catch(console.error);
-});
-</script>
-
-
+      </div>   
     </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
@@ -809,6 +809,13 @@ document.addEventListener('submit', function (event) {
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "bundle",
+      "name": "Bundle",
+      "limit": 1,
+      "settings": [        
+      ]
     },
     {
       "type": "text",
