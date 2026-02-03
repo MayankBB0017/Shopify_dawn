@@ -689,7 +689,7 @@
                               class="bundle-checkbox"
                               value="{{ bundle_product.selected_or_first_available_variant.id }}"
                               data-title="{{ bundle_product.title }}"
-                              data-price="{{ bundle_product.selected_or_first_available_variant.price | times: 100 | round }}" 
+                              data-price="{{ bundle_product.selected_or_first_available_variant.price | times: 100 | money }}" 
                             >
                           {% render 'card-product',
                             card_product: bundle_product,
@@ -704,7 +704,7 @@
                   </ul>
                 </div>
               {% endif %}              
-              
+
             <script>
             document.addEventListener('submit', function (event) {
               const form = event.target;
