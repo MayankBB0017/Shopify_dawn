@@ -689,7 +689,7 @@
                               class="bundle-checkbox"
                               value="{{ bundle_product.selected_or_first_available_variant.id }}"
                               data-title="{{ bundle_product.title }}"
-                              data-price="{{ bundle_product.selected_or_first_available_variant.price | money }}"                              
+                              data-price="{{ bundle_product.selected_or_first_available_variant.price | times: 100 | round }}" 
                             >
                           {% render 'card-product',
                             card_product: bundle_product,
@@ -704,58 +704,58 @@
                   </ul>
                 </div>
               {% endif %}              
+              
+            <script>
+            document.addEventListener('submit', function (event) {
+              const form = event.target;
+              if (!form.matches('form[action="/cart/add"]')) return;
 
-              <script>
-                document.addEventListener('submit', function (event) {
-                  const form = event.target;
-                  if (!form.matches('form[action="/cart/add"]')) return;
+              const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+              if (checkedBundles.length === 0) return;
 
-                  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-                  
-                  if (checkedBundles.length === 0) return;
+              event.preventDefault();
 
-                  event.preventDefault();
+              const formData = new FormData(form);
+              const mainProductId = formData.get('id');
+              const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
 
-                  const formData = new FormData(form);
-                  const mainProductId = formData.get('id');
-                  const mainQuantity = parseInt(formData.get('quantity') || 1);
-                  
-                  let bundleTitles = [];
-                  let bundleTotalPrice = 0;
+              let bundleTitles = [];
+              let bundleTotalPrice = 0;
 
-                  checkedBundles.forEach(checkbox => {
-                    bundleTitles.push(checkbox.dataset.title);
-                    bundleTotalPrice += parseInt(checkbox.dataset.price, 10);
-                  });
+              checkedBundles.forEach(checkbox => {
+                bundleTitles.push(checkbox.dataset.title);
+                const price = parseInt(checkbox.dataset.price, 10);
+                if (!isNaN(price)) bundleTotalPrice += price;
+              });
 
-                  const items = [
-                    {
-                      id: mainProductId,
-                      quantity: mainQuantity,
-                      properties: {
-                        "Bundle Includes": bundleTitles.join(', '),
-                        "Bundle Value": `${(bundleTotalPrice / 100).toFixed(2)}`
-                      }
-                    }
-                  ];
-                  
-                  checkedBundles.forEach(checkbox => {
-                    items.push({
-                      id: checkbox.value,
-                      quantity: 1
-                    });
-                  });
-                  
-                  fetch('/cart/add.js', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ items })
-                  })
-                  .then(response => response.json())
-                  .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
-                  .catch(console.error);
+              const items = [
+                {
+                  id: mainProductId,
+                  quantity: mainQuantity,
+                  properties: {
+                    "Bundle Includes": bundleTitles.join(', '),
+                    "Bundle Value": `$${(bundleTotalPrice / 100).toFixed(2)}`
+                  }
+                }
+              ];
+
+              checkedBundles.forEach(checkbox => {
+                items.push({
+                  id: checkbox.value,
+                  quantity: 1
                 });
-              </script> 
+              });
+
+              fetch('/cart/add.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items })
+              })
+              .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
+              .catch(console.error);
+            });
+            </script>
+
 
             {%- endcase -%}
           {%- endfor -%}
