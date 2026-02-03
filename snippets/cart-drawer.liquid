@@ -63,7 +63,7 @@
       {%- endif -%}
       
 {% assign latest_item = cart.items | last %}
-{% assign recommended_products = latest_item.product.metafields.custom.recommend_product %}
+{% assign recommended_products = latest_item.product.metafields.custom.recommend_product.Value %}
 
 <div class="cart-recommendations">
   <h3>You might also like</h3>
