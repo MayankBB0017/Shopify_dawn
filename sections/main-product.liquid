@@ -682,6 +682,26 @@
           </a>
         </section>
       </div>
+      {% if product.metafields.custom.product_bundle != blank %}
+  <div class="page-width">
+    <h2 class="title h2">Bundle products</h2>
+
+    <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--4-col-desktop">
+      {% for bundle_product in product.metafields.custom.product_bundle.value %}
+        <li class="grid__item">
+          {% render 'card-product',
+            card_product: bundle_product,
+            media_aspect_ratio: 'square',
+            show_secondary_image: true,
+            show_vendor: false,
+            show_rating: false
+          %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
     </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
