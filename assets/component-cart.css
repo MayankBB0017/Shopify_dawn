@@ -246,7 +246,7 @@ cart-items {
   }
 
   .recommended-item {
-    background: #beige;
+    background-color: beige;
     border: 1px solid #eee;
     border-radius: 6px;
     text-align: center;
