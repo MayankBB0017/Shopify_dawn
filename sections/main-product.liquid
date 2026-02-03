@@ -740,16 +740,14 @@
                       }
                     }
                   ];
-
-                  // Add bundle items as separate line items
+                  
                   checkedBundles.forEach(checkbox => {
                     items.push({
                       id: checkbox.value,
                       quantity: 1
                     });
                   });
-
-                  // Send request
+                  
                   fetch('/cart/add.js', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -759,10 +757,7 @@
                   .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
                   .catch(console.error);
                 });
-              </script>
-
-
- 
+              </script> 
 
             {%- endcase -%}
           {%- endfor -%}
