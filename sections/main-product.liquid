@@ -713,11 +713,26 @@
                 if (checkedBundles.length === 0) return;
 
                 event.preventDefault();
+
                 const formData = new FormData(form);
-                const items = [{
-                  id: formData.get('id'),
-                  quantity: formData.get('quantity') || 1
-                }];
+
+                // Collect bundle product titles
+                const bundleTitles = [];
+                checkedBundles.forEach((checkbox) => {
+                  bundleTitles.push(checkbox.dataset.title);
+                });
+
+                const items = [
+                  {
+                    id: formData.get('id'),
+                    quantity: formData.get('quantity') || 1,
+                    properties: {
+                      'Bundle Includes': bundleTitles.join(', ')
+                    }
+                  }
+                ];
+
+                // Add bundled items normally (no properties)
                 checkedBundles.forEach((checkbox) => {
                   items.push({
                     id: checkbox.value,
@@ -737,7 +752,8 @@
                 })
                 .catch(console.error);
               });
-              </script>    
+              </script>
+ 
 
             {%- endcase -%}
           {%- endfor -%}
