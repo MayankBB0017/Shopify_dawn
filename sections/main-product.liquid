@@ -676,87 +676,128 @@
                 {% render 'icon-with-text', block: block %}
               {%- when 'bundle' -%}
 
-              {% if product.metafields.custom.product_bundle != blank %}
-                <div class="page-width bundle-wrapper">
-                  <h2 class="title h2">Bundle products</h2>
+             {% if product.metafields.custom.product_bundle != blank %}
+<div class="page-width bundle-wrapper">
+  <h2 class="title h2">Bundle products</h2>
 
-                  <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--2-col-desktop">
-                    {% for bundle_product in product.metafields.custom.product_bundle.value %}
-                      <li class="grid__item">
-                        <label class="bundle-item">
-                          <input type="hidden" id="main-product-price" value="{{ product.selected_or_first_available_variant.price | money }}">
-                          <input
-                            type="checkbox"
-                            class="bundle-checkbox"
-                            value="{{ bundle_product.selected_or_first_available_variant.id }}"
-                            data-title="{{ bundle_product.title }}"
-                            data-price="{{ bundle_product.selected_or_first_available_variant.price | money }}"
-                          >
+  <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--2-col-desktop">
+    {% for bundle_product in product.metafields.custom.product_bundle.value %}
+      <li class="grid__item">
+        <label class="bundle-item">
+          <!-- Hidden input to store main product price for JS -->
+          <input type="hidden" id="main-product-price" value="{{ product.selected_or_first_available_variant.price | money }}">
 
-                          {% render 'card-product',
-                            card_product: bundle_product,
-                            media_aspect_ratio: settings.card_image_ratio,
-                            show_secondary_image: true,
-                            show_vendor: false,
-                            show_rating: false
-                          %}
-                        </label>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              {% endif %}              
-              
-            <script>
-            document.addEventListener('submit', function (event) {
-              const form = event.target;
-              if (!form.matches('form[action="/cart/add"]')) return;
+          <!-- Bundle checkbox -->
+          <input
+            type="checkbox"
+            class="bundle-checkbox"
+            value="{{ bundle_product.selected_or_first_available_variant.id }}"
+            data-title="{{ bundle_product.title }}"
+            data-price="{{ bundle_product.selected_or_first_available_variant.price | money }}"
+          >
 
-              const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-              if (checkedBundles.length === 0) return;
+          {% render 'card-product',
+            card_product: bundle_product,
+            media_aspect_ratio: settings.card_image_ratio,
+            show_secondary_image: true,
+            show_vendor: false,
+            show_rating: false
+          %}
+        </label>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
 
-              event.preventDefault();
+<script>
+// ----------------------
+// Parse money string to number
+function parseMoney(moneyStr) {
+  // Remove $ or commas, parse as float
+  return parseFloat(moneyStr.replace(/[^0-9.]/g, '')) || 0;
+}
 
-              const formData = new FormData(form);
-              const mainProductId = formData.get('id');
-              const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
+// ----------------------
+// Update total price on page
+function updateTotalPrice() {
+  const mainPrice = parseMoney(document.getElementById('main-product-price').value);
 
-              let bundleTitles = [];
-              let bundleTotalPrice = 0;
+  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+  let bundleTotal = 0;
 
-              checkedBundles.forEach(checkbox => {
-                bundleTitles.push(checkbox.dataset.title);
-                const price = parseInt(checkbox.dataset.price, 10);
-                if (!isNaN(price)) bundleTotalPrice += price;
-              });
+  checkedBundles.forEach(checkbox => {
+    bundleTotal += parseMoney(checkbox.dataset.price);
+  });
 
-              const items = [
-                {
-                  id: mainProductId,
-                  quantity: mainQuantity,
-                  properties: {
-                    "Bundle Includes": bundleTitles.join(', '),
-                    "Bundle Value": `$${(bundleTotalPrice / 100).toFixed(2)}`
-                  }
-                }
-              ];
+  const total = mainPrice + bundleTotal;
 
-              checkedBundles.forEach(checkbox => {
-                items.push({
-                  id: checkbox.value,
-                  quantity: 1
-                });
-              });
+  // Update the price display element
+  const priceEl = document.querySelector('.price.price--end');
+  if (priceEl) priceEl.textContent = `$${total.toFixed(2)}`;
+}
 
-              fetch('/cart/add.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ items })
-              })
-              .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
-              .catch(console.error);
-            });
-            </script>
+// Attach change event to all bundle checkboxes
+document.querySelectorAll('.bundle-checkbox').forEach(cb => {
+  cb.addEventListener('change', updateTotalPrice);
+});
+
+// Run on page load
+updateTotalPrice();
+
+// ----------------------
+// Add to cart functionality with bundle properties
+document.addEventListener('submit', function (event) {
+  const form = event.target;
+  if (!form.matches('form[action="/cart/add"]')) return;
+
+  const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+  if (checkedBundles.length === 0) return;
+
+  event.preventDefault();
+
+  const formData = new FormData(form);
+  const mainProductId = formData.get('id');
+  const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
+
+  let bundleTitles = [];
+  let bundleTotalPrice = 0;
+
+  checkedBundles.forEach(checkbox => {
+    bundleTitles.push(checkbox.dataset.title);
+    const price = parseMoney(checkbox.dataset.price);
+    if (!isNaN(price)) bundleTotalPrice += price;
+  });
+
+  const items = [
+    {
+      id: mainProductId,
+      quantity: mainQuantity,
+      properties: {
+        "Bundle Includes": bundleTitles.join(', '),
+        "Bundle Value": `$${bundleTotalPrice.toFixed(2)}`
+      }
+    }
+  ];
+
+  // Add the bundle products as separate items
+  checkedBundles.forEach(checkbox => {
+    items.push({
+      id: checkbox.value,
+      quantity: 1
+    });
+  });
+
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ items })
+  })
+  .then(() => document.dispatchEvent(new CustomEvent('cart:refresh')))
+  .catch(console.error);
+});
+</script>
+
 
 
             {%- endcase -%}
