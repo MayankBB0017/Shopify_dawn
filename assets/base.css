@@ -3595,3 +3595,8 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+
+.page-width.bundle-wrapper {
+    padding: 0;
+}
