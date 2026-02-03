@@ -220,36 +220,3 @@ cart-items {
     gap: 1rem;
   }
 }
-
-
-.drawer__content-wrapper {
-  display: flex;
-  gap: 20px; /* space between recommendations and cart */
-}
-
-/* Left column: recommendations */
-.cart-recommendations {
-  flex: 0 0 250px; /* fixed width for recommendations */
-}
-
-/* Right column: main cart */
-.cart-main-content {
-  flex: 1; /* take remaining space */
-  min-width: 300px;
-}
-
-/* Optional: make carousel scroll horizontally */
-.recommendation-carousel {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-@media (max-width: 768px) {
-  .drawer__content-wrapper {
-    flex-direction: column; /* stack on mobile */
-  }
-  .cart-recommendations {
-    width: 100%;
-  }
-}
