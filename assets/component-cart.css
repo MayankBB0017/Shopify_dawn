@@ -241,7 +241,7 @@ cart-items {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 80vh;
+    max-height: 60vh;
     overflow-y: auto;
   }
 
