@@ -63,19 +63,98 @@
       {%- endif -%}
       
         <div class="cart-recommendations">
-          <h3>You might also like:</h3>
-          <ul class="recommended-products">
-            {% for product in product.metafields.custom.recommend_product.value %}
-              <li>
-                <a href="{{ product.url }}">
-                  <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                  <span>{{ product.title }}</span>
-                  <span>{{ product.price | money }}</span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+  <h3>You might also like:</h3>
+  <div class="recommendation-carousel">
+    {% for product in product.metafields.custom.recommend_product.value %}
+      <div class="recommended-item">
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+          <div class="recommended-info">
+            <div class="title">{{ product.title }}</div>
+            <div class="price">{{ product.price | money }}</div>
+          </div>
+        </a>
+        <button class="btn-add-cart">Add to Cart</button>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.cart-recommendations {
+  margin-top: 30px;
+}
+
+.cart-recommendations h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+/* Carousel container */
+.recommendation-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.recommendation-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.recommendation-carousel::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 4px;
+}
+
+/* Product card */
+.recommended-item {
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  text-align: center;
+  flex-shrink: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recommended-item img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.recommended-info .title {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  height: 36px; 
+  overflow: hidden;
+}
+
+.recommended-info .price {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.btn-add-cart {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.btn-add-cart:hover {
+  background-color: #333;
+}
+</style>
+
 
            
 
