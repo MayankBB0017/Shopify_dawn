@@ -704,66 +704,39 @@
               {% endif %}
 
               <script>
-              (function () {
-                if (window.__bundleAddListenerAttached) return;
-                window.__bundleAddListenerAttached = true;
+              document.addEventListener('submit', function (event) {
+                const form = event.target;
+                if (!form.matches('form[action="/cart/add"]')) return;
 
-                document.addEventListener('submit', async function (event) {
-                  const form = event.target;
-                  if (!form || form.action.indexOf('/cart/add') === -1) return;
+                const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+                if (checkedBundles.length === 0) return;
 
-                  const checkedBundles = form.querySelectorAll('.bundle-checkbox:checked');
-                  if (!checkedBundles.length) return;
-
-                  event.preventDefault();
-
-                  try {
-                    const formData = new FormData(form);
-                    const mainProductId = formData.get('id');
-                    const mainQuantity = parseInt(formData.get('quantity') || 1, 10);
-
-                    if (!mainProductId) return;
-
-                    const items = [
-                      {
-                        id: mainProductId,
-                        quantity: mainQuantity
-                      }
-                    ];
-
-                    checkedBundles.forEach((checkbox) => {
-                      items.push({
-                        id: checkbox.value,
-                        quantity: 1
-                      });
-                    });
-
-                    const response = await fetch('/cart/add.js', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                      },
-                      body: JSON.stringify({ items })
-                      });
-
-                      if (!response.ok) {
-                        throw new Error('Cart add failed');
-                      }
-
-                      document.dispatchEvent(new CustomEvent('cart:refresh', {
-                        bubbles: true
-                      }));
-
-                    } catch (error) {
-                      console.error('Bundle add error:', error);
-                      form.submit();
-                    }
+                event.preventDefault();
+                const formData = new FormData(form);
+                const items = [{
+                  id: formData.get('id'),
+                  quantity: formData.get('quantity') || 1
+                }];
+                checkedBundles.forEach((checkbox) => {
+                  items.push({
+                    id: checkbox.value,
+                    quantity: 1
                   });
-                })();
-</script>
+                });
 
-   
+                fetch('/cart/add.js', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ items })
+                })
+                .then(() => {
+                  document.dispatchEvent(new CustomEvent('cart:refresh'));
+                })
+                .catch(console.error);
+              });
+              </script>    
 
             {%- endcase -%}
           {%- endfor -%}
