@@ -745,22 +745,22 @@
                         'Accept': 'application/json'
                       },
                       body: JSON.stringify({ items })
-      });
+                      });
 
-      if (!response.ok) {
-        throw new Error('Cart add failed');
-      }
+                      if (!response.ok) {
+                        throw new Error('Cart add failed');
+                      }
 
-      document.dispatchEvent(new CustomEvent('cart:refresh', {
-        bubbles: true
-      }));
+                      document.dispatchEvent(new CustomEvent('cart:refresh', {
+                        bubbles: true
+                      }));
 
-    } catch (error) {
-      console.error('Bundle add error:', error);
-      form.submit(); // fallback — NEVER blocks checkout
-    }
-  });
-})();
+                    } catch (error) {
+                      console.error('Bundle add error:', error);
+                      form.submit();
+                    }
+                  });
+                })();
 </script>
 
    
