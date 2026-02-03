@@ -705,52 +705,58 @@
                 </div>
               {% endif %}              
 
-              <script>
-              document.addEventListener('submit', function (event) {
-                const form = event.target;
-                if (!form.matches('form[action="/cart/add"]')) return;
+            <script>
+        document.addEventListener('submit', function (event) {
+          const form = event.target;
+          if (!form.matches('form[action="/cart/add"]')) return;
 
-                const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
-                if (checkedBundles.length === 0) return;
+          const checkedBundles = document.querySelectorAll('.bundle-checkbox:checked');
+          if (checkedBundles.length === 0) return;
 
-                event.preventDefault();
+          event.preventDefault();
 
-                const formData = new FormData(form);                
-                const bundleTitles = [];
-                checkedBundles.forEach((checkbox) => {
-                  bundleTitles.push(checkbox.dataset.title);
-                });
+          const formData = new FormData(form);
 
-                const items = [
-                  {
-                    id: formData.get('id'),
-                    quantity: formData.get('quantity') || 1,
-                    properties: {
-                      'Bundle Includes': bundleTitles.join(', ')
-                    }
-                  }
-                ];
-                
-                checkedBundles.forEach((checkbox) => {
-                  items.push({
-                    id: checkbox.value,
-                    quantity: 1
-                  });
-                });
+          let bundleTitles = [];
+          let bundleTotalPrice = 0;
 
-                fetch('/cart/add.js', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ items })
-                })
-                .then(() => {
-                  document.dispatchEvent(new CustomEvent('cart:refresh'));
-                })
-                .catch(console.error);
-              });
-              </script>
+          checkedBundles.forEach((checkbox) => {
+            bundleTitles.push(checkbox.dataset.title);
+            bundleTotalPrice += parseInt(checkbox.dataset.price, 10);
+          });
+
+          const items = [
+            {
+              id: formData.get('id'),
+              quantity: formData.get('quantity') || 1,
+              properties: {
+                'Bundle Includes': bundleTitles.join(', '),
+                'Bundle Value': `$${(bundleTotalPrice / 100).toFixed(2)}`
+              }
+            }
+          ];
+
+          checkedBundles.forEach((checkbox) => {
+            items.push({
+              id: checkbox.value,
+              quantity: 1
+            });
+          });
+
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ items })
+          })
+          .then(() => {
+            document.dispatchEvent(new CustomEvent('cart:refresh'));
+          })
+          .catch(console.error);
+        });
+</script>
+
  
 
             {%- endcase -%}
