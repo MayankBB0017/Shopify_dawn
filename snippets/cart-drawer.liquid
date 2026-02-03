@@ -10,6 +10,93 @@
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
+<style>
+  .drawer {
+    visibility: hidden;
+  }
+
+  /* Two-column layout for drawer content */
+  .drawer__content-wrapper {
+    display: flex;
+    gap: 20px;
+  }
+
+  /* Left column: recommendations */
+  .cart-recommendations {
+    flex: 0 0 250px; /* fixed width */
+  }
+
+  /* Right column: main cart content */
+  .cart-main-content {
+    flex: 1; /* take remaining space */
+    min-width: 300px;
+  }
+
+  /* Recommendation carousel styling */
+  .recommendation-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .recommended-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .recommended-item img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .recommended-info .title {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    height: 36px;
+    overflow: hidden;
+  }
+
+  .recommended-info .price {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .btn-add-cart {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 3px;
+    width: 100%;
+  }
+
+  .btn-add-cart:hover {
+    background-color: #333;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .drawer__content-wrapper {
+      flex-direction: column;
+    }
+    .cart-recommendations {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+</style>
+
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
@@ -56,7 +143,10 @@
         </div>
       {%- endif -%}
 
+      <!-- START TWO-COLUMN WRAPPER -->
       <div class="drawer__content-wrapper">
+
+        <!-- LEFT COLUMN: Recommendations -->
         <div class="cart-recommendations">
           <h3>You might also like:</h3>
           <div class="recommendation-carousel">
@@ -74,6 +164,8 @@
             {% endfor %}
           </div>
         </div>
+
+        <!-- RIGHT COLUMN: Main Cart Content -->
         <div class="cart-main-content">
           <div class="drawer-wrapper">
             <div class="drawer__header">
@@ -144,7 +236,8 @@
                           role="cell"
                           headers="CartDrawer-ColumnProductImage"
                         >
-                          {% if item.image %}                            
+                          {% if item.image %}
+                            {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
                             <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
                             <img
                               class="cart-item__image"
@@ -486,7 +579,8 @@
                 <div id="CartDrawer-CartErrors" role="alert"></div>
               </form>
             </cart-drawer-items>
-            
+
+            <!-- Footer: totals, discounts, checkout button -->
              <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
@@ -507,6 +601,10 @@
             </cart-note>
           </details>
         {%- endif -%}
+
+        <!-- Start blocks -->
+        <!-- Subtotals -->
+
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
           <div>
             {%- if cart.cart_level_discount_applications.size > 0 -%}
@@ -568,6 +666,8 @@
           </small>
         </div>
 
+        <!-- CTAs -->
+
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
             type="submit"
@@ -587,6 +687,7 @@
         </div>
 
       </div>
+      <!-- END TWO-COLUMN WRAPPER -->
 
     </div>
   </div>
