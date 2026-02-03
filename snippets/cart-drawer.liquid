@@ -57,37 +57,34 @@
       {%- endif -%}
 
       <div class="drawer__content-wrapper">
-
+        
+        {%- unless cart == empty -%}
       <div class="cart-recommendations">
-  <h3>You might also like:</h3>
-  <div class="recommendation-carousel">
-    {% for product in product.metafields.custom.recommend_product.value %}
-      {% assign first_variant = product.variants.first %}
-      {% if first_variant %}
-        <div class="recommended-item">
-          <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-            <div class="recommended-info">
-              <div class="title">{{ product.title }}</div>
-              <div class="price">{{ first_variant.price | money }}</div>
-            </div>
-          </a>
-          <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
-            Add to Cart
-          </button>
+        <h3>You might also like:</h3>
+          <div class="recommendation-carousel">
+            {% for product in product.metafields.custom.recommend_product.value %}
+              {% assign first_variant = product.variants.first %}
+              {% if first_variant %}
+                <div class="recommended-item">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+                    <div class="recommended-info">
+                      <div class="title">{{ product.title }}</div>
+                      <div class="price">{{ first_variant.price | money }}</div>
+                    </div>
+                  </a>
+                  <button class="btn-add-cart" data-variant-id="{{ first_variant.id }}">
+                    Add to Cart
+                  </button>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-</div>
-
-<!-- Optional Cart Count in Header -->
-<div class="cart-header">
-  Cart (<span class="cart-count">{{ cart.item_count }}</span>)
-</div>
-
-
-
+      {% endunless %}
+      <div class="cart-header">
+        Cart (<span class="cart-count">{{ cart.item_count }}</span>)
+      </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -148,8 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 });
-
-
 </script>
 
         <div class="cart-main-content">
