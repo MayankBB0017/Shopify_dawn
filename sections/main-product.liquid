@@ -677,36 +677,36 @@
               {%- when 'bundle' -%}
 
              {% if product.metafields.custom.product_bundle != blank %}
-  <div class="page-width bundle-wrapper">
-    <h2 class="title h2">Bundle products</h2>
+              <div class="page-width bundle-wrapper">
+                <h2 class="title h2">Bundle products</h2>
 
-    <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--2-col-desktop">
-      {% for bundle_product in product.metafields.custom.product_bundle.value %}
-        <li class="grid__item">
-          <label class="bundle-item">          
-            <input type="hidden" id="main-product-price" value="{{ product.selected_or_first_available_variant.price | money }}">
-            
-            <input
-              type="checkbox"
-              class="bundle-checkbox"
-              value="{{ bundle_product.selected_or_first_available_variant.id }}"
-              data-title="{{ bundle_product.title }}"
-              data-price="{{ bundle_product.selected_or_first_available_variant.price | money }}"
-            >
+                <ul class="grid product-grid grid--2-col grid--3-col-tablet grid--2-col-desktop">
+                  {% for bundle_product in product.metafields.custom.product_bundle.value %}
+                    <li class="grid__item">
+                      <label class="bundle-item">          
+                        <input type="hidden" id="main-product-price" value="{{ product.selected_or_first_available_variant.price | money }}">
+                        
+                        <input
+                          type="checkbox"
+                          class="bundle-checkbox"
+                          value="{{ bundle_product.selected_or_first_available_variant.id }}"
+                          data-title="{{ bundle_product.title }}"
+                          data-price="{{ bundle_product.selected_or_first_available_variant.price | money }}"
+                        >
 
-            {% render 'card-product',
-              card_product: bundle_product,
-              media_aspect_ratio: settings.card_image_ratio,
-              show_secondary_image: true,
-              show_vendor: false,
-              show_rating: false
-            %}
-          </label>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
+                        {% render 'card-product',
+                          card_product: bundle_product,
+                          media_aspect_ratio: settings.card_image_ratio,
+                          show_secondary_image: true,
+                          show_vendor: false,
+                          show_rating: false
+                        %}
+                      </label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
 
 
               <script>
