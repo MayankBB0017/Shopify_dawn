@@ -98,6 +98,17 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Transparent Header */
+.header--transparent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+  z-index: 10;
+}
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
