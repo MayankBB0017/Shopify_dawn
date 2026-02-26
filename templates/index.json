@@ -146,12 +146,81 @@
         "padding_top": 80,
         "padding_bottom": 0
       }
+    },
+    "marque_section_e6TYqY": {
+      "type": "marque-section",
+      "blocks": {
+        "logo_bgjNHb": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Glamour-Logo_025d6e02-cfae-44a2-9bd9-c77878251ee9.png",
+            "alt_text": ""
+          }
+        },
+        "logo_aKHA73": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Marie_Claire_logo_d59e225c-6481-4a84-85d9-3f14eb354bee.png",
+            "alt_text": ""
+          }
+        },
+        "logo_W8NJD7": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Vector_b0123281-f4c1-4dc1-a7ba-dd9f4bb9a7fd.png",
+            "alt_text": ""
+          }
+        },
+        "logo_87Hxaz": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Vector_b0123281-f4c1-4dc1-a7ba-dd9f4bb9a7fd.png",
+            "alt_text": ""
+          }
+        },
+        "logo_DfLnLw": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Vanity_Fair_Logo_887b57ff-799c-4cd7-9e13-2e3d6571c9f0.png",
+            "alt_text": ""
+          }
+        },
+        "logo_meiiQB": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/VOGUE_LOGO_f16afd78-bbbd-4a40-9fa1-9059dd880289.png",
+            "alt_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_bgjNHb",
+        "logo_aKHA73",
+        "logo_W8NJD7",
+        "logo_87Hxaz",
+        "logo_DfLnLw",
+        "logo_meiiQB"
+      ],
+      "name": "Marquee — Logo Bar",
+      "settings": {
+        "background_color": "#FFFFFF",
+        "border_color": "#E2E2E2",
+        "image_opacity": 55,
+        "image_filter": "grayscale(1)",
+        "separator": "none",
+        "animate": true,
+        "direction": "left",
+        "speed": 40,
+        "show_fade": true,
+        "aria_label": "As seen in"
+      }
     }
   },
   "order": [
     "hero_section_HhyRen",
     "content_section_KEUPFm",
     "collection_banner_trio_bR3rUB",
-    "featured_collection_ggXnDk"
+    "featured_collection_ggXnDk",
+    "marque_section_e6TYqY"
   ]
 }
