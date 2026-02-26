@@ -1,66 +1,68 @@
 <footer class="robin-footer" role="contentinfo">
 
-  {%- comment -%}─── MAIN GRID ────────────────────────────────────────────{%- endcomment -%}
+  {{- 'robin-footer.css' | asset_url | stylesheet_tag -}}
+
+  {%- comment -%} ═══ MAIN GRID ═══════════════════════════════════════════ {%- endcomment -%}
   <div class="robin-footer__main page-width">
 
-    {%- comment -%}─── LEFT: Newsletter + Social ───────────────────────────{%- endcomment -%}
+    {%- comment -%} LEFT — Newsletter + Social {%- endcomment -%}
     <div class="robin-footer__newsletter">
 
-      <h3 class="robin-footer__newsletter-heading">
-        {{ section.settings.newsletter_heading }}
+      <h3 class="robin-footer__nl-heading">
+        {{- section.settings.newsletter_heading -}}
       </h3>
 
-      <p class="robin-footer__newsletter-subtext">
-        {{ section.settings.newsletter_subtext }}
+      <p class="robin-footer__nl-subtext">
+        {{- section.settings.newsletter_subtext -}}
       </p>
 
       {%- form 'customer', id: 'RobinFooterNewsletter' -%}
+
         <input type="hidden" name="contact[tags]" value="newsletter">
 
         {%- if form.posted_successfully? -%}
-          <p class="robin-footer__success-msg">
+          <p class="robin-footer__nl-success">
             {{ 'general.newsletter.confirmation' | t }}
           </p>
         {%- endif -%}
 
-        <div class="robin-footer__form">
+        <div class="robin-footer__nl-form">
 
           <input
-            class="robin-footer__input"
             type="text"
             name="contact[first_name]"
+            class="robin-footer__nl-input"
             placeholder="{{ section.settings.name_placeholder }}"
             autocomplete="given-name"
           >
 
-          <div class="robin-footer__email-row">
+          <div class="robin-footer__nl-email-row">
             <input
-              class="robin-footer__input robin-footer__input--email"
               type="email"
               name="contact[email]"
+              class="robin-footer__nl-input robin-footer__nl-input--email"
               placeholder="{{ section.settings.email_placeholder }}"
               autocomplete="email"
               required
             >
             <button
               type="submit"
-              class="robin-footer__submit"
+              class="robin-footer__nl-btn"
               aria-label="{{ 'general.newsletter.submit' | t }}"
             >&#8250;</button>
           </div>
 
         </div>
+
       {%- endform -%}
 
-      {%- comment -%}─── Social Icons ───────────────────────────────────{%- endcomment -%}
+      {%- comment -%} Social Icons {%- endcomment -%}
       <ul class="robin-footer__social" aria-label="Social media">
 
         {%- if settings.social_youtube_link != blank -%}
           <li>
             <a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
-              </svg>
+              {%- render 'icon-youtube' -%}
             </a>
           </li>
         {%- endif -%}
@@ -68,9 +70,7 @@
         {%- if settings.social_instagram_link != blank -%}
           <li>
             <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-                <path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.2-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.8C2.5 3.9 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.1 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/>
-              </svg>
+              {%- render 'icon-instagram' -%}
             </a>
           </li>
         {%- endif -%}
@@ -88,9 +88,7 @@
         {%- if settings.social_twitter_link != blank -%}
           <li>
             <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-                <path d="M18.2 2h3.4L14.1 9.8 23 22h-6.8L11 14.7 4.7 22H1.3l8-8.5L0 2h7l4.7 6.8zm-1.2 18h1.9L7.1 4H5.1z"/>
-              </svg>
+              {%- render 'icon-twitter' -%}
             </a>
           </li>
         {%- endif -%}
@@ -98,95 +96,116 @@
         {%- if settings.social_facebook_link != blank -%}
           <li>
             <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-                <path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.3L17.6 15h-2.7V24C21.6 23.1 24 18.1 24 12.1z"/>
-              </svg>
+              {%- render 'icon-facebook' -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- if settings.social_pinterest_link != blank -%}
+          <li>
+            <a href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+              {%- render 'icon-pinterest' -%}
             </a>
           </li>
         {%- endif -%}
 
       </ul>
-      {%- comment -%}─── END Social ──────────────────────────────────────{%- endcomment -%}
 
     </div>
-    {%- comment -%}─── END Newsletter ───────────────────────────────────────{%- endcomment -%}
+    {%- comment -%} END Newsletter {%- endcomment -%}
 
-    {%- comment -%}─── RIGHT: Navigation Columns ───────────────────────────{%- endcomment -%}
+    {%- comment -%} RIGHT — Nav Columns {%- endcomment -%}
     <nav class="robin-footer__nav" aria-label="Footer navigation">
 
-      {%- comment -%}── Column 1 ─────────────────────────────────────────{%- endcomment -%}
+      {%- comment -%} Column 1 {%- endcomment -%}
       <div class="robin-footer__nav-col">
-        <h4 class="robin-footer__nav-heading">{{ section.settings.col1_heading }}</h4>
+        <h4 class="robin-footer__nav-heading">
+          {{- section.settings.col1_heading -}}
+        </h4>
         <ul class="robin-footer__nav-list">
           {%- for block in section.blocks -%}
             {%- if block.type == 'col1_link' -%}
               <li {{ block.shopify_attributes }}>
-                <a href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+                <a href="{{ block.settings.link_url }}">
+                  {{- block.settings.link_label -}}
+                </a>
               </li>
             {%- endif -%}
           {%- endfor -%}
         </ul>
       </div>
 
-      {%- comment -%}── Column 2 ─────────────────────────────────────────{%- endcomment -%}
+      {%- comment -%} Column 2 {%- endcomment -%}
       <div class="robin-footer__nav-col">
-        <h4 class="robin-footer__nav-heading">{{ section.settings.col2_heading }}</h4>
+        <h4 class="robin-footer__nav-heading">
+          {{- section.settings.col2_heading -}}
+        </h4>
         <ul class="robin-footer__nav-list">
           {%- for block in section.blocks -%}
             {%- if block.type == 'col2_link' -%}
               <li {{ block.shopify_attributes }}>
-                <a href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+                <a href="{{ block.settings.link_url }}">
+                  {{- block.settings.link_label -}}
+                </a>
               </li>
             {%- endif -%}
           {%- endfor -%}
         </ul>
       </div>
 
-      {%- comment -%}── Column 3: Contact ─────────────────────────────────{%- endcomment -%}
+      {%- comment -%} Column 3 — Contact (hardcoded from settings, no blocks needed) {%- endcomment -%}
       <div class="robin-footer__nav-col robin-footer__nav-col--contact">
-        <h4 class="robin-footer__nav-heading">{{ section.settings.col3_heading }}</h4>
+        <h4 class="robin-footer__nav-heading">
+          {{- section.settings.col3_heading -}}
+        </h4>
         <address class="robin-footer__contact">
           {%- if section.settings.contact_hours != blank -%}
-            <span>{{ section.settings.contact_hours }}</span>
+            <span>{{- section.settings.contact_hours -}}</span>
           {%- endif -%}
           {%- if section.settings.whatsapp_url != blank -%}
             <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener noreferrer">Whatsapp</a>
           {%- endif -%}
           {%- if section.settings.contact_email != blank -%}
-            <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+            <a href="mailto:{{ section.settings.contact_email }}">
+              {{- section.settings.contact_email -}}
+            </a>
           {%- endif -%}
         </address>
       </div>
 
     </nav>
-    {%- comment -%}─── END Navigation ───────────────────────────────────────{%- endcomment -%}
+    {%- comment -%} END Nav Columns {%- endcomment -%}
 
   </div>
-  {%- comment -%}─── END Main Grid ────────────────────────────────────────{%- endcomment -%}
+  {%- comment -%} END Main Grid {%- endcomment -%}
 
-  {%- comment -%}─── BOTTOM BAR ───────────────────────────────────────────{%- endcomment -%}
+  {%- comment -%} ═══ BOTTOM BAR ══════════════════════════════════════════ {%- endcomment -%}
   <div class="robin-footer__bottom">
     <div class="robin-footer__bottom-inner page-width">
 
       <div class="robin-footer__locale">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
           <circle cx="12" cy="12" r="10"/>
           <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/>
         </svg>
         {%- if section.settings.locale_country_url != blank -%}
           <a href="{{ section.settings.locale_country_url }}" class="robin-footer__locale-link">
-            {{ section.settings.locale_country_label }}
+            {{- section.settings.locale_country_label -}}
           </a>
         {%- else -%}
-          <span class="robin-footer__locale-link">{{ section.settings.locale_country_label }}</span>
+          <span class="robin-footer__locale-text">
+            {{- section.settings.locale_country_label -}}
+          </span>
         {%- endif -%}
         <span class="robin-footer__locale-sep" aria-hidden="true">|</span>
         {%- if section.settings.locale_lang_url != blank -%}
           <a href="{{ section.settings.locale_lang_url }}" class="robin-footer__locale-link">
-            {{ section.settings.locale_lang_label }}
+            {{- section.settings.locale_lang_label -}}
           </a>
         {%- else -%}
-          <span class="robin-footer__locale-link">{{ section.settings.locale_lang_label }}</span>
+          <span class="robin-footer__locale-text">
+            {{- section.settings.locale_lang_label -}}
+          </span>
         {%- endif -%}
       </div>
 
@@ -204,364 +223,15 @@
           <a href="{{ section.settings.link_cookies }}">Cookies</a>
         {%- endif -%}
         <span class="robin-footer__copy">
-          &copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright_name }}
+          &copy; {{- 'now' | date: '%Y' }} {{- section.settings.copyright_name -}}
         </span>
       </div>
 
     </div>
   </div>
-  {%- comment -%}─── END Bottom Bar ───────────────────────────────────────{%- endcomment -%}
+  {%- comment -%} END Bottom Bar {%- endcomment -%}
 
 </footer>
-
-{% stylesheet %}
-/* =============================================================
-   Robin Footer Stylesheet
-   Scoped with .robin-footer__ prefix — no Dawn conflicts
-============================================================= */
-
-/* ── Reset within footer ─────────────────────────────────── */
-.robin-footer *,
-.robin-footer *::before,
-.robin-footer *::after {
-  box-sizing: border-box;
-}
-
-/* ── Shell ───────────────────────────────────────────────── */
-.robin-footer {
-  border-top: 1px solid #e8e8e8;
-  padding-top: 48px;
-  font-size: 14px;
-  color: #1a1a1a;
-  background: #ffffff;
-}
-
-/* ── Main grid ───────────────────────────────────────────── */
-.robin-footer__main {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 40px;
-  padding-bottom: 48px;
-}
-
-/* ── Newsletter heading ──────────────────────────────────── */
-.robin-footer__newsletter-heading {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  margin: 0 0 8px 0;
-  line-height: 1.4;
-}
-
-.robin-footer__newsletter-subtext {
-  font-size: 13px;
-  color: #555555;
-  line-height: 1.55;
-  margin: 0 0 20px 0;
-  max-width: 260px;
-}
-
-.robin-footer__success-msg {
-  font-size: 12px;
-  color: #555555;
-  margin: 0 0 12px 0;
-}
-
-/* ── Form ────────────────────────────────────────────────── */
-.robin-footer__form {
-  display: flex;
-  flex-direction: column;
-  max-width: 260px;
-}
-
-.robin-footer__input {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #1a1a1a;
-  padding: 8px 0;
-  font-size: 13px;
-  color: #1a1a1a;
-  background: transparent;
-  outline: none;
-  font-family: inherit;
-  margin-bottom: 10px;
-  border-radius: 0;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.robin-footer__input::placeholder {
-  color: #999999;
-}
-
-.robin-footer__input:focus {
-  border-bottom-color: #1a1a1a;
-}
-
-.robin-footer__email-row {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #1a1a1a;
-}
-
-.robin-footer__input--email {
-  flex: 1;
-  border-bottom: none;
-  margin-bottom: 0;
-}
-
-.robin-footer__submit {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #1a1a1a;
-  padding: 4px 0 4px 8px;
-  line-height: 1;
-  font-family: inherit;
-  transition: opacity 0.2s ease;
-}
-
-.robin-footer__submit:hover {
-  opacity: 0.5;
-}
-
-/* ── Social ──────────────────────────────────────────────── */
-.robin-footer__social {
-  list-style: none;
-  margin: 28px 0 0 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.robin-footer__social li {
-  margin: 0;
-  padding: 0;
-}
-
-.robin-footer__social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #1a1a1a;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.robin-footer__social a:hover {
-  opacity: 0.45;
-  text-decoration: none;
-}
-
-/* ── Nav columns ─────────────────────────────────────────── */
-.robin-footer__nav {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.robin-footer__nav-heading {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  margin: 0 0 14px 0;
-  line-height: 1.4;
-}
-
-.robin-footer__nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.robin-footer__nav-list li {
-  margin: 0;
-  padding: 0;
-}
-
-.robin-footer__nav-list a {
-  font-size: 13px;
-  color: #555555;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.robin-footer__nav-list a:hover {
-  color: #1a1a1a;
-  text-decoration: none;
-}
-
-/* ── Contact address ─────────────────────────────────────── */
-.robin-footer__contact {
-  font-style: normal;
-  font-size: 13px;
-  color: #555555;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.robin-footer__contact a {
-  color: #555555;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.robin-footer__contact a:hover {
-  color: #1a1a1a;
-  text-decoration: none;
-}
-
-/* ── Bottom bar ──────────────────────────────────────────── */
-.robin-footer__bottom {
-  border-top: 1px solid #e8e8e8;
-}
-
-.robin-footer__bottom-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.robin-footer__locale {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #555555;
-}
-
-.robin-footer__locale svg {
-  flex-shrink: 0;
-}
-
-.robin-footer__locale-link {
-  font-size: 12px;
-  color: #555555;
-  text-decoration: underline;
-  transition: color 0.2s ease;
-}
-
-.robin-footer__locale-link:hover {
-  color: #1a1a1a;
-}
-
-.robin-footer__locale-sep {
-  color: #cccccc;
-}
-
-.robin-footer__legal {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.robin-footer__legal a {
-  font-size: 11px;
-  color: #999999;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.robin-footer__legal a:hover {
-  color: #1a1a1a;
-  text-decoration: none;
-}
-
-.robin-footer__copy {
-  font-size: 11px;
-  color: #999999;
-}
-
-/* =============================================================
-   RESPONSIVE — Dawn's main breakpoint is 750px
-============================================================= */
-
-/* Tablet: 750px – 1023px */
-@media screen and (max-width: 1023px) {
-  .robin-footer__main {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-
-  .robin-footer__newsletter-subtext {
-    max-width: 100%;
-  }
-
-  .robin-footer__form {
-    max-width: 360px;
-  }
-
-  /* Keep nav as 3 columns on tablet */
-  .robin-footer__nav {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Mobile: 749px and below */
-@media screen and (max-width: 749px) {
-  .robin-footer {
-    padding-top: 36px;
-  }
-
-  .robin-footer__main {
-    padding-bottom: 36px;
-  }
-
-  /* Form goes full width */
-  .robin-footer__form {
-    max-width: 100%;
-  }
-
-  .robin-footer__social {
-    margin-top: 24px;
-  }
-
-  /* Nav becomes 2 columns */
-  .robin-footer__nav {
-    grid-template-columns: 1fr 1fr;
-    gap: 28px 20px;
-  }
-
-  /* Contact column spans full row */
-  .robin-footer__nav-col--contact {
-    grid-column: 1 / -1;
-  }
-
-  /* Bottom bar stacks vertically */
-  .robin-footer__bottom-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding-bottom: 28px;
-  }
-
-  .robin-footer__legal {
-    gap: 14px;
-  }
-}
-
-/* Very small: 374px and below */
-@media screen and (max-width: 374px) {
-  .robin-footer__nav {
-    grid-template-columns: 1fr;
-  }
-
-  .robin-footer__nav-col--contact {
-    grid-column: auto;
-  }
-}
-{% endstylesheet %}
 
 {% schema %}
 {
@@ -578,7 +248,7 @@
       "default": "Únete a nuestra Newsletter"
     },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "newsletter_subtext",
       "label": "Subtext",
       "default": "Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin"
@@ -597,7 +267,7 @@
     },
     {
       "type": "header",
-      "content": "Column 1 — Robin"
+      "content": "Column 1 heading"
     },
     {
       "type": "text",
@@ -607,7 +277,7 @@
     },
     {
       "type": "header",
-      "content": "Column 2 — Ayuda"
+      "content": "Column 2 heading"
     },
     {
       "type": "text",
@@ -617,7 +287,7 @@
     },
     {
       "type": "header",
-      "content": "Column 3 — Contacto"
+      "content": "Column 3 — Contact"
     },
     {
       "type": "text",
@@ -628,34 +298,34 @@
     {
       "type": "text",
       "id": "contact_hours",
-      "label": "Office hours text",
+      "label": "Office hours",
       "default": "Lunes a Viernes 10-17h"
     },
     {
       "type": "url",
       "id": "whatsapp_url",
-      "label": "WhatsApp link URL"
+      "label": "WhatsApp URL"
     },
     {
       "type": "text",
       "id": "contact_email",
-      "label": "Contact email address",
+      "label": "Contact email",
       "default": "info@robincollection.com"
     },
     {
       "type": "header",
-      "content": "Bottom Bar — Locale"
+      "content": "Bottom bar — Locale"
     },
     {
       "type": "text",
       "id": "locale_country_label",
-      "label": "Country / currency label",
+      "label": "Country label",
       "default": "España (€)"
     },
     {
       "type": "url",
       "id": "locale_country_url",
-      "label": "Country URL"
+      "label": "Country URL (optional)"
     },
     {
       "type": "text",
@@ -666,11 +336,11 @@
     {
       "type": "url",
       "id": "locale_lang_url",
-      "label": "Language URL"
+      "label": "Language URL (optional)"
     },
     {
       "type": "header",
-      "content": "Bottom Bar — Legal Links"
+      "content": "Bottom bar — Legal links"
     },
     {
       "type": "url",
@@ -702,51 +372,38 @@
   "blocks": [
     {
       "type": "col1_link",
-      "name": "Robin link",
+      "name": "Robin — Nav link",
       "settings": [
         {
           "type": "text",
-          "id": "label",
-          "label": "Link label",
-          "default": "Sobre nosotros"
+          "id": "link_label",
+          "label": "Label",
+          "default": "Page name"
         },
         {
           "type": "url",
-          "id": "url",
-          "label": "Link URL"
+          "id": "link_url",
+          "label": "URL"
         }
       ]
     },
     {
       "type": "col2_link",
-      "name": "Ayuda link",
+      "name": "Ayuda — Nav link",
       "settings": [
         {
           "type": "text",
-          "id": "label",
-          "label": "Link label",
-          "default": "FAQS"
+          "id": "link_label",
+          "label": "Label",
+          "default": "Page name"
         },
         {
           "type": "url",
-          "id": "url",
-          "label": "Link URL"
+          "id": "link_url",
+          "label": "URL"
         }
       ]
     }
-  ],
-  "default": {
-    "blocks": [
-      { "type": "col1_link", "settings": { "label": "Sobre nosotros", "url": "/pages/sobre-nosotros" } },
-      { "type": "col1_link", "settings": { "label": "Prensa",         "url": "/pages/prensa" } },
-      { "type": "col1_link", "settings": { "label": "Tienda",         "url": "/collections/all" } },
-      { "type": "col1_link", "settings": { "label": "Gift Card",      "url": "/products/gift-card" } },
-      { "type": "col2_link", "settings": { "label": "FAQS",                   "url": "/pages/faqs" } },
-      { "type": "col2_link", "settings": { "label": "Envíos",                 "url": "/pages/envios" } },
-      { "type": "col2_link", "settings": { "label": "Cambios y devoluciones", "url": "/pages/cambios-y-devoluciones" } },
-      { "type": "col2_link", "settings": { "label": "Cómo medirse",           "url": "/pages/como-medirse" } },
-      { "type": "col2_link", "settings": { "label": "Guía de cuidados",       "url": "/pages/guia-de-cuidados" } }
-    ]
-  }
+  ]
 }
 {% endschema %}
