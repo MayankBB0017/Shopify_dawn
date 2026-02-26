@@ -37,7 +37,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1_2x_ea252745-9c4b-4edc-9f12-e682aeff4846.png",
-        "image_overlay_opacity": 40,
+        "image_overlay_opacity": 0,
         "image_height": "large",
         "image_behavior": "none",
         "desktop_content_position": "bottom-center",
