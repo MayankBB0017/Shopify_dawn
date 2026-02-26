@@ -151,7 +151,7 @@
 /* Underline link style */
 .robin-hero__cta--link {
   font-family: 'Jost', sans-serif;
-  font-size: 0.68rem;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
