@@ -22,7 +22,6 @@
 
 /* ── Main two-column grid ────────────────────────────────── */
 .robin-footer__main {
-.robin-footer__main {
     display: flex;
     justify-content: space-between;
     gap: 10px;
