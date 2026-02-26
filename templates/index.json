@@ -84,7 +84,7 @@
       "name": "Collection Banner Trio",
       "settings": {
         "gap": 2,
-        "label_size": 11,
+        "label_size": 18,
         "label_tracking": 0,
         "label_color": "#ffffff",
         "overlay_color": "#000000",
