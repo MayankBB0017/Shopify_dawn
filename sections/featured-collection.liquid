@@ -308,6 +308,39 @@
   </div>
 </div>
 
+
+<script>
+(function () {
+  var sid = {{ section.id | json }};
+  var root = document.getElementById('fct-section-' + sid);
+  if (!root) return;
+
+  var btns   = root.querySelectorAll('.fct-tab-btn-' + sid);
+  var panels = root.querySelectorAll('.fct-panel-' + sid);
+
+  function activate(index) {
+    btns.forEach(function(b) {
+      b.setAttribute('aria-selected', b.dataset.tabIndex == index ? 'true' : 'false');
+    });
+    panels.forEach(function(p) { p.classList.remove('is-active'); });
+    var panel = root.querySelector('#fct-panel-' + sid + '-' + index);
+    if (panel) {
+      panel.classList.add('is-active');
+      window.dispatchEvent(new Event('resize')); // re-init Dawn slider
+    }
+  }
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() { activate(btn.dataset.tabIndex); });
+    btn.addEventListener('keydown', function(e) {
+      var i = parseInt(btn.dataset.tabIndex, 10);
+      if (e.key === 'ArrowRight') { var n = root.querySelector('[data-tab-index="'+(i+1)+'"]'); if(n){n.focus();activate(i+1);} }
+      if (e.key === 'ArrowLeft')  { var p = root.querySelector('[data-tab-index="'+(i-1)+'"]'); if(p){p.focus();activate(i-1);} }
+    });
+  });
+})();
+</script>
+
 {% schema %}
 {
   "name": "t:sections.featured-collection.name",
