@@ -1,0 +1,411 @@
+{% comment %}
+  ══════════════════════════════════════════════════════════════
+  Robin Collection — Custom Footer
+  Drop this into:  sections/footer.liquid  (replace the default)
+  Add the CSS into: assets/robin-footer.css  (then {% stylesheet %})
+  or paste the <style> block into your theme.liquid <head>
+  ══════════════════════════════════════════════════════════════
+{% endcomment %}
+
+<footer class="robin-footer" role="contentinfo">
+
+  {%- comment -%} ── MAIN GRID ──────────────────────────── {%- endcomment -%}
+  <div class="rf-main page-width">
+
+    {%- comment -%} Newsletter + Social {%- endcomment -%}
+    <div class="rf-newsletter">
+      <h3 class="rf-heading">Únete a nuestra Newsletter</h3>
+      <p class="rf-subtext">Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin</p>
+
+      {%- form 'customer', id: 'footer-newsletter-form', class: 'rf-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          class="rf-input"
+          type="text"
+          name="contact[first_name]"
+          placeholder="Name"
+          autocomplete="given-name"
+        >
+        <div class="rf-email-row">
+          <input
+            class="rf-input"
+            type="email"
+            name="contact[email]"
+            placeholder="Email Adress"
+            autocomplete="email"
+            required
+          >
+          <button type="submit" class="rf-submit-btn" aria-label="{{ 'general.newsletter.submit' | t }}">&#8250;</button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="rf-success">{{ 'general.newsletter.confirmation' | t }}</p>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- comment -%} Social links — edit hrefs or wire to theme settings {%- endcomment -%}
+      <ul class="rf-social" aria-label="Social media links">
+        {%- if settings.social_youtube_link != blank -%}
+        <li>
+          <a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_instagram_link != blank -%}
+        <li>
+          <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.2-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.8C2.5 3.9 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.1 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+          </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_linkedin_link != blank -%}
+        <li>
+          <a href="{{ settings.social_linkedin_link }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.3A1.7 1.7 0 1 1 8.2 6.6a1.7 1.7 0 0 1-1.7 1.7zM19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6S12.6 13 12.6 14.3V19H10v-9h2.9v1.2h.1a3.2 3.2 0 0 1 2.9-1.6c3.1 0 3.6 2 3.6 4.6V19z"/></svg>
+          </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_twitter_link != blank -%}
+        <li>
+          <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" aria-label="Twitter / X">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2h3.4L14.1 9.8 23 22h-6.8L11 14.7 4.7 22H1.3l8-8.5L0 2h7l4.7 6.8zm-1.2 18h1.9L7.1 4H5.1z"/></svg>
+          </a>
+        </li>
+        {%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}
+        <li>
+          <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.3L17.6 15h-2.7V24C21.6 23.1 24 18.1 24 12.1z"/></svg>
+          </a>
+        </li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    {%- comment -%} Navigation Columns {%- endcomment -%}
+    <nav class="rf-nav" aria-label="Footer">
+
+      <div class="rf-nav-col">
+        <h4 class="rf-nav-heading">Robin</h4>
+        <ul class="rf-nav-list">
+          <li><a href="/pages/sobre-nosotros">Sobre nosotros</a></li>
+          <li><a href="/pages/prensa">Prensa</a></li>
+          <li><a href="/collections/all">Tienda</a></li>
+          <li><a href="/products/gift-card">Gift Card</a></li>
+        </ul>
+      </div>
+
+      <div class="rf-nav-col">
+        <h4 class="rf-nav-heading">Ayuda</h4>
+        <ul class="rf-nav-list">
+          <li><a href="/pages/faqs">FAQS</a></li>
+          <li><a href="/pages/envios">Envíos</a></li>
+          <li><a href="/pages/cambios-y-devoluciones">Cambios y devoluciones</a></li>
+          <li><a href="/pages/como-medirse">Cómo medirse</a></li>
+          <li><a href="/pages/guia-de-cuidados">Guía de cuidados</a></li>
+        </ul>
+      </div>
+
+      <div class="rf-nav-col rf-contact-col">
+        <h4 class="rf-nav-heading">Contacto</h4>
+        <address class="rf-contact">
+          <p>Lunes a Viernes 10-17h</p>
+          <p><a href="#">Whatsapp</a></p>
+          <p><a href="mailto:info@robincollection.com">info@robincollection.com</a></p>
+        </address>
+      </div>
+
+    </nav>
+  </div>
+
+  {%- comment -%} ── BOTTOM BAR ─────────────────────────── {%- endcomment -%}
+  <div class="rf-bottom">
+    <div class="page-width rf-bottom-inner">
+
+      <div class="rf-locale">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/>
+        </svg>
+        <a href="#" class="rf-locale-link">España (€)</a>
+        <span class="rf-sep">|</span>
+        <a href="#" class="rf-locale-link">Spanish</a>
+      </div>
+
+      <div class="rf-legal">
+        <a href="/pages/condiciones-generales">Condiciones Generales</a>
+        <a href="/pages/politica-de-privacidad">Política de Privacidad</a>
+        <a href="/pages/aviso-legal">Aviso Legal</a>
+        <a href="/pages/cookies">Cookies</a>
+        <span class="rf-copy">© ROBIN</span>
+      </div>
+
+    </div>
+  </div>
+
+</footer>
+
+{% stylesheet %}
+/* ─────────────────────────────────────────────────────────────
+   Robin Footer Styles
+   Paste into assets/robin-footer.css  OR  inside {% stylesheet %}
+───────────────────────────────────────────────────────────── */
+
+/* Reset within footer scope */
+.robin-footer *,
+.robin-footer *::before,
+.robin-footer *::after { box-sizing: border-box; }
+
+.robin-footer {
+  border-top: 1px solid #e8e8e8;
+  font-family: var(--font-body-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  font-size: 14px;
+  color: var(--color-foreground, #1a1a1a);
+  background: var(--color-background, #ffffff);
+  padding-top: 48px;
+}
+
+/* ── Main grid ──────────────────────────────────────────── */
+.rf-main {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+}
+
+/* ── Newsletter ─────────────────────────────────────────── */
+.rf-heading {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin: 0 0 8px;
+}
+
+.rf-subtext {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.55;
+  margin: 0 0 20px;
+  max-width: 260px;
+}
+
+.rf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 260px;
+}
+
+.rf-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #1a1a1a;
+  padding: 8px 0;
+  font-size: 13px;
+  color: #1a1a1a;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  margin-bottom: 10px;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.rf-input::placeholder { color: #999; }
+
+.rf-email-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 0;
+}
+
+.rf-email-row .rf-input {
+  border-bottom: none;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.rf-submit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #1a1a1a;
+  padding: 4px 0 4px 8px;
+  line-height: 1;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+.rf-submit-btn:hover { opacity: 0.5; }
+
+.rf-success {
+  font-size: 12px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* ── Social ─────────────────────────────────────────────── */
+.rf-social {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  margin: 28px 0 0;
+  padding: 0;
+  align-items: center;
+}
+
+.rf-social a {
+  display: flex;
+  align-items: center;
+  color: #1a1a1a;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+.rf-social a:hover { opacity: 0.45; }
+
+/* ── Nav columns ────────────────────────────────────────── */
+.rf-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.rf-nav-heading {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin: 0 0 14px;
+}
+
+.rf-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rf-nav-list a {
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.rf-nav-list a:hover { color: #1a1a1a; }
+
+.rf-contact {
+  font-style: normal;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.9;
+}
+.rf-contact a { color: #555; text-decoration: none; }
+.rf-contact a:hover { color: #1a1a1a; }
+
+/* ── Bottom bar ─────────────────────────────────────────── */
+.rf-bottom {
+  border-top: 1px solid #e8e8e8;
+}
+
+.rf-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.rf-locale {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.rf-locale svg { flex-shrink: 0; }
+
+.rf-locale-link {
+  font-size: 12px;
+  color: #555;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.rf-locale-link:hover { color: #1a1a1a; }
+
+.rf-sep { color: #ccc; }
+
+.rf-legal {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.rf-legal a {
+  font-size: 11px;
+  color: #999;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.rf-legal a:hover { color: #1a1a1a; }
+
+.rf-copy {
+  font-size: 11px;
+  color: #999;
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────────────── */
+
+/* Tablet 768–1023px */
+@media screen and (max-width: 1023px) {
+  .rf-main {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .rf-subtext { max-width: 100%; }
+  .rf-form    { max-width: 340px; }
+}
+
+/* Mobile ≤767px  (matches Shopify Dawn breakpoint) */
+@media screen and (max-width: 749px) {
+  .robin-footer { padding-top: 36px; }
+
+  .rf-main { padding-bottom: 36px; }
+
+  /* Newsletter */
+  .rf-form { max-width: 100%; }
+
+  /* Nav: 2-column */
+  .rf-nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+  }
+
+  /* Contact spans full width */
+  .rf-contact-col { grid-column: 1 / -1; }
+
+  /* Bottom: stacked */
+  .rf-bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 28px;
+  }
+
+  .rf-legal { gap: 14px; }
+}
+
+/* Very small ≤374px */
+@media screen and (max-width: 374px) {
+  .rf-nav { grid-template-columns: 1fr; }
+  .rf-contact-col { grid-column: auto; }
+}
+{% endstylesheet %}
