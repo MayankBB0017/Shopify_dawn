@@ -332,6 +332,7 @@
 
   .robin-footer__main {
     padding-bottom: 36px;
+    flex-direction:column;
   }
 
   /* Form stretches full width */
