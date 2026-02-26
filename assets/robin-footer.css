@@ -22,10 +22,11 @@
 
 /* ── Main two-column grid ────────────────────────────────── */
 .robin-footer__main {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 40px;
-  padding-bottom: 48px;
+.robin-footer__main {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 48px;
 }
 
 /* ════════════════════════════════════════════════════════════
