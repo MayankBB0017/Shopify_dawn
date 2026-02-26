@@ -36,6 +36,67 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+    /* ADD — Tab buttons */
+  .fct-tabs-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .fct-tab-btn-{{ section.id }} {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.45);
+    padding: 0.6rem 1.6rem;
+    position: relative;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .fct-tab-btn-{{ section.id }}:first-child { padding-left: 0; }
+
+  .fct-tab-btn-{{ section.id }}:hover {
+    color: rgb(var(--color-foreground));
+  }
+
+  .fct-tab-btn-{{ section.id }}[aria-selected="true"] {
+    color: rgb(var(--color-foreground));
+    font-weight: 600;
+  }
+
+  .fct-tab-btn-{{ section.id }}[aria-selected="true"]::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgb(var(--color-foreground));
+    border-radius: 2px;
+  }
+
+  /* ADD — Tab panels */
+  .fct-panel-{{ section.id }} { display: none; }
+  .fct-panel-{{ section.id }}.is-active { display: block; }
+
+  /* ADD — Empty state */
+  .fct-empty-{{ section.id }} {
+    padding: 4rem 0;
+    text-align: center;
+    color: rgba(var(--color-foreground), 0.5);
+    font-size: 1.4rem;
+  }
+
 {%- endstyle -%}
 
 {%- liquid
