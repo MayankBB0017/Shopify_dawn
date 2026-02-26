@@ -318,10 +318,7 @@ class="header-wrapper {% if section.settings.enable_transparent_home and request
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}
-          {% comment %} <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span> {% endcomment %}
-           <span class="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
-<path d="M7.83333 4.5V2.5C7.83333 1.39543 6.93793 0.5 5.83333 0.5C4.72873 0.5 3.83333 1.39543 3.83333 2.5V4.5M0.5 4.5H11.1667V12.5H0.5V4.5Z" stroke="white" stroke-linecap="square"/>
-</svg></span>
+          <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
         {% else %}
           <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
         {% endif %}
