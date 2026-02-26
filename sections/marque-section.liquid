@@ -5,12 +5,16 @@
 {% endcomment %}
 
 {%- liquid
-  assign section_id = section.id
-  assign speed      = section.settings.speed | default: 40
-  assign direction  = section.settings.direction | default: 'left'
-  assign animate    = section.settings.animate
-  assign bg_color   = section.settings.background_color
-  assign separator  = section.settings.separator
+  assign section_id            = section.id
+  assign speed                 = section.settings.speed | default: 40
+  assign direction             = section.settings.direction | default: 'left'
+  assign animate               = section.settings.animate
+  assign bg_color              = section.settings.background_color
+  assign separator             = section.settings.separator
+  assign padding_top           = section.settings.padding_top
+  assign padding_bottom        = section.settings.padding_bottom
+  assign padding_top_mobile    = section.settings.padding_top_mobile
+  assign padding_bottom_mobile = section.settings.padding_bottom_mobile
 -%}
 
 <style>
@@ -20,7 +24,8 @@
     --mq-gap:     clamp(2.5rem, 6vw, 6rem);
     --mq-bg:      {{ bg_color }};
     --mq-border:  {{ section.settings.border_color }};
-    --mq-py:      clamp(1rem, 2.5vw, 1.5rem);
+    --mq-pt:      {{ padding_top }}px;
+    --mq-pb:      {{ padding_bottom }}px;
     --mq-logo-h:  clamp(18px, 2.8vw, 28px);
     --mq-opacity: {{ section.settings.image_opacity | divided_by: 100.0 }};
     --mq-filter:  {{ section.settings.image_filter }};
@@ -32,7 +37,8 @@
     border-top:    1px solid var(--mq-border);
     border-bottom: 1px solid var(--mq-border);
     overflow: hidden;
-    padding-block: var(--mq-py);
+    padding-top:    var(--mq-pt);
+    padding-bottom: var(--mq-pb);
     position: relative;
     width: 100%;
   }
@@ -160,11 +166,13 @@
     }
   }
 
-  /* ─── Mobile: tighter gaps, smaller logos ─── */
+  /* ─── Mobile overrides ─── */
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section_id }} {
       --mq-gap:    clamp(1.5rem, 8vw, 3rem);
       --mq-logo-h: clamp(14px, 4vw, 22px);
+      --mq-pt:     {{ padding_top_mobile }}px;
+      --mq-pb:     {{ padding_bottom_mobile }}px;
     }
   }
 </style>
@@ -257,6 +265,54 @@
       "id": "border_color",
       "label": "Border colour",
       "default": "#E2E2E2"
+    },
+    {
+      "type": "header",
+      "content": "Spacing — Desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Spacing — Mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "header",
