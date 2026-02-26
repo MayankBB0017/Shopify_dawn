@@ -1,0 +1,283 @@
+{% comment %}
+  ╔══════════════════════════════════════════════════════╗
+  ║  Robin Hero Section — Dawn Theme Compatible          ║
+  ║  Dark / Black Color Theme                            ║
+  ║  Fully customizable via Shopify Theme Editor         ║
+  ╚══════════════════════════════════════════════════════╝
+{% endcomment %}
+
+{{ 'robin-hero.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="robin-hero"
+  id="robin-hero-{{ section.id }}"
+  style="
+    --hero-height-desktop: {{ section.settings.hero_height_desktop }}px;
+    --hero-height-mobile: {{ section.settings.hero_height_mobile }}px;
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --title-color: {{ section.settings.title_color }};
+    --link-color: {{ section.settings.link_color }};
+    --nav-bg: {{ section.settings.nav_bg_color }};
+    --content-align: {{ section.settings.content_alignment }};
+  "
+>
+
+  {%- comment -%} ── BACKGROUND IMAGE ── {%- endcomment -%}
+  <div class="robin-hero__bg">
+    {%- if section.settings.hero_image_desktop != blank -%}
+      {{
+        section.settings.hero_image_desktop
+        | image_url: width: 2000
+        | image_tag:
+          class: 'robin-hero__img robin-hero__img--desktop',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: section.settings.hero_image_desktop.alt | escape
+      }}
+    {%- else -%}
+      <div class="robin-hero__placeholder robin-hero__img--desktop">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.hero_image_mobile != blank -%}
+      {{
+        section.settings.hero_image_mobile
+        | image_url: width: 800
+        | image_tag:
+          class: 'robin-hero__img robin-hero__img--mobile',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: section.settings.hero_image_mobile.alt | escape
+      }}
+    {%- else -%}
+      <div class="robin-hero__placeholder robin-hero__img--mobile">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ── OVERLAY ── {%- endcomment -%}
+  <div class="robin-hero__overlay"></div>
+
+  {%- comment -%} ── CONTENT ── {%- endcomment -%}
+  <div class="robin-hero__content">
+    {%- if section.settings.subheading != blank -%}
+      <p class="robin-hero__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <{{ section.settings.heading_tag }} class="robin-hero__title">
+        {{ section.settings.heading }}
+      </{{ section.settings.heading_tag }}>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <p class="robin-hero__description">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    {%- comment -%} ── CTA LINKS ── {%- endcomment -%}
+    {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+      <div class="robin-hero__ctas">
+        {%- if section.settings.cta1_label != blank -%}
+          <a
+            href="{{ section.settings.cta1_url }}"
+            class="robin-hero__cta {% if section.settings.cta1_style == 'button' %}robin-hero__cta--btn{% else %}robin-hero__cta--link{% endif %}"
+          >
+            {{ section.settings.cta1_label }}
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.cta2_label != blank -%}
+          <a
+            href="{{ section.settings.cta2_url }}"
+            class="robin-hero__cta {% if section.settings.cta2_style == 'button' %}robin-hero__cta--btn{% else %}robin-hero__cta--link{% endif %}"
+          >
+            {{ section.settings.cta2_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Robin Hero",
+  "tag": "section",
+  "class": "robin-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🖼️ Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_desktop",
+      "label": "Desktop image",
+      "info": "Recommended: 2000×1000px or wider"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Mobile image",
+      "info": "Recommended: 800×1100px (portrait)"
+    },
+    {
+      "type": "header",
+      "content": "📐 Layout & Size"
+    },
+    {
+      "type": "range",
+      "id": "hero_height_desktop",
+      "label": "Desktop height (px)",
+      "min": 400,
+      "max": 1000,
+      "step": 10,
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "hero_height_mobile",
+      "label": "Mobile height (px)",
+      "min": 400,
+      "max": 900,
+      "step": 10,
+      "default": 700
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "✏️ Text Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading (above title)",
+      "placeholder": "e.g. Summer 2025"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main heading",
+      "default": "New arrivals"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading HTML tag",
+      "options": [
+        { "value": "h1", "label": "H1 (main page heading)" },
+        { "value": "h2", "label": "H2" },
+        { "value": "p", "label": "Paragraph" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description text",
+      "placeholder": "Optional short description"
+    },
+    {
+      "type": "header",
+      "content": "🔗 CTA Button / Link 1"
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "Label",
+      "default": "SHOP WOMEN"
+    },
+    {
+      "type": "url",
+      "id": "cta1_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "select",
+      "id": "cta1_style",
+      "label": "Style",
+      "options": [
+        { "value": "link", "label": "Underline link" },
+        { "value": "button", "label": "Solid button" }
+      ],
+      "default": "link"
+    },
+    {
+      "type": "header",
+      "content": "🔗 CTA Button / Link 2"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Label",
+      "default": "SHOP MEN"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "select",
+      "id": "cta2_style",
+      "label": "Style",
+      "options": [
+        { "value": "link", "label": "Underline link" },
+        { "value": "button", "label": "Solid button" }
+      ],
+      "default": "link"
+    },
+    {
+      "type": "header",
+      "content": "🎨 Colors & Overlay"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title & text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "CTA color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg_color",
+      "label": "Navbar background tint",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Dark overlay strength (%)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "info": "Higher = darker overlay on image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Robin Hero",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

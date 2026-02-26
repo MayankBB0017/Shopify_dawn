@@ -1,0 +1,243 @@
+/* ============================================================
+   robin-hero.css — Robin Hero Section for Dawn Theme
+   Dark / Black color theme
+   Upload to: Assets folder in your Shopify theme
+   ============================================================ */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+/* ============================================================
+   SECTION WRAPPER
+   ============================================================ */
+.robin-hero {
+  position: relative;
+  width: 100%;
+  height: var(--hero-height-desktop, 800px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: #0a0a0a;
+}
+
+/* ============================================================
+   BACKGROUND IMAGES
+   ============================================================ */
+.robin-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.robin-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  transform: scale(1.04);
+  animation: robinHeroZoom 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Desktop image: show on desktop, hide on mobile */
+.robin-hero__img--desktop { display: block; }
+.robin-hero__img--mobile  { display: none; }
+
+/* Placeholder SVG fallback */
+.robin-hero__placeholder {
+  width: 100%;
+  height: 100%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.robin-hero__placeholder .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes robinHeroZoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1.00); }
+}
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+.robin-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, var(--overlay-opacity, 0.4)) 100%
+  );
+}
+
+/* ============================================================
+   CONTENT BLOCK
+   ============================================================ */
+.robin-hero__content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 0 8% 5.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: var(--content-align, center);
+  text-align: center;
+  animation: robinFadeUp 1s 0.25s both;
+}
+
+/* When aligned left or right, reset text-align accordingly */
+.robin-hero__content[style*="flex-start"] { text-align: left; }
+.robin-hero__content[style*="flex-end"]   { text-align: right; }
+
+@keyframes robinFadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Subheading ── */
+.robin-hero__subheading {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--title-color, #ffffff);
+  opacity: 0.75;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Main Title ── */
+.robin-hero__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: var(--title-color, #ffffff);
+  margin: 0 0 0.5rem;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Description ── */
+.robin-hero__description {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--title-color, #ffffff);
+  opacity: 0.82;
+  max-width: 420px;
+  margin: 0.6rem 0 1.2rem;
+}
+
+/* ── CTA Links ── */
+.robin-hero__ctas {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: var(--content-align, center);
+  margin-top: 1.5rem;
+}
+
+/* Underline link style */
+.robin-hero__cta--link {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--link-color, #ffffff);
+  text-decoration: none;
+  border-bottom: 1px solid var(--link-color, #ffffff);
+  padding-bottom: 3px;
+  opacity: 0.92;
+  transition: opacity 0.22s ease, letter-spacing 0.22s ease;
+}
+.robin-hero__cta--link:hover {
+  opacity: 1;
+  letter-spacing: 0.22em;
+}
+
+/* Solid button style */
+.robin-hero__cta--btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  background: var(--link-color, #ffffff);
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--link-color, #ffffff);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.robin-hero__cta--btn:hover {
+  background: transparent;
+  color: var(--link-color, #ffffff);
+}
+
+/* ============================================================
+   MOBILE STYLES  (≤ 768px)
+   ============================================================ */
+@media screen and (max-width: 768px) {
+
+  .robin-hero {
+    height: var(--hero-height-mobile, 700px);
+  }
+
+  /* Swap images */
+  .robin-hero__img--desktop { display: none; }
+  .robin-hero__img--mobile  { display: block; }
+
+  .robin-hero__img {
+    object-position: center 15%;
+  }
+
+  .robin-hero__content {
+    padding: 0 6% 7%;
+  }
+
+  .robin-hero__title {
+    font-size: clamp(2.2rem, 9vw, 3.4rem);
+  }
+
+  .robin-hero__ctas {
+    gap: 1.8rem;
+    margin-top: 1.2rem;
+  }
+
+  .robin-hero__cta--link,
+  .robin-hero__cta--btn {
+    font-size: 0.65rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .robin-hero__ctas { gap: 1.4rem; }
+  .robin-hero__description { font-size: 0.8rem; }
+}
+
+/* ============================================================
+   DAWN THEME INTEGRATION — Prevent header overlap
+   Dawn's header is sticky; this pushes hero below it.
+   Comment out if you want the hero to go full-bleed under nav.
+   ============================================================ */
+.shopify-section:first-child .robin-hero-section {
+  /* Uncomment below line if hero should NOT go under sticky header */
+  /* margin-top: var(--header-height, 0px); */
+}
+
+/* Full-bleed hero — overlaps Dawn sticky nav (default Robin look) */
+.robin-hero-section {
+  margin-top: 0;
+}
