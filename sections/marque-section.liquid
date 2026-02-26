@@ -1,0 +1,402 @@
+{% comment %}
+  Marquee Logos Section — Shopify OS 2.0 / Dawn Theme
+  Infinite scrolling logo/text ticker with CMS controls
+{% endcomment %}
+
+{%- liquid
+  assign section_id   = section.id
+  assign speed        = section.settings.speed | default: 40
+  assign direction    = section.settings.direction | default: 'left'
+  assign animate      = section.settings.animate
+  assign bg_color     = section.settings.background_color
+  assign separator    = section.settings.separator
+-%}
+
+<style>
+  /* ─── Scoped to this section instance ─────────────────────────── */
+  #shopify-section-{{ section_id }} {
+    --marquee-speed:      {{ speed }}s;
+    --marquee-gap:        clamp(2rem, 5vw, 5rem);
+    --marquee-bg:         {{ bg_color }};
+    --marquee-text-color: {{ section.settings.text_color }};
+    --marquee-font-size:  clamp(0.75rem, 1.2vw, 0.9375rem);
+    --marquee-font-weight: {{ section.settings.font_weight }};
+    --marquee-letter-spacing: {{ section.settings.letter_spacing }}em;
+    --marquee-padding-y:  clamp(0.875rem, 2vw, 1.25rem);
+    --marquee-border-top: {{ section.settings.border_color }};
+    --marquee-border-bottom: {{ section.settings.border_color }};
+  }
+
+  /* ─── Container ────────────────────────────────────────────────── */
+  .marquee-section-{{ section_id }} {
+    background-color: var(--marquee-bg);
+    border-top:    1px solid var(--marquee-border-top);
+    border-bottom: 1px solid var(--marquee-border-bottom);
+    overflow: hidden;
+    padding-block: var(--marquee-padding-y);
+    width: 100%;
+    position: relative;
+  }
+
+  /* ─── Track wrapper — enables pause on hover ───────────────────── */
+  .marquee-track-{{ section_id }} {
+    display: flex;
+    width: max-content;
+    {% if animate %}
+      animation: marquee-scroll-{{ section_id }} var(--marquee-speed) linear infinite;
+    {% endif %}
+    will-change: transform;
+    align-items: center;
+  }
+
+  {% if animate %}
+    .marquee-track-{{ section_id }}:hover,
+    .marquee-section-{{ section_id }}:hover .marquee-track-{{ section_id }} {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  /* ─── Keyframes — direction aware ──────────────────────────────── */
+  {% if direction == 'right' %}
+    @keyframes marquee-scroll-{{ section_id }} {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+  {% else %}
+    @keyframes marquee-scroll-{{ section_id }} {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+  {% endif %}
+
+  /* ─── One copy of items ─────────────────────────────────────────── */
+  .marquee-copy-{{ section_id }} {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: var(--marquee-gap);
+    padding-inline: calc(var(--marquee-gap) / 2);
+  }
+
+  /* ─── Individual item ───────────────────────────────────────────── */
+  .marquee-item-{{ section_id }} {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: var(--marquee-text-color);
+    font-size: var(--marquee-font-size);
+    font-weight: var(--marquee-font-weight);
+    letter-spacing: var(--marquee-letter-spacing);
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ─── Image items ───────────────────────────────────────────────── */
+  .marquee-item-{{ section_id }} img {
+    display: block;
+    height: clamp(16px, 2.5vw, 24px);
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    object-position: center;
+    filter: {{ section.settings.image_filter }};
+    transition: filter 0.3s ease, opacity 0.3s ease;
+    opacity: {{ section.settings.image_opacity | divided_by: 100.0 }};
+  }
+
+  .marquee-item-{{ section_id }}:hover img {
+    filter: none;
+    opacity: 1;
+  }
+
+  /* ─── Separator dot/pipe ────────────────────────────────────────── */
+  .marquee-separator-{{ section_id }} {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: var(--marquee-text-color);
+    font-size: var(--marquee-font-size);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* ─── Edge fades ────────────────────────────────────────────────── */
+  {% if section.settings.show_fade %}
+    .marquee-section-{{ section_id }}::before,
+    .marquee-section-{{ section_id }}::after {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      width: clamp(40px, 8vw, 100px);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .marquee-section-{{ section_id }}::before {
+      left: 0;
+      background: linear-gradient(to right, var(--marquee-bg), transparent);
+    }
+    .marquee-section-{{ section_id }}::after {
+      right: 0;
+      background: linear-gradient(to left, var(--marquee-bg), transparent);
+    }
+  {% endif %}
+
+  /* ─── Reduced motion ────────────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track-{{ section_id }} {
+      animation: none !important;
+    }
+  }
+</style>
+
+<div class="marquee-section-{{ section_id }}" aria-label="{{ section.settings.aria_label | default: 'Press logos' }}" role="region">
+  <div class="marquee-track-{{ section_id }}" aria-hidden="true">
+
+    {%- comment -%} Render TWO identical copies so we can loop seamlessly {%- endcomment -%}
+    {%- for copy in (1..2) -%}
+      <div class="marquee-copy-{{ section_id }}">
+        {%- for block in section.blocks -%}
+
+          {%- if block.type == 'logo_image' -%}
+            {%- assign img = block.settings.image -%}
+            {%- if img != blank -%}
+              <span class="marquee-item-{{ section_id }}" {{ block.shopify_attributes }}>
+                {{
+                  img
+                  | image_url: width: 320
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: block.settings.alt_text | default: img.alt | default: 'Brand logo',
+                    width: img.width,
+                    height: img.height
+                }}
+              </span>
+            {%- endif -%}
+
+          {%- elsif block.type == 'logo_text' -%}
+            <span class="marquee-item-{{ section_id }}" {{ block.shopify_attributes }}>
+              {{- block.settings.text | default: 'Brand Name' -}}
+            </span>
+
+          {%- endif -%}
+
+          {%- unless forloop.last -%}
+            {%- if separator != 'none' -%}
+              <span class="marquee-separator-{{ section_id }}" aria-hidden="true">
+                {%- case separator -%}
+                  {%- when 'dot' -%}·
+                  {%- when 'bullet' -%}•
+                  {%- when 'pipe' -%}|
+                  {%- when 'dash' -%}—
+                  {%- when 'star' -%}✦
+                {%- endcase -%}
+              </span>
+            {%- endif -%}
+          {%- endunless -%}
+
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee — Logo Bar",
+  "tag": "section",
+  "class": "marquee-logos-section",
+  "limit": 2,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout & Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border colour",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Text weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "em",
+      "default": 8,
+      "info": "Value is divided by 100 to get em (e.g. 8 → 0.08em)"
+    },
+    {
+      "type": "header",
+      "content": "Image Logos"
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "label": "Default logo opacity",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60,
+      "info": "Logos become fully opaque on hover."
+    },
+    {
+      "type": "select",
+      "id": "image_filter",
+      "label": "Logo colour treatment",
+      "options": [
+        { "value": "none", "label": "Original colour" },
+        { "value": "grayscale(1)", "label": "Grayscale" },
+        { "value": "invert(1)", "label": "Inverted" },
+        { "value": "grayscale(1) invert(1)", "label": "Grayscale + Invert" }
+      ],
+      "default": "grayscale(1)"
+    },
+    {
+      "type": "header",
+      "content": "Separator"
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "Item separator",
+      "options": [
+        { "value": "none",   "label": "None" },
+        { "value": "dot",    "label": "Middle dot  ·" },
+        { "value": "bullet", "label": "Bullet  •" },
+        { "value": "pipe",   "label": "Pipe  |" },
+        { "value": "dash",   "label": "Em dash  —" },
+        { "value": "star",   "label": "Star  ✦" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate",
+      "label": "Enable scrolling animation",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Scroll direction",
+      "options": [
+        { "value": "left",  "label": "Left  ←" },
+        { "value": "right", "label": "Right →" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Animation speed",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "default": 40,
+      "info": "Lower value = faster scroll."
+    },
+    {
+      "type": "header",
+      "content": "Edge Fade"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fade",
+      "label": "Show edge fade",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "ARIA region label",
+      "default": "Featured in press",
+      "info": "Describes the marquee to screen readers."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo_image",
+      "name": "Logo — Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image",
+          "info": "Recommended: SVG or PNG with transparent background."
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt text",
+          "info": "Leave blank to use image filename."
+        }
+      ]
+    },
+    {
+      "type": "logo_text",
+      "name": "Logo — Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Brand name",
+          "default": "BRAND NAME"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee — Logo Bar",
+      "blocks": [
+        { "type": "logo_text", "settings": { "text": "marie claire" } },
+        { "type": "logo_text", "settings": { "text": "TELVA" } },
+        { "type": "logo_text", "settings": { "text": "VANITY FAIR" } },
+        { "type": "logo_text", "settings": { "text": "¡HOLA!" } },
+        { "type": "logo_text", "settings": { "text": "GLAMOUR" } },
+        { "type": "logo_text", "settings": { "text": "VOGUE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
