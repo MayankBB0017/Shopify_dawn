@@ -118,11 +118,14 @@
   border: 1px solid #000;
 }
 
-/* Hide the bottom slider counter and prev button */
- .slider-buttons .slider-counter,
-.slider-buttons .slider-button--prev {
+/* Always hide counter and prev button — even after slider interaction */
+#fct-section-{{ section.id }} .slider-buttons .slider-counter,
+#fct-section-{{ section.id }} .slider-button--prev {
   display: none !important;
-} 
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
 
 /* Move the next arrow to the side, floating over products */
 .slider-buttons {
