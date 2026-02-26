@@ -1,0 +1,249 @@
+{% comment %}
+  Section: Collection Banner Trio
+  Description: Displays three collections side-by-side with image, label, and link.
+  Each block represents one collection panel.
+  Supports custom image metafield, featured image, or fallback image.
+  Metafield namespace: custom | key: banner_image (type: file_reference → image)
+{% endcomment %}
+
+{{ 'collection-banner-trio.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="collection-banner-trio"
+  id="section-{{ section.id }}"
+  aria-label="{{ section.settings.section_aria_label | default: 'Collection categories' }}"
+>
+  <div class="collection-banner-trio__grid">
+    {%- for block in section.blocks -%}
+      {%- assign collection = collections[block.settings.collection] -%}
+
+      {%- comment -%} ── Image priority logic ──────────────────────────────
+        1. Custom metafield image on the collection (custom.banner_image)
+        2. Collection featured_image
+        3. Manually uploaded fallback image from block settings
+      {%- endcomment -%}
+
+      {%- assign panel_image = nil -%}
+      {%- assign panel_image_alt = '' -%}
+
+      {%- if collection != blank -%}
+        {%- comment -%} Priority 1 – metafield {%- endcomment -%}
+        {%- assign metafield_image = collection.metafields.custom.banner_image.value -%}
+        {%- if metafield_image != blank -%}
+          {%- assign panel_image = metafield_image -%}
+          {%- assign panel_image_alt = metafield_image.alt | default: collection.title -%}
+
+        {%- comment -%} Priority 2 – featured image {%- endcomment -%}
+        {%- elsif collection.featured_image != blank -%}
+          {%- assign panel_image = collection.featured_image -%}
+          {%- assign panel_image_alt = collection.featured_image.alt | default: collection.title -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- comment -%} Priority 3 – fallback upload {%- endcomment -%}
+      {%- if panel_image == blank and block.settings.fallback_image != blank -%}
+        {%- assign panel_image = block.settings.fallback_image -%}
+        {%- assign panel_image_alt = block.settings.fallback_image.alt | default: block.settings.label -%}
+      {%- endif -%}
+
+      {%- assign panel_label  = block.settings.label  | default: collection.title -%}
+      {%- assign panel_url    = collection.url | default: block.settings.fallback_url | default: '#' -%}
+
+      <div
+        class="collection-banner-trio__panel{% if forloop.first %} collection-banner-trio__panel--first{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <a
+          class="collection-banner-trio__link"
+          href="{{ panel_url }}"
+          aria-label="{{ panel_label | escape }}"
+        >
+          {%- comment -%} ── Image ──────────────────────────────────────────── {%- endcomment -%}
+          <div class="collection-banner-trio__media">
+            {%- if panel_image != blank -%}
+              <img
+                class="collection-banner-trio__img"
+                src="{{ panel_image | image_url: width: 800 }}"
+                srcset="
+                  {{ panel_image | image_url: width: 400 }}  400w,
+                  {{ panel_image | image_url: width: 600 }}  600w,
+                  {{ panel_image | image_url: width: 800 }}  800w,
+                  {{ panel_image | image_url: width: 1200 }} 1200w
+                "
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                alt="{{ panel_image_alt | escape }}"
+                width="{{ panel_image.width }}"
+                height="{{ panel_image.height }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+            {%- else -%}
+              {%- comment -%} Placeholder when no image is available {%- endcomment -%}
+              <div class="collection-banner-trio__placeholder" aria-hidden="true">
+                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'collection-banner-trio__placeholder-svg' }}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} ── Overlay tint ──────────────────────────────── {%- endcomment -%}
+            <div class="collection-banner-trio__overlay" aria-hidden="true"></div>
+          </div>
+
+          {%- comment -%} ── Label ──────────────────────────────────────────── {%- endcomment -%}
+          <span class="collection-banner-trio__label">
+            {{- panel_label | upcase -}}
+          </span>
+        </a>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  /* ─── Scoped to this section instance ──────────────────────────────────── */
+  #section-{{ section.id }} .collection-banner-trio__grid {
+    gap: {{ section.settings.gap }}px;
+  }
+
+  #section-{{ section.id }} .collection-banner-trio__label {
+    font-size: {{ section.settings.label_size }}px;
+    letter-spacing: {{ section.settings.label_tracking }}em;
+    color: {{ section.settings.label_color }};
+  }
+
+  #section-{{ section.id }} .collection-banner-trio__overlay {
+    background: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Banner Trio",
+  "tag": "section",
+  "class": "section-collection-banner-trio",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between panels (px)",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Label typography"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "Label font size (px)",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "label_tracking",
+      "label": "Label letter spacing (em × 10)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 15,
+      "info": "Value is divided by 10 internally (e.g. 15 → 0.15em)"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Image overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay colour",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity (%)",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "section_aria_label",
+      "label": "Section aria-label",
+      "default": "Collection categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_panel",
+      "name": "Collection Panel",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Override label",
+          "info": "Leave blank to use the collection title."
+        },
+        {
+          "type": "image_picker",
+          "id": "fallback_image",
+          "label": "Fallback image",
+          "info": "Used when the collection has no metafield image or featured image."
+        },
+        {
+          "type": "url",
+          "id": "fallback_url",
+          "label": "Fallback link URL",
+          "info": "Used only if no collection is selected."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Banner Trio",
+      "blocks": [
+        {
+          "type": "collection_panel",
+          "settings": { "label": "Bikinis" }
+        },
+        {
+          "type": "collection_panel",
+          "settings": { "label": "Ropa de Playa" }
+        },
+        {
+          "type": "collection_panel",
+          "settings": { "label": "Bañadores" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
