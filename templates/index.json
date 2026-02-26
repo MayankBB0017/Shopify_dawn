@@ -34,6 +34,19 @@
         "overlay_opacity": 0
       }
     },
+    "content_section_KEUPFm": {
+      "type": "content-section",
+      "name": "Editorial Content",
+      "settings": {
+        "heading": "El verano nunca acaba con Robin.",
+        "text": "",
+        "link_1_label": "OPTIONAL LINK",
+        "link_1": "",
+        "link_2_label": "OPTIONAL LINK",
+        "link_2": "",
+        "bg_color": "#f2f2f2"
+      }
+    },
     "collection_list_hY3wPJ": {
       "type": "collection-list",
       "blocks": {
@@ -78,6 +91,7 @@
   },
   "order": [
     "hero_section_HhyRen",
+    "content_section_KEUPFm",
     "collection_list_hY3wPJ"
   ]
 }
