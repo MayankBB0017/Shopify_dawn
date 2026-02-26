@@ -2,7 +2,11 @@
 
   {{- 'robin-footer.css' | asset_url | stylesheet_tag -}}
 
-  {%- comment -%} ═══ MAIN GRID ═══════════════════════════════════════════ {%- endcomment -%}
+  {%- comment -%} Assign the two menus from settings {%- endcomment -%}
+  {%- assign menu_col1 = linklists[section.settings.menu_col1] -%}
+  {%- assign menu_col2 = linklists[section.settings.menu_col2] -%}
+
+  {%- comment -%} ═══ MAIN GRID ══════════════════════════════════════════ {%- endcomment -%}
   <div class="robin-footer__main page-width">
 
     {%- comment -%} LEFT — Newsletter + Social {%- endcomment -%}
@@ -120,50 +124,55 @@
         {%- endif -%}
 
       </ul>
+      {%- comment -%} END Social {%- endcomment -%}
 
     </div>
     {%- comment -%} END Newsletter {%- endcomment -%}
 
-    {%- comment -%} RIGHT — Nav Columns {%- endcomment -%}
+    {%- comment -%} RIGHT — Nav Columns (using linklists) {%- endcomment -%}
     <nav class="robin-footer__nav" aria-label="Footer navigation">
 
-      {%- comment -%} Column 1 {%- endcomment -%}
-      <div class="robin-footer__nav-col">
-        <h4 class="robin-footer__nav-heading">
-          {{- section.settings.col1_heading -}}
-        </h4>
-        <ul class="robin-footer__nav-list">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'col1_link' -%}
-              <li {{ block.shopify_attributes }}>
-                <a href="{{ block.settings.link_url }}">
-                  {{- block.settings.link_label -}}
+      {%- comment -%} Column 1 — menu from settings {%- endcomment -%}
+      {%- if menu_col1.links.size > 0 -%}
+        <div class="robin-footer__nav-col">
+          <h4 class="robin-footer__nav-heading">
+            {{- section.settings.col1_heading -}}
+          </h4>
+          <ul class="robin-footer__nav-list">
+            {%- for link in menu_col1.links -%}
+              <li>
+                <a href="{{ link.url }}"
+                  {%- if link.active %} aria-current="page"{%- endif -%}
+                >
+                  {{- link.title -}}
                 </a>
               </li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
-      </div>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
 
-      {%- comment -%} Column 2 {%- endcomment -%}
-      <div class="robin-footer__nav-col">
-        <h4 class="robin-footer__nav-heading">
-          {{- section.settings.col2_heading -}}
-        </h4>
-        <ul class="robin-footer__nav-list">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'col2_link' -%}
-              <li {{ block.shopify_attributes }}>
-                <a href="{{ block.settings.link_url }}">
-                  {{- block.settings.link_label -}}
+      {%- comment -%} Column 2 — menu from settings {%- endcomment -%}
+      {%- if menu_col2.links.size > 0 -%}
+        <div class="robin-footer__nav-col">
+          <h4 class="robin-footer__nav-heading">
+            {{- section.settings.col2_heading -}}
+          </h4>
+          <ul class="robin-footer__nav-list">
+            {%- for link in menu_col2.links -%}
+              <li>
+                <a href="{{ link.url }}"
+                  {%- if link.active %} aria-current="page"{%- endif -%}
+                >
+                  {{- link.title -}}
                 </a>
               </li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
-      </div>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
 
-      {%- comment -%} Column 3 — Contact (hardcoded from settings, no blocks needed) {%- endcomment -%}
+      {%- comment -%} Column 3 — Contact (plain settings, no menu needed) {%- endcomment -%}
       <div class="robin-footer__nav-col robin-footer__nav-col--contact">
         <h4 class="robin-footer__nav-heading">
           {{- section.settings.col3_heading -}}
@@ -277,7 +286,7 @@
     },
     {
       "type": "header",
-      "content": "Column 1 heading"
+      "content": "Column 1 — Menu"
     },
     {
       "type": "text",
@@ -286,14 +295,28 @@
       "default": "Robin"
     },
     {
+      "type": "link_list",
+      "id": "menu_col1",
+      "label": "Column 1 menu",
+      "default": "main-menu",
+      "info": "Create a menu in Navigation and select it here"
+    },
+    {
       "type": "header",
-      "content": "Column 2 heading"
+      "content": "Column 2 — Menu"
     },
     {
       "type": "text",
       "id": "col2_heading",
       "label": "Column 2 heading",
       "default": "Ayuda"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_col2",
+      "label": "Column 2 menu",
+      "default": "main-menu",
+      "info": "Create a menu in Navigation and select it here"
     },
     {
       "type": "header",
@@ -377,42 +400,6 @@
       "id": "copyright_name",
       "label": "Copyright brand name",
       "default": "ROBIN"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "col1_link",
-      "name": "Robin — Nav link",
-      "settings": [
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Label",
-          "default": "Page name"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "URL"
-        }
-      ]
-    },
-    {
-      "type": "col2_link",
-      "name": "Ayuda — Nav link",
-      "settings": [
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Label",
-          "default": "Page name"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "URL"
-        }
-      ]
     }
   ]
 }
