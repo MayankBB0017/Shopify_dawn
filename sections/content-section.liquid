@@ -1,0 +1,183 @@
+{% comment %}
+  Editorial Content Section
+  Desktop: Text Left / Image Right
+  Mobile: Image Top / Text Bottom
+{% endcomment %}
+
+<section class="editorial-section" style="background: {{ section.settings.bg_color }};">
+  <div class="page-width editorial-wrapper">
+
+    <!-- Image -->
+    <div class="editorial-image">
+      {% if section.settings.image != blank %}
+        <img 
+          src="{{ section.settings.image | image_url: width: 1200 }}" 
+          alt="{{ section.settings.image.alt | escape }}"
+          loading="lazy"
+        >
+      {% endif %}
+    </div>
+
+    <!-- Content -->
+    <div class="editorial-content">
+      {% if section.settings.heading != blank %}
+        <h2 class="editorial-heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="editorial-text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      <div class="editorial-links">
+        {% if section.settings.link_1_label != blank %}
+          <a href="{{ section.settings.link_1 }}" class="editorial-link">
+            {{ section.settings.link_1_label }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.link_2_label != blank %}
+          <a href="{{ section.settings.link_2 }}" class="editorial-link">
+            {{ section.settings.link_2_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.editorial-section {
+  padding: 80px 0;
+}
+
+.editorial-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Image */
+.editorial-image {
+  flex: 1;
+}
+
+.editorial-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Content */
+.editorial-content {
+  flex: 1;
+  color: #111;
+}
+
+.editorial-heading {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.editorial-text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.editorial-links {
+  display: flex;
+  gap: 25px;
+}
+
+.editorial-link {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+
+/* ================= MOBILE ================= */
+@media screen and (max-width: 768px) {
+
+  .editorial-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .editorial-section {
+    padding: 40px 0;
+  }
+
+  .editorial-heading {
+    font-size: 24px;
+  }
+
+  .editorial-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "Editorial Content",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "El verano nunca acaba con Robin."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "link_1_label",
+      "label": "Link 1 Label",
+      "default": "OPTIONAL LINK"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_label",
+      "label": "Link 2 Label",
+      "default": "OPTIONAL LINK"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f2f2f2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Content"
+    }
+  ]
+}
+{% endschema %}
