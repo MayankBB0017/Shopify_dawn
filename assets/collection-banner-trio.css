@@ -1,0 +1,157 @@
+/*
+ * collection-banner-trio.css
+ * Drop this file into: assets/collection-banner-trio.css
+ * The section references it via: {{ 'collection-banner-trio.css' | asset_url | stylesheet_tag }}
+ */
+
+/* ─── Reset / base ───────────────────────────────────────────────────────── */
+.collection-banner-trio {
+  --panel-aspect: 133%;   /* tall portrait ~ 3:4 */
+  --label-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ─── Grid ───────────────────────────────────────────────────────────────── */
+.collection-banner-trio__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* gap is injected inline from schema settings */
+  width: 100%;
+}
+
+/* ─── Panel ──────────────────────────────────────────────────────────────── */
+.collection-banner-trio__panel {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Link – fills the entire panel ─────────────────────────────────────── */
+.collection-banner-trio__link {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─── Media wrapper (maintains aspect ratio) ────────────────────────────── */
+.collection-banner-trio__media {
+  position: relative;
+  width: 100%;
+  padding-top: var(--panel-aspect); /* aspect-ratio hack for broad browser support */
+  overflow: hidden;
+}
+
+/* ─── Image ──────────────────────────────────────────────────────────────── */
+.collection-banner-trio__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.collection-banner-trio__link:hover .collection-banner-trio__img,
+.collection-banner-trio__link:focus-visible .collection-banner-trio__img {
+  transform: scale(1.04);
+}
+
+/* ─── SVG placeholder (Shopify placeholder_svg_tag) ─────────────────────── */
+.collection-banner-trio__placeholder {
+  position: absolute;
+  inset: 0;
+  background: #f0ede8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-banner-trio__placeholder-svg {
+  width: 50%;
+  height: 50%;
+  opacity: 0.3;
+}
+
+/* ─── Overlay (colour / opacity set inline from schema) ──────────────────── */
+.collection-banner-trio__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.collection-banner-trio__link:hover .collection-banner-trio__overlay {
+  opacity: 0 !important; /* lightens on hover for subtle reveal */
+}
+
+/* ─── Label ──────────────────────────────────────────────────────────────── */
+.collection-banner-trio__label {
+  /* Position: top-left corner, matching Figma */
+  position: absolute;
+  top: 16px;
+  left: 16px;
+
+  /* Typography */
+  font-family: var(--label-font);
+  font-weight: 400;
+  line-height: 1;
+  /* font-size, letter-spacing, color injected inline from schema */
+
+  /* Visual */
+  z-index: 2;
+  pointer-events: none;
+  white-space: nowrap;
+
+  /* Subtle text-shadow so label reads on any background */
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ─── Focus-visible ring ─────────────────────────────────────────────────── */
+.collection-banner-trio__link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+/* Tablet (≤ 900px): stack into two columns, last panel full-width */
+@media screen and (max-width: 900px) {
+  .collection-banner-trio__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Make the 3rd panel span full width on tablet */
+  .collection-banner-trio__panel:last-child {
+    grid-column: span 2;
+  }
+
+  .collection-banner-trio__panel:last-child .collection-banner-trio__media {
+    --panel-aspect: 66%; /* landscape ratio when full-width */
+  }
+}
+
+/* Mobile (≤ 600px): single column stack */
+@media screen and (max-width: 600px) {
+  .collection-banner-trio__grid {
+    grid-template-columns: 1fr;
+    gap: 2px !important; /* override inline gap for mobile */
+  }
+
+  .collection-banner-trio__panel:last-child {
+    grid-column: span 1;
+  }
+
+  .collection-banner-trio__panel:last-child .collection-banner-trio__media {
+    --panel-aspect: 133%; /* restore portrait on mobile */
+  }
+
+  .collection-banner-trio__label {
+    top: 12px;
+    left: 12px;
+  }
+}
