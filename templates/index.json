@@ -162,7 +162,7 @@
       ],
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "products_to_show": 12,
+        "products_to_show": 5,
         "title": "Best sellers:",
         "heading_size": "h2",
         "columns_desktop": 4,
