@@ -96,15 +96,39 @@
     },
     "featured_collection_ggXnDk": {
       "type": "featured-collection",
+      "blocks": {
+        "collection_tab_nDVWj3": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "bikinis",
+            "tab_title": ""
+          }
+        },
+        "collection_tab_iFe7pB": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "bikinis",
+            "tab_title": ""
+          }
+        },
+        "collection_tab_Gdtfky": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "bikinis",
+            "tab_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_nDVWj3",
+        "collection_tab_iFe7pB",
+        "collection_tab_Gdtfky"
+      ],
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "collection": "automated-collection",
         "products_to_show": 4,
         "title": "Featured collection",
         "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
         "columns_desktop": 4,
         "enable_desktop_slider": true,
         "full_width": false,
