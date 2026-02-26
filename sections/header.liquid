@@ -145,7 +145,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+class="header-wrapper {% if section.settings.enable_transparent_home and request.page_type == 'index' %}header-wrapper--transparent{% else %}color-{{ section.settings.color_scheme }} gradient{% endif %}{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
 >
   {%- liquid
     assign social_links = false
