@@ -142,25 +142,15 @@
       },
       "robin-footer": {
         "type": "robin-footer",
-        "blocks": {
-          "col1_link_9y3YRN": {
-            "type": "col1_link",
-            "settings": {
-              "link_label": "Page name",
-              "link_url": ""
-            }
-          }
-        },
-        "block_order": [
-          "col1_link_9y3YRN"
-        ],
         "settings": {
           "newsletter_heading": "Únete a nuestra Newsletter",
           "newsletter_subtext": "Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin",
           "name_placeholder": "Name",
           "email_placeholder": "Email Adress",
           "col1_heading": "Robin",
+          "menu_col1": "main-menu",
           "col2_heading": "Ayuda",
+          "menu_col2": "main-menu",
           "col3_heading": "Contacto",
           "contact_hours": "Lunes a Viernes 10-17h",
           "whatsapp_url": "",
@@ -192,10 +182,10 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#f3f3f3",
+          "background": "#fcfbfb",
           "background_gradient": "",
           "text": "#121212",
-          "button": "#121212",
+          "button": "#f3f3f3",
           "button_label": "#f3f3f3",
           "secondary_button_label": "#121212",
           "shadow": "#121212"
