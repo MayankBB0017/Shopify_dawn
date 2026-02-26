@@ -204,7 +204,7 @@
       "name": "Marquee — Logo Bar",
       "settings": {
         "background_color": "#FFFFFF",
-        "border_color": "#E2E2E2",
+        "border_color": "rgba(0,0,0,0)",
         "image_opacity": 55,
         "image_filter": "grayscale(1)",
         "separator": "none",
