@@ -47,51 +47,54 @@
         "bg_color": "#f2f2f2"
       }
     },
-    "collection_list_hY3wPJ": {
-      "type": "collection-list",
+    "collection_banner_trio_bR3rUB": {
+      "type": "collection-banner-trio",
       "blocks": {
-        "featured_collection_MQrLir": {
-          "type": "featured_collection",
+        "collection_panel_8ayqtV": {
+          "type": "collection_panel",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "label": "Bikinis",
+            "fallback_url": ""
           }
         },
-        "featured_collection_N9JVcn": {
-          "type": "featured_collection",
+        "collection_panel_mP7Jxt": {
+          "type": "collection_panel",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "label": "Ropa de Playa",
+            "fallback_url": ""
           }
         },
-        "featured_collection_L49f3B": {
-          "type": "featured_collection",
+        "collection_panel_xMrwdR": {
+          "type": "collection_panel",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "label": "Bañadores",
+            "fallback_url": ""
           }
         }
       },
       "block_order": [
-        "featured_collection_MQrLir",
-        "featured_collection_N9JVcn",
-        "featured_collection_L49f3B"
+        "collection_panel_8ayqtV",
+        "collection_panel_mP7Jxt",
+        "collection_panel_xMrwdR"
       ],
-      "name": "t:sections.collection-list.presets.name",
+      "name": "Collection Banner Trio",
       "settings": {
-        "title": "Collections",
-        "heading_size": "h1",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "gap": 2,
+        "label_size": 11,
+        "label_tracking": 15,
+        "label_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "section_aria_label": "Collection categories"
       }
     }
   },
   "order": [
     "hero_section_HhyRen",
     "content_section_KEUPFm",
-    "collection_list_hY3wPJ"
+    "collection_banner_trio_bR3rUB"
   ]
 }
