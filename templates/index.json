@@ -14,6 +14,7 @@
       "name": "Robin Hero",
       "settings": {
         "hero_image_desktop": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1_2x_ea252745-9c4b-4edc-9f12-e682aeff4846.png",
+        "hero_image_mobile": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.png",
         "hero_height_desktop": 800,
         "hero_height_mobile": 700,
         "content_alignment": "center",
