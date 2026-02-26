@@ -48,9 +48,7 @@
     gap:24px;
   }
 
-  .fct-tabs-{{ section.id }} h2.title.h2 {
-    margin: 0;
-}
+  
 
   .fct-tab-btn-{{ section.id }} {
     background: none;
@@ -78,6 +76,10 @@
     color: rgb(var(--color-foreground));
     font-weight: 600;
   }
+
+  fct-header-{{ section.id }} h2.title.h2 {
+    margin: 0 !Important;
+}
 
   .fct-tab-btn-{{ section.id }}[aria-selected="true"]::after {
     content: '';
