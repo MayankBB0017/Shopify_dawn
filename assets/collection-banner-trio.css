@@ -100,7 +100,7 @@
   font-family: var(--label-font);
   font-weight: 400;
   line-height: 1;
-  /* font-size, letter-spacing, color injected inline from schema */
+ 
 
   /* Visual */
   z-index: 2;
