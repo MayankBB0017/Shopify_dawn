@@ -127,7 +127,7 @@
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
         "products_to_show": 4,
-        "title": "Featured collection",
+        "title": "Best sellers:",
         "heading_size": "h2",
         "columns_desktop": 4,
         "enable_desktop_slider": true,
