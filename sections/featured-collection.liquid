@@ -351,11 +351,6 @@
   },
   "settings": [
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "t:sections.featured-collection.settings.collection.label"
-    },
-    {
       "type": "range",
       "id": "products_to_show",
       "min": 2,
@@ -401,37 +396,6 @@
       ],
       "default": "h1",
       "label": "t:sections.all.heading_size.label"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "t:sections.featured-collection.settings.description.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_description",
-      "label": "t:sections.featured-collection.settings.show_description.label",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "description_style",
-      "label": "t:sections.featured-collection.settings.description_style.label",
-      "options": [
-        {
-          "value": "body",
-          "label": "t:sections.featured-collection.settings.description_style.options__1.label"
-        },
-        {
-          "value": "subtitle",
-          "label": "t:sections.featured-collection.settings.description_style.options__2.label"
-        },
-        {
-          "value": "uppercase",
-          "label": "t:sections.featured-collection.settings.description_style.options__3.label"
-        }
-      ],
-      "default": "body"
     },
     {
       "type": "header",
@@ -646,9 +610,33 @@
       "default": 36
     }
   ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.featured-collection.settings.collection.label"
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Custom tab title",
+          "info": "Leave blank to use the collection title automatically."
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "t:sections.featured-collection.presets.name"
+      "name": "t:sections.featured-collection.presets.name",
+      "blocks": [
+        { "type": "collection_tab" },
+        { "type": "collection_tab" },
+        { "type": "collection_tab" }
+      ]
     }
   ]
 }
