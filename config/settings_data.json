@@ -110,8 +110,8 @@
     "brand_description": "<p></p>",
     "brand_image_width": 100,
     "social_facebook_link": "",
-    "social_instagram_link": "",
-    "social_youtube_link": "",
+    "social_instagram_link": "instagram",
+    "social_youtube_link": "youtube.com",
     "social_tiktok_link": "",
     "social_twitter_link": "",
     "social_snapchat_link": "",
@@ -138,6 +138,42 @@
         "type": "main-password-footer",
         "settings": {
           "color_scheme": "scheme-1"
+        }
+      },
+      "robin-footer": {
+        "type": "robin-footer",
+        "blocks": {
+          "col1_link_9y3YRN": {
+            "type": "col1_link",
+            "settings": {
+              "link_label": "Page name",
+              "link_url": ""
+            }
+          }
+        },
+        "block_order": [
+          "col1_link_9y3YRN"
+        ],
+        "settings": {
+          "newsletter_heading": "Únete a nuestra Newsletter",
+          "newsletter_subtext": "Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin",
+          "name_placeholder": "Name",
+          "email_placeholder": "Email Adress",
+          "col1_heading": "Robin",
+          "col2_heading": "Ayuda",
+          "col3_heading": "Contacto",
+          "contact_hours": "Lunes a Viernes 10-17h",
+          "whatsapp_url": "",
+          "contact_email": "info@robincollection.com",
+          "locale_country_label": "España (€)",
+          "locale_country_url": "",
+          "locale_lang_label": "Spanish",
+          "locale_lang_url": "",
+          "link_condiciones": "#",
+          "link_privacidad": "shopify://products/the-collection-snowboard-liquid",
+          "link_aviso": "#",
+          "link_cookies": "#",
+          "copyright_name": "ROBIN"
         }
       }
     },
