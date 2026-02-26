@@ -9,6 +9,30 @@
  */
 {
   "sections": {
+    "hero_section_HhyRen": {
+      "type": "hero-section",
+      "name": "Robin Hero",
+      "settings": {
+        "hero_image_desktop": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1_2x_ea252745-9c4b-4edc-9f12-e682aeff4846.png",
+        "hero_height_desktop": 800,
+        "hero_height_mobile": 700,
+        "content_alignment": "center",
+        "subheading": "",
+        "heading": "New arrivals",
+        "heading_tag": "h2",
+        "description": "",
+        "cta1_label": "SHOP WOMEN",
+        "cta1_url": "",
+        "cta1_style": "link",
+        "cta2_label": "SHOP MEN",
+        "cta2_url": "",
+        "cta2_style": "link",
+        "title_color": "#ffffff",
+        "link_color": "#ffffff",
+        "nav_bg_color": "#0a0a0a",
+        "overlay_opacity": 0
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -79,6 +103,7 @@
     }
   },
   "order": [
+    "hero_section_HhyRen",
     "image_banner",
     "featured_collection"
   ]
