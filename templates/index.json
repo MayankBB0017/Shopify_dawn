@@ -128,7 +128,7 @@
       "settings": {
         "products_to_show": 4,
         "title": "Featured collection",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "columns_desktop": 4,
         "enable_desktop_slider": true,
         "full_width": false,
