@@ -118,6 +118,31 @@
   border: 1px solid #000;
 }
 
+/* Hide the bottom slider counter and prev button */
+.slider-buttons .slider-counter,
+.slider-buttons .slider-button--prev {
+  display: none !important;
+}
+
+/* Move the next arrow to the side, floating over products */
+.slider-buttons {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.slider-button--next {
+  background: white !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 
 {%- endstyle -%}
 
