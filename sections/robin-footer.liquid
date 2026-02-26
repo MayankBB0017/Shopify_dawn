@@ -1,0 +1,409 @@
+<footer class="robin-footer" role="contentinfo">
+
+  {{- 'robin-footer.css' | asset_url | stylesheet_tag -}}
+
+  {%- comment -%} ═══ MAIN GRID ═══════════════════════════════════════════ {%- endcomment -%}
+  <div class="robin-footer__main page-width">
+
+    {%- comment -%} LEFT — Newsletter + Social {%- endcomment -%}
+    <div class="robin-footer__newsletter">
+
+      <h3 class="robin-footer__nl-heading">
+        {{- section.settings.newsletter_heading -}}
+      </h3>
+
+      <p class="robin-footer__nl-subtext">
+        {{- section.settings.newsletter_subtext -}}
+      </p>
+
+      {%- form 'customer', id: 'RobinFooterNewsletter' -%}
+
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
+        {%- if form.posted_successfully? -%}
+          <p class="robin-footer__nl-success">
+            {{ 'general.newsletter.confirmation' | t }}
+          </p>
+        {%- endif -%}
+
+        <div class="robin-footer__nl-form">
+
+          <input
+            type="text"
+            name="contact[first_name]"
+            class="robin-footer__nl-input"
+            placeholder="{{ section.settings.name_placeholder }}"
+            autocomplete="given-name"
+          >
+
+          <div class="robin-footer__nl-email-row">
+            <input
+              type="email"
+              name="contact[email]"
+              class="robin-footer__nl-input robin-footer__nl-input--email"
+              placeholder="{{ section.settings.email_placeholder }}"
+              autocomplete="email"
+              required
+            >
+            <button
+              type="submit"
+              class="robin-footer__nl-btn"
+              aria-label="{{ 'general.newsletter.submit' | t }}"
+            >&#8250;</button>
+          </div>
+
+        </div>
+
+      {%- endform -%}
+
+      {%- comment -%} Social Icons {%- endcomment -%}
+      <ul class="robin-footer__social" aria-label="Social media">
+
+        {%- if settings.social_youtube_link != blank -%}
+          <li>
+            <a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              {%- render 'icon-youtube' -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- if settings.social_instagram_link != blank -%}
+          <li>
+            <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              {%- render 'icon-instagram' -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- if settings.social_linkedin_link != blank -%}
+          <li>
+            <a href="{{ settings.social_linkedin_link }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.3A1.7 1.7 0 1 1 8.2 6.6a1.7 1.7 0 0 1-1.7 1.7zM19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6S12.6 13 12.6 14.3V19H10v-9h2.9v1.2h.1a3.2 3.2 0 0 1 2.9-1.6c3.1 0 3.6 2 3.6 4.6V19z"/>
+              </svg>
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- if settings.social_twitter_link != blank -%}
+          <li>
+            <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+              {%- render 'icon-twitter' -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- if settings.social_facebook_link != blank -%}
+          <li>
+            <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              {%- render 'icon-facebook' -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- if settings.social_pinterest_link != blank -%}
+          <li>
+            <a href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+              {%- render 'icon-pinterest' -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+      </ul>
+
+    </div>
+    {%- comment -%} END Newsletter {%- endcomment -%}
+
+    {%- comment -%} RIGHT — Nav Columns {%- endcomment -%}
+    <nav class="robin-footer__nav" aria-label="Footer navigation">
+
+      {%- comment -%} Column 1 {%- endcomment -%}
+      <div class="robin-footer__nav-col">
+        <h4 class="robin-footer__nav-heading">
+          {{- section.settings.col1_heading -}}
+        </h4>
+        <ul class="robin-footer__nav-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'col1_link' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.link_url }}">
+                  {{- block.settings.link_label -}}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      {%- comment -%} Column 2 {%- endcomment -%}
+      <div class="robin-footer__nav-col">
+        <h4 class="robin-footer__nav-heading">
+          {{- section.settings.col2_heading -}}
+        </h4>
+        <ul class="robin-footer__nav-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'col2_link' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.link_url }}">
+                  {{- block.settings.link_label -}}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      {%- comment -%} Column 3 — Contact (hardcoded from settings, no blocks needed) {%- endcomment -%}
+      <div class="robin-footer__nav-col robin-footer__nav-col--contact">
+        <h4 class="robin-footer__nav-heading">
+          {{- section.settings.col3_heading -}}
+        </h4>
+        <address class="robin-footer__contact">
+          {%- if section.settings.contact_hours != blank -%}
+            <span>{{- section.settings.contact_hours -}}</span>
+          {%- endif -%}
+          {%- if section.settings.whatsapp_url != blank -%}
+            <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener noreferrer">Whatsapp</a>
+          {%- endif -%}
+          {%- if section.settings.contact_email != blank -%}
+            <a href="mailto:{{ section.settings.contact_email }}">
+              {{- section.settings.contact_email -}}
+            </a>
+          {%- endif -%}
+        </address>
+      </div>
+
+    </nav>
+    {%- comment -%} END Nav Columns {%- endcomment -%}
+
+  </div>
+  {%- comment -%} END Main Grid {%- endcomment -%}
+
+  {%- comment -%} ═══ BOTTOM BAR ══════════════════════════════════════════ {%- endcomment -%}
+  <div class="robin-footer__bottom">
+    <div class="robin-footer__bottom-inner page-width">
+
+      <div class="robin-footer__locale">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/>
+        </svg>
+        {%- if section.settings.locale_country_url != blank -%}
+          <a href="{{ section.settings.locale_country_url }}" class="robin-footer__locale-link">
+            {{- section.settings.locale_country_label -}}
+          </a>
+        {%- else -%}
+          <span class="robin-footer__locale-text">
+            {{- section.settings.locale_country_label -}}
+          </span>
+        {%- endif -%}
+        <span class="robin-footer__locale-sep" aria-hidden="true">|</span>
+        {%- if section.settings.locale_lang_url != blank -%}
+          <a href="{{ section.settings.locale_lang_url }}" class="robin-footer__locale-link">
+            {{- section.settings.locale_lang_label -}}
+          </a>
+        {%- else -%}
+          <span class="robin-footer__locale-text">
+            {{- section.settings.locale_lang_label -}}
+          </span>
+        {%- endif -%}
+      </div>
+
+      <div class="robin-footer__legal">
+        {%- if section.settings.link_condiciones != blank -%}
+          <a href="{{ section.settings.link_condiciones }}">Condiciones Generales</a>
+        {%- endif -%}
+        {%- if section.settings.link_privacidad != blank -%}
+          <a href="{{ section.settings.link_privacidad }}">Pol&iacute;tica de Privacidad</a>
+        {%- endif -%}
+        {%- if section.settings.link_aviso != blank -%}
+          <a href="{{ section.settings.link_aviso }}">Aviso Legal</a>
+        {%- endif -%}
+        {%- if section.settings.link_cookies != blank -%}
+          <a href="{{ section.settings.link_cookies }}">Cookies</a>
+        {%- endif -%}
+        <span class="robin-footer__copy">
+          &copy; {{- 'now' | date: '%Y' }} {{- section.settings.copyright_name -}}
+        </span>
+      </div>
+
+    </div>
+  </div>
+  {%- comment -%} END Bottom Bar {%- endcomment -%}
+
+</footer>
+
+{% schema %}
+{
+  "name": "Robin Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Heading",
+      "default": "Únete a nuestra Newsletter"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_subtext",
+      "label": "Subtext",
+      "default": "Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name field placeholder",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email field placeholder",
+      "default": "Email Adress"
+    },
+    {
+      "type": "header",
+      "content": "Column 1 heading"
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Column 1 heading",
+      "default": "Robin"
+    },
+    {
+      "type": "header",
+      "content": "Column 2 heading"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Column 2 heading",
+      "default": "Ayuda"
+    },
+    {
+      "type": "header",
+      "content": "Column 3 — Contact"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Column 3 heading",
+      "default": "Contacto"
+    },
+    {
+      "type": "text",
+      "id": "contact_hours",
+      "label": "Office hours",
+      "default": "Lunes a Viernes 10-17h"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "WhatsApp URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email",
+      "default": "info@robincollection.com"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar — Locale"
+    },
+    {
+      "type": "text",
+      "id": "locale_country_label",
+      "label": "Country label",
+      "default": "España (€)"
+    },
+    {
+      "type": "url",
+      "id": "locale_country_url",
+      "label": "Country URL (optional)"
+    },
+    {
+      "type": "text",
+      "id": "locale_lang_label",
+      "label": "Language label",
+      "default": "Spanish"
+    },
+    {
+      "type": "url",
+      "id": "locale_lang_url",
+      "label": "Language URL (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar — Legal links"
+    },
+    {
+      "type": "url",
+      "id": "link_condiciones",
+      "label": "Condiciones Generales URL"
+    },
+    {
+      "type": "url",
+      "id": "link_privacidad",
+      "label": "Política de Privacidad URL"
+    },
+    {
+      "type": "url",
+      "id": "link_aviso",
+      "label": "Aviso Legal URL"
+    },
+    {
+      "type": "url",
+      "id": "link_cookies",
+      "label": "Cookies URL"
+    },
+    {
+      "type": "text",
+      "id": "copyright_name",
+      "label": "Copyright brand name",
+      "default": "ROBIN"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "col1_link",
+      "name": "Robin — Nav link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Label",
+          "default": "Page name"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "URL"
+        }
+      ]
+    },
+    {
+      "type": "col2_link",
+      "name": "Ayuda — Nav link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Label",
+          "default": "Page name"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
