@@ -98,38 +98,7 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-
-  /* Transparent Header */
-.header--transparent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
- background: transparent !important;
-  box-shadow: none;
-  z-index: 10;
-}
-
-.header--transparent.header--scrolled {
-  background: white;
-}
-
-.header--transparent.header--scrolled .header__heading-link,
-.header--transparent.header--scrolled .header__menu-item,
-.header--transparent.header--scrolled .header__icon {
-  color: black;
-}
-
-.header--transparent .header__heading-link,
-.header--transparent .header__menu-item,
-.header--transparent .header__icon,
-.header--transparent .header__icon svg {
-  color: white;
-  fill: white;
-}
 {%- endstyle -%}
-
-
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
 
@@ -153,7 +122,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-class="header-wrapper {% if section.settings.enable_transparent_home and request.page_type == 'index' %}header-wrapper--transparent{% else %}color-{{ section.settings.color_scheme }} gradient{% endif %}{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
 >
   {%- liquid
     assign social_links = false
@@ -167,8 +136,7 @@ class="header-wrapper {% if section.settings.enable_transparent_home and request
       assign localization_forms = true
     endif
   -%}
-  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }}
-    {% if section.settings.enable_transparent_home and request.page_type == 'index' %} header--transparent{% endif %} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
     {%- liquid
       if section.settings.menu != blank
         render 'header-drawer'
@@ -456,19 +424,6 @@ class="header-wrapper {% if section.settings.enable_transparent_home and request
   }
 
   customElements.define('sticky-header', StickyHeader);
-
-// scroll js
-document.addEventListener("scroll", function () {
-  const header = document.querySelector(".header--transparent");
-  if (!header) return;
-
-  if (window.scrollY > 50) {
-    header.classList.add("header--scrolled");
-  } else {
-    header.classList.remove("header--scrolled");
-  }
-});
-
 {% endjavascript %}
 
 <script type="application/ld+json">
@@ -608,14 +563,6 @@ document.addEventListener("scroll", function () {
       "default": "on-scroll-up",
       "label": "t:sections.header.settings.sticky_header_type.label"
     },
-
-    {
-  "type": "checkbox",
-  "id": "enable_transparent_home",
-  "label": "Enable transparent header on homepage",
-  "default": false
-},
-
     {
       "type": "checkbox",
       "id": "show_line_separator",
