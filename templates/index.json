@@ -64,6 +64,7 @@
           "settings": {
             "collection": "",
             "label": "Ropa de Playa",
+            "fallback_image": "shopify://shop_images/clothing_3_2_9ccf03c3-e8c3-4077-b15a-d42195b07ce0.png",
             "fallback_url": ""
           }
         },
@@ -72,6 +73,7 @@
           "settings": {
             "collection": "",
             "label": "Bañadores",
+            "fallback_image": "shopify://shop_images/banadores_1_2.png",
             "fallback_url": ""
           }
         }
