@@ -1,202 +1,280 @@
-{% comment %}
-  ══════════════════════════════════════════════════════════════
-  Robin Collection — Custom Footer
-  Drop this into:  sections/footer.liquid  (replace the default)
-  Add the CSS into: assets/robin-footer.css  (then {% stylesheet %})
-  or paste the <style> block into your theme.liquid <head>
-  ══════════════════════════════════════════════════════════════
-{% endcomment %}
-
 <footer class="robin-footer" role="contentinfo">
 
-  {%- comment -%} ── MAIN GRID ──────────────────────────── {%- endcomment -%}
-  <div class="rf-main page-width">
+  {%- comment -%}─── MAIN GRID ────────────────────────────────────────────{%- endcomment -%}
+  <div class="robin-footer__main page-width">
 
-    {%- comment -%} Newsletter + Social {%- endcomment -%}
-    <div class="rf-newsletter">
-      <h3 class="rf-heading">Únete a nuestra Newsletter</h3>
-      <p class="rf-subtext">Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin</p>
+    {%- comment -%}─── LEFT: Newsletter + Social ───────────────────────────{%- endcomment -%}
+    <div class="robin-footer__newsletter">
 
-      {%- form 'customer', id: 'footer-newsletter-form', class: 'rf-form' -%}
+      <h3 class="robin-footer__newsletter-heading">
+        {{ section.settings.newsletter_heading }}
+      </h3>
+
+      <p class="robin-footer__newsletter-subtext">
+        {{ section.settings.newsletter_subtext }}
+      </p>
+
+      {%- form 'customer', id: 'RobinFooterNewsletter' -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
-        <input
-          class="rf-input"
-          type="text"
-          name="contact[first_name]"
-          placeholder="Name"
-          autocomplete="given-name"
-        >
-        <div class="rf-email-row">
-          <input
-            class="rf-input"
-            type="email"
-            name="contact[email]"
-            placeholder="Email Adress"
-            autocomplete="email"
-            required
-          >
-          <button type="submit" class="rf-submit-btn" aria-label="{{ 'general.newsletter.submit' | t }}">&#8250;</button>
-        </div>
+
         {%- if form.posted_successfully? -%}
-          <p class="rf-success">{{ 'general.newsletter.confirmation' | t }}</p>
+          <p class="robin-footer__success-msg">
+            {{ 'general.newsletter.confirmation' | t }}
+          </p>
         {%- endif -%}
+
+        <div class="robin-footer__form">
+
+          <input
+            class="robin-footer__input"
+            type="text"
+            name="contact[first_name]"
+            placeholder="{{ section.settings.name_placeholder }}"
+            autocomplete="given-name"
+          >
+
+          <div class="robin-footer__email-row">
+            <input
+              class="robin-footer__input robin-footer__input--email"
+              type="email"
+              name="contact[email]"
+              placeholder="{{ section.settings.email_placeholder }}"
+              autocomplete="email"
+              required
+            >
+            <button
+              type="submit"
+              class="robin-footer__submit"
+              aria-label="{{ 'general.newsletter.submit' | t }}"
+            >&#8250;</button>
+          </div>
+
+        </div>
       {%- endform -%}
 
-      {%- comment -%} Social links — edit hrefs or wire to theme settings {%- endcomment -%}
-      <ul class="rf-social" aria-label="Social media links">
+      {%- comment -%}─── Social Icons ───────────────────────────────────{%- endcomment -%}
+      <ul class="robin-footer__social" aria-label="Social media">
+
         {%- if settings.social_youtube_link != blank -%}
-        <li>
-          <a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="YouTube">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
-          </a>
-        </li>
+          <li>
+            <a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
+              </svg>
+            </a>
+          </li>
         {%- endif -%}
+
         {%- if settings.social_instagram_link != blank -%}
-        <li>
-          <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.2-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.8C2.5 3.9 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.1 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
-          </a>
-        </li>
+          <li>
+            <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.2-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.8C2.5 3.9 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.1 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/>
+              </svg>
+            </a>
+          </li>
         {%- endif -%}
+
         {%- if settings.social_linkedin_link != blank -%}
-        <li>
-          <a href="{{ settings.social_linkedin_link }}" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.3A1.7 1.7 0 1 1 8.2 6.6a1.7 1.7 0 0 1-1.7 1.7zM19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6S12.6 13 12.6 14.3V19H10v-9h2.9v1.2h.1a3.2 3.2 0 0 1 2.9-1.6c3.1 0 3.6 2 3.6 4.6V19z"/></svg>
-          </a>
-        </li>
+          <li>
+            <a href="{{ settings.social_linkedin_link }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.3A1.7 1.7 0 1 1 8.2 6.6a1.7 1.7 0 0 1-1.7 1.7zM19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6S12.6 13 12.6 14.3V19H10v-9h2.9v1.2h.1a3.2 3.2 0 0 1 2.9-1.6c3.1 0 3.6 2 3.6 4.6V19z"/>
+              </svg>
+            </a>
+          </li>
         {%- endif -%}
+
         {%- if settings.social_twitter_link != blank -%}
-        <li>
-          <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" aria-label="Twitter / X">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2h3.4L14.1 9.8 23 22h-6.8L11 14.7 4.7 22H1.3l8-8.5L0 2h7l4.7 6.8zm-1.2 18h1.9L7.1 4H5.1z"/></svg>
-          </a>
-        </li>
+          <li>
+            <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M18.2 2h3.4L14.1 9.8 23 22h-6.8L11 14.7 4.7 22H1.3l8-8.5L0 2h7l4.7 6.8zm-1.2 18h1.9L7.1 4H5.1z"/>
+              </svg>
+            </a>
+          </li>
         {%- endif -%}
+
         {%- if settings.social_facebook_link != blank -%}
-        <li>
-          <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.3L17.6 15h-2.7V24C21.6 23.1 24 18.1 24 12.1z"/></svg>
-          </a>
-        </li>
+          <li>
+            <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.3L17.6 15h-2.7V24C21.6 23.1 24 18.1 24 12.1z"/>
+              </svg>
+            </a>
+          </li>
         {%- endif -%}
+
       </ul>
+      {%- comment -%}─── END Social ──────────────────────────────────────{%- endcomment -%}
+
     </div>
+    {%- comment -%}─── END Newsletter ───────────────────────────────────────{%- endcomment -%}
 
-    {%- comment -%} Navigation Columns {%- endcomment -%}
-    <nav class="rf-nav" aria-label="Footer">
+    {%- comment -%}─── RIGHT: Navigation Columns ───────────────────────────{%- endcomment -%}
+    <nav class="robin-footer__nav" aria-label="Footer navigation">
 
-      <div class="rf-nav-col">
-        <h4 class="rf-nav-heading">Robin</h4>
-        <ul class="rf-nav-list">
-          <li><a href="/pages/sobre-nosotros">Sobre nosotros</a></li>
-          <li><a href="/pages/prensa">Prensa</a></li>
-          <li><a href="/collections/all">Tienda</a></li>
-          <li><a href="/products/gift-card">Gift Card</a></li>
+      {%- comment -%}── Column 1 ─────────────────────────────────────────{%- endcomment -%}
+      <div class="robin-footer__nav-col">
+        <h4 class="robin-footer__nav-heading">{{ section.settings.col1_heading }}</h4>
+        <ul class="robin-footer__nav-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'col1_link' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
         </ul>
       </div>
 
-      <div class="rf-nav-col">
-        <h4 class="rf-nav-heading">Ayuda</h4>
-        <ul class="rf-nav-list">
-          <li><a href="/pages/faqs">FAQS</a></li>
-          <li><a href="/pages/envios">Envíos</a></li>
-          <li><a href="/pages/cambios-y-devoluciones">Cambios y devoluciones</a></li>
-          <li><a href="/pages/como-medirse">Cómo medirse</a></li>
-          <li><a href="/pages/guia-de-cuidados">Guía de cuidados</a></li>
+      {%- comment -%}── Column 2 ─────────────────────────────────────────{%- endcomment -%}
+      <div class="robin-footer__nav-col">
+        <h4 class="robin-footer__nav-heading">{{ section.settings.col2_heading }}</h4>
+        <ul class="robin-footer__nav-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'col2_link' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
         </ul>
       </div>
 
-      <div class="rf-nav-col rf-contact-col">
-        <h4 class="rf-nav-heading">Contacto</h4>
-        <address class="rf-contact">
-          <p>Lunes a Viernes 10-17h</p>
-          <p><a href="#">Whatsapp</a></p>
-          <p><a href="mailto:info@robincollection.com">info@robincollection.com</a></p>
+      {%- comment -%}── Column 3: Contact ─────────────────────────────────{%- endcomment -%}
+      <div class="robin-footer__nav-col robin-footer__nav-col--contact">
+        <h4 class="robin-footer__nav-heading">{{ section.settings.col3_heading }}</h4>
+        <address class="robin-footer__contact">
+          {%- if section.settings.contact_hours != blank -%}
+            <span>{{ section.settings.contact_hours }}</span>
+          {%- endif -%}
+          {%- if section.settings.whatsapp_url != blank -%}
+            <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener noreferrer">Whatsapp</a>
+          {%- endif -%}
+          {%- if section.settings.contact_email != blank -%}
+            <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+          {%- endif -%}
         </address>
       </div>
 
     </nav>
+    {%- comment -%}─── END Navigation ───────────────────────────────────────{%- endcomment -%}
+
   </div>
+  {%- comment -%}─── END Main Grid ────────────────────────────────────────{%- endcomment -%}
 
-  {%- comment -%} ── BOTTOM BAR ─────────────────────────── {%- endcomment -%}
-  <div class="rf-bottom">
-    <div class="page-width rf-bottom-inner">
+  {%- comment -%}─── BOTTOM BAR ───────────────────────────────────────────{%- endcomment -%}
+  <div class="robin-footer__bottom">
+    <div class="robin-footer__bottom-inner page-width">
 
-      <div class="rf-locale">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <div class="robin-footer__locale">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
           <circle cx="12" cy="12" r="10"/>
           <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/>
         </svg>
-        <a href="#" class="rf-locale-link">España (€)</a>
-        <span class="rf-sep">|</span>
-        <a href="#" class="rf-locale-link">Spanish</a>
+        {%- if section.settings.locale_country_url != blank -%}
+          <a href="{{ section.settings.locale_country_url }}" class="robin-footer__locale-link">
+            {{ section.settings.locale_country_label }}
+          </a>
+        {%- else -%}
+          <span class="robin-footer__locale-link">{{ section.settings.locale_country_label }}</span>
+        {%- endif -%}
+        <span class="robin-footer__locale-sep" aria-hidden="true">|</span>
+        {%- if section.settings.locale_lang_url != blank -%}
+          <a href="{{ section.settings.locale_lang_url }}" class="robin-footer__locale-link">
+            {{ section.settings.locale_lang_label }}
+          </a>
+        {%- else -%}
+          <span class="robin-footer__locale-link">{{ section.settings.locale_lang_label }}</span>
+        {%- endif -%}
       </div>
 
-      <div class="rf-legal">
-        <a href="/pages/condiciones-generales">Condiciones Generales</a>
-        <a href="/pages/politica-de-privacidad">Política de Privacidad</a>
-        <a href="/pages/aviso-legal">Aviso Legal</a>
-        <a href="/pages/cookies">Cookies</a>
-        <span class="rf-copy">© ROBIN</span>
+      <div class="robin-footer__legal">
+        {%- if section.settings.link_condiciones != blank -%}
+          <a href="{{ section.settings.link_condiciones }}">Condiciones Generales</a>
+        {%- endif -%}
+        {%- if section.settings.link_privacidad != blank -%}
+          <a href="{{ section.settings.link_privacidad }}">Pol&iacute;tica de Privacidad</a>
+        {%- endif -%}
+        {%- if section.settings.link_aviso != blank -%}
+          <a href="{{ section.settings.link_aviso }}">Aviso Legal</a>
+        {%- endif -%}
+        {%- if section.settings.link_cookies != blank -%}
+          <a href="{{ section.settings.link_cookies }}">Cookies</a>
+        {%- endif -%}
+        <span class="robin-footer__copy">
+          &copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright_name }}
+        </span>
       </div>
 
     </div>
   </div>
+  {%- comment -%}─── END Bottom Bar ───────────────────────────────────────{%- endcomment -%}
 
 </footer>
 
 {% stylesheet %}
-/* ─────────────────────────────────────────────────────────────
-   Robin Footer Styles
-   Paste into assets/robin-footer.css  OR  inside {% stylesheet %}
-───────────────────────────────────────────────────────────── */
+/* =============================================================
+   Robin Footer Stylesheet
+   Scoped with .robin-footer__ prefix — no Dawn conflicts
+============================================================= */
 
-/* Reset within footer scope */
+/* ── Reset within footer ─────────────────────────────────── */
 .robin-footer *,
 .robin-footer *::before,
-.robin-footer *::after { box-sizing: border-box; }
-
-.robin-footer {
-  border-top: 1px solid #e8e8e8;
-  font-family: var(--font-body-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
-  font-size: 14px;
-  color: var(--color-foreground, #1a1a1a);
-  background: var(--color-background, #ffffff);
-  padding-top: 48px;
+.robin-footer *::after {
+  box-sizing: border-box;
 }
 
-/* ── Main grid ──────────────────────────────────────────── */
-.rf-main {
+/* ── Shell ───────────────────────────────────────────────── */
+.robin-footer {
+  border-top: 1px solid #e8e8e8;
+  padding-top: 48px;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #ffffff;
+}
+
+/* ── Main grid ───────────────────────────────────────────── */
+.robin-footer__main {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 40px;
   padding-bottom: 48px;
 }
 
-/* ── Newsletter ─────────────────────────────────────────── */
-.rf-heading {
+/* ── Newsletter heading ──────────────────────────────────── */
+.robin-footer__newsletter-heading {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  margin: 0 0 8px;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
 }
 
-.rf-subtext {
+.robin-footer__newsletter-subtext {
   font-size: 13px;
-  color: #555;
+  color: #555555;
   line-height: 1.55;
-  margin: 0 0 20px;
+  margin: 0 0 20px 0;
   max-width: 260px;
 }
 
-.rf-form {
+.robin-footer__success-msg {
+  font-size: 12px;
+  color: #555555;
+  margin: 0 0 12px 0;
+}
+
+/* ── Form ────────────────────────────────────────────────── */
+.robin-footer__form {
   display: flex;
   flex-direction: column;
-  gap: 0;
   max-width: 260px;
 }
 
-.rf-input {
+.robin-footer__input {
   width: 100%;
   border: none;
   border-bottom: 1px solid #1a1a1a;
@@ -209,24 +287,30 @@
   margin-bottom: 10px;
   border-radius: 0;
   -webkit-appearance: none;
+  appearance: none;
 }
 
-.rf-input::placeholder { color: #999; }
+.robin-footer__input::placeholder {
+  color: #999999;
+}
 
-.rf-email-row {
+.robin-footer__input:focus {
+  border-bottom-color: #1a1a1a;
+}
+
+.robin-footer__email-row {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #1a1a1a;
-  margin-bottom: 0;
 }
 
-.rf-email-row .rf-input {
+.robin-footer__input--email {
+  flex: 1;
   border-bottom: none;
   margin-bottom: 0;
-  flex: 1;
 }
 
-.rf-submit-btn {
+.robin-footer__submit {
   background: none;
   border: none;
   cursor: pointer;
@@ -235,81 +319,110 @@
   padding: 4px 0 4px 8px;
   line-height: 1;
   font-family: inherit;
-  transition: opacity 0.2s;
-}
-.rf-submit-btn:hover { opacity: 0.5; }
-
-.rf-success {
-  font-size: 12px;
-  color: #555;
-  margin-top: 10px;
+  transition: opacity 0.2s ease;
 }
 
-/* ── Social ─────────────────────────────────────────────── */
-.rf-social {
+.robin-footer__submit:hover {
+  opacity: 0.5;
+}
+
+/* ── Social ──────────────────────────────────────────────── */
+.robin-footer__social {
   list-style: none;
-  display: flex;
-  gap: 16px;
-  margin: 28px 0 0;
+  margin: 28px 0 0 0;
   padding: 0;
+  display: flex;
   align-items: center;
+  gap: 16px;
 }
 
-.rf-social a {
+.robin-footer__social li {
+  margin: 0;
+  padding: 0;
+}
+
+.robin-footer__social a {
   display: flex;
   align-items: center;
+  justify-content: center;
   color: #1a1a1a;
-  transition: opacity 0.2s;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.robin-footer__social a:hover {
+  opacity: 0.45;
   text-decoration: none;
 }
-.rf-social a:hover { opacity: 0.45; }
 
-/* ── Nav columns ────────────────────────────────────────── */
-.rf-nav {
+/* ── Nav columns ─────────────────────────────────────────── */
+.robin-footer__nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.rf-nav-heading {
+.robin-footer__nav-heading {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  margin: 0 0 14px;
+  margin: 0 0 14px 0;
+  line-height: 1.4;
 }
 
-.rf-nav-list {
+.robin-footer__nav-list {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.rf-nav-list a {
-  font-size: 13px;
-  color: #555;
-  text-decoration: none;
-  transition: color 0.2s;
+.robin-footer__nav-list li {
+  margin: 0;
+  padding: 0;
 }
-.rf-nav-list a:hover { color: #1a1a1a; }
 
-.rf-contact {
+.robin-footer__nav-list a {
+  font-size: 13px;
+  color: #555555;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.robin-footer__nav-list a:hover {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+/* ── Contact address ─────────────────────────────────────── */
+.robin-footer__contact {
   font-style: normal;
   font-size: 13px;
-  color: #555;
-  line-height: 1.9;
+  color: #555555;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-.rf-contact a { color: #555; text-decoration: none; }
-.rf-contact a:hover { color: #1a1a1a; }
 
-/* ── Bottom bar ─────────────────────────────────────────── */
-.rf-bottom {
+.robin-footer__contact a {
+  color: #555555;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.robin-footer__contact a:hover {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+/* ── Bottom bar ──────────────────────────────────────────── */
+.robin-footer__bottom {
   border-top: 1px solid #e8e8e8;
 }
 
-.rf-bottom-inner {
+.robin-footer__bottom-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -319,93 +432,321 @@
   flex-wrap: wrap;
 }
 
-.rf-locale {
+.robin-footer__locale {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #555;
+  color: #555555;
 }
 
-.rf-locale svg { flex-shrink: 0; }
+.robin-footer__locale svg {
+  flex-shrink: 0;
+}
 
-.rf-locale-link {
+.robin-footer__locale-link {
   font-size: 12px;
-  color: #555;
+  color: #555555;
   text-decoration: underline;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
-.rf-locale-link:hover { color: #1a1a1a; }
 
-.rf-sep { color: #ccc; }
+.robin-footer__locale-link:hover {
+  color: #1a1a1a;
+}
 
-.rf-legal {
+.robin-footer__locale-sep {
+  color: #cccccc;
+}
+
+.robin-footer__legal {
   display: flex;
   align-items: center;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
-.rf-legal a {
+.robin-footer__legal a {
   font-size: 11px;
-  color: #999;
+  color: #999999;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
-.rf-legal a:hover { color: #1a1a1a; }
 
-.rf-copy {
+.robin-footer__legal a:hover {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.robin-footer__copy {
   font-size: 11px;
-  color: #999;
+  color: #999999;
 }
 
-/* ─────────────────────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────────────────────── */
+/* =============================================================
+   RESPONSIVE — Dawn's main breakpoint is 750px
+============================================================= */
 
-/* Tablet 768–1023px */
+/* Tablet: 750px – 1023px */
 @media screen and (max-width: 1023px) {
-  .rf-main {
+  .robin-footer__main {
     grid-template-columns: 1fr;
     gap: 36px;
   }
 
-  .rf-subtext { max-width: 100%; }
-  .rf-form    { max-width: 340px; }
+  .robin-footer__newsletter-subtext {
+    max-width: 100%;
+  }
+
+  .robin-footer__form {
+    max-width: 360px;
+  }
+
+  /* Keep nav as 3 columns on tablet */
+  .robin-footer__nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* Mobile ≤767px  (matches Shopify Dawn breakpoint) */
+/* Mobile: 749px and below */
 @media screen and (max-width: 749px) {
-  .robin-footer { padding-top: 36px; }
+  .robin-footer {
+    padding-top: 36px;
+  }
 
-  .rf-main { padding-bottom: 36px; }
+  .robin-footer__main {
+    padding-bottom: 36px;
+  }
 
-  /* Newsletter */
-  .rf-form { max-width: 100%; }
+  /* Form goes full width */
+  .robin-footer__form {
+    max-width: 100%;
+  }
 
-  /* Nav: 2-column */
-  .rf-nav {
+  .robin-footer__social {
+    margin-top: 24px;
+  }
+
+  /* Nav becomes 2 columns */
+  .robin-footer__nav {
     grid-template-columns: 1fr 1fr;
     gap: 28px 20px;
   }
 
-  /* Contact spans full width */
-  .rf-contact-col { grid-column: 1 / -1; }
+  /* Contact column spans full row */
+  .robin-footer__nav-col--contact {
+    grid-column: 1 / -1;
+  }
 
-  /* Bottom: stacked */
-  .rf-bottom-inner {
+  /* Bottom bar stacks vertically */
+  .robin-footer__bottom-inner {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
     padding-bottom: 28px;
   }
 
-  .rf-legal { gap: 14px; }
+  .robin-footer__legal {
+    gap: 14px;
+  }
 }
 
-/* Very small ≤374px */
+/* Very small: 374px and below */
 @media screen and (max-width: 374px) {
-  .rf-nav { grid-template-columns: 1fr; }
-  .rf-contact-col { grid-column: auto; }
+  .robin-footer__nav {
+    grid-template-columns: 1fr;
+  }
+
+  .robin-footer__nav-col--contact {
+    grid-column: auto;
+  }
 }
 {% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Robin Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Heading",
+      "default": "Únete a nuestra Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_subtext",
+      "label": "Subtext",
+      "default": "Sé el primero en enterarte de las novedades y ofertas exclusivas de Robin"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name field placeholder",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email field placeholder",
+      "default": "Email Adress"
+    },
+    {
+      "type": "header",
+      "content": "Column 1 — Robin"
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Column 1 heading",
+      "default": "Robin"
+    },
+    {
+      "type": "header",
+      "content": "Column 2 — Ayuda"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Column 2 heading",
+      "default": "Ayuda"
+    },
+    {
+      "type": "header",
+      "content": "Column 3 — Contacto"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Column 3 heading",
+      "default": "Contacto"
+    },
+    {
+      "type": "text",
+      "id": "contact_hours",
+      "label": "Office hours text",
+      "default": "Lunes a Viernes 10-17h"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "WhatsApp link URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email address",
+      "default": "info@robincollection.com"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar — Locale"
+    },
+    {
+      "type": "text",
+      "id": "locale_country_label",
+      "label": "Country / currency label",
+      "default": "España (€)"
+    },
+    {
+      "type": "url",
+      "id": "locale_country_url",
+      "label": "Country URL"
+    },
+    {
+      "type": "text",
+      "id": "locale_lang_label",
+      "label": "Language label",
+      "default": "Spanish"
+    },
+    {
+      "type": "url",
+      "id": "locale_lang_url",
+      "label": "Language URL"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar — Legal Links"
+    },
+    {
+      "type": "url",
+      "id": "link_condiciones",
+      "label": "Condiciones Generales URL"
+    },
+    {
+      "type": "url",
+      "id": "link_privacidad",
+      "label": "Política de Privacidad URL"
+    },
+    {
+      "type": "url",
+      "id": "link_aviso",
+      "label": "Aviso Legal URL"
+    },
+    {
+      "type": "url",
+      "id": "link_cookies",
+      "label": "Cookies URL"
+    },
+    {
+      "type": "text",
+      "id": "copyright_name",
+      "label": "Copyright brand name",
+      "default": "ROBIN"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "col1_link",
+      "name": "Robin link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link label",
+          "default": "Sobre nosotros"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        }
+      ]
+    },
+    {
+      "type": "col2_link",
+      "name": "Ayuda link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link label",
+          "default": "FAQS"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "col1_link", "settings": { "label": "Sobre nosotros", "url": "/pages/sobre-nosotros" } },
+      { "type": "col1_link", "settings": { "label": "Prensa",         "url": "/pages/prensa" } },
+      { "type": "col1_link", "settings": { "label": "Tienda",         "url": "/collections/all" } },
+      { "type": "col1_link", "settings": { "label": "Gift Card",      "url": "/products/gift-card" } },
+      { "type": "col2_link", "settings": { "label": "FAQS",                   "url": "/pages/faqs" } },
+      { "type": "col2_link", "settings": { "label": "Envíos",                 "url": "/pages/envios" } },
+      { "type": "col2_link", "settings": { "label": "Cambios y devoluciones", "url": "/pages/cambios-y-devoluciones" } },
+      { "type": "col2_link", "settings": { "label": "Cómo medirse",           "url": "/pages/como-medirse" } },
+      { "type": "col2_link", "settings": { "label": "Guía de cuidados",       "url": "/pages/guia-de-cuidados" } }
+    ]
+  }
+}
+{% endschema %}
