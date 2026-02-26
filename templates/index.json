@@ -53,8 +53,9 @@
         "collection_panel_8ayqtV": {
           "type": "collection_panel",
           "settings": {
-            "collection": "",
+            "collection": "bikinis",
             "label": "Bikinis",
+            "fallback_image": "shopify://shop_images/bikini_2_1.png",
             "fallback_url": ""
           }
         },
