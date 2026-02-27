@@ -105,8 +105,9 @@
 
     <!-- Products Container -->
     <div id="tab-collection-slider-{{ section.id }}" class="tab-collection-slider__products">
-         {% for block in section.blocks %}
-            {% assign active_collection = section.blocks[0].settings.collection %}
+         {% for i in (0..4) %}
+            {{  i }}
+            {% assign active_collection = section.blocks[i].settings.collection %}
         {% endfor %}
       
       {% if active_collection != blank %}
