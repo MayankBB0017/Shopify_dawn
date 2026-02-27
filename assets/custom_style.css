@@ -140,7 +140,7 @@ div.header__icons:not(.desktop-menu) {
 #FooterCountryLabel{display:none}
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
 .footer__content-top.custom-footer{
     flex-direction:column
 }
