@@ -126,3 +126,4 @@ div.header__icons:not(.desktop-menu) {
 .footer__content-top.custom-footer .footer-block--newsletter {
     margin-top:0
 }
+#FooterCountryLabel{display:none}
