@@ -89,9 +89,10 @@
           </a>
         {%- endif -%}
       </li>
-      <li>
+     
         {% for block in blocks %}
           {% if block.type == 'mega_menu_image' and block.settings.menu_title == link.title %}
+             <li>
             {% if block.settings.image != blank %}
               <div class="mega-menu__promo">
                 {% if block.settings.image_link != blank %}
@@ -109,9 +110,10 @@
                 {% endif %}
               </div>
             {% endif %}
+            </li>
           {% endif %}
         {% endfor %}
-      </li>
+      
     {%- endfor -%}
   </ul>
 </nav>
