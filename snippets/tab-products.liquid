@@ -1,14 +1,21 @@
+{% comment %}
+  Snippet: snippet-tab-products
+  Inputs:
+    - collection: collection object
+    - settings: section settings
+{% endcomment %}
+
 <ul class="grid product-grid">
-  {% for product in collection.products limit: section.settings.products_to_show %}
+  {% for product in collection.products limit: settings.products_to_show %}
     <li class="grid__item">
       {% render 'card-product',
         card_product: product,
-        media_aspect_ratio: section.settings.image_ratio,
-        image_shape: section.settings.image_shape,
-        show_secondary_image: section.settings.show_secondary_image,
-        show_vendor: section.settings.show_vendor,
-        show_rating: section.settings.show_rating,
-        quick_add: section.settings.quick_add
+        media_aspect_ratio: settings.image_ratio,
+        image_shape: settings.image_shape,
+        show_secondary_image: settings.show_secondary_image,
+        show_vendor: settings.show_vendor,
+        show_rating: settings.show_rating,
+        quick_add: settings.quick_add
       %}
     </li>
   {% endfor %}
