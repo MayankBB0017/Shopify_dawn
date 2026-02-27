@@ -119,6 +119,7 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "collection": "all",
         "products_to_show": 4,
@@ -211,6 +212,7 @@
         "featured_collection_JEgYaV",
         "featured_collection_XCeeDY"
       ],
+      "disabled": true,
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Collections",
