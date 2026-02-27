@@ -123,3 +123,6 @@ div.header__icons:not(.desktop-menu) {
     justify-content: space-between;
     align-items: flex-start;
 }
+.footer__content-top.custom-footer .footer-block--newsletter {
+    margin-top:0
+}
