@@ -90,9 +90,10 @@
     <!-- Tabs -->
     {% if section.blocks.size > 0 %}
       <div class="tab-collection-slider__tabs">
+        BestSellers: 
         {% for block in section.blocks %}
           {% assign col = block.settings.collection %}
-          BestSellers: 
+          
           {% if col != blank %}
             <button
               class="tab-collection-slider__tab  {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index }}"
