@@ -1,14 +1,65 @@
 {% comment %}
-  tab-collection.liquid
-  Section with tabbed collections slider
-  Tabs titles priority: 1) CMS titles, 2) collection title fallback
-  Uses Dawn default product slider
+  Tab Collection Slider with product slider below tabs
+  Clicking tab changes product collection shown below (one active at a time)
+  Tabs titles priority: CMS custom title or collection title fallback
+  Uses Dawn theme default slider markup and data attributes
 {% endcomment %}
 
-
+{% schema %}
+{
+  "name": "Tab Collection Slider",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection 4"
+    },
+    {
+      "type": "collection",
+      "id": "collection_5",
+      "label": "Collection 5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab_title",
+      "name": "Tab Title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Custom Tab Title",
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Tab Collection Slider",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
 
 {% stylesheet %}
-  /* Minimal tab styling consistent with Dawn */
+  /* Tabs styling consistent with Dawn theme */
   .tab-collection {
     margin: 2rem 0;
   }
@@ -41,7 +92,6 @@
 {% endstylesheet %}
 
 {% javascript %}
-  // Tab switching behavior
   document.addEventListener('DOMContentLoaded', function () {
     const section = document.querySelector('[data-section-id="{{ section.id }}"]');
     if (!section) return;
@@ -53,6 +103,9 @@
       tabs.forEach((tab, i) => {
         tab.classList.toggle('tab-collection__tab--active', i === index);
         panels[i].classList.toggle('tab-collection__panel--active', i === index);
+        // Update aria attributes
+        tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        panels[i].setAttribute('aria-hidden', i !== index ? 'true' : 'false');
       });
     }
 
@@ -62,7 +115,15 @@
       });
     });
 
-    setActiveTab(0); // default first tab active
+    setActiveTab(0); // Activate first tab on load
+
+    // Initialize Dawn slider for active panel only
+    const sliders = section.querySelectorAll('.slider');
+    sliders.forEach(slider => {
+      if (slider.closest('.tab-collection__panel').classList.contains('tab-collection__panel--active')) {
+        new window.theme.Slideshow ? window.theme.Slideshow(slider) : null;
+      }
+    });
   });
 {% endjavascript %}
 
@@ -72,7 +133,6 @@
   <nav class="tab-collection__tabs" role="tablist" aria-label="Best sellers categories">
     {% assign collections_arr = "" | split: "" %}
     {% assign tab_titles = "" | split: "" %}
-
     {% assign collection_settings = "collection_1,collection_2,collection_3,collection_4,collection_5" | split: "," %}
 
     {% for i in (0..4) %}
@@ -81,10 +141,9 @@
         {% assign collection_obj = collections[coll_handle] %}
         {% if collection_obj %}
           {% assign collections_arr = collections_arr | push: collection_obj %}
-
-          {% assign custom_title_block = section.blocks[i] %}
-          {% if custom_title_block != nil and custom_title_block.settings.tab_title != blank %}
-            {% assign tab_titles = tab_titles | push: custom_title_block.settings.tab_title %}
+          {% assign block = section.blocks[i] %}
+          {% if block != nil and block.settings.tab_title != blank %}
+            {% assign tab_titles = tab_titles | push: block.settings.tab_title %}
           {% else %}
             {% assign tab_titles = tab_titles | push: collection_obj.title %}
           {% endif %}
@@ -98,6 +157,7 @@
         role="tab"
         type="button"
         aria-selected="false"
+        tabindex="-1"
       >
         {{ tab_title }}
       </button>
@@ -138,56 +198,3 @@
     </section>
   {% endfor %}
 </div>
-{% schema %}
-{
-  "name": "Tab Collection Slider",
-  "settings": [
-    {
-      "type": "collection",
-      "id": "collection_1",
-      "label": "Collection 1"
-    },
-    {
-      "type": "collection",
-      "id": "collection_2",
-      "label": "Collection 2"
-    },
-    {
-      "type": "collection",
-      "id": "collection_3",
-      "label": "Collection 3"
-    },
-    {
-      "type": "collection",
-      "id": "collection_4",
-      "label": "Collection 4"
-    },
-    {
-      "type": "collection",
-      "id": "collection_5",
-      "label": "Collection 5"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "tab_title",
-      "name": "Tab Title",
-      "settings": [
-        {
-          "type": "text",
-          "id": "tab_title",
-          "label": "Custom Tab Title",
-         
-        }
-      ]
-    }
-  ],
-  "max_blocks": 5,
-  "presets": [
-    {
-      "name": "Tab Collection Slider",
-      "category": "Collection"
-    }
-  ]
-}
-{% endschema %}
