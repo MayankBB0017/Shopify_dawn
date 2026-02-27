@@ -86,7 +86,7 @@
       ],
       "name": "Collection List 2",
       "settings": {
-        "title_position": "bottom-center"
+        "title_position": "top-left"
       }
     },
     "collection_list_2_VHgnEn": {
@@ -124,7 +124,6 @@
         "collection_HjanGq",
         "collection_cYtzqY"
       ],
-      "disabled": true,
       "name": "Collection List 2",
       "settings": {
         "title_position": "bottom-center"
