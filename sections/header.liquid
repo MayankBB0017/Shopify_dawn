@@ -228,7 +228,7 @@
         {% if block.type == 'right_menu' %}
           {% if block.settings.menu != blank %}
             <nav class="header__right-menu">
-              <ul class="list-menu list-menu--inline" role="list">
+              <ul class="list-menu list-menu--inline list-menu list-menu--inline" role="list">
                 {% for link in block.settings.menu.links %}
                   <li>
                     <a href="{{ link.url }}" class="list-menu__item link link--text focus-inset">
