@@ -223,7 +223,7 @@
       {%- endif -%}
     {%- endif -%}
 
-    <div class="right-menu {% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+    <div class="right-menu header__icons  {% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       <div class="desktop-menu">
         {% for block in section.blocks %}
           {% if block.type == 'right_menu' %}
