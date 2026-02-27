@@ -93,7 +93,7 @@
           {% assign col = block.settings.collection %}
           {% if col != blank %}
             <button
-              class="tab-collection-slider__tab {% if forloop.first %}active{% endif %}"
+              class="tab-collection-slider__tab {{ forloop.index }} {% if forloop.first %}active{% endif %}"
               data-collection-handle="{{ col.handle }}"
             >
               {{ col.title }}
