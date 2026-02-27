@@ -141,12 +141,12 @@
       {% if coll_handle != blank %}
         {% assign collection_obj = collections[coll_handle] %}
         {% if collection_obj %}
-          {% assign collections_arr = collections_arr | push: collection_obj %}
+          {% assign collections_arr = collections_arr  %}
           {% assign block = section.blocks[i] %}
           {% if block != nil and block.settings.tab_title != blank %}
-            {% assign tab_titles = tab_titles | push: block.settings.tab_title %}
+            {% assign tab_titles = tab_titles %}
           {% else %}
-            {% assign tab_titles = tab_titles | push: collection_obj.title %}
+            {% assign tab_titles = tab_titles  %}
           {% endif %}
         {% endif %}
       {% endif %}
