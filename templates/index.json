@@ -90,31 +90,40 @@
     },
     "tab_collection_Ch6CqX": {
       "type": "tab-collection",
+      "blocks": {
+        "collection_tab_YEBNpK": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "swimwear-1"
+          }
+        },
+        "collection_tab_nwFPnm": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "bikinis"
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_YEBNpK",
+        "collection_tab_nwFPnm"
+      ],
       "name": "Tab Collection Slider",
       "settings": {
-        "collection": "bikinis",
         "products_to_show": 4,
         "title": "",
-        "heading_size": "h1",
         "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "color_scheme": "",
+        "heading_size": "h1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "color_scheme": "",
+        "show_view_all": false
       }
     },
     "featured_collection": {
