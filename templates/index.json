@@ -78,7 +78,7 @@
       ],
       "name": "Collection List 2",
       "settings": {
-        "title_position": "top-left"
+        "title_position": "bottom-center"
       }
     },
     "featured_collection": {
