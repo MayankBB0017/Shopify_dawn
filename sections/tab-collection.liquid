@@ -107,24 +107,21 @@
     <div id="tab-collection-slider-{{ section.id }}" class="tab-collection-slider__products">
       {% assign active_collection = section.blocks[0].settings.collection %}
       {% if active_collection != blank %}
-        {% assign products_to_display = active_collection.all_products_count %}
-        {% paginate active_collection.products by section.settings.products_to_show %}
-          <ul class="grid product-grid">
-            {% for product in active_collection.products limit: section.settings.products_to_show %}
-              <li class="grid__item">
-                {% render 'card-product',
-                  card_product: product,
-                  media_aspect_ratio: section.settings.image_ratio,
-                  image_shape: section.settings.image_shape,
-                  show_secondary_image: section.settings.show_secondary_image,
-                  show_vendor: section.settings.show_vendor,
-                  show_rating: section.settings.show_rating,
-                  quick_add: section.settings.quick_add
-                %}
-              </li>
-            {% endfor %}
-          </ul>
-        {% endpaginate %}
+        <ul class="grid product-grid">
+          {% for product in active_collection.products limit: section.settings.products_to_show %}
+            <li class="grid__item">
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
+                image_shape: section.settings.image_shape,
+                show_secondary_image: section.settings.show_secondary_image,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                quick_add: section.settings.quick_add
+              %}
+            </li>
+          {% endfor %}
+        </ul>
       {% endif %}
     </div>
 
@@ -144,23 +141,27 @@
 
 <!-- JS: Handle Tab Click -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const tabs = document.querySelectorAll('.tab-collection-slider__tab');
-    const productsContainer = document.getElementById('tab-collection-slider-{{ section.id }}');
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.tab-collection-slider__tab');
+  const productsContainer = document.getElementById('tab-collection-slider-{{ section.id }}');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        tabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
 
-        const collectionHandle = this.dataset.collectionHandle;
+      const collectionHandle = this.dataset.collectionHandle;
 
-        fetch(`/collections/${collectionHandle}?view=tab-products`)
-          .then(res => res.text())
-          .then(html => productsContainer.innerHTML = html);
-      });
+      // Fetch only the products grid for this collection
+      fetch(`/collections/${collectionHandle}?view=tab-products`)
+        .then(res => res.text())
+        .then(html => {
+          productsContainer.innerHTML = html;
+        })
+        .catch(err => console.error('Error loading collection products:', err));
     });
   });
+});
 </script>
 
 {% schema %}
