@@ -13,6 +13,34 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "link_list_CFpYNh": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "robin"
+          }
+        },
+        "link_list_jRXGTC": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "ayuda"
+          }
+        },
+        "link_list_ePzKay": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "contact"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_CFpYNh",
+        "link_list_jRXGTC",
+        "link_list_ePzKay"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
