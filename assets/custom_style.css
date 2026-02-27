@@ -118,7 +118,7 @@ div.header__icons:not(.desktop-menu) {
 
 /* footer */
 
-.custom-footer{
+.footer__content-top.custom-footer{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
