@@ -50,7 +50,7 @@
 
 {% endstylesheet %}
 
-<section class="collection-list-2">
+<section class="collection-list-2 section-{{ section.id }}" >
   {% for block in section.blocks %}
     {% assign collection = block.settings.collection %}
     {% if collection %}
