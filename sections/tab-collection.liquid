@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const collectionHandle = this.dataset.collectionHandle;
 
-      fetch(`/collections/${collectionHandle}?view=snippet-tab-products`)
+      fetch(`/collections/${collectionHandle}?view=tab-products`)
         .then(res => res.text())
         .then(html => {
           productsContainer.innerHTML = html;
