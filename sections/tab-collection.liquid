@@ -196,7 +196,7 @@
           <div class="slider__list grid grid--uniform grid--4-col">
             {% for product in collection.products %}
               <div class="product-item grid__item">
-                {% render 'product-card', product: product, card_style: 'basic' %}
+                {% render 'card-product', product: product, card_style: 'basic' %}
               </div>
             {% endfor %}
           </div>
