@@ -11,7 +11,7 @@
 .mobile-icons{
     display:none
 }
-@media (min-width: 600px) {
+@media (max-width: 600px) {
 div.mobile-icons{
     display:block
 }
