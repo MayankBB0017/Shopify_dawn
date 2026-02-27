@@ -106,6 +106,7 @@
     <!-- Products Container -->
     <div id="tab-collection-slider-{{ section.id }}" class="tab-collection-slider__products">
       {% assign active_collection = section.blocks[0].settings.collection %}
+      {{  active_collection }}
       {% if active_collection != blank %}
         <ul class="grid product-grid">
           {% for product in active_collection.products limit: section.settings.products_to_show %}
