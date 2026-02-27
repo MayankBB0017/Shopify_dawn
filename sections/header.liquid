@@ -225,23 +225,23 @@
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       <div class="desktop-menu">
-      {% for block in section.blocks %}
-        {% if block.type == 'right_menu' %}
-          {% if block.settings.menu != blank %}
-            <nav class="header__right-menu">
-              <ul class="list-menu list-menu--inline list-menu list-menu--inline" role="list">
-                {% for link in block.settings.menu.links %}
-                  <li >
-                    <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset">
-                      <span> {{ link.title }} </span>
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </nav>
+        {% for block in section.blocks %}
+          {% if block.type == 'right_menu' %}
+            {% if block.settings.menu != blank %}
+              <nav class="header__right-menu">
+                <ul class="list-menu list-menu--inline list-menu list-menu--inline" role="list">
+                  {% for link in block.settings.menu.links %}
+                    <li >
+                      <a href="{{ link.url }}" class="header__menu-item list-menu__item link link--text focus-inset">
+                        <span> {{ link.title }} </span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </nav>
+            {% endif %}
           {% endif %}
-        {% endif %}
-      {% endfor %}
+        {% endfor %}
       </div>
       <div class="mobile-icons">
         {% comment %} <div class="desktop-localization-wrapper">
