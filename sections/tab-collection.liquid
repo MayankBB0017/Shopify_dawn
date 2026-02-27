@@ -151,13 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
       this.classList.add('active');
 
       const collectionHandle = this.dataset.collectionHandle;
-
-      fetch(`/collections/${collectionHandle}?view=tab-products`)
-        .then(res => res.text())
-        .then(html => {
-          productsContainer.innerHTML = html;
-        })
-        .catch(err => console.error('Error loading collection products:', err));
+      console.log(collectionHandle)
     });
   });
 });
