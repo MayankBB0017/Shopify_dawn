@@ -130,7 +130,8 @@ div.header__icons:not(.desktop-menu) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:0
+    padding:0;
+    border-top:none
 }
 .footer__content-bottom .footer__copyright{margin:0}
 #FooterCountryLabel{display:none}
