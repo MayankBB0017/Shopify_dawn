@@ -88,6 +88,28 @@
         "title_position": "top-left"
       }
     },
+    "tab_collection_Ch6CqX": {
+      "type": "tab-collection",
+      "blocks": {
+        "tab_title_Mf8WiM": {
+          "type": "tab_title",
+          "settings": {
+            "tab_title": "Ropa"
+          }
+        }
+      },
+      "block_order": [
+        "tab_title_Mf8WiM"
+      ],
+      "name": "Tab Collection Slider",
+      "settings": {
+        "collection_1": "ropa-de-playa",
+        "collection_2": "",
+        "collection_3": "",
+        "collection_4": "",
+        "collection_5": ""
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -241,6 +263,7 @@
   "order": [
     "image_banner",
     "collection_list_2_ncWmUy",
+    "tab_collection_Ch6CqX",
     "featured_collection",
     "collection_list_2_VHgnEn",
     "collection_list_6PLC3A",
