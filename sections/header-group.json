@@ -38,6 +38,13 @@
     "header": {
       "type": "header",
       "blocks": {
+        "mega_menu_image_McNbYc": {
+          "type": "Mega_menu_image",
+          "settings": {
+            "mega_image": "shopify://shop_images/dffe056d3d6c509e6daea5b49ed12194d9101df5.jpg",
+            "mega_image_link": ""
+          }
+        },
         "right_menu_PtEtaJ": {
           "type": "right_menu",
           "settings": {
@@ -46,6 +53,7 @@
         }
       },
       "block_order": [
+        "mega_menu_image_McNbYc",
         "right_menu_PtEtaJ"
       ],
       "settings": {
