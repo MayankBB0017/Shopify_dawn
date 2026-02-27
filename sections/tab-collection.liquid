@@ -149,6 +149,8 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const tabs = document.querySelectorAll('.tab-collection-slider__tab');
+  const title = document.querySelectorAll('.section-title');
+
   const productsContainer = document.getElementById('tab-collection-slider-{{ section.id }}');
 
   tabs.forEach(tab => {
@@ -163,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const index = this.dataset.index; // <-- get the data-index
       console.log('Collection Handle:', collectionHandle);
       console.log('Tab Index:', index);
-
+      title.textContent = `Collection Handle: ${collectionHandle}, Tab Index: ${index}`;
       // Optional: Do something with the index, like show the right collection
       // Example:
       // const selectedCollection = collections[index - 1]; // if forloop.index starts at 1
