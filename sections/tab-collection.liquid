@@ -65,6 +65,7 @@
     color: #fff;
     border-color: #000;
   }
+  .section-title{margin:0}
 {% endstyle %}
 
 <div class="color-{{ section.settings.color_scheme }} isolate gradient  page-width" >
@@ -90,7 +91,7 @@
     <!-- Tabs -->
     {% if section.blocks.size > 0 %}
       <div class="tab-collection-slider__tabs">
-        <h3>{{ section.settings.section-title}}  </h3>  
+        <h3 class="section-title">{{ section.settings.section-title}}  </h3>  
         {% for block in section.blocks %}
           {% assign col = block.settings.collection %}
           
@@ -187,7 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
     {
         "type": "text",
         "id": "section-title",
-        "label": "Section Title"
+        "label": "Section Title",
+        "default":"BestSellers:  "
     },
     {
       "type": "inline_richtext",
