@@ -115,3 +115,11 @@ div.header__icons:not(.desktop-menu) {
   transform: translate(0, 0);
   text-align: right;
 }
+
+/* footer */
+
+.custom-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
