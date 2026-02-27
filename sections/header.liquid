@@ -224,6 +224,7 @@
     {%- endif -%}
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+      <div class="desktop-menu">
       {% for block in section.blocks %}
         {% if block.type == 'right_menu' %}
           {% if block.settings.menu != blank %}
@@ -241,6 +242,7 @@
           {% endif %}
         {% endif %}
       {% endfor %}
+      </div>
       <div class="mobile-icons">
         {% comment %} <div class="desktop-localization-wrapper">
           {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
