@@ -1,0 +1,193 @@
+{% comment %}
+  tab-collection.liquid
+  Section with tabbed collections slider
+  Tabs titles priority: 1) CMS titles, 2) collection title fallback
+  Uses Dawn default product slider
+{% endcomment %}
+
+
+
+{% stylesheet %}
+  /* Minimal tab styling consistent with Dawn */
+  .tab-collection {
+    margin: 2rem 0;
+  }
+  .tab-collection__tabs {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-medium);
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+  }
+  .tab-collection__tab {
+    cursor: pointer;
+    padding: 0.5rem 0;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  .tab-collection__tab--active {
+    border-color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+  .tab-collection__panel {
+    display: none;
+  }
+  .tab-collection__panel--active {
+    display: block;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  // Tab switching behavior
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const tabs = section.querySelectorAll('.tab-collection__tab');
+    const panels = section.querySelectorAll('.tab-collection__panel');
+
+    function setActiveTab(index) {
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('tab-collection__tab--active', i === index);
+        panels[i].classList.toggle('tab-collection__panel--active', i === index);
+      });
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        setActiveTab(i);
+      });
+    });
+
+    setActiveTab(0); // default first tab active
+  });
+{% endjavascript %}
+
+<div class="tab-collection" data-section-id="{{ section.id }}">
+  <h2 class="section-header__title">Best sellers:</h2>
+
+  <nav class="tab-collection__tabs" role="tablist" aria-label="Best sellers categories">
+    {% assign collections_arr = "" | split: "" %}
+    {% assign tab_titles = "" | split: "" %}
+
+    {% assign collection_settings = "collection_1,collection_2,collection_3,collection_4,collection_5" | split: "," %}
+
+    {% for i in (0..4) %}
+      {% assign coll_handle = section.settings[collection_settings[i]] %}
+      {% if coll_handle != blank %}
+        {% assign collection_obj = collections[coll_handle] %}
+        {% if collection_obj %}
+          {% assign collections_arr = collections_arr | push: collection_obj %}
+
+          {% assign custom_title_block = section.blocks[i] %}
+          {% if custom_title_block != nil and custom_title_block.settings.tab_title != blank %}
+            {% assign tab_titles = tab_titles | push: custom_title_block.settings.tab_title %}
+          {% else %}
+            {% assign tab_titles = tab_titles | push: collection_obj.title %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% for tab_title in tab_titles %}
+      <button
+        class="tab-collection__tab"
+        role="tab"
+        type="button"
+        aria-selected="false"
+      >
+        {{ tab_title }}
+      </button>
+    {% endfor %}
+  </nav>
+
+  {% for collection in collections_arr %}
+    <section
+      class="tab-collection__panel"
+      role="tabpanel"
+      tabindex="0"
+      aria-hidden="true"
+    >
+      {% if collection.products_count > 0 %}
+        <div
+          class="slider slider--product"
+          data-slider
+          data-slider-item-wrapper=".product-item"
+          data-slider-item=".product-item"
+          data-slider-items-per-view="4"
+          data-slider-items-per-view-tablet="2"
+          data-slider-items-per-view-mobile="1"
+          data-slider-nav="true"
+          data-slider-dots="false"
+          data-slider-loop="false"
+        >
+          <div class="slider__list grid grid--uniform grid--4-col">
+            {% for product in collection.products %}
+              <div class="product-item grid__item">
+                {% render 'product-card', product: product, card_style: 'basic' %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <p>No products found in {{ collection.title }}.</p>
+      {% endif %}
+    </section>
+  {% endfor %}
+</div>
+{% schema %}
+{
+  "name": "Tab Collection Slider",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection 4"
+    },
+    {
+      "type": "collection",
+      "id": "collection_5",
+      "label": "Collection 5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab_title",
+      "name": "Tab Title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Custom Tab Title",
+         
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Tab Collection Slider",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
