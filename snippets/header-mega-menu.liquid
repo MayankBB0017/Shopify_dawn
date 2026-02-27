@@ -93,10 +93,10 @@
         {% for block in blocks %}
           {% if block.type == 'mega_menu_image' and block.settings.menu_title == link.title %}
              <li>
-            {% if block.settings.image != blank %}
+            {% if block.settings.mega_image != blank %}
               <div class="mega-menu__promo">
-                {% if block.settings.image_link != blank %}
-                  <a href="{{ block.settings.image_link }}">
+                {% if block.settings.mega_image_link != blank %}
+                  <a href="{{ block.settings.mega_image_link }}">
                 {% endif %}
 
                 <img
@@ -105,7 +105,7 @@
                   loading="lazy"
                 >
 
-                {% if block.settings.image_link != blank %}
+                {% if block.settings.mega_image_link != blank %}
                   </a>
                 {% endif %}
               </div>
