@@ -65,7 +65,8 @@
                         </ul>
                       {%- endif -%}
                     </li>
-                    <li>
+                  {%- endfor -%}
+                  <li>
                       {% for block in blocks %}
                         {% if block.type == 'mega_menu_image' %}
                           {% if block.settings.mega_image_title  %}
@@ -90,7 +91,6 @@
                         {% endif %}
                       {% endfor %}
                     </li>
-                  {%- endfor -%}
                 </ul>
               </div>
             </details>
