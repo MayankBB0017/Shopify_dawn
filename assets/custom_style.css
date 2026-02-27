@@ -8,11 +8,11 @@
     padding: 5px 8px;
 }
 
-.mobile-icons{
+.header__icons{
     display:none
 }
 @media (max-width: 600px) {
-div.mobile-icons{
+div.header__icons {
     display:block
 }
 .desktop-menu{
