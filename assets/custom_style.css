@@ -131,4 +131,5 @@ div.header__icons:not(.desktop-menu) {
     justify-content: space-between;
     align-items: center;
 }
+.footer__content-bottom .footer__copyright{margin:0}
 #FooterCountryLabel{display:none}
