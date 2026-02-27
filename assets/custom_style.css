@@ -20,12 +20,19 @@ div.header__icons:not(.desktop-menu) {
 }
 }
 
-.header-wrapper{ 
-background: transparent;
-    position: fixed;
-    left: 0;
-    right: 0;
+.header-wrapper {
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
+
+.header-wrapper.scrolled {
+  position: fixed;
+  background: #ffffff; /* Change to your color */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
 .header-wrapper:not(.scrolled) .header__menu-item,
 .header-wrapper:not(.scrolled) .header__icon,
 .header-wrapper:not(.scrolled) .header__heading-link {
