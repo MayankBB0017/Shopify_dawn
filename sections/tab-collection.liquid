@@ -138,6 +138,7 @@
     {% for i in (0..4) %}
         {{ i }}
       {% assign coll_handle = section.settings[collection_settings[i]] %}
+      {{ coll_handle }}
       {% if coll_handle != blank %}
         {% assign collection_obj = collections[coll_handle] %}
         {% if collection_obj %}
