@@ -90,7 +90,7 @@
     <!-- Tabs -->
     {% if section.blocks.size > 0 %}
       <div class="tab-collection-slider__tabs">
-        BestSellers: 
+        <h3>{{ section.settings.section-title}}  </h3>  
         {% for block in section.blocks %}
           {% assign col = block.settings.collection %}
           
