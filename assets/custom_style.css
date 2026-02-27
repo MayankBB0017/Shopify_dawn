@@ -26,3 +26,14 @@ background: transparent;
     left: 0;
     right: 0;
 }
+.header-wrapper:not(.scrolled) .header__menu-item,
+.header-wrapper:not(.scrolled) .header__icon,
+.header-wrapper:not(.scrolled) .header__heading-link {
+  color: #ffffff;
+}
+
+.header-wrapper.scrolled .header__menu-item,
+.header-wrapper.scrolled .header__icon,
+.header-wrapper.scrolled .header__heading-link {
+  color: #000000;
+}
