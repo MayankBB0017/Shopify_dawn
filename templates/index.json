@@ -124,6 +124,7 @@
         "collection_HjanGq",
         "collection_cYtzqY"
       ],
+      "disabled": true,
       "name": "Collection List 2",
       "settings": {
         "title_position": "bottom-center"
