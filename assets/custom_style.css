@@ -142,6 +142,6 @@ div.header__icons:not(.desktop-menu) {
 
 @media (max-width: 768px) {
 .footer__content-top.custom-footer{
-    flex-direction:column
+    flex-direction:column;gap:50px
 }
 }
