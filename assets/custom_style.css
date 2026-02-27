@@ -50,15 +50,7 @@ div.header__icons:not(.desktop-menu) {
 }
 /* Title positioning variants */
 
-.collection-list-2__title {
-  position: absolute;
-  color: white;
-  font-weight: 600;
-  font-size: 1.25rem;
-  text-shadow: 0 0 10px rgba(0,0,0,0.7);
-  z-index: 2;
-  white-space: nowrap;
-}
+
 
 /* Position classes */
 .title-top-left {
