@@ -49,6 +49,36 @@
         "show_text_below": false
       }
     },
+    "collection_list_2_ncWmUy": {
+      "type": "collection-list-2",
+      "blocks": {
+        "collection_NWNq9R": {
+          "type": "collection",
+          "settings": {
+            "collection": "ropa-de-playa"
+          }
+        },
+        "collection_U8gBRX": {
+          "type": "collection",
+          "settings": {
+            "collection": "ropa-de-playa-1"
+          }
+        },
+        "collection_G4fRwR": {
+          "type": "collection",
+          "settings": {
+            "collection": "swimwear-1"
+          }
+        }
+      },
+      "block_order": [
+        "collection_NWNq9R",
+        "collection_U8gBRX",
+        "collection_G4fRwR"
+      ],
+      "name": "Collection List 2",
+      "settings": {}
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -121,6 +151,7 @@
   },
   "order": [
     "image_banner",
+    "collection_list_2_ncWmUy",
     "featured_collection",
     "collection_list_6PLC3A"
   ]
