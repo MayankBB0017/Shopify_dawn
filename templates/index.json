@@ -119,17 +119,16 @@
     "collection_list_2_VHgnEn": {
       "type": "collection-list-2",
       "blocks": {
-        "collection_ArGE3w": {
-          "type": "collection",
-          "disabled": true,
-          "settings": {
-            "collection": "bikinis"
-          }
-        },
         "collection_drTX6g": {
           "type": "collection",
           "settings": {
             "collection": "ropa-de-playa"
+          }
+        },
+        "collection_ArGE3w": {
+          "type": "collection",
+          "settings": {
+            "collection": "bikinis"
           }
         },
         "collection_HjanGq": {
@@ -146,8 +145,8 @@
         }
       },
       "block_order": [
-        "collection_ArGE3w",
         "collection_drTX6g",
+        "collection_ArGE3w",
         "collection_HjanGq",
         "collection_cYtzqY"
       ],
@@ -214,24 +213,24 @@
             "collection": "ropa-de-playa"
           }
         },
-        "collection_ny7RmU": {
-          "type": "collection",
-          "settings": {
-            "collection": "ropa-de-playa-1"
-          }
-        },
         "collection_tQkHgK": {
           "type": "collection",
           "settings": {
             "collection": "swimwear-1"
+          }
+        },
+        "collection_ny7RmU": {
+          "type": "collection",
+          "settings": {
+            "collection": "ropa-de-playa-1"
           }
         }
       },
       "block_order": [
         "collection_KBeUBe",
         "collection_iArcBE",
-        "collection_ny7RmU",
-        "collection_tQkHgK"
+        "collection_tQkHgK",
+        "collection_ny7RmU"
       ],
       "name": "Collection List 2",
       "settings": {
