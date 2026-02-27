@@ -91,6 +91,24 @@
     "tab_collection_Ch6CqX": {
       "type": "tab-collection",
       "blocks": {
+        "tab_title_Nm6a3d": {
+          "type": "tab_title",
+          "settings": {
+            "tab_title": ""
+          }
+        },
+        "tab_title_bbMf7c": {
+          "type": "tab_title",
+          "settings": {
+            "tab_title": ""
+          }
+        },
+        "tab_title_gcNrGR": {
+          "type": "tab_title",
+          "settings": {
+            "tab_title": ""
+          }
+        },
         "tab_title_Mf8WiM": {
           "type": "tab_title",
           "settings": {
@@ -99,15 +117,18 @@
         }
       },
       "block_order": [
+        "tab_title_Nm6a3d",
+        "tab_title_bbMf7c",
+        "tab_title_gcNrGR",
         "tab_title_Mf8WiM"
       ],
       "name": "Tab Collection Slider",
       "settings": {
         "collection_1": "ropa-de-playa",
-        "collection_2": "",
-        "collection_3": "",
-        "collection_4": "",
-        "collection_5": ""
+        "collection_2": "bikinis",
+        "collection_3": "ropa-de-playa-1",
+        "collection_4": "swimwear-1",
+        "collection_5": "bikinis"
       }
     },
     "featured_collection": {
