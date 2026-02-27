@@ -39,7 +39,7 @@
       "type": "header",
       "settings": {
         "logo_position": "middle-center",
-        "mobile_logo_position": "center",
+        "mobile_logo_position": "left",
         "menu": "test-menu-copy",
         "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
