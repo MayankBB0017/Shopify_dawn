@@ -48,81 +48,7 @@
     text-align: center;
     text-transform: uppercase;
 }
-/* Title positioning variants */
 
-.collection-list-2__title {
-  position: absolute;
-  color: white;
-  font-weight: 600;
-  font-size: 1.25rem;
-  text-shadow: 0 0 10px rgba(0,0,0,0.7);
-  z-index: 2;
-  white-space: nowrap;
-}
-
-/* Position classes */
-.title-top-left {
-  top: 10px;
-  left: 10px;
-  transform: translate(0, 0);
-  text-align: left;
-}
-
-.title-top-center {
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-}
-
-.title-top-right {
-  top: 10px;
-  right: 10px;
-  transform: translate(0, 0);
-  text-align: right;
-}
-
-.title-center-left {
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  text-align: left;
-}
-
-.title-center-center {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.title-center-right {
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  text-align: right;
-}
-
-.title-bottom-left {
-  bottom: 10px;
-  left: 10px;
-  transform: translate(0, 0);
-  text-align: left;
-}
-
-.title-bottom-center {
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-}
-
-.title-bottom-right {
-  bottom: 10px;
-  right: 10px;
-  transform: translate(0, 0);
-  text-align: right;
-}
 {% endstylesheet %}
 
 <section class="collection-list-2">
@@ -150,6 +76,9 @@
         {% assign img_src = '' %}
       {% endif %}
 
+      {% assign title_pos = block.settings.title_position | default: 'bottom-center' %}
+      {% assign title_class = 'title-' | append: title_pos %}
+
       <a href="{{ collection.url }}" class="collection-list-2__item" aria-label="{{ collection.title }}">
         <div class="collection-list-2__image-wrapper">
           {% if img_src != blank %}
@@ -157,8 +86,8 @@
           {% else %}
             <div style="background: #ccc; width:100%; height:100%;"></div>
           {% endif %}
+          <h3 class="collection-list-2__title {{ title_class }}">{{ collection.title }}</h3>
         </div>
-        <h3 class="collection-list-2__title">{{ collection.title }}</h3>
       </a>
     {% endif %}
   {% endfor %}
