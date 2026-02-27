@@ -244,7 +244,7 @@
         {% endfor %}
       </div>
       <div class="mobile-icons">
-        {% comment %} <div class="desktop-localization-wrapper">
+        <div class="desktop-localization-wrapper">
           {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
             <localization-form class="small-hide medium-hide" data-prevent-hide>
               {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
@@ -266,10 +266,10 @@
               {%- endform -%}
             </localization-form>
           {%- endif -%}
-        </div>{% endcomment %}
-        {% comment %} {% render 'header-search', input_id: 'Search-In-Modal' %}  {% endcomment %}
+        </div>
+        {% render 'header-search', input_id: 'Search-In-Modal' %} 
 
-        {% comment %} {%- if shop.customer_accounts_enabled -%}
+        {%- if shop.customer_accounts_enabled -%}
           <a
             href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
             class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
@@ -296,16 +296,16 @@
               -%}
             </span>
           </a>
-        {%- endif -%} {% endcomment %}
+        {%- endif -%} 
 
-        {% comment %} {%- for block in section.blocks -%}
+        {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
           {%- endcase -%}
-        {%- endfor -%} {% endcomment %}
+        {%- endfor -%} 
 
-        {% comment %} <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
           {% if cart == empty %}
             <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
           {% else %}
@@ -320,7 +320,7 @@
               <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
             </div>
           {%- endif -%}
-        </a> {% endcomment %}
+        </a> 
       </div>
     </div>
 
