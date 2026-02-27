@@ -111,6 +111,7 @@
       "name": "Tab Collection Slider",
       "settings": {
         "products_to_show": 4,
+        "section-title": "BestSellers:",
         "title": "",
         "description": "",
         "heading_size": "h1",
@@ -210,6 +211,7 @@
       "name": "Tab Collection Slider",
       "settings": {
         "products_to_show": 4,
+        "section-title": "",
         "title": "",
         "description": "",
         "heading_size": "h1",
