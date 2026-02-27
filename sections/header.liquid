@@ -243,8 +243,8 @@
           {% endif %}
         {% endfor %}
       </div>
-      <div class="mobile-icons header__icons">
-        <div class="desktop-localization-wrapper">
+      <div class="mobile-icons ">
+        <div class="header__icons desktop-localization-wrapper">
           {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
             <localization-form class="small-hide medium-hide" data-prevent-hide>
               {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
