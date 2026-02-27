@@ -144,4 +144,5 @@ div.header__icons:not(.desktop-menu) {
 .footer__content-top.custom-footer{
     flex-direction:column;gap:50px
 }
+.footer__localization.footer__column{justify-content: flex-start;}
 }
