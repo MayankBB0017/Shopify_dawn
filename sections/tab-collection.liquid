@@ -141,6 +141,7 @@
       {{ coll_handle }}
       {% if coll_handle != blank %}
         {% assign collection_obj = collections[coll_handle] %}
+        
         {% if collection_obj %}
           {% assign collections_arr = collections_arr | push: collection_obj %}
           {% assign block = section.blocks[i] %}
