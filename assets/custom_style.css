@@ -13,7 +13,7 @@
 }
 @media (max-width: 600px) {
 div.header__icons {
-    display:block
+    display:flex
 }
 .desktop-menu{
     display:none
