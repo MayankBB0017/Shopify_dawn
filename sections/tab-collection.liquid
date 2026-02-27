@@ -1,147 +1,94 @@
 {% comment %}
-  Tab Collection Slider with product slider below tabs
-  Clicking tab changes product collection shown below (one active at a time)
-  Tabs titles priority: CMS custom title or collection title fallback
-  Uses Dawn theme default slider markup and data attributes
+  Tab Collection Slider Section
+  - Tabs with priority: CMS title > Collection title
+  - Clicking a tab shows the respective collection products below
+  - Uses Dawn theme slider
 {% endcomment %}
 
 {% schema %}
 {
   "name": "Tab Collection Slider",
   "settings": [
-    {
-      "type": "collection",
-      "id": "collection_1",
-      "label": "Collection 1"
-    },
-    {
-      "type": "collection",
-      "id": "collection_2",
-      "label": "Collection 2"
-    },
-    {
-      "type": "collection",
-      "id": "collection_3",
-      "label": "Collection 3"
-    },
-    {
-      "type": "collection",
-      "id": "collection_4",
-      "label": "Collection 4"
-    },
-    {
-      "type": "collection",
-      "id": "collection_5",
-      "label": "Collection 5"
-    }
+    { "type": "collection", "id": "collection_1", "label": "Collection 1" },
+    { "type": "collection", "id": "collection_2", "label": "Collection 2" },
+    { "type": "collection", "id": "collection_3", "label": "Collection 3" },
+    { "type": "collection", "id": "collection_4", "label": "Collection 4" },
+    { "type": "collection", "id": "collection_5", "label": "Collection 5" }
   ],
   "blocks": [
     {
       "type": "tab_title",
       "name": "Tab Title",
       "settings": [
-        {
-          "type": "text",
-          "id": "tab_title",
-          "label": "Custom Tab Title",
-        }
+        { "type": "text", "id": "tab_title", "label": "Custom Tab Title" }
       ]
     }
   ],
   "max_blocks": 5,
-  "presets": [
-    {
-      "name": "Tab Collection Slider",
-      "category": "Collection"
-    }
-  ]
+  "presets": [{ "name": "Tab Collection Slider", "category": "Collection" }]
 }
 {% endschema %}
 
 {% stylesheet %}
-  /* Tabs styling consistent with Dawn theme */
-  .tab-collection {
-    margin: 2rem 0;
-  }
-  .tab-collection__tabs {
-    display: flex;
-    border-bottom: 1px solid var(--color-border);
-    font-size: var(--font-size-3);
-    font-weight: var(--font-weight-medium);
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-    overflow-x: auto;
-  }
-  .tab-collection__tab {
-    cursor: pointer;
-    padding: 0.5rem 0;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.3s ease;
-  }
-  .tab-collection__tab--active {
-    border-color: var(--color-accent);
-    font-weight: var(--font-weight-bold);
-  }
-  .tab-collection__panel {
-    display: none;
-  }
-  .tab-collection__panel--active {
-    display: block;
-  }
+.tab-collection { margin: 2rem 0; }
+.tab-collection__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-medium);
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+.tab-collection__tab {
+  cursor: pointer;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+.tab-collection__tab--active {
+  border-color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+}
+.tab-collection__panel { display: none; }
+.tab-collection__panel--active { display: block; }
 {% endstylesheet %}
 
 {% javascript %}
-  document.addEventListener('DOMContentLoaded', function () {
-    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
-    if (!section) return;
+document.addEventListener('DOMContentLoaded', function () {
+  const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!section) return;
 
-    const tabs = section.querySelectorAll('.tab-collection__tab');
-    const panels = section.querySelectorAll('.tab-collection__panel');
+  const tabs = section.querySelectorAll('.tab-collection__tab');
+  const panels = section.querySelectorAll('.tab-collection__panel');
 
-    function setActiveTab(index) {
-      tabs.forEach((tab, i) => {
-        tab.classList.toggle('tab-collection__tab--active', i === index);
-        panels[i].classList.toggle('tab-collection__panel--active', i === index);
-        // Update aria attributes
-        tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
-        panels[i].setAttribute('aria-hidden', i !== index ? 'true' : 'false');
-      });
-    }
-
+  function setActiveTab(index) {
     tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => {
-        setActiveTab(i);
-      });
+      tab.classList.toggle('tab-collection__tab--active', i === index);
+      tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      panels[i].classList.toggle('tab-collection__panel--active', i === index);
+      panels[i].setAttribute('aria-hidden', i !== index ? 'true' : 'false');
     });
+  }
 
-    setActiveTab(0); // Activate first tab on load
+  tabs.forEach((tab, i) => tab.addEventListener('click', () => setActiveTab(i)));
 
-    // Initialize Dawn slider for active panel only
-    const sliders = section.querySelectorAll('.slider');
-    sliders.forEach(slider => {
-      if (slider.closest('.tab-collection__panel').classList.contains('tab-collection__panel--active')) {
-        new window.theme.Slideshow ? window.theme.Slideshow(slider) : null;
-      }
-    });
-  });
+  setActiveTab(0);
+});
 {% endjavascript %}
 
 <div class="tab-collection" data-section-id="{{ section.id }}">
-  <h2 class="section-header__title">Best sellers:</h2>
+  <h2 class="section-header__title">Best Sellers</h2>
 
-  <nav class="tab-collection__tabs" role="tablist" aria-label="Best sellers categories">
-    {% assign tab_titles_string = "" %}
-{% assign collections_arr = "" | split: "" %}
-{% assign collection_settings = "collection_1,collection_2,collection_3,collection_4,collection_5" | split: "," %}
+  {% comment %} Build arrays of collection handles and tab titles {% endcomment %}
+  {% assign collection_settings = "collection_1,collection_2,collection_3,collection_4,collection_5" | split: "," %}
+  {% assign collection_handles_str = "" %}
+  {% assign tab_titles_str = "" %}
 
-{% for i in (0..4) %}
-  {% assign coll_handle = section.settings[collection_settings[i]] %}
-  {% if coll_handle != blank %}
-    {% assign collection_obj = collections[coll_handle] %}
-    {% if collection_obj %}
-      {% assign collections_arr = collections_arr | push: collection_obj %}
-      
+  {% for i in (0..4) %}
+    {% assign coll_handle = section.settings[collection_settings[i]] %}
+    {% if coll_handle != blank %}
       {% assign custom_title = blank %}
       {% for block in section.blocks %}
         {% if forloop.index0 == i %}
@@ -149,61 +96,49 @@
         {% endif %}
       {% endfor %}
 
+      {% assign collection_handles_str = collection_handles_str | append: coll_handle | append: "|" %}
+      {% assign coll_obj = collections[coll_handle] %}
       {% if custom_title != blank %}
-        {% assign tab_titles_string = tab_titles_string | append: custom_title | append: "|" %}
+        {% assign tab_titles_str = tab_titles_str | append: custom_title | append: "|" %}
       {% else %}
-        {% assign tab_titles_string = tab_titles_string | append: collection_obj.title | append: "|" %}
+        {% assign tab_titles_str = tab_titles_str | append: coll_obj.title | append: "|" %}
       {% endif %}
     {% endif %}
-  {% endif %}
-{% endfor %}
+  {% endfor %}
 
-{% assign tab_titles = tab_titles_string | split: "|" %}
+  {% assign collection_handles = collection_handles_str | split: "|" %}
+  {% assign tab_titles = tab_titles_str | split: "|" %}
 
+  {% comment %} Render tabs {% endcomment %}
+  <nav class="tab-collection__tabs" role="tablist" aria-label="Best sellers categories">
     {% for tab_title in tab_titles %}
-      <button
-        class="tab-collection__tab"
-        role="tab"
-        type="button"
-        aria-selected="false"
-        tabindex="-1"
-      >
-        {{ tab_title }}
-      </button>
+      {% if tab_title != blank %}
+        <button class="tab-collection__tab" role="tab" type="button" aria-selected="false" tabindex="-1">
+          {{ tab_title }}
+        </button>
+      {% endif %}
     {% endfor %}
   </nav>
 
-  {% for collection in collections_arr %}
-    <section
-      class="tab-collection__panel"
-      role="tabpanel"
-      tabindex="0"
-      aria-hidden="true"
-    >
-      {% if collection.products_count > 0 %}
-        <div
-          class="slider slider--product"
-          data-slider
-          data-slider-item-wrapper=".product-item"
-          data-slider-item=".product-item"
-          data-slider-items-per-view="4"
-          data-slider-items-per-view-tablet="2"
-          data-slider-items-per-view-mobile="1"
-          data-slider-nav="true"
-          data-slider-dots="false"
-          data-slider-loop="false"
-        >
-          <div class="slider__list grid grid--uniform grid--4-col">
-            {% for product in collection.products %}
-              <div class="product-item grid__item">
-                {% render 'card-product', product: product, card_style: 'basic' %}
-              </div>
-            {% endfor %}
+  {% comment %} Render product panels {% endcomment %}
+  {% for coll_handle in collection_handles %}
+    {% if coll_handle != blank %}
+      {% assign collection = collections[coll_handle] %}
+      <section class="tab-collection__panel" role="tabpanel" tabindex="0" aria-hidden="true">
+        {% if collection.products_count > 0 %}
+          <div class="slider slider--product" data-slider data-slider-item-wrapper=".product-item" data-slider-item=".product-item" data-slider-items-per-view="4" data-slider-items-per-view-tablet="2" data-slider-items-per-view-mobile="1" data-slider-nav="true" data-slider-dots="false" data-slider-loop="false">
+            <div class="slider__list grid grid--uniform grid--4-col">
+              {% for product in collection.products %}
+                <div class="product-item grid__item">
+                  {% render 'product-card', product: product, card_style: 'basic' %}
+                </div>
+              {% endfor %}
+            </div>
           </div>
-        </div>
-      {% else %}
-        <p>No products found in {{ collection.title }}.</p>
-      {% endif %}
-    </section>
+        {% else %}
+          <p>No products found in {{ collection.title }}.</p>
+        {% endif %}
+      </section>
+    {% endif %}
   {% endfor %}
 </div>
