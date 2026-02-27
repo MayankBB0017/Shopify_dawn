@@ -92,7 +92,7 @@
       <li>
         {% for block in blocks %}
           {% if block.type == 'mega_menu_image' %}
-            {% if block.settings.menu_title | strip | downcase == link.title | strip | downcase %}
+            {% if block.settings.menu_title  %}
               {% if block.settings.image != blank %}
                 <div class="mega-menu__promo">
                   {% if block.settings.image_link != blank %}
