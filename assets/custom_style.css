@@ -19,3 +19,10 @@ div.header__icons:not(.desktop-menu) {
     display:none
 }
 }
+
+.header-wrapper{ 
+background: transparent;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
