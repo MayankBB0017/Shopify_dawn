@@ -77,7 +77,9 @@
         "collection_G4fRwR"
       ],
       "name": "Collection List 2",
-      "settings": {}
+      "settings": {
+        "title_position": "top-left"
+      }
     },
     "featured_collection": {
       "type": "featured-collection",
