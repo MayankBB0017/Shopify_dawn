@@ -47,7 +47,18 @@
     text-align: center;
     text-transform: uppercase;
 }
+/* Mobile: one item per row */
+@media (max-width: 768px) {
+  .collection-list-2 {
+    flex-direction: column;
+    margin: 20px 0;
+  }
 
+  .collection-list-2__item {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+}
 {% endstylesheet %}
 
 <section class="collection-list-2 section-{{ section.id }}" >
