@@ -65,6 +65,31 @@
                         </ul>
                       {%- endif -%}
                     </li>
+                    <li>
+                      {% for block in blocks %}
+                        {% if block.type == 'mega_menu_image' %}
+                          {% if block.settings.mega_image_title  %}
+                            {% if block.settings.mega_image != blank %}
+                              <div class="mega-menu__promo">
+                                {% if block.settings.mega_image_link != blank %}
+                                  <a href="{{ block.settings.mega_image_link }}">
+                                {% endif %}
+
+                                <img
+                                  src="{{ block.settings.mega_image | image_url: width: 400 }}"
+                                  alt="{{ block.settings.mega_image.alt | escape }}"
+                                  loading="lazy"
+                                >
+
+                                {% if block.settings.mega_image_link != blank %}
+                                  </a>
+                                {% endif %}
+                              </div>
+                            {% endif %}
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </li>
                   {%- endfor -%}
                 </ul>
               </div>
@@ -89,31 +114,7 @@
           </a>
         {%- endif -%}
       </li>
-      <li>
-        {% for block in blocks %}
-          {% if block.type == 'mega_menu_image' %}
-            {% if block.settings.mega_image_title  %}
-              {% if block.settings.mega_image != blank %}
-                <div class="mega-menu__promo">
-                  {% if block.settings.mega_image_link != blank %}
-                    <a href="{{ block.settings.mega_image_link }}">
-                  {% endif %}
-
-                  <img
-                    src="{{ block.settings.mega_image | image_url: width: 400 }}"
-                    alt="{{ block.settings.mega_image.alt | escape }}"
-                    loading="lazy"
-                  >
-
-                  {% if block.settings.mega_image_link != blank %}
-                    </a>
-                  {% endif %}
-                </div>
-              {% endif %}
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-      </li>
+      
     {%- endfor -%}
   </ul>
 </nav>
