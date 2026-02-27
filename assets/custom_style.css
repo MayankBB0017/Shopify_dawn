@@ -124,6 +124,7 @@ div.header__icons:not(.desktop-menu) {
     justify-content: space-between;
     align-items: flex-start;
 }
+.footer .policies li:before{content:""}
 @media (min-width: 768px) {
 .footer__content-top.custom-footer .footer-block--newsletter {
     margin-top:0
