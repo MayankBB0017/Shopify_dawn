@@ -76,7 +76,7 @@
         {% assign img_src = '' %}
       {% endif %}
 
-      {% assign title_pos = block.settings.title_position | default: 'bottom-center' %}
+      {% assign title_pos = section.settings.title_position | default: 'bottom-center' %}
       {% assign title_class = 'title-' | append: title_pos %}
 
       <a href="{{ collection.url }}" class="collection-list-2__item" aria-label="{{ collection.title }}">
