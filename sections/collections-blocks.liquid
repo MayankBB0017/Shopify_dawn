@@ -20,7 +20,7 @@
 </style>
 
 <section class="collection_blocks_section section-padding-{{section.id}}"> 
-  <div class="collections_blocks_wrap section_layout_{{section.settings.block_column }}">
+  <div class="collections_blocks_wrap section_layout_{{section.settings.block_column }} {% if section.settings.title_alignment == 'top' %} top_title_set {% else %} middle_bottom_set {% endif %} ">
     {% for block in section.blocks %}
       <div class="collection_image_wrap">
         {% assign collection = block.settings.collection %}
@@ -85,6 +85,22 @@
         "step": 1,
         "label": "Column Layout",
         "default": 3
+    },
+    {
+    "type": "select",
+    "id": "title_alignment",
+    "label": "Title alignment",
+    "options": [
+        {
+        "value": "top",
+        "label": "Top Left"
+        },
+        {
+        "value": "middle",
+        "label": "Middle Bottom"
+        }
+    ],
+    "default": "middle"
     },
     {
       "type": "range",
