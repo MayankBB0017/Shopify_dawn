@@ -116,7 +116,11 @@
             </div>
         </div>
     </div>
-    <div class="section_footer_wrapper"></div>
+    <div class="section_footer_wrapper page-width">
+        {% for block in section.blocks %}
+            <p class="footer_text">{{ block.settings.head_text }}</p>
+        {% endfor %}
+    </div>
 </section>
 
 {% schema %}
