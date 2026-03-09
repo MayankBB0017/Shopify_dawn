@@ -118,6 +118,7 @@
   padding: 0;
   min-width: fit-content;
   flex-grow: unset;
+  min-height: auto;
 }
 
 .cst_richtext_section .rich-text__buttons {
