@@ -145,7 +145,26 @@
     }
 
 
+.mega_menu_image_block .cst_block_image_wrap {
+    max-width: 355px;
+    margin: 0 auto;
+    width: 100%;
+}
 
+.mega_menu_image_block .cst_block_image_wrap .mega_img_wrap {
+    position: relative;
+    padding-top: 100%;
+}
+
+.mega_menu_image_block .cst_block_image_wrap .mega_img_wrap img {
+    position: absolute;
+    inset: 0;
+    width: 1005;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
 
 
 
