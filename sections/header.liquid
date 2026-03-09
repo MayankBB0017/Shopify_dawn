@@ -222,7 +222,7 @@
           </div>
 
 
-          {% if section.settings.transparant_logo != blank  %}
+          {% comment %} {% if section.settings.transparant_logo != blank  %}
 
 
           <div class="header__heading-logo-wrapper transparant_logo_visible">
@@ -250,7 +250,7 @@
             </div>
           </div>
 
-          {% endif %}
+          {% endif %} {% endcomment %}
 
         {%- else -%}
           <span class="h2">{{ shop.name }}</span>
