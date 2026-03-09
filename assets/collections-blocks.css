@@ -7,6 +7,11 @@
     object-fit: cover;
     transition: all 0.3s ease-in-out;
 }
+
+.collection_image_wrap:hover img {
+   scale: 1.05;
+}
+
 .collection_image_wrap {
     position: relative;
 }
