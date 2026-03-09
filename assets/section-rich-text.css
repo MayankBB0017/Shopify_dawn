@@ -137,6 +137,9 @@
     font-size: 14px;
     line-height: 20px;
   }
+  .cst_richtext_section .rich-text__wrapper {
+    width: 100%;
+  }
 }
 
 
