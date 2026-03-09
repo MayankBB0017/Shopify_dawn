@@ -193,6 +193,46 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0
       }
+    },
+    "logo_marquee_section_DMzbib": {
+      "type": "logo-marquee-section",
+      "blocks": {
+        "item_7tdqxT": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/Vanity_Fair_Logo_887b57ff-799c-4cd7-9e13-2e3d6571c9f0.png"
+          }
+        },
+        "item_8ihYdL": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/Revista__Hola__logo_3b59ce76-d45a-49e9-bf0a-e596ce466441.png"
+          }
+        },
+        "item_arCKLV": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/Glamour-Logo_025d6e02-cfae-44a2-9bd9-c77878251ee9.png"
+          }
+        },
+        "item_dEVQH4": {
+          "type": "item",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "item_7tdqxT",
+        "item_8ihYdL",
+        "item_arCKLV",
+        "item_dEVQH4"
+      ],
+      "name": "Logo Marquee Section",
+      "settings": {
+        "padding_top_desktop": 50,
+        "padding_bottom_desktop": 50,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
     }
   },
   "order": [
@@ -200,6 +240,7 @@
     "rich_text_eKhTRd",
     "collections_blocks_BYVedC",
     "collections_blocks_m3pEet",
-    "collections_blocks_N9wpr4"
+    "collections_blocks_N9wpr4",
+    "logo_marquee_section_DMzbib"
   ]
 }
