@@ -5,3 +5,12 @@
 .product-card-wrapper .card__information {
     padding-inline : 16px !important;
 }
+
+.product-card-wrapper .card__information .card__heading {
+    font-size: 14px;
+    line-height: 22px;
+    font-family: Jost-Regular;
+    font-weight: 400;
+    color: #000000;
+    letter-spacing: 0;
+}
