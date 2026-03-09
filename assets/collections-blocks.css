@@ -6,6 +6,9 @@
     max-width: 100%;
     object-fit: cover;
 }
+.collection_image_wrap {
+    position: relative;
+}
 
 a.collection_url:after {
     position: absolute;
