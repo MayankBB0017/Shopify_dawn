@@ -58,7 +58,11 @@
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
 
-        
+        {% if product.metafields.custom.product_badge_text.value != blank %}
+        <span class="product_cst_badge">
+          {{ product.metafields.custom.product_badge_text.value }}
+        </span>
+      {% endif %}
 
 
         {%- if card_product.featured_media -%}
