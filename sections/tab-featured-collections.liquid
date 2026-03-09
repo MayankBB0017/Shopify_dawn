@@ -72,31 +72,35 @@
 <div class="color-{{ section.settings.color_scheme }} isolate gradient">
   <div class="collection section-{{ section.id }}-padding">
 
-    <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width">
-      {% if section.settings.title != blank %}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}">
-          {{ section.settings.title }}
-        </h2>
-      {% endif %}
+    <div class="section_head_wrap">
+        <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width">
+        {% if section.settings.title != blank %}
+            <h2 class="title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.title }}
+            </h2>
+        {% endif %}
+        </div>
+
+        {% if section.blocks.size > 0 %}
+        <div class="tab-collections-tabs page-width">
+            {% for block in section.blocks %}
+            <button
+                    class="tab-collection-btn {% if forloop.first %}active{% endif %}"
+                    data-tab="tab-{{ block.id }}"
+                    type="button"
+                    >
+                    {% if block.settings.custom_title != blank %}
+                        {{ block.settings.custom_title }}
+                    {% else %}
+                        {{ block.settings.collection.title }}
+                    {% endif %}
+                    </button>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 
-    {% if section.blocks.size > 0 %}
-      <div class="tab-collections-tabs page-width">
-        {% for block in section.blocks %}
-          <button
-                class="tab-collection-btn {% if forloop.first %}active{% endif %}"
-                data-tab="tab-{{ block.id }}"
-                type="button"
-                >
-                {% if block.settings.custom_title != blank %}
-                    {{ block.settings.custom_title }}
-                {% else %}
-                    {{ block.settings.collection.title }}
-                {% endif %}
-                </button>
-        {% endfor %}
-      </div>
-    {% endif %}
+
 
     {% for block in section.blocks %}
       <div
