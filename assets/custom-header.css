@@ -72,3 +72,8 @@
     visibility: visible;
     display: block;
 }
+
+
+.custom_transparant_navigation:hover .defult_logo img {
+    filter: invert(1);
+}
