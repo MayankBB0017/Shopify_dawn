@@ -83,8 +83,9 @@
         "collection_block_PQyF9k": {
           "type": "collection_block",
           "settings": {
-            "collection": "pijamas",
-            "custom_title": ""
+            "collection": "automated-collection",
+            "custom_image": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png",
+            "custom_title": "Custom Title"
           }
         },
         "collection_block_AzCC97": {
