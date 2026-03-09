@@ -47,10 +47,10 @@
           "type": "button",
           "settings": {
             "button_label": "OPTIONAL LINK",
-            "button_link": "",
+            "button_link": "#",
             "button_style_secondary": true,
             "button_label_2": "OPTIONAL LINK",
-            "button_link_2": "",
+            "button_link_2": "#",
             "button_style_secondary_2": true
           }
         }
