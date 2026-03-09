@@ -49,11 +49,11 @@
 
 }
 
-.section_footer_wrapper .text_block_wrap:first-child span {
+.section_footer_wrapper .text_block_wrap p:first-child span {
     display: none;
 }
 
-.section_footer_wrapper .text_block_wrap:last-child span {
+.section_footer_wrapper .text_block_wrap p:last-child span {
     display: none;
 }
 
