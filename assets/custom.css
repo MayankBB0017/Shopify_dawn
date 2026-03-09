@@ -60,6 +60,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 24px;
+    padding-bottom: 32px;
 }
 
 .tab_featured_collections_section .collection__title  {
