@@ -120,4 +120,7 @@
     height: auto;
 }
 
+.header__icons [
+    align-items: center;
+]
 
