@@ -107,3 +107,7 @@
 .cst_richtext_section  a.button.button--secondary:before {
   content: clear;
 }
+
+.cst_richtext_section  a.button.button--secondary {
+  
+}
