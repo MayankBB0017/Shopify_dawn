@@ -33,6 +33,13 @@
     gap: 16px;
 }
 
+.section_btns_wrapper {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
 .section_content_wrap .section_heading {
     font-size: 40px;
     line-height: 46px;
