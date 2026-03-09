@@ -40,6 +40,13 @@
     align-items: center;
 }
 
+.section_btns_wrapper a {
+    font-family: Jost-Regular;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
 .section_content_wrap .section_heading {
     font-size: 40px;
     line-height: 46px;
