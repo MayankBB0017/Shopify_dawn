@@ -1,2 +1,116 @@
 {{ 'hero-section.css' | asset_url | stylesheet_tag }}
 
+<style>
+    .responsive-image-section {
+    width: 100%;
+    }
+    .responsive-image-section {
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    .responsive-image-section img {
+    width: 100%;
+    display: block;
+    }
+
+    .responsive-image-section .desktop-image {
+    display: block;
+    }
+
+    .responsive-image-section .mobile-image {
+    display: none;
+    }
+
+    @media screen and (max-width: 749px) {
+    .responsive-image-section {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    {% if mobile_image_url != blank %}
+        .responsive-image-section .desktop-image { display: none; }
+        .responsive-image-section .mobile-image { display: block; }
+    {% else %}
+        /* If mobile image not provided, show desktop image */
+        .responsive-image-section .desktop-image { display: block; }
+        .responsive-image-section .mobile-image { display: none; }
+    {% endif %}
+    }
+</style>
+
+
+{% assign desktop_image_url = section.settings.desktop_image | img_url: '2048x2048' %}
+{% assign mobile_image_url = section.settings.mobile_image | img_url: '1024x1024' %}
+
+<div class="responsive-image-section">
+  {% if desktop_image_url %}
+    <img src="{{ desktop_image_url }}" alt="Desktop Image" class="desktop-image" />
+  {% endif %}
+  
+  {% if mobile_image_url %}
+    <img src="{{ mobile_image_url }}" alt="Mobile Image" class="mobile-image" />
+  {% endif %}
+</div>
+
+
+{% schema %}
+{
+  "name": "Responsive Image Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image (Optional)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding Top Desktop (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom Desktop (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top Mobile (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom Mobile (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Responsive Image",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
+
