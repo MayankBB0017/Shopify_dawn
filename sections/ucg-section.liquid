@@ -15,7 +15,11 @@
 </style>
 
 <section class="ucs_section section-padding-{{section.id }} ">
-    <div class="section_head_wrapper"></div>
+    <div class="section_head_wrapper">
+        {% for block in section.blocks %}
+            <p class="head_text">{{ block.settings.head_text }}</p>
+        {% endfor %}
+    </div>
     <div class="section_media_wrapper">
         <div class="left_col_wrap col_wrap">
             <div class="block_mage_wrapper">
