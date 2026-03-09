@@ -27,6 +27,12 @@
     padding: 20px 20px 52px;
 }
 
+.section_content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .section_content_wrap .section_heading {
     font-size: 40px;
     line-height: 46px;
