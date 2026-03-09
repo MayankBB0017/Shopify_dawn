@@ -1,6 +1,5 @@
 {% comment %}
   Renders a megamenu for the header.
-
   Usage:
   {% render 'header-mega-menu' %}
 {% endcomment %}
@@ -25,7 +24,7 @@
                 </span>
                 {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
-              
+
               <div
                 id="MegaMenu-Content-{{ forloop.index }}"
                 class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
@@ -65,10 +64,38 @@
                             </li>
                           {%- endfor -%}
                         </ul>
-                      {%- endif -%}
+                      {%- endif %}
                     </li>
                   {%- endfor -%}
                 </ul>
+
+                {% comment %} CUSTOM IMAGE BLOCK {% endcomment %}
+                {% for block in section.blocks %}
+                  {% assign nav_title = link.title | handleize %}
+                  {% assign block_label = block.settings.label | handleize %}
+
+                  {% if nav_title == block_label %}
+                    <div class="mega-menu-image-block">
+
+                      {% if block.settings.image %}
+                        <a href="{{ block.settings.link }}">
+                          <img
+                            src="{{ block.settings.image | image_url: width: 400 }}"
+                            alt="{{ block.settings.link_name }}"
+                          >
+                        </a>
+                      {% endif %}
+
+                      <div class="mega-menu-link-row">
+                        <a href="{{ block.settings.link }}">
+                          {{ block.settings.link_name }}
+                        </a>
+                      </div>
+
+                    </div>
+                  {% endif %}
+                {% endfor %}
+
               </div>
             </details>
           </header-menu>
@@ -91,9 +118,6 @@
           </a>
         {%- endif -%}
       </li>
-
-
     {%- endfor -%}
   </ul>
-
 </nav>
