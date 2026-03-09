@@ -20,7 +20,6 @@
       <div class="collection_image_wrap">
         {% assign collection = block.settings.collection %}
 
-        {%- comment -%} Image Priority {%- endcomment -%}
         {% if collection.metafields.custom.collection_metafeild_image != blank %}
           {% assign image = collection.metafields.custom.collection_metafeild_image %}
         {% elsif collection.image != blank %}
@@ -31,7 +30,6 @@
           {% assign image = '' %}
         {% endif %}
 
-        {%- comment -%} Title Priority {%- endcomment -%}
         {% if block.settings.custom_title != blank %}
           {% assign collection_title = block.settings.custom_title %}
         {% else %}
