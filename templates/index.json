@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "hero_section_YPk3pc": {
+      "type": "hero-section",
+      "name": "Hero Section",
+      "settings": {
+        "desktop_image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1_2x_ea252745-9c4b-4edc-9f12-e682aeff4846.png",
+        "mobile_image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.png",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
     "rich_text_eKhTRd": {
       "type": "rich-text",
       "blocks": {
@@ -82,6 +94,7 @@
     }
   },
   "order": [
+    "hero_section_YPk3pc",
     "rich_text_eKhTRd",
     "featured_collection"
   ]
