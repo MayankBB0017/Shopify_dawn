@@ -73,7 +73,12 @@
 }
 
 @media screen and (max-width: 1024px) {
-    
+    .section_footer_wrapper .text_block_wrap {
+        gap: 60px;
+    }
+    .section_footer_wrapper .text_block_wrap p:after {
+        right: -30px;
+    }
 }
 
 @media screen and (max-width: 600px) {
