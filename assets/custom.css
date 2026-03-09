@@ -75,7 +75,12 @@
 }
 
 
+@media screen and (max-width: 600px) {
+    .section_head_wrap {
+        gap: 16px;
+    }
 
+}
 
 
 
