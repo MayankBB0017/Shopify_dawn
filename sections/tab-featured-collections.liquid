@@ -84,12 +84,16 @@
       <div class="tab-collections-tabs page-width">
         {% for block in section.blocks %}
           <button
-            class="tab-collection-btn {% if forloop.first %}active{% endif %}"
-            data-tab="tab-{{ block.id }}"
-            type="button"
-          >
-            {{ block.settings.collection.title }}
-          </button>
+                class="tab-collection-btn {% if forloop.first %}active{% endif %}"
+                data-tab="tab-{{ block.id }}"
+                type="button"
+                >
+                {% if block.settings.custom_title != blank %}
+                    {{ block.settings.custom_title }}
+                {% else %}
+                    {{ block.settings.collection.title }}
+                {% endif %}
+                </button>
         {% endfor %}
       </div>
     {% endif %}
