@@ -140,6 +140,10 @@
   .cst_richtext_section .rich-text__wrapper {
     width: 100%;
   }
+  .cst_richtext_section .rich-text__text {
+    font-size: 13px;
+    line-height: 21px;
+  }
 }
 
 
