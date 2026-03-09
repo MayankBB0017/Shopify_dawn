@@ -337,6 +337,24 @@
     },
     "ucg_section_EMnJBk": {
       "type": "ucg-section",
+      "blocks": {
+        "head_text_96J6WL": {
+          "type": "head_text",
+          "settings": {
+            "head_text": "#WEAREROBIN"
+          }
+        },
+        "head_text_cwCFjK": {
+          "type": "head_text",
+          "settings": {
+            "head_text": "FOLLOW US ON INSTAGRAM"
+          }
+        }
+      },
+      "block_order": [
+        "head_text_96J6WL",
+        "head_text_cwCFjK"
+      ],
       "name": "UCG Section",
       "settings": {
         "img1": "shopify://shop_images/Captura_de_pantalla_2024-12-04_a_las_16.26.06_1.png",
