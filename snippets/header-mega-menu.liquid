@@ -48,38 +48,6 @@
                         {{ childlink.title | escape }}
                       </a>
 
-
-                            {% for block in section.blocks %}
-                                {% assign block_label = block.settings.label | handleize %}
-                                {% assign nav_title = link.title | handleize %}
-
-                                {% if block_label == nav_title %}
-                                  <div class="mega-menu-image-block">
-
-                                    {% if block.settings.image %}
-                                      <a href="{{ block.settings.link }}">
-                                        <img
-                                          src="{{ block.settings.image | image_url: width: 400 }}"
-                                          alt="{{ block.settings.link_name }}"
-                                        >
-                                      </a>
-                                    {% endif %}
-
-                                    <div class="mega-menu-link">
-                                      <a href="{{ block.settings.link }}">
-                                        {{ block.settings.link_name }}
-                                      </a>
-                                    </div>
-
-                                  </div>
-                                {% endif %}
-
-                              {% endfor %}
-
-
-
-
-
                       {%- if childlink.links != blank -%}
                         <ul class="list-unstyled" role="list">
                           {%- for grandchildlink in childlink.links -%}
