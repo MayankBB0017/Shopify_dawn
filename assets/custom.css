@@ -78,6 +78,7 @@
 @media screen and (max-width: 600px) {
     .section_head_wrap {
         gap: 16px;
+        flex-direction: column;
     }
     .tab_featured_collections_section .collection__title .title {
         font-size: 24px;
