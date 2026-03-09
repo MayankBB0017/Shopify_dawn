@@ -15,7 +15,7 @@
 </style>
 
 <section class="collection_blocks_section section-padding-{{section.id}}"> 
-  <div class="collections_blocks_wrap   ">
+  <div class="collections_blocks_wrap section_layout_{{section.settings.block_column }}">
     {% for block in section.blocks %}
       <div class="collection_image_wrap">
         {% assign collection = block.settings.collection %}
