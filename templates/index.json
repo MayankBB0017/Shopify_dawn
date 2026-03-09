@@ -70,6 +70,27 @@
         "padding_bottom": 80
       }
     },
+    "collections_blocks_BYVedC": {
+      "type": "collections-blocks",
+      "blocks": {
+        "collection_block_TFiFKi": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "ropa-de-playa"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_TFiFKi"
+      ],
+      "name": "Collections Blocks",
+      "settings": {
+        "padding_top_desktop": 50,
+        "padding_bottom_desktop": 50,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -102,6 +123,7 @@
   "order": [
     "hero_section_YPk3pc",
     "rich_text_eKhTRd",
+    "collections_blocks_BYVedC",
     "featured_collection"
   ]
 }
