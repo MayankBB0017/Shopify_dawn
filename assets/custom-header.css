@@ -66,6 +66,9 @@
     color: #000000;
 }
 
+.header__icon {
+    text-decoration: none;
+}
 
 /* 
 .custom_transparant_navigation .transparant_logo_visible {
