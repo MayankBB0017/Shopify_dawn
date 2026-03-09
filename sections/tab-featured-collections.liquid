@@ -26,13 +26,11 @@
 {% endif %}
 
 {% style %}
-
 .tab-collections-tabs {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
 }
-
 .tab-collection-btn {
     cursor: pointer;
     border: none;
@@ -45,7 +43,6 @@
     position: relative;
     transition: all 0s ease-in-out;
 }
-
 .tab-collection-btn:after {
     content: "";
     position: absolute;
@@ -57,40 +54,31 @@
     border-radius: 3px;
     transition: all .4s ease;
 }
-
 .tab-collection-btn:hover:after {
     width: 100%;
 }
-
 .tab-collection-btn.active:after {
     width: 100%;
 }
-
 .tab-collection-panel {
   display: none;
 }
-
 .tab-collection-panel.active {
   display: block;
 }
-
 .section-{{ section.id }}-padding {
   padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
   padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
 }
-
 @media screen and (min-width: 750px) {
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 }
-
 {% endstyle %}
-
 <div class="color-{{ section.settings.color_scheme }} isolate gradient tab_featured_collections_section   ">
   <div class="collection section-{{ section.id }}-padding">
-
     <div class="section_head_wrap title-wrapper--no-top-margin page-width ">
         <div class="collection__title title-wrapper">
         {% if section.settings.title != blank %}
@@ -99,7 +87,6 @@
             </h2>
         {% endif %}
         </div>
-
         {% if section.blocks.size > 0 %}
         <div class="tab-collections-tabs">
             {% for block in section.blocks %}
@@ -118,9 +105,6 @@
         </div>
         {% endif %}
     </div>
-
-
-
     {% for block in section.blocks %}
       <div
         id="tab-{{ block.id }}"
@@ -131,7 +115,6 @@
             class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
             role="list"
           >
-
             {% if block.settings.collection.products.size > 0 %}
               {% paginate block.settings.collection.products by section.settings.products_to_show %}
 
@@ -157,35 +140,24 @@
         </slider-component>
       </div>
     {% endfor %}
-
   </div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
   const tabs = document.querySelectorAll(".tab-collection-btn");
   const panels = document.querySelectorAll(".tab-collection-panel");
-
   tabs.forEach(tab => {
-
     tab.addEventListener("click", function () {
-
       tabs.forEach(t => t.classList.remove("active"));
       panels.forEach(p => p.classList.remove("active"));
-
       tab.classList.add("active");
-
       const target = document.getElementById(tab.dataset.tab);
-
       if (target) {
         target.classList.add("active");
       }
-
     });
-
   });
-
 });
 </script>
 
