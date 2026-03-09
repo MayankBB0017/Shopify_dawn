@@ -90,6 +90,7 @@
     .section_footer_wrapper .text_block_wrap {
         flex-direction: column;
         gap: 16px;
+        align-items: center;
     }
     .section_footer_wrapper .text_block_wrap p:after {
         display: none;
