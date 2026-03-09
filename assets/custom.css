@@ -63,7 +63,7 @@
 }
 
 .tab_featured_collections_section .collection__title  {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .tab_featured_collections_section .collection__title .title  {
