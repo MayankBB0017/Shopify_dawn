@@ -144,6 +144,9 @@
     font-size: 13px;
     line-height: 21px;
   }
+  .cst_richtext_section .rich-text__text p br {
+    display: none;
+  }
 }
 
 
