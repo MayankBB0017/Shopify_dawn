@@ -227,7 +227,7 @@
 
           <div class="header__heading-logo-wrapper transparant_logo_visible">
             <div class="trans_header_hover_logo">
-              <div class="custom_trans_logo_wrap" style="padding-bottom: {{ 1 | divided_by: section.settings.transparant_logo.aspect_ratio | times: 100 }}%;">
+              <div class="custom_trans_logo_wrap" style="padding-top: {{ 1 | divided_by: section.settings.transparant_logo.aspect_ratio | times: 100 }}%;">
                 <img
                   srcset="
                     {% if section.settings.transparant_logo.width >= 350 %}{{ section.settings.transparant_logo | image_url: width: 350 }} 350w,{% endif %}
