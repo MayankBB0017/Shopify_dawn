@@ -259,9 +259,8 @@
         "collection_block_V9LCcf": {
           "type": "collection_block",
           "settings": {
-            "collection": "hydrogen",
-            "custom_image": "shopify://shop_images/e37eaa3054f458733a6819638c7457d9622df4f9.png",
-            "custom_title": "INTIMATES"
+            "collection": "pijamas",
+            "custom_title": ""
           }
         },
         "collection_block_DgGLVi": {
