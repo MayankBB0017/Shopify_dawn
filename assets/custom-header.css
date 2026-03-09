@@ -80,6 +80,8 @@
     text-decoration: none;
 }
 
+
+
 /* 
 .custom_transparant_navigation .transparant_logo_visible {
     opacity: 1;
@@ -110,6 +112,11 @@
 
 .cst_hide {
     display: none !important;
+}
+
+.header__icon, .header__icon--cart .icon {
+    width: auto;
+    height: auto;
 }
 
 
