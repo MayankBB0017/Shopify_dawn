@@ -55,7 +55,7 @@
 .section_footer_wrapper .text_block_wrap {
     display: flex;
     justify-content: center;
-
+    gap: 100px;
 }
 
 
