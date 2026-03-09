@@ -263,12 +263,12 @@
 /* .mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper  li:nth-child(2) */
 
 
-.drawer-mega-menu-image-block {
-    padding: 11px 52px 11px 30px;
-}
-
 .menu-drawer__inner-submenu .cst_block_image_wrap {
     max-width: 100%;
+}
+
+.menu-drawer__inner-submenu .mega_menu_image_block {
+    padding: 11px 52px 11px 30px;
 }
 
 
