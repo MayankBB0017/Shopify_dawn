@@ -142,6 +142,8 @@
     .mega-menu .admin_nav_with_custom_megamenu_blocks  {
         display: grid;
         grid-template-columns: auto auto;
+        padding-top: 24px;
+        padding-bottom: 34px;
     }
 
 
