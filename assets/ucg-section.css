@@ -61,6 +61,10 @@
 
 .section_footer_wrapper .text_block_wrap p:after {
     position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    right: 0;
 }
 
 
