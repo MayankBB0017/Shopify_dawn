@@ -91,4 +91,33 @@
       </li>
     {%- endfor -%}
   </ul>
+
+
+    {% for block in section.blocks %}
+    {% assign nav_label = link.title | downcase | strip %}
+    {% assign block_label = block.settings.label | downcase | strip %}
+
+    {% if nav_label == block_label %}
+      <div class="nav-image-block">
+
+        {% if block.settings.image %}
+          <div class="nav-image">
+            <a href="{{ block.settings.link }}">
+              <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.link_name }}">
+            </a>
+          </div>
+        {% endif %}
+
+        <div class="nav-link-row">
+          <a href="{{ block.settings.link }}">
+            {{ block.settings.link_name }}
+          </a>
+        </div>
+
+      </div>
+    {% endif %}
+  {% endfor %}
+
+
+
 </nav>
