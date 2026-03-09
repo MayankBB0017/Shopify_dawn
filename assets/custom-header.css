@@ -67,3 +67,8 @@
 }
 
     
+.custom_transparant_navigation:hover .defult_logo {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
