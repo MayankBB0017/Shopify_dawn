@@ -64,6 +64,12 @@
   if section.settings.enable_desktop_slider and products_to_display > section.settings.columns_desktop
     assign show_desktop_slider = true
   endif
+
+  # --- Custom tab title logic ---
+  assign display_tab_title = section.settings.tab_title
+  if display_tab_title == blank and section.settings.collection != blank
+    assign display_tab_title = section.settings.collection.title
+  endif
 -%}
 
 <div
@@ -75,9 +81,9 @@
     data-id="{{ section.id }}"
   >
     <div class="collection__title title-wrapper title-wrapper--no-top-margin page-width{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %}{% if show_desktop_slider %} collection__title--desktop-slider{% endif %}">
-      {%- if section.settings.title != blank -%}
+      {%- if display_tab_title != blank -%}
         <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.title }}
+          {{ display_tab_title }}
         </h2>
       {%- endif -%}
       {%- if section.settings.description != blank
@@ -89,7 +95,7 @@
             {{ section.settings.collection.description }}
           {%- else -%}
             {{ section.settings.description -}}
-          {%- endif %}
+          {%- endif -%}
         </div>
       {%- endif -%}
     </div>
@@ -231,6 +237,12 @@
       "label": "t:sections.featured-collection.settings.collection.label"
     },
     {
+      "type": "text",
+      "id": "tab_title",
+      "label": "Custom Tab Title",
+      "info": "If blank, the collection title will be used."
+    },
+    {
       "type": "range",
       "id": "products_to_show",
       "min": 2,
@@ -238,11 +250,7 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.featured-collection.settings.products_to_show.label"
-    },     
-    {
-      "type": "header",
-      "content": "t:sections.featured-collection.settings.header_text.content"
-    },   
+    },
     {
       "type": "inline_richtext",
       "id": "title",
@@ -253,26 +261,11 @@
       "type": "select",
       "id": "heading_size",
       "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
+        {"value": "h2","label": "t:sections.all.heading_size.options__1.label"},
+        {"value": "h1","label": "t:sections.all.heading_size.options__2.label"},
+        {"value": "h0","label": "t:sections.all.heading_size.options__3.label"},
+        {"value": "hxl","label": "t:sections.all.heading_size.options__4.label"},
+        {"value": "hxxl","label": "t:sections.all.heading_size.options__5.label"}
       ],
       "default": "h1",
       "label": "t:sections.all.heading_size.label"
