@@ -211,12 +211,13 @@
     font-weight: 400;
 }
 
-.mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper li:not(:first-child) a ul li a {
+.mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper li:not(:first-child) a ul li a,
+.mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper li:not(:first-child) a ul li {
     font-size: 12px;
     line-height: 14px;
     font-family: 'Jost-Regular';
     font-weight: 400;
-     color: #000000;
+    color: #000000;
 }
 
 
