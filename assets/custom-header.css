@@ -161,6 +161,10 @@
     padding: 0 5rem;    
 }
 
+.main_chaild_megamenu_wrapper {
+    padding: 0;
+}
+
 .mega_menu_image_block .cst_block_image_wrap .mega_img_wrap img {
     position: absolute;
     inset: 0;
