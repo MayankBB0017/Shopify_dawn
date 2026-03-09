@@ -34,5 +34,10 @@
 }
 
 .discount-percentage {
-    
+    color: #F5AC3F;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: Jost-Regular;
+    font-weight: 400;
+
 }
