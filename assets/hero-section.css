@@ -1,9 +1,9 @@
-.hero_section_wrapper .desktop_image_wrap,
+.hero_section_wrapper .Desktop_image_wrapper,
 .hero_section_wrapper .mobile_image_wrap {
     position: relative;
 }
 
-.hero_section_wrapper .desktop_image_wrap img,
+.hero_section_wrapper .Desktop_image_wrapper img,
 .hero_section_wrapper .mobile_image_wrap img {
     position: absolute;
     inset: 0;
