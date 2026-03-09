@@ -1,17 +1,17 @@
 {{ 'collections-blocks.css' | asset_url | stylesheet_tag }}
 
 <style>
-    .section-padding-{{section.id }} {
+  .section-padding-{{section.id }} {
     padding-top: {{ section.settings.padding_top_desktop }}px;
     padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-    }
+  }
 
-    @media screen and (max-width: 749px) {
+  @media screen and (max-width: 749px) {
     .section-padding-{{section.id }} {
-        padding-top: {{ section.settings.padding_top_mobile }}px;
-        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     }
-    }
+  }
 </style>
 
 <section class="collection_blocks_section section-padding-{{section.id}}"> 
@@ -19,42 +19,51 @@
     {% for block in section.blocks %}
       <div class="collection_image_wrap">
         {% assign collection = block.settings.collection %}
+
+        {%- comment -%} Image Priority {%- endcomment -%}
         {% if collection.metafields.custom.collection_metafeild_image != blank %}
           {% assign image = collection.metafields.custom.collection_metafeild_image %}
         {% elsif collection.image != blank %}
           {% assign image = collection.image %}
+        {% elsif block.settings.custom_image != blank %}
+          {% assign image = block.settings.custom_image %}
         {% else %}
-          {% assign image = section.settings.mobile_image %}
+          {% assign image = '' %}
         {% endif %}
-        {% if collection.metafields.custom.collection_metafeild_title != blank %}
-          {% assign collection_title = collection.metafields.custom.collection_metafeild_title %}
+
+        {%- comment -%} Title Priority {%- endcomment -%}
+        {% if block.settings.custom_title != blank %}
+          {% assign collection_title = block.settings.custom_title %}
         {% else %}
           {% assign collection_title = collection.title %}
         {% endif %}
-        <img
-          srcset="
-            {% if image.width >= 350 %}{{ image | image_url: width: 350 }} 350w,{% endif %}
-            {% if image.width >= 750 %}{{ image | image_url: width: 750 }} 750w,{% endif %}
-            {% if image.width >= 1100 %}{{ image | image_url: width: 1100 }} 1100w,{% endif %}
-            {% if image.width >= 1500 %}{{ image | image_url: width: 1500 }} 1500w,{% endif %}
-            {% if image.width >= 2200 %}{{ image | image_url: width: 2200 }} 2200w,{% endif %}
-            {% if image.width >= 3000 %}{{ image | image_url: width: 3000 }} 3000w,{% endif %}
-            {{ image | image_url }} {{ image.width }}w
-          "
-          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-          src="{{ image | image_url: width: 1100 }}"
-          loading="eager"
-          fetchpriority="high"
-          width="{{ image.width }}"
-          height="{{ image.height }}"
-          alt="{{ collection_title | escape }}"
-        >
+
+        {% if image != blank %}
+          <img
+            srcset="
+              {% if image.width >= 350 %}{{ image | image_url: width: 350 }} 350w,{% endif %}
+              {% if image.width >= 750 %}{{ image | image_url: width: 750 }} 750w,{% endif %}
+              {% if image.width >= 1100 %}{{ image | image_url: width: 1100 }} 1100w,{% endif %}
+              {% if image.width >= 1500 %}{{ image | image_url: width: 1500 }} 1500w,{% endif %}
+              {% if image.width >= 2200 %}{{ image | image_url: width: 2200 }} 2200w,{% endif %}
+              {% if image.width >= 3000 %}{{ image | image_url: width: 3000 }} 3000w,{% endif %}
+              {{ image | image_url }} {{ image.width }}w
+            "
+            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+            src="{{ image | image_url: width: 1100 }}"
+            loading="eager"
+            fetchpriority="high"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            alt="{{ collection_title | escape }}"
+          >
+        {% endif %}
+
         <h2 class="collection_title">{{ collection_title }}</h2>
       </div>
     {% endfor %}
   </div>
 </section>
-
 
 {% schema %}
 {
@@ -99,11 +108,6 @@
       "max": 200,
       "step": 5,
       "default": 30
-    },
-    {
-      "type": "image_picker",
-      "id": "mobile_image",
-      "label": "Fallback CMS Image"
     }
   ],
   "blocks": [
@@ -115,6 +119,16 @@
           "type": "collection",
           "id": "collection",
           "label": "Select Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image (Fallback)"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title"
         }
       ]
     }
