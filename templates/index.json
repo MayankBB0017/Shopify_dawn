@@ -111,6 +111,56 @@
         "padding_bottom_mobile": 0
       }
     },
+    "collections_blocks_m3pEet": {
+      "type": "collections-blocks",
+      "blocks": {
+        "collection_block_XzPpHm": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "pijamas",
+            "custom_title": ""
+          }
+        },
+        "collection_block_qwrHjR": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "automated-collection",
+            "custom_image": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png",
+            "custom_title": "Custom Title"
+          }
+        },
+        "collection_block_pFNtfd": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "pijamas",
+            "custom_title": ""
+          }
+        },
+        "collection_block_6F3BLg": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "automated-collection",
+            "custom_image": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png",
+            "custom_title": "Custom Title"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_XzPpHm",
+        "collection_block_qwrHjR",
+        "collection_block_pFNtfd",
+        "collection_block_6F3BLg"
+      ],
+      "name": "Collections Blocks",
+      "settings": {
+        "block_column": 4,
+        "title_alignment": "top",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -144,6 +194,7 @@
     "hero_section_YPk3pc",
     "rich_text_eKhTRd",
     "collections_blocks_BYVedC",
+    "collections_blocks_m3pEet",
     "featured_collection"
   ]
 }
