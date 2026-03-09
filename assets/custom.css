@@ -58,6 +58,7 @@
 .section_head_wrap {
     display: flex;
     align-items: center;
+    gap: 24px;
 }
 
 .tab_featured_collections_section .collection__title  {
