@@ -93,6 +93,9 @@
   </ul>
 
 
+
+   {%- for link in section.settings.menu.links -%}
+
     {% for block in section.blocks %}
     {% assign nav_label = link.title | downcase | strip %}
     {% assign block_label = block.settings.label | downcase | strip %}
@@ -117,6 +120,8 @@
       </div>
     {% endif %}
   {% endfor %}
+
+{% endfor %}
 
 
 
