@@ -37,6 +37,20 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "nav_image_block_J9fHXW": {
+          "type": "nav_image_block",
+          "settings": {
+            "label": "",
+            "image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.jpg",
+            "link_name": "Ropa de Baño",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "nav_image_block_J9fHXW"
+      ],
       "settings": {
         "trnasprant_menu": true,
         "transparant_logo": "shopify://shop_images/Capa_1.svg",
