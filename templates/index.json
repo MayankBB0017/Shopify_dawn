@@ -294,19 +294,22 @@
         "collection_tab_ahtrRH": {
           "type": "collection_tab",
           "settings": {
-            "collection": "swimwear-1"
+            "collection": "swimwear-1",
+            "custom_title": ""
           }
         },
         "collection_tab_h89MNy": {
           "type": "collection_tab",
           "settings": {
-            "collection": "bikinis"
+            "collection": "bikinis",
+            "custom_title": "Custom Title"
           }
         },
         "collection_tab_p9U478": {
           "type": "collection_tab",
           "settings": {
-            "collection": "hydrogen"
+            "collection": "hydrogen",
+            "custom_title": ""
           }
         }
       },
