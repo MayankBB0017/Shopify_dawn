@@ -119,13 +119,29 @@
 .admin_nav_with_custom_megamenu_blocks 
 
 /* ===================== */
-
-@media screen and (min-width: 989px)
-{
-    .header__icon, .header__icon--cart .icon,
+  .header__icon, .header__icon--cart .icon,
     .header__icon .icon  {
         width: auto;
         height: auto;
+    }
+
+    .header__icons {
+        align-items: center;
+        column-gap: 16px;
+    }
+
+    .header__menu-item .icon-caret {
+        right: -2px;
+        width: 7px;
+    }
+
+
+@media screen and (max-width: 989px)
+{
+    .header__icon, .header__icon--cart .icon,
+    .header__icon .icon  {
+    height: 4.4rem;
+    width: 4.4rem;
     }
 
     .header__icons {
