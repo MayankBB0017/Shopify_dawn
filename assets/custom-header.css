@@ -2,6 +2,7 @@
     position: absolute;
     width: 100%;
     max-width: 100%;
+    transition: all 0.3s ease-in-out;
 }
 
 .trans_header_hover_logo{
@@ -33,5 +34,13 @@
 .custom_transparant_navigation .header__menu-item {
     color: #ffffff;
     transition: all 0.3s ease-in-out;
+}
+
+.custom_transparant_navigation:hover {
+    background: #ffffff;
+}  
+
+.custom_transparant_navigation:hover .header__menu-item {
+    color: #000000;
 }
 
