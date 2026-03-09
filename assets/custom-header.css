@@ -55,6 +55,17 @@
 .custom_transparant_navigation:hover .header__menu-item {
     color: #000000;
 }
+
+.custom_transparant_navigation .header_font_style {
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+
+.custom_transparant_navigation:hover .header_font_style {
+    color: #ffffff;
+}
+
+
 /* 
 .custom_transparant_navigation .transparant_logo_visible {
     opacity: 1;
