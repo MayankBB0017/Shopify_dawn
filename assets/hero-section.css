@@ -56,6 +56,7 @@
     margin: 0;
     font-family: LT Remark;
     font-weight: 400;
+    text-align: center;
 }
 
 @media screen and (max-width: 800px) {
@@ -68,4 +69,11 @@
     .shown_desktop  {
         display: block;
     }  
+}
+
+@media screen and (max-width: 600px) {
+    .section_content_wrap .section_heading {
+        font-size: 32px;
+        line-height: 40px;
+    }
 }
