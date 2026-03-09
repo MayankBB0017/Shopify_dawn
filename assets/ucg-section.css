@@ -36,6 +36,12 @@
     font-weight: 400;
 }
 
+.section_footer_wrapper {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 24px 0px;
+}
+
 @media screen and (max-width: 600px) {
     .section_media_wrapper {
         display: grid;
