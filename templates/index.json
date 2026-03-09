@@ -76,7 +76,8 @@
         "collection_block_TFiFKi": {
           "type": "collection_block",
           "settings": {
-            "collection": "ropa-de-playa"
+            "collection": "pijamas",
+            "custom_title": ""
           }
         }
       },
