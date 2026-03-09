@@ -79,6 +79,10 @@
     .section_footer_wrapper .text_block_wrap p:after {
         right: -30px;
     }
+    .section_footer_wrapper p {
+        font-size: 12px;
+        line-height: 18px;
+    }
 }
 
 @media screen and (max-width: 600px) {
