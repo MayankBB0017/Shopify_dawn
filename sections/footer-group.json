@@ -13,6 +13,18 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "text_7MK3YY": {
+          "type": "text",
+          "settings": {
+            "heading": "Contacto",
+            "subtext": "<p>Lunes a Viernes 10-17h<br/>Whatsapp<br/>info@robincollection.com</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_7MK3YY"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
