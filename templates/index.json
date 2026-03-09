@@ -349,11 +349,18 @@
           "settings": {
             "head_text": "FOLLOW US ON INSTAGRAM"
           }
+        },
+        "footer_text_dh9Lew": {
+          "type": "footer_text",
+          "settings": {
+            "footer_text": "Free Standard Shipping Over $300"
+          }
         }
       },
       "block_order": [
         "head_text_96J6WL",
-        "head_text_cwCFjK"
+        "head_text_cwCFjK",
+        "footer_text_dh9Lew"
       ],
       "name": "UCG Section",
       "settings": {
