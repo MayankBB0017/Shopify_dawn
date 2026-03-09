@@ -197,6 +197,16 @@
     "logo_marquee_section_DMzbib": {
       "type": "logo-marquee-section",
       "blocks": {
+        "item_XaJa3z": {
+          "type": "item",
+          "settings": {}
+        },
+        "item_rphDww": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/Vector_b0123281-f4c1-4dc1-a7ba-dd9f4bb9a7fd.png"
+          }
+        },
         "item_7tdqxT": {
           "type": "item",
           "settings": {
@@ -218,13 +228,22 @@
         "item_dEVQH4": {
           "type": "item",
           "settings": {}
+        },
+        "item_bCAj8z": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/VOGUE_LOGO_f16afd78-bbbd-4a40-9fa1-9059dd880289.png"
+          }
         }
       },
       "block_order": [
+        "item_XaJa3z",
+        "item_rphDww",
         "item_7tdqxT",
         "item_8ihYdL",
         "item_arCKLV",
-        "item_dEVQH4"
+        "item_dEVQH4",
+        "item_bCAj8z"
       ],
       "name": "Logo Marquee Section",
       "settings": {
