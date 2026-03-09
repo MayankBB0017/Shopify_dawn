@@ -1,4 +1,6 @@
 {{ 'hero-section.css' | asset_url | stylesheet_tag }}
+{% assign desktop_image_url = section.settings.desktop_image | img_url: '2048x2048' %}
+{% assign mobile_image_url = section.settings.mobile_image | img_url: '1024x1024' %}
 
 <style>
     .responsive-image-section {
@@ -32,16 +34,11 @@
         .responsive-image-section .desktop-image { display: none; }
         .responsive-image-section .mobile-image { display: block; }
     {% else %}
-        /* If mobile image not provided, show desktop image */
         .responsive-image-section .desktop-image { display: block; }
         .responsive-image-section .mobile-image { display: none; }
     {% endif %}
     }
 </style>
-
-
-{% assign desktop_image_url = section.settings.desktop_image | img_url: '2048x2048' %}
-{% assign mobile_image_url = section.settings.mobile_image | img_url: '1024x1024' %}
 
 <div class="responsive-image-section">
   {% if desktop_image_url %}
