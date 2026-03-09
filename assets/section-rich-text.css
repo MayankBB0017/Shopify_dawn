@@ -105,7 +105,7 @@
 
 .cst_richtext_section  a.button.button--secondary:after,
 .cst_richtext_section  a.button.button--secondary:before {
-  content: clear;
+  content: none;
 }
 
 .cst_richtext_section  a.button.button--secondary {
