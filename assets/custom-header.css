@@ -5,7 +5,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.trans_header_hover_logo{
+/* .trans_header_hover_logo{
     max-width : 80px;
     width: 100%;
 }
@@ -71,7 +71,7 @@
     opacity: 1;
     visibility: visible;
     display: block;
-}
+} */
 
 
 .custom_transparant_navigation:hover .defult_logo img {
