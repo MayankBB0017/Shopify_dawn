@@ -15,6 +15,12 @@
       "settings": {
         "desktop_image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1_2x_ea252745-9c4b-4edc-9f12-e682aeff4846.png",
         "mobile_image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.png",
+        "title": "New arrivals",
+        "text": "",
+        "url_text1": "OPTIONAL LINK",
+        "url1": "#",
+        "url_text2": "OPTIONAL LINK",
+        "url2": "#",
         "padding_top_desktop": 0,
         "padding_bottom_desktop": 0,
         "padding_top_mobile": 0,
