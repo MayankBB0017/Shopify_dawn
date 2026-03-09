@@ -67,6 +67,10 @@
 
 .tab_featured_collections_section .collection__title .title  {
     margin: 0;
+    font-family: Jost-Regular;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 30px;
 }
 
 
