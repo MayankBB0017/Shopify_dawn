@@ -75,15 +75,17 @@
                   {% assign block_label = block.settings.label | handleize %}
 
                   {% if nav_title == block_label %}
-                    <div class="mega-menu-image-block">
+                    <div class="mega_menu_image_block">
 
                       {% if block.settings.image %}
-                        <a href="{{ block.settings.link }}">
-                          <img
-                            src="{{ block.settings.image | image_url: width: 400 }}"
-                            alt="{{ block.settings.link_name }}"
-                          >
-                        </a>
+                        <div class="cst_block_image_wrap">
+                          <a href="{{ block.settings.link }}">
+                            <img
+                              src="{{ block.settings.image | image_url: width: 400 }}"
+                              alt="{{ block.settings.link_name }}"
+                            >
+                          </a>
+                      </div>
                       {% endif %}
 
                       <div class="mega-menu-link-row">
