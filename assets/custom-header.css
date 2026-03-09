@@ -29,13 +29,13 @@
     visibility: visible;
     transition: all 0.3s ease-in-out;
     
-}
+} */
 
 .custom_transparant_navigation .header__menu-item {
     color: #ffffff;
     transition: all 0.3s ease-in-out;
 }
-
+/* 
 .custom_transparant_navigation:hover {
     background: #ffffff;
 }  
@@ -54,12 +54,12 @@
     opacity: 1;
     visibility: visible;
     display: block;
-}
+} */
 
 .custom_transparant_navigation:hover .header__menu-item {
     color: #000000;
 }
-
+/* 
 .custom_transparant_navigation .transparant_logo_visible {
     opacity: 1;
     visibility: visible;
