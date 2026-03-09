@@ -88,5 +88,6 @@
 
 
 .cst_richtext_section h2.rich-text__heading {
-  
+  font-size: 18px;
+  line-height: 28px;
 }
