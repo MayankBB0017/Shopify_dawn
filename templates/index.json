@@ -154,6 +154,39 @@
       "name": "Collections Blocks",
       "settings": {
         "block_column": 4,
+        "title_alignment": "middle",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "collections_blocks_N9wpr4": {
+      "type": "collections-blocks",
+      "blocks": {
+        "collection_block_V9LCcf": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "pijamas",
+            "custom_title": ""
+          }
+        },
+        "collection_block_DgGLVi": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "automated-collection",
+            "custom_image": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png",
+            "custom_title": "Custom Title"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_V9LCcf",
+        "collection_block_DgGLVi"
+      ],
+      "name": "Collections Blocks",
+      "settings": {
+        "block_column": 2,
         "title_alignment": "top",
         "padding_top_desktop": 0,
         "padding_bottom_desktop": 0,
@@ -166,6 +199,7 @@
     "hero_section_YPk3pc",
     "rich_text_eKhTRd",
     "collections_blocks_BYVedC",
-    "collections_blocks_m3pEet"
+    "collections_blocks_m3pEet",
+    "collections_blocks_N9wpr4"
   ]
 }
