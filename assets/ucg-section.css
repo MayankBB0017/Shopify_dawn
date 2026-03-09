@@ -46,7 +46,15 @@
 .section_footer_wrapper .text_block_wrap {
     display: flex;
     justify-content: center;
-    
+
+}
+
+.section_footer_wrapper .text_block_wrap:first-child span {
+    display: none;
+}
+
+.section_footer_wrapper .text_block_wrap:last-child span {
+    display: none;
 }
 
 @media screen and (max-width: 600px) {
