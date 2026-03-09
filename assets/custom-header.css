@@ -126,3 +126,7 @@
     column-gap: 16px;
 }
 
+.header__menu-item .icon-caret {
+    right: -2px;
+    width: 7px;
+}
