@@ -119,6 +119,9 @@
 .admin_nav_with_custom_megamenu_blocks 
 
 /* ===================== */
+
+@media screen and (min-width: 989px)
+{
     .header__icon, .header__icon--cart .icon,
     .header__icon .icon  {
         width: auto;
@@ -134,6 +137,7 @@
         right: -2px;
         width: 7px;
     }
+}
 
 
     /* ====================== */
