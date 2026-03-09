@@ -14,7 +14,7 @@
     position: relative;
 }
 
-.trans_header_hover_logo .custom_trans_logo_wra img {
+.trans_header_hover_logo .custom_trans_logo_wrap img {
     position: absolute;
     inset: 0;
     width: 100%;
