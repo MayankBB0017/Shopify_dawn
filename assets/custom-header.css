@@ -84,7 +84,7 @@
 
 
 .cst_hide {
-    display: none;
+    display: none !important;
 }
 
 
