@@ -250,6 +250,8 @@
         "padding_top_mobile": 60,
         "padding_bottom_mobile": 60,
         "marquee_speed": 28,
+        "marquee_direction": "ltr",
+        "marquee_animation_style": "linear",
         "pause_on_hover": true
       }
     },
