@@ -114,7 +114,8 @@
     display: none !important;
 }
 
-.header__icon, .header__icon--cart .icon {
+.header__icon, .header__icon--cart .icon,
+.header__icon .icon  {
     width: auto;
     height: auto;
 }
