@@ -77,7 +77,6 @@
           "type": "collection_block",
           "settings": {
             "collection": "pijamas",
-            "custom_image": "shopify://shop_images/Capa_2.png",
             "custom_title": ""
           }
         }
