@@ -1,0 +1,172 @@
+@font-face {
+  font-family: 'Jost-BlackItalic';
+  src:        url('Jost-BlackItalic.woff') format('woff'),
+       url('Jost-BlackItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jost-Bold';
+  src:        url('Jost-Bold.woff') format('woff'),
+       url('Jost-Bold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-BoldItalic';
+  src:        url('Jost-BoldItalic.woff') format('woff'),
+       url('Jost-BoldItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-ExtraBoldItalic';
+  src:        url('Jost-ExtraBoldItalic.woff') format('woff'),
+       url('Jost-ExtraBoldItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-Italic';
+  src:        url('Jost-Italic.woff') format('woff'),
+       url('Jost-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-MediumItalic';
+  src:        url('Jost-MediumItalic.woff') format('woff'),
+       url('Jost-MediumItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-Regular';
+  src:        url('Jost-Regular.woff') format('woff'),
+       url('Jost-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jost-SemiBoldItalic';
+  src:        url('Jost-SemiBoldItalic.woff') format('woff'),
+       url('Jost-SemiBoldItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-Black';
+  src:        url('Jost-Black.woff') format('woff'),
+       url('Jost-Black.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jost-ExtraBold';
+  src:        url('Jost-ExtraBold.woff') format('woff'),
+       url('Jost-ExtraBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jost-ExtraLight';
+  src:        url('Jost-ExtraLight.woff') format('woff'),
+       url('Jost-ExtraLight.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-ExtraLightItalic';
+  src:        url('Jost-ExtraLightItalic.woff') format('woff'),
+       url('Jost-ExtraLightItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jost-Light';
+  src:        url('Jost-Light.woff') format('woff'),
+       url('Jost-Light.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-LightItalic';
+  src:        url('Jost-LightItalic.woff') format('woff'),
+       url('Jost-LightItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-Medium';
+  src:        url('Jost-Medium.woff') format('woff'),
+       url('Jost-Medium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jost-SemiBold';
+  src:        url('Jost-SemiBold.woff') format('woff'),
+       url('Jost-SemiBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-Thin';
+  src:        url('Jost-Thin.woff') format('woff'),
+       url('Jost-Thin.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Jost-ThinItalic';
+  src:        url('Jost-ThinItalic.woff') format('woff'),
+       url('Jost-ThinItalic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
