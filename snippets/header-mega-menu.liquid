@@ -89,12 +89,7 @@
           </a>
         {%- endif -%}
       </li>
-    {%- endfor -%}
-  </ul>
 
-
-
-   {%- for link in section.settings.menu.links -%}
 
       {% for block in section.blocks %}
         {% assign block_label = block.settings.label | handleize %}
@@ -120,10 +115,11 @@
 
           </div>
         {% endif %}
-      {% endfor %}
 
-{% endfor %}
+       {% endfor %}
 
 
+    {%- endfor -%}
+  </ul>
 
 </nav>
