@@ -45,6 +45,7 @@
     font-weight: 400;
     text-transform: uppercase;
     margin: 0;
+    position: relative;
 }
 
 .section_footer_wrapper {
@@ -56,6 +57,10 @@
     display: flex;
     justify-content: center;
     gap: 100px;
+}
+
+.section_footer_wrapper .text_block_wrap p:after {
+    position: absolute;
 }
 
 
