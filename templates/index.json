@@ -79,10 +79,42 @@
             "collection": "pijamas",
             "custom_title": ""
           }
+        },
+        "collection_block_PQyF9k": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "pijamas",
+            "custom_title": ""
+          }
+        },
+        "collection_block_AzCC97": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "pijamas",
+            "custom_title": ""
+          }
+        },
+        "collection_block_Pjb6zA": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "pijamas",
+            "custom_title": ""
+          }
+        },
+        "collection_block_3G3kNF": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "pijamas",
+            "custom_title": ""
+          }
         }
       },
       "block_order": [
-        "collection_block_TFiFKi"
+        "collection_block_TFiFKi",
+        "collection_block_PQyF9k",
+        "collection_block_AzCC97",
+        "collection_block_Pjb6zA",
+        "collection_block_3G3kNF"
       ],
       "name": "Collections Blocks",
       "settings": {
