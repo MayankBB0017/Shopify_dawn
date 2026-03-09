@@ -38,10 +38,10 @@
     "header": {
       "type": "header",
       "blocks": {
-        "nav_image_block_J9fHXW": {
-          "type": "nav_image_block",
+        "mega_image_bCh6Xz": {
+          "type": "mega_image",
           "settings": {
-            "label": "ropa-de-bano",
+            "label": "ropa-de-baño",
             "image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.jpg",
             "link_name": "Ropa de Baño",
             "link": "#"
@@ -49,7 +49,7 @@
         }
       },
       "block_order": [
-        "nav_image_block_J9fHXW"
+        "mega_image_bCh6Xz"
       ],
       "settings": {
         "trnasprant_menu": true,
