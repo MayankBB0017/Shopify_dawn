@@ -27,7 +27,8 @@
     padding-bottom: 16px;
 }
 
-.section_head_wrapper p {
+.section_head_wrapper p,
+.section_footer_wrapper p  {
     margin: 0;
     color: #0A0B0A;
     font-size: 16px;
