@@ -191,7 +191,7 @@
     font-weight: 400;
 }
 
-.mega-menu .admin_nav_with_custom_megamenu_blocks .main_chaild_megamenu_wrapper  li:first-child {
+.mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper  li:first-child {
     font-size: 12px;
     line-height: 14px;
     font-weight: 500;
