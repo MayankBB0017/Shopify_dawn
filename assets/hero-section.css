@@ -45,6 +45,8 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
+    text-decoration: underline;
+    color: #ffffff;
 }
 
 .section_content_wrap .section_heading {
