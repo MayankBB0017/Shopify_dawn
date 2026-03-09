@@ -74,7 +74,7 @@
   {% if mobile_image_url %}
     {% comment %} <img src="{{ mobile_image_url }}" alt="Mobile Image" class="mobile-image" /> {% endcomment %}
 
-    <div class="desktop_image_wrap  mobile-image  mobile_image_wrap" style="padding-top: {{ 1 | divided_by: desktop_image_url.aspect_ratio | times: 100 }}%;">
+    <div class=" mobile-image  mobile_image_wrap" style="padding-top: {{ 1 | divided_by: desktop_image_url.aspect_ratio | times: 100 }}%;">
                 <img
                   srcset="
                     {% if desktop_image_url.width >= 350 %}{{ desktop_image_url | image_url: width: 350 }} 350w,{% endif %}
