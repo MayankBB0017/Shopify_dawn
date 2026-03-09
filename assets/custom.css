@@ -44,4 +44,13 @@
 
 .product_cst_badge {
     position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 16px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 18px;
+    font-family: Jost-Regular;
+    font-weight: 400;
 }
