@@ -259,6 +259,11 @@
     font-weight: 400;
 }
 
+.custom_transparant_navigation .menu-drawer-container svg.icon.icon-hamburger path,
+.custom_transparant_navigation .menu-drawer-container .svg.icon.icon-close {
+    fill: #ffffff;
+}
+
 
 /* .mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper  li:nth-child(2) */
 
