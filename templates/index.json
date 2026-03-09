@@ -9,62 +9,65 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "rich_text_eKhTRd": {
+      "type": "rich-text",
       "blocks": {
-        "heading": {
+        "heading_fRCGXf": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "heading": "El verano nunca acaba con Robin.",
+            "heading_size": "h2"
           }
         },
-        "button": {
-          "type": "buttons",
+        "text_4wWwtP": {
+          "type": "text",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
+            "text": "<p>Encuentra en nuestra tienda online oficial tus bikinis y bañadores para tus escapadas a la playa, tus momentos en la piscina, y cualquier plan que imagines. ¡Estampados únicos y formas para todos los cuerpos! Encuentra tu bikini ideal: balconette, triángulo, bandeau, de talle alto, tiras o lazo... Compra tu bikini y disfrútalo. </p>"
+          }
+        },
+        "button_n39qBb": {
+          "type": "button",
+          "settings": {
+            "button_label": "OPTIONAL LINK",
+            "button_link": "",
+            "button_style_secondary": true,
+            "button_label_2": "OPTIONAL LINK",
             "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_style_secondary_2": true
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "heading_fRCGXf",
+        "text_4wWwtP",
+        "button_n39qBb"
       ],
+      "name": "t:sections.rich-text.presets.name",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "collection": "all",
+        "products_to_show": 8,
         "title": "Featured products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -72,13 +75,14 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "image_banner",
+    "rich_text_eKhTRd",
     "featured_collection"
   ]
 }
