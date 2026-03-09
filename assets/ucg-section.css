@@ -20,6 +20,21 @@
     height: 100%;
 }
 
+.section_head_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.section_head_wrapper p {
+    margin: 0;
+    color: #0A0B0A;
+    font-size: 16px;
+    line-height: 28px;
+    font-family: Jost-Regular;
+    font-weight: 400;
+}
+
 @media screen and (max-width: 600px) {
     .section_media_wrapper {
         display: grid;
