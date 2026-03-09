@@ -104,6 +104,7 @@
       "name": "Collections Blocks",
       "settings": {
         "block_column": 3,
+        "title_alignment": "top",
         "padding_top_desktop": 0,
         "padding_bottom_desktop": 0,
         "padding_top_mobile": 0,
