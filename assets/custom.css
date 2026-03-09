@@ -85,6 +85,11 @@
         font-size: 24px;
         line-height: 38px;
     }
+    .product_cst_badge {
+        padding: 8px;
+        font-size: 10px;
+        line-height: 16px;
+    }
 
 }
 
