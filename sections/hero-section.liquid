@@ -74,24 +74,24 @@
   {% if mobile_image_url %}
     {% comment %} <img src="{{ mobile_image_url }}" alt="Mobile Image" class="mobile-image" /> {% endcomment %}
 
-    <div class=" mobile-image  mobile_image_wrap" style="padding-top: {{ 1 | divided_by: desktop_image_url.aspect_ratio | times: 100 }}%;">
+    <div class=" mobile-image  mobile_image_wrap" style="padding-top: {{ 1 | divided_by: mobile_image_url.aspect_ratio | times: 100 }}%;">
                 <img
                   srcset="
-                    {% if desktop_image_url.width >= 350 %}{{ desktop_image_url | image_url: width: 350 }} 350w,{% endif %}
-                    {% if desktop_image_url.width >= 750 %}{{ desktop_image_url | image_url: width: 750 }} 750w,{% endif %}
-                    {% if desktop_image_url.width >= 1100 %}{{ desktop_image_url | image_url: width: 1100 }} 1100w,{% endif %}
-                    {% if desktop_image_url.width >= 1500 %}{{ desktop_image_url | image_url: width: 1500 }} 1500w,{% endif %}
-                    {% if desktop_image_url.width >= 2200 %}{{ desktop_image_url | image_url: width: 2200 }} 2200w,{% endif %}
-                    {% if desktop_image_url.width >= 3000 %}{{ desktop_image_url | image_url: width: 3000 }} 3000w,{% endif %}
-                    {{ desktop_image_url | image_url }} {{ desktop_image_url.width }}w
+                    {% if mobile_image_url.width >= 350 %}{{ mobile_image_url | image_url: width: 350 }} 350w,{% endif %}
+                    {% if mobile_image_url.width >= 750 %}{{ mobile_image_url | image_url: width: 750 }} 750w,{% endif %}
+                    {% if mobile_image_url.width >= 1100 %}{{ mobile_image_url | image_url: width: 1100 }} 1100w,{% endif %}
+                    {% if mobile_image_url.width >= 1500 %}{{ mobile_image_url | image_url: width: 1500 }} 1500w,{% endif %}
+                    {% if mobile_image_url.width >= 2200 %}{{ mobile_image_url | image_url: width: 2200 }} 2200w,{% endif %}
+                    {% if mobile_image_url.width >= 3000 %}{{ mobile_image_url | image_url: width: 3000 }} 3000w,{% endif %}
+                    {{ mobile_image_url | image_url }} {{ mobile_image_url.width }}w
                   "
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                  src="{{ desktop_image_url | image_url: width: 1100 }}"
+                  src="{{ mobile_image_url | image_url: width: 1100 }}"
                   loading="eager"
                   fetchpriority="high"
-                  width="{{ desktop_image_url.width }}"
-                  height="{{ desktop_image_url.height }}"
-                  alt="{{ desktop_image_url.alt | escape }}"
+                  width="{{ mobile_image_url.width }}"
+                  height="{{ mobile_image_url.height }}"
+                  alt="{{ mobile_image_url.alt | escape }}"
                 >
               <div> 
 
