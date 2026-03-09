@@ -36,11 +36,7 @@
     transition: all 0.3s ease-in-out;
 }
 /* 
-.custom_transparant_navigation:hover {
-    background: #ffffff;
-}  
-
-.custom_transparant_navigation:hover .transparant_logo_visible {
+ .custom_transparant_navigation:hover .transparant_logo_visible {
     display:  none;
 }
 .custom_transparant_navigation .defult_logo {
@@ -73,6 +69,9 @@
     display: block;
 } */
 
+.custom_transparant_navigation:hover {
+    background: #ffffff;
+} 
 
 .custom_transparant_navigation:hover .defult_logo img {
     filter: invert(1);
