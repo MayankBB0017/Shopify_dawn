@@ -27,31 +27,6 @@
       "content": "Section Spacing"
     },
     {
-        "type": "range",
-        "id": "block_column",
-        "min": 2,
-        "max": 5,
-        "step": 1,
-        "label": "Column Layout",
-        "default": 3
-    },
-    {
-    "type": "select",
-    "id": "title_alignment",
-    "label": "Title alignment",
-    "options": [
-        {
-        "value": "top",
-        "label": "Top Left"
-        },
-        {
-        "value": "middle",
-        "label": "Middle Bottom"
-        }
-    ],
-    "default": "middle"
-    },
-    {
       "type": "range",
       "id": "padding_top_desktop",
       "label": "Padding Top Desktop",
@@ -90,23 +65,13 @@
   ],
   "blocks": [
     {
-      "type": "collection_block",
-      "name": "Collection Block",
+      "type": "item",
+      "name": "Item",
       "settings": [
         {
-          "type": "collection",
-          "id": "collection",
-          "label": "Select Collection"
-        },
-        {
-          "type": "image_picker",
-          "id": "custom_image",
-          "label": "Custom Image (Fallback)"
-        },
-        {
-          "type": "text",
-          "id": "custom_title",
-          "label": "Custom Title"
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo "
         }
       ]
     }
