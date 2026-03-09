@@ -126,3 +126,17 @@
   gap: 24px;
   display: flex;
 }
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  .cst_richtext_section h2.rich-text__heading {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+
