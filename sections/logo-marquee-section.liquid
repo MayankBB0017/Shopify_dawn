@@ -1,43 +1,99 @@
 <style>
-  .section-padding-{{section.id }} {
+  .section-padding-{{ section.id }} {
     padding-top: {{ section.settings.padding_top_desktop }}px;
     padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
   }
 
   @media screen and (max-width: 749px) {
-    .section-padding-{{section.id }} {
+    .section-padding-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_mobile }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     }
   }
+  .logo_marquee_section .marquee {
+    overflow: hidden;
+    position: relative;
+  }
 
+  .logo_marquee_section .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll {{ section.settings.marquee_speed }}s linear infinite;
+  }
+  {% if section.settings.pause_on_hover %}
+  .logo_marquee_section .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  {% endif %}
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .logo_marquee_section .icon_wrapper {
+    flex: 0 0 auto;
+    margin-right: 2rem;
+  }
+
+  .logo_marquee_section img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
 </style>
 
-<section class="logo_marquee_section section-padding-{{section.id }} "> 
-     {% for block in section.blocks %}
+<section class="logo_marquee_section section-padding-{{ section.id }}">
+  <div class="marquee">
+    <div class="marquee-track">
+      {% for block in section.blocks %}
         <div class="icon_wrapper">
-            <img
-                srcset="
-                {% if block.settings.logo.width >= 350 %}{{ block.settings.logo | image_url: width: 350 }} 350w,{% endif %}
-                {% if block.settings.logo.width >= 750 %}{{ block.settings.logo | image_url: width: 750 }} 750w,{% endif %}
-                {% if block.settings.logo.width >= 1100 %}{{ block.settings.logo | image_url: width: 1100 }} 1100w,{% endif %}
-                {% if block.settings.logo.width >= 1500 %}{{ block.settings.logo | image_url: width: 1500 }} 1500w,{% endif %}
-                {% if block.settings.logo.width >= 2200 %}{{ block.settings.logo | image_url: width: 2200 }} 2200w,{% endif %}
-                {% if block.settings.logo.width >= 3000 %}{{ block.settings.logo | image_url: width: 3000 }} 3000w,{% endif %}
-                {{ block.settings.logo | image_url }} {{ block.settings.logo.width }}w
-                "
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                src="{{ block.settings.logo | image_url: width: 1100 }}"
-                loading="eager"
-                fetchpriority="high"
-                width="{{ block.settings.logo.width }}"
-                height="{{ block.settings.logo.height }}"
-                alt="{{ block.settings.logo.alt | escape }}"
-            >
+          <img
+            srcset="
+              {% if block.settings.logo.width >= 350 %}{{ block.settings.logo | image_url: width: 350 }} 350w,{% endif %}
+              {% if block.settings.logo.width >= 750 %}{{ block.settings.logo | image_url: width: 750 }} 750w,{% endif %}
+              {% if block.settings.logo.width >= 1100 %}{{ block.settings.logo | image_url: width: 1100 }} 1100w,{% endif %}
+              {% if block.settings.logo.width >= 1500 %}{{ block.settings.logo | image_url: width: 1500 }} 1500w,{% endif %}
+              {{ block.settings.logo | image_url }} {{ block.settings.logo.width }}w
+            "
+            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+            src="{{ block.settings.logo | image_url: width: 1100 }}"
+            loading="eager"
+            fetchpriority="high"
+            width="{{ block.settings.logo.width }}"
+            height="{{ block.settings.logo.height }}"
+            alt="{{ block.settings.logo.alt | escape }}"
+          >
         </div>
-     {% endfor %}
-</section>
+      {% endfor %}
 
+      {% for block in section.blocks %}
+        <div class="icon_wrapper">
+          <img
+            srcset="
+              {% if block.settings.logo.width >= 350 %}{{ block.settings.logo | image_url: width: 350 }} 350w,{% endif %}
+              {% if block.settings.logo.width >= 750 %}{{ block.settings.logo | image_url: width: 750 }} 750w,{% endif %}
+              {% if block.settings.logo.width >= 1100 %}{{ block.settings.logo | image_url: width: 1100 }} 1100w,{% endif %}
+              {% if block.settings.logo.width >= 1500 %}{{ block.settings.logo | image_url: width: 1500 }} 1500w,{% endif %}
+              {{ block.settings.logo | image_url }} {{ block.settings.logo.width }}w
+            "
+            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+            src="{{ block.settings.logo | image_url: width: 1100 }}"
+            loading="eager"
+            fetchpriority="high"
+            width="{{ block.settings.logo.width }}"
+            height="{{ block.settings.logo.height }}"
+            alt="{{ block.settings.logo.alt | escape }}"
+          >
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
@@ -82,6 +138,21 @@
       "max": 200,
       "step": 5,
       "default": 30
+    },
+    {
+        "type": "range",
+        "id": "marquee_speed",
+        "label": "Marquee Speed (seconds)",
+        "min": 10,
+        "max": 110,
+        "step": 1,
+        "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on Hover",
+      "default": true
     }
   ],
   "blocks": [
@@ -90,9 +161,9 @@
       "name": "Item",
       "settings": [
         {
-            "type": "image_picker",
-            "id": "logo",
-            "label": "Logo "
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
         }
       ]
     }
