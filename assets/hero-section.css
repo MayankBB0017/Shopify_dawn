@@ -14,8 +14,15 @@
     object-fit: cover;
 }
 
+.mobile_image_wrap {
+    display: none;
+}
+
 @media screen and (max-width: 800px) {
     .Desktop_image_wrapper {
         display: none;
     }
+    .mobile_image_wrap {
+        display: block;
+    }   
 }
