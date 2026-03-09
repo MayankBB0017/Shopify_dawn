@@ -200,7 +200,7 @@
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
-      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset  cst_main_shop_logo_url">
+      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset ">
         {%- if settings.logo != blank -%}
           <div class="header__heading-logo-wrapper  defult_logo">
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
@@ -221,37 +221,6 @@
             }}
           </div>
 
-
-          {% if section.settings.transparant_logo != blank  %}
-
-
-          <div class="header__heading-logo-wrapper transparant_logo_visible">
-            <div class="trans_header_hover_logo">
-              <div class="custom_trans_logo_wrap" style="padding-top: {{ 1 | divided_by: section.settings.transparant_logo.aspect_ratio | times: 100 }}%;">
-                <img
-                  srcset="
-                    {% if section.settings.transparant_logo.width >= 350 %}{{ section.settings.transparant_logo | image_url: width: 350 }} 350w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 750 %}{{ section.settings.transparant_logo | image_url: width: 750 }} 750w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 1100 %}{{ section.settings.transparant_logo | image_url: width: 1100 }} 1100w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 1500 %}{{ section.settings.transparant_logo | image_url: width: 1500 }} 1500w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 2200 %}{{ section.settings.transparant_logo | image_url: width: 2200 }} 2200w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 3000 %}{{ section.settings.transparant_logo | image_url: width: 3000 }} 3000w,{% endif %}
-                    {{ section.settings.transparant_logo | image_url }} {{ section.settings.transparant_logo.width }}w
-                  "
-                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                  src="{{ section.settings.transparant_logo | image_url: width: 1100 }}"
-                  loading="eager"
-                  fetchpriority="high"
-                  width="{{ section.settings.transparant_logo.width }}"
-                  height="{{ section.settings.transparant_logo.height }}"
-                  alt="{{ section.settings.transparant_logo.alt | escape }}"
-                >
-              <div>
-            </div>
-          </div>
-
-          {% endif %}
-
         {%- else -%}
           <span class="h2">{{ shop.name }}</span>
         {%- endif -%}
@@ -259,6 +228,40 @@
       {%- if request.page_type == 'index' -%}
         </h1>
       {%- endif -%}
+
+
+
+          {% if section.settings.transparant_logo != blank  %}
+
+
+            <div class="header__heading-logo-wrapper transparant_logo_visible">
+              <div class="trans_header_hover_logo">
+                <div class="custom_trans_logo_wrap" style="padding-top: {{ 1 | divided_by: section.settings.transparant_logo.aspect_ratio | times: 100 }}%;">
+                  <img
+                    srcset="
+                      {% if section.settings.transparant_logo.width >= 350 %}{{ section.settings.transparant_logo | image_url: width: 350 }} 350w,{% endif %}
+                      {% if section.settings.transparant_logo.width >= 750 %}{{ section.settings.transparant_logo | image_url: width: 750 }} 750w,{% endif %}
+                      {% if section.settings.transparant_logo.width >= 1100 %}{{ section.settings.transparant_logo | image_url: width: 1100 }} 1100w,{% endif %}
+                      {% if section.settings.transparant_logo.width >= 1500 %}{{ section.settings.transparant_logo | image_url: width: 1500 }} 1500w,{% endif %}
+                      {% if section.settings.transparant_logo.width >= 2200 %}{{ section.settings.transparant_logo | image_url: width: 2200 }} 2200w,{% endif %}
+                      {% if section.settings.transparant_logo.width >= 3000 %}{{ section.settings.transparant_logo | image_url: width: 3000 }} 3000w,{% endif %}
+                      {{ section.settings.transparant_logo | image_url }} {{ section.settings.transparant_logo.width }}w
+                    "
+                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                    src="{{ section.settings.transparant_logo | image_url: width: 1100 }}"
+                    loading="eager"
+                    fetchpriority="high"
+                    width="{{ section.settings.transparant_logo.width }}"
+                    height="{{ section.settings.transparant_logo.height }}"
+                    alt="{{ section.settings.transparant_logo.alt | escape }}"
+                  >
+                <div>
+              </div>
+            </div>
+
+          {% endif %}
+
+
     {%- endif -%}
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
