@@ -2,6 +2,7 @@
     display: grid;
 }
 
-/* .collections_blocks_wrap .section_layout_3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-} */
+.collection_image_wrap img {
+    max-width: 100%;
+    object-fit: cover;
+}
