@@ -39,6 +39,12 @@
     font-family: 'Jost-Regular';
     font-weight: 400;
 }
+
+* {
+    font-family: 'Jost-Regular';
+    font-weight: 400;
+}
+
 /* 
  .custom_transparant_navigation:hover .transparant_logo_visible {
     display:  none;
