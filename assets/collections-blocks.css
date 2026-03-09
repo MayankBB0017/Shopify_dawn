@@ -10,6 +10,10 @@
     position: relative;
 }
 
+a.collection_url {
+    display: block;
+}
+
 a.collection_url:after {
     position: absolute;
     content: '';
