@@ -109,5 +109,11 @@
 }
 
 .cst_richtext_section  a.button.button--secondary {
-  
+  font-size: 14px;
+  line-height: 18px;
+  font-family: Jost-Regular;
+  text-decoration: underline;
+  font-weight: 400;
+  color: #000000;
+  padding: 0;
 }
