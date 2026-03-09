@@ -57,6 +57,7 @@
 
 .section_head_wrap {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 24px;
 }
