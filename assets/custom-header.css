@@ -30,3 +30,8 @@
     display: none;
 }
 
+.custom_transparant_navigation .header__menu-item {
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+
