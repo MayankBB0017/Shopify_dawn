@@ -19,3 +19,10 @@
 .block_mage_wrapper {
     height: 100%;
 }
+
+@media screen and (max-width: 600px) {
+    .section_media_wrapper {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
