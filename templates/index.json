@@ -126,11 +126,11 @@
       ],
       "name": "Collections Blocks",
       "settings": {
-        "block_column": 3,
-        "padding_top_desktop": 50,
-        "padding_bottom_desktop": 50,
-        "padding_top_mobile": 30,
-        "padding_bottom_mobile": 30
+        "block_column": 5,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
       }
     },
     "featured_collection": {
