@@ -99,6 +99,10 @@
     .product-card-wrapper .card__information {
         padding: 8px 11px 0px 8px !important;
     }
+    .product-card-wrapper .card__information .price {
+        font-size: 12px;
+        line-height: 18px;
+    }
 
 }
 
