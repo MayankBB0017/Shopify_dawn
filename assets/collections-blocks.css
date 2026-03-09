@@ -47,6 +47,10 @@ h2.collection_title {
     padding: 24px;
 }
 
+.middle_bottom_set h2.collection_title {
+    
+} 
+
 @media screen and (max-width: 1200px) {
     .collections_blocks_wrap {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
