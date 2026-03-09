@@ -48,7 +48,11 @@ h2.collection_title {
 }
 
 .middle_bottom_set h2.collection_title {
-    
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
 } 
 
 @media screen and (max-width: 1200px) {
