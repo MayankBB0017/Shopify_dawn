@@ -7,6 +7,7 @@
     object-fit: cover;
     transition: all 0.3s ease-in-out;
     height: 100%;
+    width: 100%;
 }
 
 .collection_image_wrap:hover img {
