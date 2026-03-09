@@ -3,5 +3,5 @@
 }
 
 .product-card-wrapper .card__information {
-    padding-inline : 16px;
+    padding-inline : 16px !important;
 }
