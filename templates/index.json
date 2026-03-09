@@ -334,6 +334,21 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0
       }
+    },
+    "ucg_section_EMnJBk": {
+      "type": "ucg-section",
+      "name": "UCG Section",
+      "settings": {
+        "img1": "shopify://shop_images/Captura_de_pantalla_2024-12-04_a_las_16.26.06_1.png",
+        "img2": "shopify://shop_images/Captura_de_pantalla_2024-12-04_a_las_16.25.46_1.png",
+        "img3": "shopify://shop_images/category_x2_9f96091d-5e20-4e5d-9998-bf516690d6d0.png",
+        "img4": "shopify://shop_images/category_x2_57700ad6-4755-4daa-ae4e-016602fd0e7d.png",
+        "img5": "shopify://shop_images/category_x2_7cdeff8a-2d9b-4e4e-9d15-87b55af12ef1.png",
+        "padding_top_desktop": 50,
+        "padding_bottom_desktop": 50,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
     }
   },
   "order": [
@@ -344,6 +359,7 @@
     "collections_blocks_m3pEet",
     "featured_collection_9qJH9U",
     "logo_marquee_section_DMzbib",
-    "collections_blocks_N9wpr4"
+    "collections_blocks_N9wpr4",
+    "ucg_section_EMnJBk"
   ]
 }
