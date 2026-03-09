@@ -41,4 +41,8 @@
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
+    .section_head_wrapper p {
+        font-size: 14px;
+        line-height: 20px;
+    }
 }
