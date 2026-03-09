@@ -212,6 +212,15 @@
     color: #000000;
 }
 
+.mega-menu__link .mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper li a {
+     font-size: 12px;
+    line-height: 14px;
+    font-family: 'Jost-Regular';
+    font-weight: 400;
+    color: #000000;
+}
+
+
 .mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper  li:first-child,
 .mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper  li:first-child a,
 .mega-menu .admin_nav_with_custom_megamenu_blocks ul.main_chaild_megamenu_wrapper  li:first-child a ul li a {
