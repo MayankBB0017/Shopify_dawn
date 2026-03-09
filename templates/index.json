@@ -86,6 +86,7 @@
       ],
       "name": "Collections Blocks",
       "settings": {
+        "block_column": 4,
         "padding_top_desktop": 50,
         "padding_bottom_desktop": 50,
         "padding_top_mobile": 30,
