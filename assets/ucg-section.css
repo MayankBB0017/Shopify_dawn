@@ -87,7 +87,13 @@
 }
 
 @media screen and (max-width: 768px)  {
-    
+    .section_footer_wrapper .text_block_wrap {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .section_footer_wrapper .text_block_wrap p:after {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 600px) {
