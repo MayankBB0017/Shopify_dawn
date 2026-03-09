@@ -1,0 +1,15 @@
+{{ 'collections-blocks.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .section-padding-{{section.id }} {
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    @media screen and (max-width: 749px) {
+    .section-padding-{{section.id }} {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    }
+</style>
