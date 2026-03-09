@@ -20,7 +20,7 @@
 
     {% if section.settings.desktop_image != blank %}
 
-     <div class="Desktop_image_wrapper" style="padding-top: {{ 1 | divided_by: section.settings.desktop_image.aspect_ratio | times: 100 }}%;">
+     <div class="Desktop_image_wrapper {% if section.settings.mobile_image != blank %} desktop_hidden {%else %} shown_desktop {% endif %} " style="padding-top: {{ 1 | divided_by: section.settings.desktop_image.aspect_ratio | times: 100 }}%;">
         <img
             srcset="
             {% if section.settings.desktop_image.width >= 350 %}{{ section.settings.desktop_image | image_url: width: 350 }} 350w,{% endif %}

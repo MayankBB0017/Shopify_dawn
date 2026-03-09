@@ -24,5 +24,8 @@
     }
     .mobile_image_wrap {
         display: block;
-    }   
+    }  
+    .shown_desktop  {
+        display: block;
+    }  
 }
