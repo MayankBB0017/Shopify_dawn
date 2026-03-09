@@ -15,10 +15,12 @@
 </style>
 
 <section class="ucs_section section-padding-{{section.id }} ">
-    <div class="section_head_wrapper page-width">
-        {% for block in section.blocks %}
-            <p class="head_text">{{ block.settings.head_text }}</p>
-        {% endfor %}
+    <div class="section_head_wrapper">
+        <div class="page-width">
+            {% for block in section.blocks %}
+                <p class="head_text">{{ block.settings.head_text }}</p>
+            {% endfor %}
+        </div>
     </div>
     <div class="section_media_wrapper">
         <div class="left_col_wrap col_wrap">
@@ -116,10 +118,12 @@
             </div>
         </div>
     </div>
-    <div class="section_footer_wrapper page-width">
-        {% for block in section.blocks %}
-            <p class="footer_text">{{ block.settings.head_text }}</p>
-        {% endfor %}
+    <div class="section_footer_wrapper">
+        <div class="page-width">
+            {% for block in section.blocks %}
+                <p class="footer_text">{{ block.settings.head_text }}</p>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
