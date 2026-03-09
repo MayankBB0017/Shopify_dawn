@@ -64,7 +64,7 @@
     content: '';
     height: 100%;
     width: 1px;
-    right: 0;
+    right: -50px;
     background: #000000;
 }
 
