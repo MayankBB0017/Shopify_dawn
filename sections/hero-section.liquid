@@ -44,35 +44,57 @@
 
 <div class="responsive-image-section">
   {% if desktop_image_url %}
-    <img src="{{ desktop_image_url }}" alt="Desktop Image" class="desktop-image" />
+    {% comment %} <img src="{{ desktop_image_url }}" alt="Desktop Image" class="desktop-image" /> {% endcomment %}
 
 
-            {% comment %} <div class="custom_trans_logo_wrap" style="padding-top: {{ 1 | divided_by: section.settings.transparant_logo.aspect_ratio | times: 100 }}%;">
+             <div class="desktop_image_wrap desktop-image" style="padding-top: {{ 1 | divided_by: desktop_image_url.aspect_ratio | times: 100 }}%;">
                 <img
                   srcset="
-                    {% if section.settings.transparant_logo.width >= 350 %}{{ section.settings.transparant_logo | image_url: width: 350 }} 350w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 750 %}{{ section.settings.transparant_logo | image_url: width: 750 }} 750w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 1100 %}{{ section.settings.transparant_logo | image_url: width: 1100 }} 1100w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 1500 %}{{ section.settings.transparant_logo | image_url: width: 1500 }} 1500w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 2200 %}{{ section.settings.transparant_logo | image_url: width: 2200 }} 2200w,{% endif %}
-                    {% if section.settings.transparant_logo.width >= 3000 %}{{ section.settings.transparant_logo | image_url: width: 3000 }} 3000w,{% endif %}
-                    {{ section.settings.transparant_logo | image_url }} {{ section.settings.transparant_logo.width }}w
+                    {% if desktop_image_url.width >= 350 %}{{ desktop_image_url | image_url: width: 350 }} 350w,{% endif %}
+                    {% if desktop_image_url.width >= 750 %}{{ desktop_image_url | image_url: width: 750 }} 750w,{% endif %}
+                    {% if desktop_image_url.width >= 1100 %}{{ desktop_image_url | image_url: width: 1100 }} 1100w,{% endif %}
+                    {% if desktop_image_url.width >= 1500 %}{{ desktop_image_url | image_url: width: 1500 }} 1500w,{% endif %}
+                    {% if desktop_image_url.width >= 2200 %}{{ desktop_image_url | image_url: width: 2200 }} 2200w,{% endif %}
+                    {% if desktop_image_url.width >= 3000 %}{{ desktop_image_url | image_url: width: 3000 }} 3000w,{% endif %}
+                    {{ desktop_image_url | image_url }} {{ desktop_image_url.width }}w
                   "
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                  src="{{ section.settings.transparant_logo | image_url: width: 1100 }}"
+                  src="{{ desktop_image_url | image_url: width: 1100 }}"
                   loading="eager"
                   fetchpriority="high"
-                  width="{{ section.settings.transparant_logo.width }}"
-                  height="{{ section.settings.transparant_logo.height }}"
-                  alt="{{ section.settings.transparant_logo.alt | escape }}"
+                  width="{{ desktop_image_url.width }}"
+                  height="{{ desktop_image_url.height }}"
+                  alt="{{ desktop_image_url.alt | escape }}"
                 >
-              <div> {% endcomment %}
+              <div> 
 
 
   {% endif %}
   
   {% if mobile_image_url %}
-    <img src="{{ mobile_image_url }}" alt="Mobile Image" class="mobile-image" />
+    {% comment %} <img src="{{ mobile_image_url }}" alt="Mobile Image" class="mobile-image" /> {% endcomment %}
+
+    <div class="desktop_image_wrap  mobile-image  mobile_image_wrap" style="padding-top: {{ 1 | divided_by: desktop_image_url.aspect_ratio | times: 100 }}%;">
+                <img
+                  srcset="
+                    {% if desktop_image_url.width >= 350 %}{{ desktop_image_url | image_url: width: 350 }} 350w,{% endif %}
+                    {% if desktop_image_url.width >= 750 %}{{ desktop_image_url | image_url: width: 750 }} 750w,{% endif %}
+                    {% if desktop_image_url.width >= 1100 %}{{ desktop_image_url | image_url: width: 1100 }} 1100w,{% endif %}
+                    {% if desktop_image_url.width >= 1500 %}{{ desktop_image_url | image_url: width: 1500 }} 1500w,{% endif %}
+                    {% if desktop_image_url.width >= 2200 %}{{ desktop_image_url | image_url: width: 2200 }} 2200w,{% endif %}
+                    {% if desktop_image_url.width >= 3000 %}{{ desktop_image_url | image_url: width: 3000 }} 3000w,{% endif %}
+                    {{ desktop_image_url | image_url }} {{ desktop_image_url.width }}w
+                  "
+                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                  src="{{ desktop_image_url | image_url: width: 1100 }}"
+                  loading="eager"
+                  fetchpriority="high"
+                  width="{{ desktop_image_url.width }}"
+                  height="{{ desktop_image_url.height }}"
+                  alt="{{ desktop_image_url.alt | escape }}"
+                >
+              <div> 
+
   {% endif %}
 </div>
 
