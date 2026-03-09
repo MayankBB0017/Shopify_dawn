@@ -25,4 +25,10 @@
     letter-spacing: 0;
 }
 
-.product-card-wrapper .card__information
+.product-card-wrapper .card__information .price-item--regular {
+    color: #B3B3B3;
+     font-size: 14px;
+    line-height: 22px;
+    font-family: Jost-Regular;
+    font-weight: 400;
+}
