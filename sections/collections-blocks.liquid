@@ -12,6 +12,11 @@
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     }
   }
+
+  .collections_blocks_wrap .section_layout_3 {
+    grid-template-columns: repeat({{section.settings.block_column }}, minmax(0, 1fr));
+  }
+
 </style>
 
 <section class="collection_blocks_section section-padding-{{section.id}}"> 
