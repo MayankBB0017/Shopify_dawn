@@ -47,11 +47,17 @@
     display: none;
 }
 
+.custom_transparant_navigation:hover .defult_logo {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
+
 .custom_transparant_navigation:hover .header__menu-item {
     color: #000000;
 }
 
-.custom_transparant_navigation:hover .transparant_logo_visible {
+.custom_transparant_navigation .transparant_logo_visible {
     opacity: 1;
     visibility: visible;
     display: block;
