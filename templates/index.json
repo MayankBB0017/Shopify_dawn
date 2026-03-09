@@ -355,12 +355,26 @@
           "settings": {
             "footer_text": "Free Standard Shipping Over $300"
           }
+        },
+        "footer_text_6m4N7Y": {
+          "type": "footer_text",
+          "settings": {
+            "footer_text": "Easy Returns"
+          }
+        },
+        "footer_text_qf6GH6": {
+          "type": "footer_text",
+          "settings": {
+            "footer_text": "Afterpay & Klarna available"
+          }
         }
       },
       "block_order": [
         "head_text_96J6WL",
         "head_text_cwCFjK",
-        "footer_text_dh9Lew"
+        "footer_text_dh9Lew",
+        "footer_text_6m4N7Y",
+        "footer_text_qf6GH6"
       ],
       "name": "UCG Section",
       "settings": {
