@@ -1,6 +1,6 @@
-.card__heading a:after {
+/* .card__heading a:after {
     display: none;
-}
+} */
 
 .product-card-wrapper .card__information {
     padding-inline : 16px !important;
