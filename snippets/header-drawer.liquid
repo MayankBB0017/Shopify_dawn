@@ -139,33 +139,35 @@
 
                           </ul>
 
-                          {% comment %} DRAWER MEGA MENU IMAGE BLOCK {% endcomment %}
-                          {% for block in section.blocks %}
-                            {% assign nav_title = link.title | handleize %}
-                            {% assign block_label = block.settings.label | handleize %}
+                          
+                              {% comment %} CUSTOM IMAGE BLOCK {% endcomment %}
+                              {% for block in section.blocks %}
+                                {% assign nav_title = link.title | handleize %}
+                                {% assign block_label = block.settings.label | handleize %}
 
-                            {% if nav_title == block_label %}
-                              <div class="drawer-mega-menu-image-block">
+                                {% if nav_title == block_label %}
+                                  <div class="mega_menu_image_block">
 
-                                {% if block.settings.image %}
-                                  <a href="{{ block.settings.link }}">
-                                    <img
-                                      src="{{ block.settings.image | image_url: width: 500 }}"
-                                      alt="{{ block.settings.link_name }}"
-                                      loading="lazy"
-                                    >
-                                  </a>
+                                    {% if block.settings.image %}
+                                      <div class="cst_block_image_wrap">
+                                        <a href="{{ block.settings.link }}" class="mega_img_wrap">
+                                          <img
+                                            src="{{ block.settings.image | image_url: width: 400 }}"
+                                            alt="{{ block.settings.link_name }}"
+                                          >
+                                        </a>
+                                    </div>
+                                    {% endif %}
+
+                                    <div class="mega-menu-link-row">
+                                      <a href="{{ block.settings.link }}">
+                                        {{ block.settings.link_name }}
+                                      </a>
+                                    </div>
+
+                                  </div>
                                 {% endif %}
-
-                                <div class="drawer-mega-menu-link">
-                                  <a href="{{ block.settings.link }}">
-                                    {{ block.settings.link_name }}
-                                  </a>
-                                </div>
-
-                              </div>
-                            {% endif %}
-                          {% endfor %}
+                              {% endfor %}
 
                         </div>
                       </div>
