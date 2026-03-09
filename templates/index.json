@@ -294,7 +294,7 @@
       "settings": {
         "padding_top_desktop": 0,
         "padding_bottom_desktop": 90,
-        "padding_top_mobile": 60,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 30,
         "marquee_speed": 28,
         "marquee_direction": "ltr",
