@@ -93,3 +93,7 @@
   font-family: Jost-Regular;
   font-weight: 400;
 }
+
+.cst_richtext_section .rich-text__text {
+  margin-top: 16px;
+}
