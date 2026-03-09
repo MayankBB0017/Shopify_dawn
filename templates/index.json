@@ -111,35 +111,6 @@
         "padding_bottom_mobile": 0
       }
     },
-    "featured_collection_9qJH9U": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
-      "settings": {
-        "collection": "swimwear-1",
-        "products_to_show": 6,
-        "title": "Featured collection",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": true,
-        "full_width": true,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "color_scheme": "",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "collections_blocks_m3pEet": {
       "type": "collections-blocks",
       "blocks": {
@@ -188,6 +159,35 @@
         "padding_bottom_desktop": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0
+      }
+    },
+    "featured_collection_9qJH9U": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "swimwear-1",
+        "products_to_show": 6,
+        "title": "",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": true,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "logo_marquee_section_DMzbib": {
@@ -245,10 +245,10 @@
       ],
       "name": "Logo Marquee Section",
       "settings": {
-        "padding_top_desktop": 90,
+        "padding_top_desktop": 0,
         "padding_bottom_desktop": 90,
         "padding_top_mobile": 60,
-        "padding_bottom_mobile": 60,
+        "padding_bottom_mobile": 0,
         "marquee_speed": 28,
         "marquee_direction": "ltr",
         "marquee_animation_style": "linear",
@@ -340,8 +340,8 @@
     "hero_section_YPk3pc",
     "rich_text_eKhTRd",
     "collections_blocks_BYVedC",
-    "featured_collection_9qJH9U",
     "collections_blocks_m3pEet",
+    "featured_collection_9qJH9U",
     "logo_marquee_section_DMzbib",
     "collections_blocks_N9wpr4",
     "tab_featured_collections_pQwAtY"
