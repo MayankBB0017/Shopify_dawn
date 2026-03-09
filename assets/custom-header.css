@@ -120,7 +120,8 @@
     height: auto;
 }
 
-.header__icons [
+.header__icons {
     align-items: center;
-]
+    column-gap: 16px;
+}
 
