@@ -26,7 +26,7 @@
 }
 
 .product-card-wrapper .card__information .price-item--regular {
-    color: #B3B3B3;
+    color:rgb(0, 0, 0);
      font-size: 14px;
     line-height: 22px;
     font-family: Jost-Regular;
