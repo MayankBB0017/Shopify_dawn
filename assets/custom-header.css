@@ -134,6 +134,7 @@
         right: -2px;
         width: 7px;
     }
+    
 
 
 @media screen and (max-width: 989px)
@@ -143,6 +144,7 @@
     height: 2rem;
     width: 2rem;
     }
+
 
     .header__icons {
         align-items: center;
