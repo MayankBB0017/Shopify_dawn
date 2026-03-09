@@ -291,6 +291,12 @@
     "tab_featured_collections_pQwAtY": {
       "type": "tab-featured-collections",
       "blocks": {
+        "collection_tab_ahtrRH": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "swimwear-1"
+          }
+        },
         "collection_tab_h89MNy": {
           "type": "collection_tab",
           "settings": {
@@ -302,18 +308,12 @@
           "settings": {
             "collection": "inimiates"
           }
-        },
-        "collection_tab_ahtrRH": {
-          "type": "collection_tab",
-          "settings": {
-            "collection": "swimwear-1"
-          }
         }
       },
       "block_order": [
+        "collection_tab_ahtrRH",
         "collection_tab_h89MNy",
-        "collection_tab_p9U478",
-        "collection_tab_ahtrRH"
+        "collection_tab_p9U478"
       ],
       "name": "Tab Featured Collections",
       "settings": {
