@@ -5,6 +5,7 @@
 .collection_image_wrap img {
     max-width: 100%;
     object-fit: cover;
+    transition: all 0.3s ease-in-out;
 }
 .collection_image_wrap {
     position: relative;
