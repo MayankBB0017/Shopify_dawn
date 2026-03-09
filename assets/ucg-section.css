@@ -27,12 +27,20 @@
     padding-bottom: 16px;
 }
 
-.section_head_wrapper p,
-.section_footer_wrapper p  {
+.section_head_wrapper p  {
     margin: 0;
     color: #0A0B0A;
     font-size: 16px;
     line-height: 28px;
+    font-family: Jost-Regular;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.section_footer_wrapper p {
+    color: #0A0B0A;
+    font-size: 14px;
+    line-height: 22px;
     font-family: Jost-Regular;
     font-weight: 400;
     text-transform: uppercase;
