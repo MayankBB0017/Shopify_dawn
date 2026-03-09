@@ -267,6 +267,10 @@
     padding: 11px 52px 11px 30px;
 }
 
+.menu-drawer__inner-submenu .cst_block_image_wrap {
+    max-width: 100%;
+}
+
 
 
 
