@@ -22,6 +22,19 @@ a.collection_url:after {
     height: 100%;
 }
 
+h2.collection_title {
+    position: absolute;
+    top: 0;
+    color: #ffffff;
+    margin: 0;
+    font-family: Jost-Regular;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0;
+    padding: 24px;
+}
+
 @media screen and (max-width: 1200px) {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
