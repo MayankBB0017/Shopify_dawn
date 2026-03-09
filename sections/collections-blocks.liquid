@@ -14,37 +14,51 @@
     }
 </style>
 
-<section class="collection_blocks_section section-padding-{{section.id }} "> 
-    <div class="collections_blocks_wrap">
-    {% for block in section.blocks %} 
-        <div class="collection_image_wrap">
-            <img
-                srcset="
-                {% if section.settings.mobile_image.width >= 350 %}{{ section.settings.mobile_image | image_url: width: 350 }} 350w,{% endif %}
-                {% if section.settings.mobile_image.width >= 750 %}{{ section.settings.mobile_image | image_url: width: 750 }} 750w,{% endif %}
-                {% if section.settings.mobile_image.width >= 1100 %}{{ section.settings.mobile_image | image_url: width: 1100 }} 1100w,{% endif %}
-                {% if section.settings.mobile_image.width >= 1500 %}{{ section.settings.mobile_image | image_url: width: 1500 }} 1500w,{% endif %}
-                {% if section.settings.mobile_image.width >= 2200 %}{{ section.settings.mobile_image | image_url: width: 2200 }} 2200w,{% endif %}
-                {% if section.settings.mobile_image.width >= 3000 %}{{ section.settings.mobile_image | image_url: width: 3000 }} 3000w,{% endif %}
-                {{ section.settings.mobile_image | image_url }} {{ section.settings.mobile_image.width }}w
-                "
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                src="{{ section.settings.mobile_image | image_url: width: 1100 }}"
-                loading="eager"
-                fetchpriority="high"
-                width="{{ section.settings.mobile_image.width }}"
-                height="{{ section.settings.mobile_image.height }}"
-                alt="{{ section.settings.mobile_image.alt | escape }}"
-            >
-        </div>
-    {%endfor %}
-    </div>
+<section class="collection_blocks_section section-padding-{{section.id}}"> 
+  <div class="collections_blocks_wrap">
+    {% for block in section.blocks %}
+      <div class="collection_image_wrap">
+        {% assign collection = block.settings.collection %}
+        {% if collection.metafields.custom.collection_metafeild_image != blank %}
+          {% assign image = collection.metafields.custom.collection_metafeild_image %}
+        {% elsif collection.image != blank %}
+          {% assign image = collection.image %}
+        {% else %}
+          {% assign image = section.settings.mobile_image %}
+        {% endif %}
+        {% if collection.metafields.custom.collection_metafeild_title != blank %}
+          {% assign collection_title = collection.metafields.custom.collection_metafeild_title %}
+        {% else %}
+          {% assign collection_title = collection.title %}
+        {% endif %}
+        <img
+          srcset="
+            {% if image.width >= 350 %}{{ image | image_url: width: 350 }} 350w,{% endif %}
+            {% if image.width >= 750 %}{{ image | image_url: width: 750 }} 750w,{% endif %}
+            {% if image.width >= 1100 %}{{ image | image_url: width: 1100 }} 1100w,{% endif %}
+            {% if image.width >= 1500 %}{{ image | image_url: width: 1500 }} 1500w,{% endif %}
+            {% if image.width >= 2200 %}{{ image | image_url: width: 2200 }} 2200w,{% endif %}
+            {% if image.width >= 3000 %}{{ image | image_url: width: 3000 }} 3000w,{% endif %}
+            {{ image | image_url }} {{ image.width }}w
+          "
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+          src="{{ image | image_url: width: 1100 }}"
+          loading="eager"
+          fetchpriority="high"
+          width="{{ image.width }}"
+          height="{{ image.height }}"
+          alt="{{ collection_title | escape }}"
+        >
+        <h2 class="collection_title">{{ collection_title }}</h2>
+      </div>
+    {% endfor %}
+  </div>
 </section>
 
 
 {% schema %}
 {
-  "name": "Hero Section",
+  "name": "Collections Hero Section",
   "settings": [
     {
       "type": "header",
@@ -53,7 +67,7 @@
     {
       "type": "range",
       "id": "padding_top_desktop",
-      "label": "Padding Top Desktop ",
+      "label": "Padding Top Desktop",
       "min": 0,
       "max": 200,
       "step": 5,
@@ -71,7 +85,7 @@
     {
       "type": "range",
       "id": "padding_top_mobile",
-      "label": "Padding Top Mobile )",
+      "label": "Padding Top Mobile",
       "min": 0,
       "max": 200,
       "step": 5,
@@ -80,19 +94,28 @@
     {
       "type": "range",
       "id": "padding_bottom_mobile",
-      "label": "Padding Bottom Mobile ",
+      "label": "Padding Bottom Mobile",
       "min": 0,
       "max": 200,
       "step": 5,
       "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Fallback CMS Image"
     }
   ],
-   "blocks": [
+  "blocks": [
     {
-      "type": "collection_blocks",
+      "type": "collection_block",
       "name": "Collection Block",
       "settings": [
-
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        }
       ]
     }
   ],
