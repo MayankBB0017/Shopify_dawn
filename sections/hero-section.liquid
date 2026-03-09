@@ -76,6 +76,24 @@
             height="{{ section.settings.mobile_image.height }}"
             alt="{{ section.settings.mobile_image.alt | escape }}"
         >
+            <div class="section_content_wrap">
+                <div class="section_content">
+                    {% if section.settings.title != blank %}
+                        <h1 class="section_heading">{{section.settings.title }}</h1>
+                    {% endif %}
+                    {% if section.settings.text != blank %}
+                     <div class="section_text">{{section.settings.text }}</div>
+                    {% endif %}
+                    <div class="section_btns_wrapper">
+                        {% if section.settings.url1 != blank %}
+                         <a href="{{ section.settings.url1 }}"> {{section.settings.url_text1 }}</a>
+                        {% endif %}
+                        {% if section.settings.url2 != blank %}
+                         <a href="{{ section.settings.url2 }}"> {{section.settings.url_text2 }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
     </div>
     {%endif %}
   </div>
