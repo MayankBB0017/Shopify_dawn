@@ -76,4 +76,7 @@
         font-size: 32px;
         line-height: 40px;
     }
+    .section_content_wrap {
+        padding-bottom: 37px;
+    }
 }
