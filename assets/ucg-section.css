@@ -49,13 +49,6 @@
 
 }
 
-.section_footer_wrapper .text_block_wrap p:first-child span {
-    display: none;
-}
-
-.section_footer_wrapper .text_block_wrap p:last-child span {
-    display: none;
-}
 
 @media screen and (max-width: 600px) {
     .section_media_wrapper {
