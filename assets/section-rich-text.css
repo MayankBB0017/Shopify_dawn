@@ -103,6 +103,7 @@
   color: #000000;
 }
 
-.cst_richtext_sectio .button.button--secondary {
-  
+.cst_richtext_sectio .button.button--secondary:after,
+.cst_richtext_sectio .button.button--secondary:before {
+  content: none;
 }
