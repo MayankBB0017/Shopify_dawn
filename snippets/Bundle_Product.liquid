@@ -1,10 +1,10 @@
 {% assign bundle_products = product.metafields.custom.product_custom_bundle %}
 
 {% if bundle_products %}
-  <div class="bundle-block" id="bundle-block">
+  <div class="bundle-block grid grid--1-col grid--1-col-desktop" id="bundle-block">
 
     {% for bundle_product in bundle_products.value %}
-      <div class="bundle-product-card">
+      <div class="bundle-product-card grid__item ">
 
         {% if bundle_product.featured_image %}
           <img
