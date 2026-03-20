@@ -4,7 +4,7 @@
   <div class="page-width">
     <h2 class="title">Bundle Products</h2>
 
-    <div class="grid grid--2-col grid--4-col-desktop">
+    <div class="grid grid--1-col grid--1-col-desktop">
       {% for bundle_product in bundle_products.value %}
         
         <div class="grid__item">
@@ -13,7 +13,7 @@
               <div class="card card--standard">
                 
                 <!-- Product Image -->
-                <div class="card__media">
+                <div class="card__media_cutom">
                   <img 
                     src="{{ bundle_product.featured_image | image_url: width: 400 }}" 
                     alt="{{ bundle_product.title }}"
