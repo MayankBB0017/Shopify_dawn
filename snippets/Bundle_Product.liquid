@@ -165,7 +165,7 @@
 
         let response;
         try {
-       response = await originalFetch(url, {
+          response = await originalFetch('/cart/add.js', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify(newPayload)
