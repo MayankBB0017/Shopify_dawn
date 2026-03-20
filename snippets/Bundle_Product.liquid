@@ -4,7 +4,7 @@
   <div class="bundle-block grid grid--1-col grid--1-col-desktop" id="bundle-block">
 
     {% for bundle_product in bundle_products.value %}
-      <div class="bundle-product-card grid__item ">
+      <div class="bundle-product-card grid__item">
 
         {% if bundle_product.featured_image %}
           <img
@@ -17,19 +17,17 @@
         <div class="bundle-product-info">
           <p class="bundle-product-title">{{ bundle_product.title }}</p>
           <p class="bundle-product-price">
-            <s>{{ bundle_product.price | money }}</s>
+            {{ bundle_product.price | money }}
           </p>
         </div>
 
         {% assign bundle_variant = bundle_product.variants.first %}
+        <!-- ✅ Always enabled — no disabled attribute, no Select button -->
         <input
           type="hidden"
           class="bundle-variant-id"
           value="{{ bundle_variant.id }}"
-          disabled
         />
-
-        <button type="button" class="bundle-select-btn">Select</button>
 
       </div>
     {% endfor %}
@@ -37,7 +35,11 @@
   </div>
 
   <style>
-
+    .bundle-product-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
     img.bundle-product-image {
       max-width: 120px;
     }
@@ -46,40 +48,11 @@
       flex-direction: column;
       gap: 20px;
     }
-    .bundle-select-btn {
-      padding: 8px 18px;
-      border: 2px solid #000;
-      background: #fff;
-      color: #000;
-      cursor: pointer;
-      font-size: 14px;
-      border-radius: 4px;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
-    }
-    .bundle-select-btn.selected {
-      background: #000;
-      color: #fff;
-    }
   </style>
 
   <script>
   (function() {
     console.log("🟡 [Bundle] Script loaded");
-
-    // ✅ Select / Deselect button logic
-    document.querySelectorAll('.bundle-select-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const card = btn.closest('.bundle-product-card');
-        const input = card.querySelector('.bundle-variant-id');
-        const isSelected = btn.classList.toggle('selected');
-
-        btn.textContent = isSelected ? 'Selected' : 'Select';
-        input.disabled = !isSelected;
-
-        console.log("🟡 [Bundle] Variant", input.value, isSelected ? "selected" : "deselected");
-      });
-    });
 
     const originalFetch = window.fetch;
 
@@ -89,15 +62,15 @@
         console.log("🟡 [Bundle] Intercepted /cart/add call");
         console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
 
-        // ✅ Only pick enabled (selected) bundle variant inputs
-        const bundleVariantEls = document.querySelectorAll('.bundle-variant-id:not([disabled])');
+        // ✅ All bundle variants — no disabled filter
+        const bundleVariantEls = document.querySelectorAll('.bundle-variant-id');
         console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
         bundleVariantEls.forEach((el, i) => {
           console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
         });
 
         if (bundleVariantEls.length === 0) {
-          console.warn("🟠 [Bundle] No child variants selected — passing through");
+          console.warn("🟠 [Bundle] No child variants found — passing through");
           return originalFetch(url, options);
         }
 
@@ -146,6 +119,7 @@
           return originalFetch(url, options);
         }
 
+        // ✅ Child items — hidden in cart via _bundle_role: 'child' property
         const childItems = [...bundleVariantEls].map(el => ({
           id: parseInt(el.value),
           quantity: 1,
