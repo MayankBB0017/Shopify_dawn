@@ -41,3 +41,61 @@
     </div>
   </div>
 {% endif %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.querySelector('form[action="/cart/add"]');
+
+  if (!form) return;
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const mainVariantId = form.querySelector('[name="id"]').value;
+
+    const bundleProducts = [
+      {% for bundle_product in product.metafields.custom.product_custom_bundle.value %}
+        {
+          id: {{ bundle_product.variants.first.id }},
+          title: "{{ bundle_product.title | escape }}"
+        },
+      {% endfor %}
+    ];
+
+    const subproductNames = bundleProducts.map(p => p.title).join(', ');
+
+    let items = [];
+
+    // 👉 MAIN PRODUCT (VISIBLE)
+    items.push({
+      id: mainVariantId,
+      quantity: 1,
+      properties: {
+        Subproducts: subproductNames
+      }
+    });
+
+    // 👉 CHILD PRODUCTS (HIDDEN)
+    bundleProducts.forEach(product => {
+      items.push({
+        id: product.id,
+        quantity: 1,
+        properties: {
+          _isSubproduct: true,
+          parent_variant: mainVariantId
+        }
+      });
+    });
+
+    await fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items })
+    });
+
+    // 👉 OPEN CART DRAWER (Dawn)
+    document.querySelector('cart-drawer')?.open();
+  });
+
+});
+</script>
