@@ -1,7 +1,43 @@
-{% assign bd_product = product.metfield.custom.product_custom_bundle %}
+{% assign bundle_products = product.metafields.custom.product_custom_bundle.value %}
 
-{% if bd_product != blank %}
-    <div class="grid grid--1-col grid--2-col-tablet">
+{% if bundle_products != blank %}
+  <div class="page-width">
+    <h2 class="title">Bundle Products</h2>
 
+    <div class="grid grid--2-col grid--4-col-desktop">
+      {% for bundle_product in bundle_products %}
+        
+        <div class="grid__item">
+          <div class="card-wrapper">
+              
+              <div class="card card--standard">
+                
+                <!-- Product Image -->
+                <div class="card__media">
+                  <img 
+                    src="{{ bundle_product.featured_image | image_url: width: 400 }}" 
+                    alt="{{ bundle_product.title }}"
+                    loading="lazy"
+                  >
+                </div>
+
+                <!-- Product Info -->
+                <div class="card__content">
+                  <h3 class="card__heading">
+                    {{ bundle_product.title }}
+                  </h3>
+
+                  <div class="card__price">
+                    {{ bundle_product.price | money }}
+                  </div>
+                </div>
+
+              </div>
+            
+          </div>
+        </div>
+
+      {% endfor %}
     </div>
+  </div>
 {% endif %}
