@@ -1,4 +1,4 @@
-{% assign bundle_products = product.metafields.custom.bundle_product %}
+{% assign bundle_products = product.metafields.custom.product_custom_bundle %}
 
 {% if bundle_products %}
   <div class="bundle-block" id="bundle-block">
@@ -17,7 +17,7 @@
         <div class="bundle-product-info">
           <p class="bundle-product-title">{{ bundle_product.title }}</p>
           <p class="bundle-product-price">
-            <s>{{ bundle_product.price | money }}</s>            
+            <s>{{ bundle_product.price | money }}</s>
           </p>
         </div>
 
