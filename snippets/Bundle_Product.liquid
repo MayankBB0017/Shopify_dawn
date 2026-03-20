@@ -127,6 +127,7 @@
             }
           }];
 
+        // ✅ Handle JSON string
         } else if (typeof options.body === 'string') {
           console.log("🟡 [Bundle] JSON body detected");
           try {
@@ -164,23 +165,19 @@
 
         let response;
         try {
-          // ✅ KEY FIX: use original `url` not hardcoded '/cart/add.js'
-          // Dawn appends ?sections=cart-drawer,cart-icon-bubble to the URL
-          // which tells Shopify to return pre-rendered section HTML alongside
-          // the cart JSON — stripping it causes parsedState['cart-drawer'] = undefined
-          response = await originalFetch(url, {
+          response = await originalFetch('/cart/add.js', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify(newPayload)
           });
         } catch(networkErr) {
-          console.error("🔴 [Bundle] Network error:", networkErr);
+          console.error("🔴 [Bundle] Network error on /cart/add.js:", networkErr);
           throw networkErr;
         }
 
-        console.log("🟢 [Bundle] Response status:", response.status);
+        console.log("🟢 [Bundle] /cart/add.js response status:", response.status);
 
-        // ✅ Clone so Dawn can read the body stream and open the drawer
+        // ✅ Clone so Dawn can read the response body and open the drawer
         return response.clone();
       }
 
