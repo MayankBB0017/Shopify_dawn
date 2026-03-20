@@ -28,8 +28,8 @@
           value="{{ bundle_variant.id }}"
           disabled
         />
-
-        <button type="button" class="bundle-select-btn">Select</button>
+{% comment %} 
+        <button type="button" class="bundle-select-btn">Select</button> {% endcomment %}
 
       </div>
     {% endfor %}
@@ -50,21 +50,6 @@
       flex-direction: column;
       gap: 20px;
     }
-    .bundle-select-btn {
-      padding: 8px 18px;
-      border: 2px solid #000;
-      background: #fff;
-      color: #000;
-      cursor: pointer;
-      font-size: 14px;
-      border-radius: 4px;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
-    }
-    .bundle-select-btn.selected {
-      background: #000;
-      color: #fff;
-    }
   </style>
 
   <script>
@@ -72,7 +57,7 @@
     console.log("🟡 [Bundle] Script loaded");
 
     // ✅ Select / Deselect button logic
-    document.querySelectorAll('.bundle-select-btn').forEach(function(btn) {
+    {% comment %} document.querySelectorAll('.bundle-select-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         const card = btn.closest('.bundle-product-card');
         const input = card.querySelector('.bundle-variant-id');
@@ -83,7 +68,7 @@
 
         console.log("🟡 [Bundle] Variant", input.value, isSelected ? "selected" : "deselected");
       });
-    });
+    }); {% endcomment %}
 
     const originalFetch = window.fetch;
 
