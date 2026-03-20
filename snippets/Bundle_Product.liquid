@@ -84,8 +84,6 @@
       if (el) observer.observe(el, { childList: true, subtree: true });
     });
 
-    // ─── FETCH OVERRIDE ────────────────────────────────────────────────────
-
     const originalFetch = window.fetch;
 
     window.fetch = async function(url, options = {}) {
