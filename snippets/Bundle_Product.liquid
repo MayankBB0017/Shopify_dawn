@@ -16,13 +16,10 @@
 
         <div class="bundle-product-info">
           <p class="bundle-product-title">{{ bundle_product.title }}</p>
-          <p class="bundle-product-price">
-            {{ bundle_product.price | money }}
-          </p>
+          <p class="bundle-product-price">{{ bundle_product.price | money }}</p>
         </div>
 
         {% assign bundle_variant = bundle_product.variants.first %}
-        <!-- ✅ Always enabled — no disabled attribute, no Select button -->
         <input
           type="hidden"
           class="bundle-variant-id"
@@ -54,20 +51,55 @@
   (function() {
     console.log("🟡 [Bundle] Script loaded");
 
+    // ─── HIDE CHILD ITEMS IN CART (AJAX safe) ─────────────────────────────
+
+    function hideChildBundleItems() {
+      // Covers both cart drawer and cart page
+      document.querySelectorAll('.cart-item').forEach(function(item) {
+        const allText = item.innerText || '';
+        const dlTags  = item.querySelectorAll('dl .product-option, dl dt, dl dd');
+
+        let isChild = false;
+
+        // Method 1: scan <dt>/<dd> pairs
+        dlTags.forEach(function(el) {
+          if (el.textContent.trim() === '_bundle_role') isChild = true;
+        });
+
+        // Method 2: fallback plain text scan (some Dawn versions render differently)
+        if (!isChild && allText.includes('_bundle_role')) isChild = true;
+
+        if (isChild) {
+          item.style.setProperty('display', 'none', 'important');
+          console.log("🟡 [Bundle] Hid child cart item");
+        }
+      });
+    }
+
+    // Run immediately
+    hideChildBundleItems();
+
+    // Re-run whenever cart drawer or cart page DOM updates
+    const observer = new MutationObserver(function() {
+      hideChildBundleItems();
+    });
+
+    ['cart-drawer', 'cart-items', 'main'].forEach(function(sel) {
+      const el = document.querySelector(sel);
+      if (el) observer.observe(el, { childList: true, subtree: true });
+    });
+
+    // ─── FETCH OVERRIDE — ADD BUNDLE ITEMS TO CART ────────────────────────
+
     const originalFetch = window.fetch;
 
     window.fetch = async function(url, options = {}) {
 
       if (typeof url === 'string' && url.includes('/cart/add')) {
         console.log("🟡 [Bundle] Intercepted /cart/add call");
-        console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
 
-        // ✅ All bundle variants — no disabled filter
         const bundleVariantEls = document.querySelectorAll('.bundle-variant-id');
         console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
-        bundleVariantEls.forEach((el, i) => {
-          console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
-        });
 
         if (bundleVariantEls.length === 0) {
           console.warn("🟠 [Bundle] No child variants found — passing through");
@@ -75,31 +107,22 @@
         }
 
         const bundleId = 'bundle_' + Date.now();
-        console.log("🟡 [Bundle] Bundle ID:", bundleId);
-
         let existingItems = [];
 
         if (options.body instanceof FormData) {
-          console.log("🟡 [Bundle] Body is FormData — converting to JSON");
           const formData = options.body;
           const variantId = formData.get('id');
-          const quantity = formData.get('quantity') || 1;
-          console.log("🟡 [Bundle] Extracted from FormData — variantId:", variantId, "quantity:", quantity);
+          const quantity  = formData.get('quantity') || 1;
 
           existingItems = [{
             id: parseInt(variantId),
             quantity: parseInt(quantity),
-            properties: {
-              _bundle_id: bundleId,
-              _bundle_role: 'parent'
-            }
+            properties: { _bundle_id: bundleId, _bundle_role: 'parent' }
           }];
 
         } else if (typeof options.body === 'string') {
-          console.log("🟡 [Bundle] Body is JSON string — parsing");
           try {
             const parsed = JSON.parse(options.body);
-            console.log("🟡 [Bundle] Parsed JSON body:", parsed);
             existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
               .map(item => ({
                 ...item,
@@ -119,26 +142,18 @@
           return originalFetch(url, options);
         }
 
-        // ✅ Child items — hidden in cart via _bundle_role: 'child' property
         const childItems = [...bundleVariantEls].map(el => ({
           id: parseInt(el.value),
           quantity: 1,
-          properties: {
-            _bundle_id: bundleId,
-            _bundle_role: 'child'
-          }
+          properties: { _bundle_id: bundleId, _bundle_role: 'child' }
         }));
 
         const newPayload = { items: [...existingItems, ...childItems] };
-
-        console.log("🟡 [Bundle] Final payload being sent:", JSON.stringify(newPayload, null, 2));
+        console.log("🟡 [Bundle] Final payload:", JSON.stringify(newPayload, null, 2));
 
         return originalFetch(url, {
           ...options,
-          headers: {
-            ...(options.headers || {}),
-            'Content-Type': 'application/json'
-          },
+          headers: { ...(options.headers || {}), 'Content-Type': 'application/json' },
           body: JSON.stringify(newPayload)
         });
       }
@@ -146,7 +161,7 @@
       return originalFetch(url, options);
     };
 
-    console.log("🟢 [Bundle] fetch override active — waiting for add to cart");
+    console.log("🟢 [Bundle] Bundle script ready");
   })();
   </script>
 
