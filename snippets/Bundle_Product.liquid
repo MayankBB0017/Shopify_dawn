@@ -56,8 +56,6 @@
   (function() {
     console.log("[Bundle] Script loaded");
 
-    // ─── HIDE CHILD ITEMS (MutationObserver — AJAX safe) ──────────────────
-
     function hideChildBundleItems() {
       document.querySelectorAll('.cart-item').forEach(function(item) {
         if (item.dataset.bundleChild === 'true') return;
@@ -106,7 +104,6 @@
         const bundleId = 'bundle_' + Date.now();
         let existingItems = [];
 
-        // ✅ Handle FormData (Dawn's default form submit)
         if (options.body instanceof FormData) {
           console.log("[Bundle] FormData detected");
           const formData  = options.body;
@@ -164,10 +161,7 @@
 
         let response;
         try {
-          // ✅ KEY FIX: use original `url` not hardcoded '/cart/add.js'
-          // Dawn appends ?sections=cart-drawer,cart-icon-bubble to the URL
-          // which tells Shopify to return pre-rendered section HTML alongside
-          // the cart JSON — stripping it causes parsedState['cart-drawer'] = undefined
+   
           response = await originalFetch(url, {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
