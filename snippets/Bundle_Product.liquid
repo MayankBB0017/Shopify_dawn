@@ -1,11 +1,11 @@
-{% assign bundle_products = product.metafields.custom.product_custom_bundle.value %}
+{% assign bundle_products = product.metafields.custom.product_custom_bundle %}
 
 {% if bundle_products != blank %}
   <div class="page-width">
     <h2 class="title">Bundle Products</h2>
 
     <div class="grid grid--2-col grid--4-col-desktop">
-      {% for bundle_product in bundle_products %}
+      {% for bundle_product in bundle_products.value %}
         
         <div class="grid__item">
           <div class="card-wrapper">
