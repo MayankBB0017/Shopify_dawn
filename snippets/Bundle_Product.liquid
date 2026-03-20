@@ -42,17 +42,23 @@
   </div>
 {% endif %}
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.querySelector('form[action="/cart/add"]');
-
   if (!form) return;
 
-  form.addEventListener("submit", async function (e) {
+  const submitBtn = form.querySelector('.product-form__submit');
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // 👉 Show loader (Dawn style)
+    submitBtn.classList.add('loading');
+    submitBtn.setAttribute('disabled', true);
 
     const mainVariantId = form.querySelector('[name="id"]').value;
 
+    // 👉 Bundle products from metafield
     const bundleProducts = [
       {% for bundle_product in product.metafields.custom.product_custom_bundle.value %}
         {
@@ -62,23 +68,23 @@ document.addEventListener("DOMContentLoaded", function () {
       {% endfor %}
     ];
 
-    const subproductNames = bundleProducts.map(p => p.title).join(', ');
+    const subNames = bundleProducts.map(p => p.title).join(', ');
 
     let items = [];
 
-    // 👉 MAIN PRODUCT (VISIBLE)
+    // ✅ MAIN PRODUCT (VISIBLE)
     items.push({
       id: mainVariantId,
       quantity: 1,
       properties: {
-        Subproducts: subproductNames
+        Subproducts: subNames
       }
     });
 
-    // 👉 CHILD PRODUCTS (HIDDEN)
-    bundleProducts.forEach(product => {
+    // ✅ SUB PRODUCTS (HIDDEN BUT PRICE INCLUDED)
+    bundleProducts.forEach(p => {
       items.push({
-        id: product.id,
+        id: p.id,
         quantity: 1,
         properties: {
           _isSubproduct: true,
@@ -87,14 +93,29 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    await fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items })
-    });
+    try {
+      // 👉 Add all items
+      await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items })
+      });
 
-    // 👉 OPEN CART DRAWER (Dawn)
-    document.querySelector('cart-drawer')?.open();
+      // 👉 Refresh cart drawer (Dawn)
+      const response = await fetch('/cart?section_id=cart-drawer');
+      const html = await response.text();
+
+      const drawer = document.querySelector('cart-drawer');
+      drawer.renderContents(html);
+      drawer.classList.add('active');
+
+    } catch (err) {
+      console.error(err);
+    }
+
+    // 👉 Reset button
+    submitBtn.classList.remove('loading');
+    submitBtn.removeAttribute('disabled');
   });
 
 });
