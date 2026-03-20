@@ -56,7 +56,7 @@
   (function() {
     console.log("🟡 [Bundle] Script loaded");
 
-    // ─── HIDE CHILD ITEMS ──────────────────────────────────────────────────
+    // ─── HIDE CHILD ITEMS (MutationObserver — AJAX safe) ──────────────────
 
     function hideChildBundleItems() {
       document.querySelectorAll('.cart-item').forEach(function(item) {
@@ -75,25 +75,15 @@
       });
     }
 
-    // ✅ Run immediately
     hideChildBundleItems();
 
-    // ✅ FIX: Watch document.body — always exists,
-    // catches Dawn injecting cart-drawer HTML after AJAX response
-    new MutationObserver(function() {
-      hideChildBundleItems();
-    }).observe(document.body, { childList: true, subtree: true });
-
-    // ✅ Also hook into Dawn's custom event fired after section render
-    document.addEventListener('cart:refresh', function() {
-      console.log("🟡 [Bundle] cart:refresh event — re-hiding children");
+    const observer = new MutationObserver(function() {
       hideChildBundleItems();
     });
 
-    // ✅ Dawn fires this after cart drawer renders
-    document.addEventListener('cart-drawer:open', function() {
-      console.log("🟡 [Bundle] cart-drawer:open event — re-hiding children");
-      hideChildBundleItems();
+    ['cart-drawer', 'cart-items', 'main'].forEach(function(sel) {
+      const el = document.querySelector(sel);
+      if (el) observer.observe(el, { childList: true, subtree: true });
     });
 
     // ─── FETCH OVERRIDE ────────────────────────────────────────────────────
@@ -116,6 +106,7 @@
         const bundleId = 'bundle_' + Date.now();
         let existingItems = [];
 
+        // ✅ Handle FormData (Dawn's default form submit)
         if (options.body instanceof FormData) {
           console.log("🟡 [Bundle] FormData detected");
           const formData  = options.body;
@@ -123,7 +114,7 @@
           const quantity  = parseInt(formData.get('quantity') || 1);
 
           if (!variantId) {
-            console.error("🔴 [Bundle] No variant ID — passing through");
+            console.error("🔴 [Bundle] No variant ID in FormData — passing through");
             return originalFetch(url, options);
           }
 
@@ -173,6 +164,10 @@
 
         let response;
         try {
+          // ✅ KEY FIX: use original `url` not hardcoded '/cart/add.js'
+          // Dawn appends ?sections=cart-drawer,cart-icon-bubble to the URL
+          // which tells Shopify to return pre-rendered section HTML alongside
+          // the cart JSON — stripping it causes parsedState['cart-drawer'] = undefined
           response = await originalFetch(url, {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -185,11 +180,7 @@
 
         console.log("🟢 [Bundle] Response status:", response.status);
 
-        // ✅ Hide immediately after cart add — before drawer animates open
-        setTimeout(function() {
-          hideChildBundleItems();
-        }, 100);
-
+        // ✅ Clone so Dawn can read the body stream and open the drawer
         return response.clone();
       }
 
