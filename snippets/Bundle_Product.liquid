@@ -1,133 +1,183 @@
-{% assign bundle_products = product.metafields.custom.product_custom_bundle %}
+{% assign bundle_products = product.metafields.custom.bundle_product %}
 
-{% if bundle_products != blank %}
-  <div class="page-width">
-    <h2 class="title">Bundle Products</h2>
+{% if bundle_products %}
+  <div class="bundle-block" id="bundle-block">
 
-    <div class="grid grid--1-col grid--1-col-desktop">
-      {% for bundle_product in bundle_products.value %}
-        <div class="grid__item">
-          <div class="card-wrapper">
-            <div class="card card--standard bundle-variant-id">
+    {% for bundle_product in bundle_products.value %}
+      <div class="bundle-product-card">
 
-              <!-- Product Image -->
-              <div class="card__media_custom">
-                <img
-                  src="{{ bundle_product.featured_image | image_url: width: 150 }}"
-                  alt="{{ bundle_product.title }}"
-                  loading="lazy"
-                >
-              </div>
+        {% if bundle_product.featured_image %}
+          <img
+            src="{{ bundle_product.featured_image | img_url: '200x200' }}"
+            alt="{{ bundle_product.title }}"
+            class="bundle-product-image"
+          />
+        {% endif %}
 
-              <!-- Product Info -->
-              <div class="card__content">
-                <input class="cutom_bundle" value="{{ bundle_product.value }}" >
-                <h3 class="card__heading">{{ bundle_product.title }}</h3>
-                <div class="card__price">{{ bundle_product.price | money }}</div>
-              </div>
-
-            </div>
-          </div>
+        <div class="bundle-product-info">
+          <p class="bundle-product-title">{{ bundle_product.title }}</p>
+          <p class="bundle-product-price">
+            <s>{{ bundle_product.price | money }}</s>            
+          </p>
         </div>
-      {% endfor %}
-    </div>
+
+        {% assign bundle_variant = bundle_product.variants.first %}
+        <input
+          type="hidden"
+          class="bundle-variant-id"
+          value="{{ bundle_variant.id }}"
+          disabled
+        />
+
+        <button type="button" class="bundle-select-btn">Select</button>
+
+      </div>
+    {% endfor %}
+
   </div>
-{% endif %}
 
-<script>
-(function() {
-  console.log("🟡 [Bundle] Script loaded");
+  <style>
+    .bundle-product-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    img.bundle-product-image {
+      max-width: 120px;
+    }
+    div#bundle-block {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .bundle-select-btn {
+      padding: 8px 18px;
+      border: 2px solid #000;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .bundle-select-btn.selected {
+      background: #000;
+      color: #fff;
+    }
+  </style>
 
-  const originalFetch = window.fetch;
+  <script>
+  (function() {
+    console.log("🟡 [Bundle] Script loaded");
 
-  window.fetch = async function(url, options = {}) {
+    // ✅ Select / Deselect button logic
+    document.querySelectorAll('.bundle-select-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const card = btn.closest('.bundle-product-card');
+        const input = card.querySelector('.bundle-variant-id');
+        const isSelected = btn.classList.toggle('selected');
 
-    if (typeof url === 'string' && url.includes('/cart/add')) {
-      console.log("🟡 [Bundle] Intercepted /cart/add call");
-      console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
+        btn.textContent = isSelected ? 'Selected' : 'Select';
+        input.disabled = !isSelected;
 
-      const bundleVariantEls = document.querySelectorAll('.bundle-variant-id');
-      console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
-      bundleVariantEls.forEach((el, i) => {
-        console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
+        console.log("🟡 [Bundle] Variant", input.value, isSelected ? "selected" : "deselected");
       });
+    });
 
-      if (bundleVariantEls.length === 0) {
-        console.warn("🟠 [Bundle] No child variants found — passing through");
-        return originalFetch(url, options);
-      }
+    const originalFetch = window.fetch;
 
-      const bundleId = 'bundle_' + Date.now();
-      console.log("🟡 [Bundle] Bundle ID:", bundleId);
+    window.fetch = async function(url, options = {}) {
 
-      let existingItems = [];
+      if (typeof url === 'string' && url.includes('/cart/add')) {
+        console.log("🟡 [Bundle] Intercepted /cart/add call");
+        console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
 
-      if (options.body instanceof FormData) {
-        console.log("🟡 [Bundle] Body is FormData — converting to JSON");
-        const formData = options.body;
-        const variantId = formData.get('id');
-        const quantity = formData.get('quantity') || 1;
-        console.log("🟡 [Bundle] Extracted from FormData — variantId:", variantId, "quantity:", quantity);
+        // ✅ Only pick enabled (selected) bundle variant inputs
+        const bundleVariantEls = document.querySelectorAll('.bundle-variant-id:not([disabled])');
+        console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
+        bundleVariantEls.forEach((el, i) => {
+          console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
+        });
 
-        existingItems = [{
-          id: parseInt(variantId),
-          quantity: parseInt(quantity),
-          properties: {
-            _bundle_id: bundleId,
-            _bundle_role: 'parent'
-          }
-        }];
-
-      } else if (typeof options.body === 'string') {
-        console.log("🟡 [Bundle] Body is JSON string — parsing");
-        try {
-          const parsed = JSON.parse(options.body);
-          console.log("🟡 [Bundle] Parsed JSON body:", parsed);
-          existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
-            .map(item => ({
-              ...item,
-              properties: {
-                ...(item.properties || {}),
-                _bundle_id: bundleId,
-                _bundle_role: 'parent'
-              }
-            }));
-        } catch(e) {
-          console.error("🔴 [Bundle] Failed to parse JSON body:", e);
+        if (bundleVariantEls.length === 0) {
+          console.warn("🟠 [Bundle] No child variants selected — passing through");
           return originalFetch(url, options);
         }
 
-      } else {
-        console.warn("🟠 [Bundle] Unknown body type — passing through");
-        return originalFetch(url, options);
+        const bundleId = 'bundle_' + Date.now();
+        console.log("🟡 [Bundle] Bundle ID:", bundleId);
+
+        let existingItems = [];
+
+        if (options.body instanceof FormData) {
+          console.log("🟡 [Bundle] Body is FormData — converting to JSON");
+          const formData = options.body;
+          const variantId = formData.get('id');
+          const quantity = formData.get('quantity') || 1;
+          console.log("🟡 [Bundle] Extracted from FormData — variantId:", variantId, "quantity:", quantity);
+
+          existingItems = [{
+            id: parseInt(variantId),
+            quantity: parseInt(quantity),
+            properties: {
+              _bundle_id: bundleId,
+              _bundle_role: 'parent'
+            }
+          }];
+
+        } else if (typeof options.body === 'string') {
+          console.log("🟡 [Bundle] Body is JSON string — parsing");
+          try {
+            const parsed = JSON.parse(options.body);
+            console.log("🟡 [Bundle] Parsed JSON body:", parsed);
+            existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
+              .map(item => ({
+                ...item,
+                properties: {
+                  ...(item.properties || {}),
+                  _bundle_id: bundleId,
+                  _bundle_role: 'parent'
+                }
+              }));
+          } catch(e) {
+            console.error("🔴 [Bundle] Failed to parse JSON body:", e);
+            return originalFetch(url, options);
+          }
+
+        } else {
+          console.warn("🟠 [Bundle] Unknown body type — passing through");
+          return originalFetch(url, options);
+        }
+
+        const childItems = [...bundleVariantEls].map(el => ({
+          id: parseInt(el.value),
+          quantity: 1,
+          properties: {
+            _bundle_id: bundleId,
+            _bundle_role: 'child'
+          }
+        }));
+
+        const newPayload = { items: [...existingItems, ...childItems] };
+
+        console.log("🟡 [Bundle] Final payload being sent:", JSON.stringify(newPayload, null, 2));
+
+        return originalFetch(url, {
+          ...options,
+          headers: {
+            ...(options.headers || {}),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newPayload)
+        });
       }
 
-      const childItems = [...bundleVariantEls].map(el => ({
-        id: parseInt(el.value),
-        quantity: 1,
-        properties: {
-          _bundle_id: bundleId,
-          _bundle_role: 'child'
-        }
-      }));
+      return originalFetch(url, options);
+    };
 
-      const newPayload = { items: [...existingItems, ...childItems] };
+    console.log("🟢 [Bundle] fetch override active — waiting for add to cart");
+  })();
+  </script>
 
-      console.log("🟡 [Bundle] Final payload being sent:", JSON.stringify(newPayload, null, 2));
-
-      return originalFetch(url, {
-        ...options,
-        headers: {
-          ...(options.headers || {}),
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newPayload)
-      });
-    }
-
-    return originalFetch(url, options);
-  };
-
-  console.log("🟢 [Bundle] fetch override active — waiting for add to cart");
-})();
-</script>
+{% endif %}
