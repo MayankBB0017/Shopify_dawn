@@ -22,7 +22,6 @@
         </div>
 
         {% assign bundle_variant = bundle_product.variants.first %}
-        <!-- ✅ disabled removed so JS can read all variants -->
         <input
           type="hidden"
           class="bundle-variant-id"
@@ -48,8 +47,6 @@
       flex-direction: column;
       gap: 20px;
     }
-
-    /* ✅ Hide child bundle items in cart drawer & cart page */
     .cart-item[data-bundle-child="true"] {
       display: none !important;
     }
@@ -63,12 +60,9 @@
 
     function hideChildBundleItems() {
       document.querySelectorAll('.cart-item').forEach(function(item) {
-        // Already marked — skip
         if (item.dataset.bundleChild === 'true') return;
 
-        // Dawn renders line item properties as <dl> with <dt> key / <dd> value pairs
-        const dts = item.querySelectorAll('dt');
-        dts.forEach(function(dt) {
+        item.querySelectorAll('dt').forEach(function(dt) {
           if (dt.textContent.trim() === '_bundle_role') {
             const dd = dt.nextElementSibling;
             if (dd && dd.textContent.trim() === 'child') {
@@ -92,7 +86,7 @@
       if (el) observer.observe(el, { childList: true, subtree: true });
     });
 
-    // ─── FETCH OVERRIDE — ADD BUNDLE ITEMS TO CART ────────────────────────
+    // ─── FETCH OVERRIDE ────────────────────────────────────────────────────
 
     const originalFetch = window.fetch;
 
@@ -100,35 +94,34 @@
 
       if (typeof url === 'string' && url.includes('/cart/add')) {
         console.log("🟡 [Bundle] Intercepted /cart/add call");
-        console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
 
-        // ✅ No disabled filter — picks all bundle variants
         const bundleVariantEls = document.querySelectorAll('.bundle-variant-id');
         console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
-        bundleVariantEls.forEach((el, i) => {
-          console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
-        });
 
+        // No bundle products on this page — pass through untouched
         if (bundleVariantEls.length === 0) {
-          console.warn("🟠 [Bundle] No child variants found — passing through");
+          console.warn("🟠 [Bundle] No child variants — passing through");
           return originalFetch(url, options);
         }
 
         const bundleId = 'bundle_' + Date.now();
-        console.log("🟡 [Bundle] Bundle ID:", bundleId);
-
         let existingItems = [];
 
-        // ✅ Handle FormData (Dawn default form submit)
+        // ✅ Handle FormData (Dawn's default form submit)
         if (options.body instanceof FormData) {
-          console.log("🟡 [Bundle] Body is FormData — converting to JSON");
+          console.log("🟡 [Bundle] FormData detected");
           const formData  = options.body;
           const variantId = formData.get('id');
-          const quantity  = formData.get('quantity') || 1;
+          const quantity  = parseInt(formData.get('quantity') || 1);
+
+          if (!variantId) {
+            console.error("🔴 [Bundle] No variant ID in FormData — passing through");
+            return originalFetch(url, options);
+          }
 
           existingItems = [{
             id: parseInt(variantId),
-            quantity: parseInt(quantity),
+            quantity: quantity,
             properties: {
               _bundle_id:   bundleId,
               _bundle_role: 'parent'
@@ -137,6 +130,7 @@
 
         // ✅ Handle JSON string
         } else if (typeof options.body === 'string') {
+          console.log("🟡 [Bundle] JSON body detected");
           try {
             const parsed = JSON.parse(options.body);
             existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
@@ -149,7 +143,7 @@
                 }
               }));
           } catch(e) {
-            console.error("🔴 [Bundle] Failed to parse JSON body:", e);
+            console.error("🔴 [Bundle] JSON parse failed — passing through:", e);
             return originalFetch(url, options);
           }
 
@@ -168,18 +162,38 @@
         }));
 
         const newPayload = { items: [...existingItems, ...childItems] };
-        console.log("🟡 [Bundle] Final payload being sent:", JSON.stringify(newPayload, null, 2));
+        console.log("🟡 [Bundle] Sending payload:", JSON.stringify(newPayload, null, 2));
 
-        return originalFetch(url, {
-          ...options,
-          headers: {
-            ...(options.headers || {}),
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(newPayload)
-        });
+        // ─────────────────────────────────────────────────────────────────
+        // ✅ THE CORE FIX:
+        // Dawn calls fetch('/cart/add.js') and reads the Response body
+        // to update the cart drawer. If we consume the body ourselves
+        // (e.g. await response.json()), Dawn gets an empty stream and
+        // the drawer never opens.
+        //
+        // Solution: always send to /cart/add.js as JSON, then return
+        // response.clone() so both our code AND Dawn can read the body.
+        // ─────────────────────────────────────────────────────────────────
+        let response;
+        try {
+          response = await originalFetch('/cart/add.js', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(newPayload)
+          });
+        } catch(networkErr) {
+          console.error("🔴 [Bundle] Network error on /cart/add.js:", networkErr);
+          throw networkErr; // re-throw so Dawn's own error handling kicks in
+        }
+
+        console.log("🟢 [Bundle] /cart/add.js response status:", response.status);
+
+        // ✅ Clone BEFORE returning — Dawn will read the original,
+        //    our log reads the clone (or we just don't read it at all)
+        return response.clone();
       }
 
+      // All other fetch calls pass through untouched
       return originalFetch(url, options);
     };
 
