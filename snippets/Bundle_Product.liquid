@@ -34,181 +34,99 @@
 {% endif %}
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+(function() {
+  console.log("🟡 [Bundle] Script loaded");
 
-  // ─── 1. ADD TO CART ───────────────────────────────────────────────────────
+  const originalFetch = window.fetch;
 
-  const form = document.querySelector('form[action="/cart/add"]');
-  if (!form) return;
+  window.fetch = async function(url, options = {}) {
 
-  const submitBtn = form.querySelector('[name="add"], .product-form__submit');
-  if (!submitBtn) return;
+    if (typeof url === 'string' && url.includes('/cart/add')) {
+      console.log("🟡 [Bundle] Intercepted /cart/add call");
+      console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
 
-  // Bundle variant IDs + titles rendered server-side
-  const bundleProducts = [
-    {% for bundle_product in bundle_products.value %}
-      {
-        id: "{{ bundle_product.variants.first.id }}",
-        title: "{{ bundle_product.title | escape }}"
-      },
-    {% endfor %}
-  ];
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const mainVariantId = form.querySelector('[name="id"]').value;
-    if (!mainVariantId) return;
-
-    // Dawn loading state
-    submitBtn.setAttribute('aria-disabled', 'true');
-    submitBtn.classList.add('loading');
-
-    const subNames = bundleProducts.map(p => p.title).join(', ');
-
-    const items = [
-      // Main product – visible in cart, carries bundle names as property
-      {
-        id: parseInt(mainVariantId),
-        quantity: 1,
-        properties: {
-          _bundle_id: mainVariantId,          // used to match sub-products on removal
-          Bundle: subNames                    // shown to customer (no underscore prefix)
-        }
-      },
-      // Sub-products – hidden in cart (properties starting with _ are hidden by Dawn)
-      ...bundleProducts.map(p => ({
-        id: parseInt(p.id),
-        quantity: 1,
-        properties: {
-          _isSubproduct: 'true',
-          _parent_variant: mainVariantId     // links sub-product back to its parent
-        }
-      }))
-    ];
-
-    try {
-      const addRes = await fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items })
+      const bundleVariantEls = document.querySelectorAll('.bundle-variant-id');
+      console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
+      bundleVariantEls.forEach((el, i) => {
+        console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
       });
 
-      if (!addRes.ok) throw new Error('Cart add failed');
-
-      // ── Refresh Dawn cart drawer ──────────────────────────────────────────
-      await refreshCartDrawer();
-
-    } catch (err) {
-      console.error('Bundle add-to-cart error:', err);
-    } finally {
-      submitBtn.removeAttribute('aria-disabled');
-      submitBtn.classList.remove('loading');
-    }
-  });
-
-
-  // ─── 2. REMOVE LOGIC – wipe sub-products when main is removed ─────────────
-
-  document.addEventListener('click', async (e) => {
-
-    // Dawn's remove button: <cart-remove-button> fires a custom event,
-    // but it also has a plain <a> / <button> inside with data-index.
-    // We intercept ANY click that triggers a line removal.
-    const removeBtn = e.target.closest('cart-remove-button, [data-index][href*="change"]');
-    if (!removeBtn) return;
-
-    // Let Dawn remove the item first, then we clean up sub-products.
-    // We use a small delay so Dawn's own handler runs first.
-    setTimeout(async () => {
-      await removeOrphanedSubproducts();
-    }, 800);
-  });
-
-
-  // ─── HELPERS ──────────────────────────────────────────────────────────────
-
-  /**
-   * Fetch current cart, find sub-products whose parent no longer exists,
-   * and remove them in one /cart/change.js call per orphan.
-   */
-  async function removeOrphanedSubproducts() {
-    try {
-      const cartRes  = await fetch('/cart.js');
-      const cart     = await cartRes.json();
-      const { items } = cart;
-
-      // Collect all parent variant IDs still present in the cart
-      const activeParentIds = new Set(
-        items
-          .filter(item => item.properties && item.properties['_bundle_id'])
-          .map(item => String(item.properties['_bundle_id']))
-      );
-
-      // Find sub-products whose parent is gone
-      const orphans = items.filter(item =>
-        item.properties &&
-        item.properties['_isSubproduct'] === 'true' &&
-        !activeParentIds.has(String(item.properties['_parent_variant']))
-      );
-
-      if (!orphans.length) return;
-
-      // Remove orphans sequentially (Shopify cart is not concurrent-safe)
-      for (const orphan of orphans) {
-        await fetch('/cart/change.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: orphan.key, quantity: 0 })
-        });
+      if (bundleVariantEls.length === 0) {
+        console.warn("🟠 [Bundle] No child variants found — passing through");
+        return originalFetch(url, options);
       }
 
-      // Refresh drawer after cleanup
-      await refreshCartDrawer();
+      const bundleId = 'bundle_' + Date.now();
+      console.log("🟡 [Bundle] Bundle ID:", bundleId);
 
-    } catch (err) {
-      console.error('Bundle removal error:', err);
-    }
-  }
+      let existingItems = [];
 
-  /**
-   * Re-renders Dawn's cart drawer via section rendering API.
-   * Works with Dawn 8+.
-   */
-  async function refreshCartDrawer() {
-    try {
-      const res  = await fetch('/?sections=cart-drawer');
-      const data = await res.json();
-      const html = data['cart-drawer'];
+      if (options.body instanceof FormData) {
+        console.log("🟡 [Bundle] Body is FormData — converting to JSON");
+        const formData = options.body;
+        const variantId = formData.get('id');
+        const quantity = formData.get('quantity') || 1;
+        console.log("🟡 [Bundle] Extracted from FormData — variantId:", variantId, "quantity:", quantity);
 
-      if (!html) return;
+        existingItems = [{
+          id: parseInt(variantId),
+          quantity: parseInt(quantity),
+          properties: {
+            _bundle_id: bundleId,
+            _bundle_role: 'parent'
+          }
+        }];
 
-      const parser  = new DOMParser();
-      const doc     = parser.parseFromString(html, 'text/html');
-      const newInner = doc.querySelector('#CartDrawer');
-      const existing = document.querySelector('#CartDrawer');
+      } else if (typeof options.body === 'string') {
+        console.log("🟡 [Bundle] Body is JSON string — parsing");
+        try {
+          const parsed = JSON.parse(options.body);
+          console.log("🟡 [Bundle] Parsed JSON body:", parsed);
+          existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
+            .map(item => ({
+              ...item,
+              properties: {
+                ...(item.properties || {}),
+                _bundle_id: bundleId,
+                _bundle_role: 'parent'
+              }
+            }));
+        } catch(e) {
+          console.error("🔴 [Bundle] Failed to parse JSON body:", e);
+          return originalFetch(url, options);
+        }
 
-      if (newInner && existing) {
-        existing.innerHTML = newInner.innerHTML;
+      } else {
+        console.warn("🟠 [Bundle] Unknown body type — passing through");
+        return originalFetch(url, options);
       }
 
-      // Open the drawer
-      const drawerEl = document.querySelector('cart-drawer');
-      if (drawerEl && typeof drawerEl.open === 'function') {
-        drawerEl.open();
-      } else if (drawerEl) {
-        drawerEl.classList.add('is-empty'); // remove class if needed
-        drawerEl.removeAttribute('aria-hidden');
-        drawerEl.querySelector('#CartDrawer')?.focus();
-      }
+      const childItems = [...bundleVariantEls].map(el => ({
+        id: parseInt(el.value),
+        quantity: 1,
+        properties: {
+          _bundle_id: bundleId,
+          _bundle_role: 'child'
+        }
+      }));
 
-      // Dispatch Dawn's built-in event so the cart bubble/count updates
-      document.dispatchEvent(new CustomEvent('cart:refresh'));
+      const newPayload = { items: [...existingItems, ...childItems] };
 
-    } catch (err) {
-      console.error('Cart drawer refresh error:', err);
+      console.log("🟡 [Bundle] Final payload being sent:", JSON.stringify(newPayload, null, 2));
+
+      return originalFetch(url, {
+        ...options,
+        headers: {
+          ...(options.headers || {}),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newPayload)
+      });
     }
-  }
 
-});
+    return originalFetch(url, options);
+  };
+
+  console.log("🟢 [Bundle] fetch override active — waiting for add to cart");
+})();
 </script>
