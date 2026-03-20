@@ -54,7 +54,7 @@
 
   <script>
   (function() {
-    console.log("🟡 [Bundle] Script loaded");
+    console.log("[Bundle] Script loaded");
 
     // ─── HIDE CHILD ITEMS (MutationObserver — AJAX safe) ──────────────────
 
@@ -68,7 +68,7 @@
             if (dd && dd.textContent.trim() === 'child') {
               item.setAttribute('data-bundle-child', 'true');
               item.style.setProperty('display', 'none', 'important');
-              console.log("🟡 [Bundle] Hid child cart item");
+              console.log("[Bundle] Hid child cart item");
             }
           }
         });
@@ -93,13 +93,13 @@
     window.fetch = async function(url, options = {}) {
 
       if (typeof url === 'string' && url.includes('/cart/add')) {
-        console.log("🟡 [Bundle] Intercepted /cart/add call");
+        console.log("[Bundle] Intercepted /cart/add call");
 
         const bundleVariantEls = document.querySelectorAll('.bundle-variant-id');
-        console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
+        console.log("[Bundle] Child variants found:", bundleVariantEls.length);
 
         if (bundleVariantEls.length === 0) {
-          console.warn("🟠 [Bundle] No child variants — passing through");
+          console.warn("[Bundle] No child variants — passing through");
           return originalFetch(url, options);
         }
 
@@ -108,13 +108,13 @@
 
         // ✅ Handle FormData (Dawn's default form submit)
         if (options.body instanceof FormData) {
-          console.log("🟡 [Bundle] FormData detected");
+          console.log("[Bundle] FormData detected");
           const formData  = options.body;
           const variantId = formData.get('id');
           const quantity  = parseInt(formData.get('quantity') || 1);
 
           if (!variantId) {
-            console.error("🔴 [Bundle] No variant ID in FormData — passing through");
+            console.error("[Bundle] No variant ID in FormData — passing through");
             return originalFetch(url, options);
           }
 
@@ -128,7 +128,7 @@
           }];
 
         } else if (typeof options.body === 'string') {
-          console.log("🟡 [Bundle] JSON body detected");
+          console.log("[Bundle] JSON body detected");
           try {
             const parsed = JSON.parse(options.body);
             existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
@@ -141,12 +141,12 @@
                 }
               }));
           } catch(e) {
-            console.error("🔴 [Bundle] JSON parse failed — passing through:", e);
+            console.error("[Bundle] JSON parse failed — passing through:", e);
             return originalFetch(url, options);
           }
 
         } else {
-          console.warn("🟠 [Bundle] Unknown body type — passing through");
+          console.warn("[Bundle] Unknown body type — passing through");
           return originalFetch(url, options);
         }
 
@@ -160,7 +160,7 @@
         }));
 
         const newPayload = { items: [...existingItems, ...childItems] };
-        console.log("🟡 [Bundle] Sending payload:", JSON.stringify(newPayload, null, 2));
+        console.log("[Bundle] Sending payload:", JSON.stringify(newPayload, null, 2));
 
         let response;
         try {
@@ -174,11 +174,11 @@
             body:    JSON.stringify(newPayload)
           });
         } catch(networkErr) {
-          console.error("🔴 [Bundle] Network error:", networkErr);
+          console.error("[Bundle] Network error:", networkErr);
           throw networkErr;
         }
 
-        console.log("🟢 [Bundle] Response status:", response.status);
+        console.log("[Bundle] Response status:", response.status);
 
         // ✅ Clone so Dawn can read the body stream and open the drawer
         return response.clone();
@@ -187,7 +187,7 @@
       return originalFetch(url, options);
     };
 
-    console.log("🟢 [Bundle] fetch override active — waiting for add to cart");
+    console.log("[Bundle] fetch override active — waiting for add to cart");
   })();
   </script>
 
