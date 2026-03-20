@@ -8,7 +8,7 @@
       {% for bundle_product in bundle_products.value %}
         <div class="grid__item">
           <div class="card-wrapper">
-            <div class="card card--standard">
+            <div class="card card--standard bundle-variant-id">
 
               <!-- Product Image -->
               <div class="card__media_custom">
@@ -21,6 +21,7 @@
 
               <!-- Product Info -->
               <div class="card__content">
+                <input class="cutom_bundle" value="{{ bundle_product.value }}" >
                 <h3 class="card__heading">{{ bundle_product.title }}</h3>
                 <div class="card__price">{{ bundle_product.price | money }}</div>
               </div>
