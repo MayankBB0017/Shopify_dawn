@@ -53,116 +53,100 @@
   </style>
 
   <script>
-  (function() {
-    console.log("🟡 [Bundle] Script loaded");
+(function() {
+  console.log("🟡 [Bundle] Script loaded");
 
-    // ✅ Select / Deselect button logic
-    {% comment %} document.querySelectorAll('.bundle-select-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const card = btn.closest('.bundle-product-card');
-        const input = card.querySelector('.bundle-variant-id');
-        const isSelected = btn.classList.toggle('selected');
+  const originalFetch = window.fetch;
 
-        btn.textContent = isSelected ? 'Selected' : 'Select';
-        input.disabled = !isSelected;
+  window.fetch = async function(url, options = {}) {
 
-        console.log("🟡 [Bundle] Variant", input.value, isSelected ? "selected" : "deselected");
+    if (typeof url === 'string' && url.includes('/cart/add')) {
+      console.log("🟡 [Bundle] Intercepted /cart/add call");
+      console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
+
+      const bundleVariantEls = document.querySelectorAll('.bundle-variant-id');
+      console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
+      bundleVariantEls.forEach((el, i) => {
+        console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
       });
-    }); {% endcomment %}
 
-    const originalFetch = window.fetch;
-
-    window.fetch = async function(url, options = {}) {
-
-      if (typeof url === 'string' && url.includes('/cart/add')) {
-        console.log("🟡 [Bundle] Intercepted /cart/add call");
-        console.log("🟡 [Bundle] Options body type:", options.body?.constructor?.name);
-
-        // ✅ Only pick enabled (selected) bundle variant inputs
-        const bundleVariantEls = document.querySelectorAll('.bundle-variant-id:not([disabled])');
-        console.log("🟡 [Bundle] Child variants found:", bundleVariantEls.length);
-        bundleVariantEls.forEach((el, i) => {
-          console.log(`🟡 [Bundle] Child variant [${i}]: ${el.value}`);
-        });
-
-        if (bundleVariantEls.length === 0) {
-          console.warn("🟠 [Bundle] No child variants selected — passing through");
-          return originalFetch(url, options);
-        }
-
-        const bundleId = 'bundle_' + Date.now();
-        console.log("🟡 [Bundle] Bundle ID:", bundleId);
-
-        let existingItems = [];
-
-        if (options.body instanceof FormData) {
-          console.log("🟡 [Bundle] Body is FormData — converting to JSON");
-          const formData = options.body;
-          const variantId = formData.get('id');
-          const quantity = formData.get('quantity') || 1;
-          console.log("🟡 [Bundle] Extracted from FormData — variantId:", variantId, "quantity:", quantity);
-
-          existingItems = [{
-            id: parseInt(variantId),
-            quantity: parseInt(quantity),
-            properties: {
-              _bundle_id: bundleId,
-              _bundle_role: 'parent'
-            }
-          }];
-
-        } else if (typeof options.body === 'string') {
-          console.log("🟡 [Bundle] Body is JSON string — parsing");
-          try {
-            const parsed = JSON.parse(options.body);
-            console.log("🟡 [Bundle] Parsed JSON body:", parsed);
-            existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
-              .map(item => ({
-                ...item,
-                properties: {
-                  ...(item.properties || {}),
-                  _bundle_id: bundleId,
-                  _bundle_role: 'parent'
-                }
-              }));
-          } catch(e) {
-            console.error("🔴 [Bundle] Failed to parse JSON body:", e);
-            return originalFetch(url, options);
-          }
-
-        } else {
-          console.warn("🟠 [Bundle] Unknown body type — passing through");
-          return originalFetch(url, options);
-        }
-
-        const childItems = [...bundleVariantEls].map(el => ({
-          id: parseInt(el.value),
-          quantity: 1,
-          properties: {
-            _bundle_id: bundleId,
-            _bundle_role: 'child'
-          }
-        }));
-
-        const newPayload = { items: [...existingItems, ...childItems] };
-
-        console.log("🟡 [Bundle] Final payload being sent:", JSON.stringify(newPayload, null, 2));
-
-        return originalFetch(url, {
-          ...options,
-          headers: {
-            ...(options.headers || {}),
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(newPayload)
-        });
+      if (bundleVariantEls.length === 0) {
+        console.warn("🟠 [Bundle] No child variants found — passing through");
+        return originalFetch(url, options);
       }
 
-      return originalFetch(url, options);
-    };
+      const bundleId = 'bundle_' + Date.now();
+      console.log("🟡 [Bundle] Bundle ID:", bundleId);
 
-    console.log("🟢 [Bundle] fetch override active — waiting for add to cart");
-  })();
-  </script>
+      let existingItems = [];
 
+      if (options.body instanceof FormData) {
+        console.log("🟡 [Bundle] Body is FormData — converting to JSON");
+        const formData = options.body;
+        const variantId = formData.get('id');
+        const quantity = formData.get('quantity') || 1;
+        console.log("🟡 [Bundle] Extracted from FormData — variantId:", variantId, "quantity:", quantity);
+
+        existingItems = [{
+          id: parseInt(variantId),
+          quantity: parseInt(quantity),
+          properties: {
+            _bundle_id: bundleId,
+            _bundle_role: 'parent'
+          }
+        }];
+
+      } else if (typeof options.body === 'string') {
+        console.log("🟡 [Bundle] Body is JSON string — parsing");
+        try {
+          const parsed = JSON.parse(options.body);
+          console.log("🟡 [Bundle] Parsed JSON body:", parsed);
+          existingItems = (parsed.items || [{ id: parsed.id, quantity: parsed.quantity || 1 }])
+            .map(item => ({
+              ...item,
+              properties: {
+                ...(item.properties || {}),
+                _bundle_id: bundleId,
+                _bundle_role: 'parent'
+              }
+            }));
+        } catch(e) {
+          console.error("🔴 [Bundle] Failed to parse JSON body:", e);
+          return originalFetch(url, options);
+        }
+
+      } else {
+        console.warn("🟠 [Bundle] Unknown body type — passing through");
+        return originalFetch(url, options);
+      }
+
+      const childItems = [...bundleVariantEls].map(el => ({
+        id: parseInt(el.value),
+        quantity: 1,
+        properties: {
+          _bundle_id: bundleId,
+          _bundle_role: 'child'
+        }
+      }));
+
+      const newPayload = { items: [...existingItems, ...childItems] };
+
+      console.log("🟡 [Bundle] Final payload being sent:", JSON.stringify(newPayload, null, 2));
+
+      return originalFetch(url, {
+        ...options,
+        headers: {
+          ...(options.headers || {}),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newPayload)
+      });
+    }
+
+    return originalFetch(url, options);
+  };
+
+  console.log("🟢 [Bundle] fetch override active — waiting for add to cart");
+})();
+</script>
 {% endif %}
