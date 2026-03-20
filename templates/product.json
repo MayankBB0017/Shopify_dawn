@@ -38,6 +38,10 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "bundle_product_kNyCzH": {
+          "type": "Bundle_Product",
+          "settings": {}
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -62,6 +66,7 @@
         "price",
         "variant_picker",
         "quantity_selector",
+        "bundle_product_kNyCzH",
         "buy_buttons",
         "description",
         "share"
