@@ -1,3 +1,40 @@
-body{
-    display:none;
+/* Custom CSS for Mega Menu Image */
+.mega-menu__content-inner {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.mega-menu__list {
+  flex: 1;
+}
+
+.mega-menu__image-column {
+  width: 300px;
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-menu__image-column a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-menu__image-column img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--media-radius);
+}
+
+.mega-menu__image-text {
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  font-size: 1.2rem;
+  text-align: left;
 }
