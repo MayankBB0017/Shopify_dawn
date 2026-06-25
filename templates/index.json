@@ -97,6 +97,7 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "collection": "all",
         "products_to_show": 8,
@@ -147,6 +148,7 @@
       "block_order": [
         "forms_inline_dB3tEb"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
