@@ -61,6 +61,9 @@ sticky-header.header-wrapper.color-scheme-1.gradient.header-wrapper--border-bott
     text-decoration: none;
 }
 sticky-header:has(.mega-menu[open]) {
-  background: #fff;
+  background: #fff !important;
   z-index: 9999;
+}
+sticky-header:has(.mega-menu[open]) .header__menu-item, sticky-header:has(.mega-menu[open]) .header__active-menu-item{
+    color: #000 !important;
 }
