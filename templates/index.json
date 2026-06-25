@@ -49,47 +49,50 @@
         "show_text_below": false
       }
     },
-    "rich_text_VgWwMm": {
-      "type": "rich-text",
+    "custom_image_text_columns_znBdWk": {
+      "type": "custom-image-text-columns",
       "blocks": {
-        "heading_MfPyEV": {
-          "type": "heading",
+        "column_FLnBKQ": {
+          "type": "column",
           "settings": {
-            "heading": "El verano nunca acaba con Robin.",
-            "heading_size": "h2"
+            "image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.jpg",
+            "title": "BIKINIS",
+            "link": ""
           }
         },
-        "text_db7eNQ": {
-          "type": "text",
+        "column_NpMVbn": {
+          "type": "column",
           "settings": {
-            "text": "<p>Encuentra en nuestra tienda online oficial tus bikinis y bañadores para tus escapadas a la playa, tus momentos en la piscina, y cualquier plan que imagines. ¡Estampados únicos y formas para todos los cuerpos! Encuentra tu bikini ideal: balconette, triángulo, bandeau, de talle alto, tiras o lazo... Compra tu bikini y disfrútalo. </p>"
+            "image": "shopify://shop_images/e37eaa3054f458733a6819638c7457d9622df4f9.png",
+            "title": "ROPA DE PLAYA",
+            "link": ""
           }
         },
-        "button_nCM6dr": {
-          "type": "button",
+        "column_DNwNgw": {
+          "type": "column",
           "settings": {
-            "button_label": "OPTIONAL LINK",
-            "button_link": "#",
-            "button_style_secondary": false,
-            "button_label_2": "OPTIONAL LINK",
-            "button_link_2": "#",
-            "button_style_secondary_2": false
+            "image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.png",
+            "title": "BAÑADORES",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "heading_MfPyEV",
-        "text_db7eNQ",
-        "button_nCM6dr"
+        "column_FLnBKQ",
+        "column_NpMVbn",
+        "column_DNwNgw"
       ],
-      "name": "t:sections.rich-text.presets.name",
+      "name": "Custom image columns",
       "settings": {
-        "desktop_content_position": "left",
-        "content_alignment": "left",
+        "title": "El verano nunca acaba con Robin.",
+        "text": "<p>Encuentra en nuestra tienda online oficial tus bikinis y bañadores para tus escapadas a la playa, tus momentos en la piscina, y cualquier plan que imagines. ¡Estampados únicos y formas para todos los cuerpos! Encuentra tu bikini ideal: balconette, triángulo, bandeau, de talle alto, tiras o lazo... Compra tu bikini y disfrútalo.</p>",
+        "link_1_label": "OPTIONAL LINK",
+        "link_1_url": "",
+        "link_2_label": "OPTIONAL LINK",
+        "link_2_url": "",
         "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "featured_collection": {
@@ -151,7 +154,7 @@
   },
   "order": [
     "image_banner",
-    "rich_text_VgWwMm",
+    "custom_image_text_columns_znBdWk",
     "featured_collection",
     "177021381514078c66"
   ]
