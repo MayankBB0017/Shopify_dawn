@@ -91,13 +91,11 @@
     font-weight: 500;
   }
 
-  .custom-column-item a {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .custom-column-link-wrapper {
+    display: block;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    text-decoration: none;
   }
 {%- endstyle -%}
 
@@ -130,7 +128,7 @@
         {%- for block in section.blocks -%}
           <div class="custom-column-item" {{ block.shopify_attributes }}>
             {%- if block.settings.link != blank -%}
-              <a href="{{ block.settings.link }}" aria-label="{{ block.settings.title | escape }}"></a>
+              <a href="{{ block.settings.link }}" aria-label="{{ block.settings.title | escape }}" class="custom-column-link-wrapper">
             {%- endif -%}
             
             {%- if block.settings.image != blank -%}
@@ -141,6 +139,10 @@
 
             {%- if block.settings.title != blank -%}
               <h3 class="custom-column-text">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.link != blank -%}
+              </a>
             {%- endif -%}
           </div>
         {%- endfor -%}
