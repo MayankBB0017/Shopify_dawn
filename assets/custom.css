@@ -43,3 +43,6 @@ sticky-header.header-wrapper.color-scheme-1.gradient.header-wrapper--border-bott
     width: 100%;
     background: transparent;
 }
+.header__menu-item {
+    color: #fff;
+}
