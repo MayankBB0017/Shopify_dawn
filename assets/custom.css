@@ -78,3 +78,12 @@ sticky-header:has(.mega-menu[open]) .header__menu-item, sticky-header:has(.mega-
 sticky-header:has(.mega-menu[open]) .header__icon{
      color: #000 !important;
 }
+.home-page-banner h2{
+    font-family: Jost;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 40px;
+    line-height: 46px;
+    letter-spacing: 0;
+
+}
