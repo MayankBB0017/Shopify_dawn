@@ -48,62 +48,15 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, a, span, button, 
   font-size: 1.2rem;
   text-align: left;
 }
-/* Transparent Header Override for Homepage */
-.template-index .section-header {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 10;
+sticky-header.header-wrapper.color-scheme-1.gradient.header-wrapper--border-bottom{
+    position: absolute;
+    width: 100%;
+    background: transparent;
 }
-
-.template-index .header-wrapper {
-  background: transparent !important;
-  border-bottom: none !important;
-  transition: background-color 0.3s ease, border-bottom 0.3s ease;
+.header__menu-item {
+    color: #fff;
 }
-
-.template-index .header__menu-item,
-.template-index .header__active-menu-item,
-.template-index .header__heading-link,
-.template-index .header__icon,
-.template-index .header__icon span {
-  color: #ffffff !important;
-  transition: color 0.3s ease;
-}
-
-.template-index .header__icon .svg-wrapper svg path {
-  fill: #ffffff !important;
-  transition: fill 0.3s ease;
-}
-
-/* Hover, Sticky, and Mega Menu Open States */
-.template-index .section-header:hover .header-wrapper,
-.template-index .mega-menu-open-state,
-.template-index .shopify-section-header-sticky .header-wrapper {
-  background: #ffffff !important;
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08) !important;
-}
-
-.template-index .section-header:hover .header__menu-item,
-.template-index .section-header:hover .header__active-menu-item,
-.template-index .section-header:hover .header__heading-link,
-.template-index .section-header:hover .header__icon,
-.template-index .section-header:hover .header__icon span,
-.template-index .mega-menu-open-state .header__menu-item,
-.template-index .mega-menu-open-state .header__active-menu-item,
-.template-index .mega-menu-open-state .header__heading-link,
-.template-index .mega-menu-open-state .header__icon,
-.template-index .mega-menu-open-state .header__icon span,
-.template-index .shopify-section-header-sticky .header__menu-item,
-.template-index .shopify-section-header-sticky .header__active-menu-item,
-.template-index .shopify-section-header-sticky .header__heading-link,
-.template-index .shopify-section-header-sticky .header__icon,
-.template-index .shopify-section-header-sticky .header__icon span {
-  color: rgb(var(--color-foreground)) !important;
-}
-
-.template-index .section-header:hover .header__icon .svg-wrapper svg path,
-.template-index .mega-menu-open-state .header__icon .svg-wrapper svg path,
-.template-index .shopify-section-header-sticky .header__icon .svg-wrapper svg path {
-  fill: rgb(var(--color-foreground)) !important;
+.header__active-menu-item{
+    color: #fff;
+    text-decoration: none;
 }
