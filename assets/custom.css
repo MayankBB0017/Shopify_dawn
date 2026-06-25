@@ -48,4 +48,5 @@ sticky-header.header-wrapper.color-scheme-1.gradient.header-wrapper--border-bott
 }
 .header__active-menu-item{
     color: #fff;
+    text-decoration: none;
 }
