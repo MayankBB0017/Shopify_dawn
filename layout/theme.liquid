@@ -64,6 +64,7 @@
     {%- endif -%}
 
     {{ content_for_header }}
+    {{  custom.css || asset_url || stylesheet_tag}}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
