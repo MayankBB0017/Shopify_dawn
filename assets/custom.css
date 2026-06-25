@@ -60,6 +60,9 @@ sticky-header.header-wrapper.color-scheme-1.gradient.header-wrapper--border-bott
     color: #fff;
     text-decoration: none;
 }
+.header__menu-item:hover{
+    color: #fff;
+}
 sticky-header:has(.mega-menu[open]) {
   background: #fff !important;
   z-index: 9999;
