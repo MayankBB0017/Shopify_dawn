@@ -70,3 +70,10 @@ sticky-header:has(.mega-menu[open]) {
 sticky-header:has(.mega-menu[open]) .header__menu-item, sticky-header:has(.mega-menu[open]) .header__active-menu-item{
     color: #000 !important;
 }
+.header__icon{
+  color: #fff !important;
+}
+
+sticky-header:has(.mega-menu[open]) .header__icon{
+     color: #000 !important;
+}
