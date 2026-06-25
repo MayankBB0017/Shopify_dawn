@@ -78,7 +78,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, a, span, button, 
 
 /* Hover, Sticky, and Mega Menu Open States */
 .template-index .section-header:hover .header-wrapper,
-.template-index .section-header:has(details[open]) .header-wrapper,
+.template-index .mega-menu-open-state,
 .template-index .shopify-section-header-sticky .header-wrapper {
   background: #ffffff !important;
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08) !important;
@@ -89,11 +89,11 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, a, span, button, 
 .template-index .section-header:hover .header__heading-link,
 .template-index .section-header:hover .header__icon,
 .template-index .section-header:hover .header__icon span,
-.template-index .section-header:has(details[open]) .header__menu-item,
-.template-index .section-header:has(details[open]) .header__active-menu-item,
-.template-index .section-header:has(details[open]) .header__heading-link,
-.template-index .section-header:has(details[open]) .header__icon,
-.template-index .section-header:has(details[open]) .header__icon span,
+.template-index .mega-menu-open-state .header__menu-item,
+.template-index .mega-menu-open-state .header__active-menu-item,
+.template-index .mega-menu-open-state .header__heading-link,
+.template-index .mega-menu-open-state .header__icon,
+.template-index .mega-menu-open-state .header__icon span,
 .template-index .shopify-section-header-sticky .header__menu-item,
 .template-index .shopify-section-header-sticky .header__active-menu-item,
 .template-index .shopify-section-header-sticky .header__heading-link,
@@ -103,7 +103,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, a, span, button, 
 }
 
 .template-index .section-header:hover .header__icon .svg-wrapper svg path,
-.template-index .section-header:has(details[open]) .header__icon .svg-wrapper svg path,
+.template-index .mega-menu-open-state .header__icon .svg-wrapper svg path,
 .template-index .shopify-section-header-sticky .header__icon .svg-wrapper svg path {
   fill: rgb(var(--color-foreground)) !important;
 }
