@@ -57,7 +57,7 @@
           "settings": {
             "image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.jpg",
             "title": "BIKINIS",
-            "link": ""
+            "link": "shopify://products/accessories"
           }
         },
         "column_NpMVbn": {
@@ -65,7 +65,7 @@
           "settings": {
             "image": "shopify://shop_images/e37eaa3054f458733a6819638c7457d9622df4f9.png",
             "title": "ROPA DE PLAYA",
-            "link": ""
+            "link": "shopify://products/bikini-balconette-butterfly-braga-clasica-lazo"
           }
         },
         "column_DNwNgw": {
@@ -73,7 +73,7 @@
           "settings": {
             "image": "shopify://shop_images/Captura-de-pantalla-2024-11-21-a-las-17.56.27_1.png",
             "title": "BAÑADORES",
-            "link": ""
+            "link": "shopify://products/bikini-balconette-butterfly-braga-clasica-lazo-1"
           }
         }
       },
