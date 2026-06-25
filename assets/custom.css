@@ -1,3 +1,13 @@
+/* Global Font override */
+:root {
+  --font-body-family: 'Jost', sans-serif !important;
+  --font-heading-family: 'Jost', sans-serif !important;
+}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, a, span, button, input, textarea, select {
+  font-family: 'Jost', sans-serif !important;
+}
+
 /* Custom CSS for Mega Menu Image */
 .mega-menu__content-inner {
   display: flex;
