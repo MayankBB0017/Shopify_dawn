@@ -2340,6 +2340,137 @@
         "name": "JANÉ Recommender"
       }
     },
+    "instagram_grid": {
+      "name": "Instagram grid",
+      "settings": {
+        "header_content": {
+          "content": "Content"
+        },
+        "content_source": {
+          "label": "Content source",
+          "info": "Manual uses post blocks below. App mode renders an Instagram feed app block.",
+          "options__manual": {
+            "label": "Manual grid"
+          },
+          "options__app": {
+            "label": "App embed"
+          }
+        },
+        "heading": {
+          "label": "Instagram handle"
+        },
+        "profile_link": {
+          "label": "Profile link",
+          "info": "Uses theme social Instagram link when blank."
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "cta_label": {
+          "label": "CTA label",
+          "info": "Defaults to Ver más when blank."
+        },
+        "cta_link": {
+          "label": "CTA link",
+          "info": "Defaults to profile link when blank."
+        },
+        "header_layout": {
+          "content": "Layout"
+        },
+        "container_width": {
+          "label": "Container width",
+          "info": "Standard uses theme page width. Full width spans edge to edge on desktop.",
+          "options__standard": {
+            "label": "Standard"
+          },
+          "options__full_width": {
+            "label": "Full width"
+          }
+        },
+        "show_on_desktop": {
+          "label": "Show on desktop"
+        },
+        "show_on_mobile": {
+          "label": "Show on mobile"
+        },
+        "header_animation": {
+          "content": "Animation"
+        },
+        "enable_fade_in_desktop": {
+          "label": "Enable fade-in on desktop"
+        },
+        "enable_fade_in_mobile": {
+          "label": "Enable fade-in on mobile"
+        },
+        "header_padding": {
+          "content": "Padding"
+        },
+        "padding_top_desktop": {
+          "label": "Top padding (desktop)"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom padding (desktop)"
+        },
+        "padding_top_mobile": {
+          "label": "Top padding (mobile)"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom padding (mobile)"
+        },
+        "app_embed_info": {
+          "content": "Install your Instagram feed app and add its block in the blocks panel below."
+        }
+      },
+      "blocks": {
+        "post": {
+          "name": "Post",
+          "settings": {
+            "media_type": {
+              "label": "Media type",
+              "options__image": {
+                "label": "Image"
+              },
+              "options__video": {
+                "label": "Video"
+              }
+            },
+            "image": {
+              "label": "Image"
+            },
+            "video": {
+              "label": "Video"
+            },
+            "video_poster": {
+              "label": "Video poster image",
+              "info": "Optional. Shown before video loads and when reduced motion is enabled."
+            },
+            "link": {
+              "label": "Link"
+            },
+            "alt_text": {
+              "label": "Alt text",
+              "info": "Optional. Used for accessibility labels."
+            },
+            "tile_size": {
+              "label": "Tile size",
+              "info": "Auto follows grid slot for this block order.",
+              "options__auto": {
+                "label": "Auto"
+              },
+              "options__square": {
+                "label": "Square"
+              },
+              "options__tall": {
+                "label": "Tall"
+              }
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Instagram grid"
+      }
+    },
     "multirow": {
       "name": "Multirow",
       "settings": {

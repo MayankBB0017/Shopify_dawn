@@ -373,6 +373,13 @@
       "tablist_label": "Gift recommendations",
       "empty_state": "Add at least two recommendation blocks to enable tabs."
     },
+    "instagram_grid": {
+      "view_more": "Ver más",
+      "view_post": "View Instagram post: {{ title }}",
+      "view_video": "View Instagram video: {{ title }}",
+      "empty_manual": "Add up to 8 post blocks (6 images and 2 videos) to build the grid.",
+      "empty_app": "Add an Instagram app block to display your feed."
+    },
     "page": {
       "title": "Page title"
     },

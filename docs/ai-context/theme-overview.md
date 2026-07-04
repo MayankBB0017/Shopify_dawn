@@ -47,6 +47,8 @@ Dawn 15.5.0 provides the foundation: JSON templates, section groups, app blocks,
 - `assets/section-jane-blocks-banner.css`, `snippets/jane-blocks-banner-card.liquid` — blocks banner layout and hover
 - `sections/recommender.liquid` — tabbed gift recommender (*Compra por edad*); see [recommender.md](./recommender.md) for full implementation reference
 - `assets/section-recommender.css`, `assets/recommender.js`, `snippets/recommender-*.liquid` — recommender tabs and panels
+- `sections/instagram-grid.liquid` — Instagram masonry grid (Figma BloqueRrss); see [instagram-grid.md](./instagram-grid.md)
+- `assets/section-instagram-grid.css`, `snippets/instagram-grid-*.liquid` — instagram grid masonry tiles
 - `layout/theme.liquid` — StandardEvents CDN import + `data-template` on `<main>`
 
 See [project-patterns.md](./project-patterns.md) for full pattern reference.
@@ -139,6 +141,7 @@ templates/product.json       — Product template (includes disclosures section)
 | [jane-hero-banner.md](./jane-hero-banner.md) | 2026-07-04 | JANÉ Hero banner — implemented section reference |
 | [jane-blocks-banner.md](./jane-blocks-banner.md) | 2026-07-04 | JANÉ Blocks Banner — implemented section reference |
 | [recommender.md](./recommender.md) | 2026-07-04 | JANÉ Recommender — tabs, split layout, schema, deferred Figma card UI |
+| [instagram-grid.md](./instagram-grid.md) | 2026-07-04 | Instagram grid — 5-col desktop, 2-col mobile, 8 posts, app mode |
 | [shopify-development-rules.md](./shopify-development-rules.md) | 2026-07-03 | Workflow, precedence, planning, validation |
 | [project-patterns.md](./project-patterns.md) | 2026-07-03 | Reusable patterns, conventions, backlog |
 

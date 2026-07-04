@@ -1,0 +1,126 @@
+{%- comment -%}
+  Single Instagram grid tile (image or video).
+  Accepts:
+  - block: {Object} post block
+  - tile_size: {String} square | tall
+  - section: {Object}
+  - tile_index: {Number} 1-based among post blocks
+  - loading: {String} eager | lazy
+{%- endcomment -%}
+
+{%- liquid
+  assign media_type = block.settings.media_type
+  if media_type != 'video'
+    assign media_type = 'image'
+  endif
+
+  assign tile_label = block.settings.alt_text
+  if tile_label == blank
+    if media_type == 'video'
+      assign tile_label = section.settings.heading
+    else
+      assign tile_label = section.settings.heading | append: ' ' | append: tile_index
+    endif
+  endif
+
+  if media_type == 'video'
+    assign aria_key = 'sections.instagram_grid.view_video'
+  else
+    assign aria_key = 'sections.instagram_grid.view_post'
+  endif
+
+  assign placeholder_index = tile_index | modulo: 3 | plus: 1
+  assign placeholder_name = 'hero-apparel-' | append: placeholder_index
+
+  assign tile_classes = 'instagram-grid__tile instagram-grid__tile--' | append: tile_size | append: ' instagram-grid__tile--animate'
+  if media_type == 'video'
+    assign tile_classes = tile_classes | append: ' instagram-grid__tile--video'
+  endif
+
+  assign has_link = false
+  if block.settings.link != blank
+    assign has_link = true
+  endif
+-%}
+
+{%- if has_link -%}
+  <a
+    href="{{ block.settings.link }}"
+    class="{{ tile_classes }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="{{ aria_key | t: title: tile_label | escape }}"
+    data-tile-index="{{ tile_index }}"
+    style="--reveal-order: {{ tile_index }};"
+    {{ block.shopify_attributes }}
+  >
+{%- else -%}
+  <div
+    class="{{ tile_classes }}"
+    data-tile-index="{{ tile_index }}"
+    style="--reveal-order: {{ tile_index }};"
+    {{ block.shopify_attributes }}
+  >
+{%- endif -%}
+
+  <div class="instagram-grid__media">
+    {%- if media_type == 'video' and block.settings.video != blank -%}
+      {%- liquid
+        assign video_poster = block.settings.video_poster
+        if video_poster == blank and block.settings.video.preview_image != blank
+          assign video_poster = block.settings.video.preview_image
+        endif
+      -%}
+      {%- if video_poster != blank -%}
+        {{
+          video_poster
+          | image_url: width: 800
+          | image_tag:
+            class: 'instagram-grid__poster',
+            loading: loading,
+            widths: '336, 568, 800',
+            sizes: '(max-width: 749px) 168px, (min-width: 750px) 354px, 284px',
+            alt: ''
+        }}
+      {%- endif -%}
+      {{
+        block.settings.video
+        | video_tag:
+          class: 'instagram-grid__video',
+          image_size: '800x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true,
+          controls: false,
+          preload: 'metadata'
+      }}
+    {%- elsif media_type == 'image' and block.settings.image != blank -%}
+      {%- liquid
+        assign image_alt = block.settings.alt_text | escape
+        if image_alt == blank and has_link
+          assign image_alt = ''
+        endif
+      -%}
+      {{
+        block.settings.image
+        | image_url: width: 496
+        | image_tag:
+          class: 'instagram-grid__image',
+          loading: loading,
+          widths: '336, 496',
+          sizes: '(max-width: 749px) 168px, 248px',
+          alt: image_alt
+      }}
+    {%- else -%}
+      <div class="instagram-grid__placeholder" aria-hidden="true">
+        {{ placeholder_name | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+{%- if has_link -%}
+  </a>
+{%- else -%}
+  </div>
+{%- endif -%}
