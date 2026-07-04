@@ -43,6 +43,8 @@ Dawn 15.5.0 provides the foundation: JSON templates, section groups, app blocks,
 - `sections/jane-hero-banner.liquid` — multi-slide hero carousel (Figma JANÉ Hero banner); see [jane-hero-banner.md](./jane-hero-banner.md)
 - `assets/section-jane-hero-banner.css`, `assets/jane-hero-banner.js` — hero layout, carousel, fade, transparent header
 - `snippets/jane-hero-*.liquid` — hero slide/media/content/button partials
+- `sections/jane-blocks-banner.liquid` — category strip + typology grid cards (Figma JANÉ Blocks Banner); see [jane-blocks-banner.md](./jane-blocks-banner.md)
+- `assets/section-jane-blocks-banner.css`, `snippets/jane-blocks-banner-card.liquid` — blocks banner layout and hover
 - `layout/theme.liquid` — StandardEvents CDN import + `data-template` on `<main>`
 
 See [project-patterns.md](./project-patterns.md) for full pattern reference.
@@ -133,6 +135,7 @@ templates/product.json       — Product template (includes disclosures section)
 | [typography-guidelines.md](./typography-guidelines.md) | 2026-07-04 | Figma typography spec, Dawn dynamic scale system, class mapping |
 | [button-guidelines.md](./button-guidelines.md) | 2026-07-04 | Button variants, hover animations, form fields, variant pills, accordions |
 | [jane-hero-banner.md](./jane-hero-banner.md) | 2026-07-04 | JANÉ Hero banner — implemented section reference |
+| [jane-blocks-banner.md](./jane-blocks-banner.md) | 2026-07-04 | JANÉ Blocks Banner — implemented section reference |
 | [shopify-development-rules.md](./shopify-development-rules.md) | 2026-07-03 | Workflow, precedence, planning, validation |
 | [project-patterns.md](./project-patterns.md) | 2026-07-03 | Reusable patterns, conventions, backlog |
 

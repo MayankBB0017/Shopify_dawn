@@ -365,6 +365,10 @@
       "metafield_empty": "Hero content is not available from the product metafield. Showing theme editor slides.",
       "metaobject_empty": "No hero metaobject selected. Showing theme editor slides."
     },
+    "jane_blocks_banner": {
+      "default_button_label": "Ver detalles",
+      "view_category": "View category"
+    },
     "page": {
       "title": "Page title"
     },

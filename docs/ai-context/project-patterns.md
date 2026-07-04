@@ -169,7 +169,8 @@ When implementing features, check these files first:
 - **Cart changes**: `assets/cart.js`, `assets/cart-drawer.js`, `assets/standard-actions-override.js`, `snippets/cart-drawer.liquid`
 - **Collection changes**: `sections/main-collection-product-grid.liquid`, `snippets/facets.liquid`, `assets/facets.js`
 - **Disclosure changes**: `snippets/product-disclosures.liquid`, `sections/disclosures.liquid`
-- **Hero banner changes**: `sections/jane-hero-banner.liquid`, `snippets/jane-hero-*.liquid`, `assets/section-jane-hero-banner.css`, `assets/jane-hero-banner.js` — see [jane-hero-banner implementation](./jane-hero-banner.md) (build brief: [agent prompt](../ai-agent-prompts/jane-hero-banner.md))
+- **Hero banner changes**: `sections/jane-hero-banner.liquid`, `snippets/jane-hero-*.liquid`, `assets/section-jane-hero-banner.css`, `assets/jane-hero-banner.js` — see [jane-hero-banner.md](./jane-hero-banner.md)
+- **Blocks banner changes**: `sections/jane-blocks-banner.liquid`, `snippets/jane-blocks-banner-card.liquid`, `assets/section-jane-blocks-banner.css` — see [jane-blocks-banner prompt](../ai-agent-prompts/jane-blocks-banner.md)
 - **Global/layout**: `layout/theme.liquid`, `assets/global.js`, `config/settings_schema.json`
 - **Styling**: `assets/base.css` (global), relevant `component-*.css`
 - **Translations**: `locales/en.default.json`, `locales/en.default.schema.json`
