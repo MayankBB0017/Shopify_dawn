@@ -45,6 +45,8 @@ Dawn 15.5.0 provides the foundation: JSON templates, section groups, app blocks,
 - `snippets/jane-hero-*.liquid` — hero slide/media/content/button partials
 - `sections/jane-blocks-banner.liquid` — category strip + typology grid cards (Figma JANÉ Blocks Banner); see [jane-blocks-banner.md](./jane-blocks-banner.md)
 - `assets/section-jane-blocks-banner.css`, `snippets/jane-blocks-banner-card.liquid` — blocks banner layout and hover
+- `sections/recommender.liquid` — tabbed gift recommender (*Compra por edad*); see [recommender.md](./recommender.md) for full implementation reference
+- `assets/section-recommender.css`, `assets/recommender.js`, `snippets/recommender-*.liquid` — recommender tabs and panels
 - `layout/theme.liquid` — StandardEvents CDN import + `data-template` on `<main>`
 
 See [project-patterns.md](./project-patterns.md) for full pattern reference.
@@ -136,6 +138,7 @@ templates/product.json       — Product template (includes disclosures section)
 | [button-guidelines.md](./button-guidelines.md) | 2026-07-04 | Button variants, hover animations, form fields, variant pills, accordions |
 | [jane-hero-banner.md](./jane-hero-banner.md) | 2026-07-04 | JANÉ Hero banner — implemented section reference |
 | [jane-blocks-banner.md](./jane-blocks-banner.md) | 2026-07-04 | JANÉ Blocks Banner — implemented section reference |
+| [recommender.md](./recommender.md) | 2026-07-04 | JANÉ Recommender — tabs, split layout, schema, deferred Figma card UI |
 | [shopify-development-rules.md](./shopify-development-rules.md) | 2026-07-03 | Workflow, precedence, planning, validation |
 | [project-patterns.md](./project-patterns.md) | 2026-07-03 | Reusable patterns, conventions, backlog |
 

@@ -369,6 +369,10 @@
       "default_button_label": "Ver detalles",
       "view_category": "View category"
     },
+    "recommender": {
+      "tablist_label": "Gift recommendations",
+      "empty_state": "Add at least two recommendation blocks to enable tabs."
+    },
     "page": {
       "title": "Page title"
     },

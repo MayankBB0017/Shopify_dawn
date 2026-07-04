@@ -170,7 +170,8 @@ When implementing features, check these files first:
 - **Collection changes**: `sections/main-collection-product-grid.liquid`, `snippets/facets.liquid`, `assets/facets.js`
 - **Disclosure changes**: `snippets/product-disclosures.liquid`, `sections/disclosures.liquid`
 - **Hero banner changes**: `sections/jane-hero-banner.liquid`, `snippets/jane-hero-*.liquid`, `assets/section-jane-hero-banner.css`, `assets/jane-hero-banner.js` — see [jane-hero-banner.md](./jane-hero-banner.md)
-- **Blocks banner changes**: `sections/jane-blocks-banner.liquid`, `snippets/jane-blocks-banner-card.liquid`, `assets/section-jane-blocks-banner.css` — see [jane-blocks-banner prompt](../ai-agent-prompts/jane-blocks-banner.md)
+- **Blocks banner changes**: `sections/jane-blocks-banner.liquid`, `snippets/jane-blocks-banner-card.liquid`, `assets/section-jane-blocks-banner.css` — see [jane-blocks-banner.md](./jane-blocks-banner.md)
+- **Recommender changes**: `sections/recommender.liquid`, `snippets/recommender-*.liquid`, `assets/section-recommender.css`, `assets/recommender.js` — see [recommender.md](./recommender.md)
 - **Global/layout**: `layout/theme.liquid`, `assets/global.js`, `config/settings_schema.json`
 - **Styling**: `assets/base.css` (global), relevant `component-*.css`
 - **Translations**: `locales/en.default.json`, `locales/en.default.schema.json`

@@ -2236,6 +2236,110 @@
         "name": "JANÉ Blocks Banner"
       }
     },
+    "recommender": {
+      "name": "JANÉ Recommender",
+      "settings": {
+        "header_content": {
+          "content": "Content"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "header_layout": {
+          "content": "Layout"
+        },
+        "container_width": {
+          "label": "Container width",
+          "info": "Standard uses theme page width. Full width spans edge to edge on desktop.",
+          "options__standard": {
+            "label": "Standard"
+          },
+          "options__full_width": {
+            "label": "Full width"
+          }
+        },
+        "image_position": {
+          "label": "Promotional image position",
+          "info": "Desktop layout only. Mobile always stacks image above products.",
+          "options__left": {
+            "label": "Left"
+          },
+          "options__right": {
+            "label": "Right"
+          }
+        },
+        "header_products": {
+          "content": "Products"
+        },
+        "products_to_show": {
+          "label": "Products to show",
+          "info": "Number of products per tab (2–8)."
+        },
+        "enable_quick_add": {
+          "label": "Enable quick add"
+        },
+        "enable_gallery": {
+          "label": "Show second product image on hover",
+          "info": "Uses the theme product card secondary image on hover."
+        },
+        "header_padding": {
+          "content": "Padding"
+        },
+        "padding_top_desktop": {
+          "label": "Top padding (desktop)"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom padding (desktop)"
+        },
+        "padding_top_mobile": {
+          "label": "Top padding (mobile)"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom padding (mobile)"
+        },
+        "header_accessibility": {
+          "content": "Accessibility"
+        },
+        "accessibility_label": {
+          "label": "Tab list label",
+          "info": "Describes the tab group for assistive technology. Uses default when blank."
+        }
+      },
+      "blocks": {
+        "recommendation": {
+          "name": "Recommendation",
+          "settings": {
+            "tab_label": {
+              "label": "Tab label"
+            },
+            "collection": {
+              "label": "Collection"
+            },
+            "promo_image": {
+              "label": "Promotional image (desktop)",
+              "info": "Optional. Uses the collection image when blank."
+            },
+            "promo_image_mobile": {
+              "label": "Promotional image (mobile)",
+              "info": "Optional. Uses desktop promo image, then collection image, when blank."
+            },
+            "description": {
+              "label": "Description",
+              "info": "Overrides the section description when this tab is active."
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "JANÉ Recommender"
+      }
+    },
     "multirow": {
       "name": "Multirow",
       "settings": {

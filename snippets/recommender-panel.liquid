@@ -1,0 +1,175 @@
+{%- comment -%}
+  Single recommendation tab panel: promo image (left) + 2×2 product grid (right).
+{%- endcomment -%}
+
+{%- liquid
+  assign collection = block.settings.collection
+  assign promo_image = block.settings.promo_image
+  assign promo_image_mobile = block.settings.promo_image_mobile
+
+  if collection != blank and collection.featured_image != blank
+    assign collection_image = collection.featured_image
+  endif
+
+  if promo_image == blank and collection_image != blank
+    assign promo_image = collection_image
+  endif
+
+  if promo_image_mobile == blank
+    if block.settings.promo_image != blank
+      assign promo_image_mobile = block.settings.promo_image
+    elsif promo_image != blank
+      assign promo_image_mobile = promo_image
+    elsif collection_image != blank
+      assign promo_image_mobile = collection_image
+    endif
+  endif
+
+  assign promo_alt = block.settings.tab_label
+  if promo_alt == blank and collection != blank
+    assign promo_alt = collection.title
+  endif
+
+  assign panel_description = section.settings.description
+  if block.settings.description != blank
+    assign panel_description = block.settings.description
+  endif
+
+  assign promo_loading = 'lazy'
+  if is_active and panel_index == 1
+    assign promo_loading = 'eager'
+  endif
+
+  assign show_gallery = section.settings.enable_gallery
+  assign placeholder_index = panel_index | modulo: 3 | plus: 1
+  assign promo_placeholder = 'hero-apparel-' | append: placeholder_index
+-%}
+
+<template id="GiftRecommenderDesc-{{ section.id }}-{{ panel_index }}">
+  {%- if panel_description != blank -%}
+    {{ panel_description }}
+  {%- endif -%}
+</template>
+
+<div
+  id="GiftRecommenderPanel-{{ section.id }}-{{ panel_index }}"
+  class="gift-recommender__panel"
+  role="tabpanel"
+  aria-labelledby="GiftRecommenderTab-{{ section.id }}-{{ panel_index }}"
+  data-panel-index="{{ panel_index | minus: 1 }}"
+  aria-hidden="{% if is_active %}false{% else %}true{% endif %}"
+  {% unless is_active %}
+    hidden
+  {% endunless %}
+  {{ block.shopify_attributes }}
+>
+  <div class="gift-recommender__layout gift-recommender__layout--split">
+    <div class="gift-recommender__promo">
+      {%- if promo_image_mobile != blank -%}
+        {{
+          promo_image_mobile
+          | image_url: width: 686
+          | image_tag:
+            class: 'gift-recommender__promo-image gift-recommender__promo-image--mobile',
+            loading: promo_loading,
+            widths: '343, 686',
+            sizes: '(max-width: 749px) 343px, 100vw',
+            alt: promo_alt
+        }}
+      {%- endif -%}
+      {%- if promo_image != blank -%}
+        {{
+          promo_image
+          | image_url: width: 1400
+          | image_tag:
+            class: 'gift-recommender__promo-image gift-recommender__promo-image--desktop',
+            loading: promo_loading,
+            widths: '700, 1400',
+            sizes: '(min-width: 750px) 697px, 50vw',
+            alt: promo_alt
+        }}
+      {%- elsif promo_image_mobile != blank -%}
+        {{
+          promo_image_mobile
+          | image_url: width: 1400
+          | image_tag:
+            class: 'gift-recommender__promo-image gift-recommender__promo-image--desktop',
+            loading: promo_loading,
+            widths: '700, 1400',
+            sizes: '(min-width: 750px) 697px, 50vw',
+            alt: promo_alt
+        }}
+      {%- else -%}
+        <div class="gift-recommender__promo-placeholder gift-recommender__promo-image--mobile" aria-hidden="true">
+          {{ promo_placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+        <div class="gift-recommender__promo-placeholder gift-recommender__promo-image--desktop" aria-hidden="true">
+          {{ promo_placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="gift-recommender__grid-wrap">
+      <ul
+        class="gift-recommender__grid product-grid contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %}"
+        role="list"
+      >
+        {%- if collection != blank and collection.all_products_count > 0 -%}
+          {% assign skip_card_product_styles = false %}
+          {%- for product in collection.products limit: products_limit -%}
+            {%- liquid
+              assign lazy_load = false
+              if forloop.index > 2 or is_active == false
+                assign lazy_load = true
+              endif
+            -%}
+            <li class="gift-recommender__grid-item">
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: 'square',
+                image_shape: 'default',
+                lazy_load: lazy_load,
+                show_secondary_image: show_gallery,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                skip_styles: skip_card_product_styles,
+                section_id: section.id,
+                quick_add: quick_add,
+                extend_height: false,
+                product_view_context: 'collection'
+              %}
+            </li>
+            {%- assign skip_card_product_styles = true -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..products_limit) -%}
+            <li class="gift-recommender__grid-item">
+              {%- liquid
+                assign ridx = forloop.index
+                case ridx
+                  when 5
+                    assign ridx = 1
+                  when 6
+                    assign ridx = 2
+                  when 7
+                    assign ridx = 3
+                  when 8
+                    assign ridx = 4
+                endcase
+                assign placeholder_image = 'product-apparel-' | append: ridx
+              -%}
+              {% render 'card-product',
+                show_vendor: section.settings.show_vendor,
+                media_aspect_ratio: 'square',
+                image_shape: 'default',
+                lazy_load: false,
+                extend_height: false,
+                placeholder_image: placeholder_image
+              %}
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+</div>
