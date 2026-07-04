@@ -40,6 +40,9 @@ Dawn 15.5.0 provides the foundation: JSON templates, section groups, app blocks,
 - `assets/standard-actions-override.js` — custom Standard Actions cart refresh
 - `assets/cart-disclosure-modal.js`, `assets/cart-disclosure-tooltip.js` — cart disclosure UX
 - `assets/disclosures.js` — disclosure accordion web component
+- `sections/jane-hero-banner.liquid` — multi-slide hero carousel (Figma JANÉ Hero banner); see [jane-hero-banner.md](./jane-hero-banner.md)
+- `assets/section-jane-hero-banner.css`, `assets/jane-hero-banner.js` — hero layout, carousel, fade, transparent header
+- `snippets/jane-hero-*.liquid` — hero slide/media/content/button partials
 - `layout/theme.liquid` — StandardEvents CDN import + `data-template` on `<main>`
 
 See [project-patterns.md](./project-patterns.md) for full pattern reference.
@@ -63,7 +66,7 @@ No hardcoded analytics (GTM/gtag/Klaviyo) found in theme source; tracking likely
 |--------|------|
 | `layout/` | `theme.liquid` (main), `password.liquid` |
 | `templates/` | JSON templates (OS 2.0) + `gift_card.liquid` |
-| `sections/` | 53 Liquid sections |
+| `sections/` | 54 Liquid sections |
 | `snippets/` | 39 reusable partials |
 | `blocks/` | **Not present** — Dawn-style local blocks in section schemas |
 | `assets/` | ~60 JS + ~40 CSS files, SVG icons |
@@ -129,6 +132,7 @@ templates/product.json       — Product template (includes disclosures section)
 | [image-aspect-ratio-guidelines.md](./image-aspect-ratio-guidelines.md) | 2026-07-04 | Figma image/video aspect ratios, resolutions, upload specs |
 | [typography-guidelines.md](./typography-guidelines.md) | 2026-07-04 | Figma typography spec, Dawn dynamic scale system, class mapping |
 | [button-guidelines.md](./button-guidelines.md) | 2026-07-04 | Button variants, hover animations, form fields, variant pills, accordions |
+| [jane-hero-banner.md](./jane-hero-banner.md) | 2026-07-04 | JANÉ Hero banner — implemented section reference |
 | [shopify-development-rules.md](./shopify-development-rules.md) | 2026-07-03 | Workflow, precedence, planning, validation |
 | [project-patterns.md](./project-patterns.md) | 2026-07-03 | Reusable patterns, conventions, backlog |
 

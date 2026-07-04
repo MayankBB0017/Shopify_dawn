@@ -1,0 +1,136 @@
+{%- liquid
+  comment
+    Renders hero media (image or video) with optional overlay.
+
+    @param {object} block
+    @param {string} [panel] - '' or 'panel_2'
+    @param {number} slide_index
+    @param {number} section_index
+    @param {string} media_class
+  endcomment
+
+  if panel == 'panel_2'
+    assign media_type_desktop = block.settings.panel_2_media_type_desktop
+    assign media_type_mobile = block.settings.panel_2_media_type_mobile
+    assign image_desktop = block.settings.panel_2_image_desktop
+    assign image_mobile = block.settings.panel_2_image_mobile
+    assign video_desktop = block.settings.panel_2_video_desktop
+    assign video_mobile = block.settings.panel_2_video_mobile
+    assign overlay_type = block.settings.panel_2_overlay_type
+    assign overlay_opacity = block.settings.panel_2_overlay_opacity
+  else
+    assign media_type_desktop = block.settings.media_type_desktop
+    assign media_type_mobile = block.settings.media_type_mobile
+    assign image_desktop = block.settings.image_desktop
+    assign image_mobile = block.settings.image_mobile
+    assign video_desktop = block.settings.video_desktop
+    assign video_mobile = block.settings.video_mobile
+    assign overlay_type = block.settings.overlay_type
+    assign overlay_opacity = block.settings.overlay_opacity
+  endif
+
+  assign fetch_priority = 'auto'
+  if section_index == 1 and slide_index == 1
+    assign fetch_priority = 'high'
+  endif
+
+  assign overlay_opacity_decimal = overlay_opacity | divided_by: 100.0
+-%}
+
+<div class="jane-hero__media {{ media_class }}">
+  <div class="jane-hero__media-inner">
+    <div class="jane-hero__media-item jane-hero__media-item--mobile">
+      {%- if media_type_mobile == 'video' and video_mobile != blank -%}
+        {{
+          video_mobile
+          | video_tag:
+            class: 'jane-hero__video',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            playsinline: true,
+            controls: false,
+            preload: 'metadata'
+        }}
+      {%- elsif image_mobile != blank -%}
+        {{
+          image_mobile
+          | image_url: width: 1080
+          | image_tag:
+            class: 'jane-hero__image',
+            loading: 'lazy',
+            widths: '375, 550, 750, 1080',
+            sizes: '100vw',
+            fetchpriority: fetch_priority,
+            draggable: 'false'
+        }}
+      {%- elsif image_desktop != blank -%}
+        {{
+          image_desktop
+          | image_url: width: 1080
+          | image_tag:
+            class: 'jane-hero__image',
+            loading: 'lazy',
+            widths: '375, 550, 750, 1080',
+            sizes: '100vw',
+            fetchpriority: fetch_priority,
+            draggable: 'false'
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'jane-hero__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    <div class="jane-hero__media-item jane-hero__media-item--desktop">
+      {%- if media_type_desktop == 'video' and video_desktop != blank -%}
+        {{
+          video_desktop
+          | video_tag:
+            class: 'jane-hero__video',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            playsinline: true,
+            controls: false,
+            preload: 'metadata'
+        }}
+      {%- elsif image_desktop != blank -%}
+        {{
+          image_desktop
+          | image_url: width: 1920
+          | image_tag:
+            class: 'jane-hero__image',
+            loading: 'lazy',
+            widths: '750, 1100, 1500, 1920',
+            sizes: '100vw',
+            fetchpriority: fetch_priority,
+            draggable: 'false'
+        }}
+      {%- elsif image_mobile != blank -%}
+        {{
+          image_mobile
+          | image_url: width: 1920
+          | image_tag:
+            class: 'jane-hero__image',
+            loading: 'lazy',
+            widths: '750, 1100, 1500, 1920',
+            sizes: '100vw',
+            fetchpriority: fetch_priority,
+            draggable: 'false'
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'jane-hero__placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if overlay_type == 'opacity' or overlay_type == 'both' -%}
+    <div
+      class="jane-hero__overlay jane-hero__overlay--solid"
+      style="--hero-overlay-opacity: {{ overlay_opacity_decimal }};"
+    ></div>
+  {%- endif -%}
+  {%- if overlay_type == 'gradient' or overlay_type == 'both' -%}
+    <div class="jane-hero__overlay jane-hero__overlay--gradient"></div>
+  {%- endif -%}
+</div>

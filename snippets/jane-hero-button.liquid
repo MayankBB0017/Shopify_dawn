@@ -1,0 +1,49 @@
+{%- liquid
+  assign btn_type = type | default: 'none'
+  assign btn_index = button_index | default: 1
+  assign link_size = link_size | default: '14'
+-%}
+{%- if label != blank and btn_type != 'none' -%}
+  {%- liquid
+    assign custom_style = ''
+    if btn_type == 'customize' and block != blank
+      if btn_index == 1
+        assign custom_style = '--hero-btn-bg:' | append: block.settings.button_1_bg_color | append: ';--hero-btn-border:' | append: block.settings.button_1_border_color | append: ';--hero-btn-text:' | append: block.settings.button_1_text_color | append: ';'
+      else
+        assign custom_style = '--hero-btn-bg:' | append: block.settings.button_2_bg_color | append: ';--hero-btn-border:' | append: block.settings.button_2_border_color | append: ';--hero-btn-text:' | append: block.settings.button_2_text_color | append: ';'
+      endif
+    endif
+
+    case btn_type
+      when 'filled_white'
+        assign btn_class = 'button button--filled-white'
+      when 'filled_black'
+        assign btn_class = 'button button--filled-black'
+      when 'stroke_white'
+        assign btn_class = 'button button--stroke-white'
+      when 'stroke_black'
+        assign btn_class = 'button button--stroke-black'
+      when 'link_white'
+        assign btn_class = 'link-button--' | append: link_size | append: ' jane-hero__link jane-hero__link--white'
+      when 'link_black'
+        assign btn_class = 'link-button--' | append: link_size | append: ' jane-hero__link jane-hero__link--black'
+      when 'customize'
+        assign btn_class = 'button jane-hero__button--custom'
+      else
+        assign btn_class = 'button button--filled-black'
+    endcase
+  -%}
+  <a
+    {% if link == blank %}
+      role="link" aria-disabled="true"
+    {% else %}
+      href="{{ link }}"
+    {% endif %}
+    class="{{ btn_class }}"
+    {% if custom_style != blank %}
+      style="{{ custom_style }}"
+    {% endif %}
+  >
+    <span class="button-label">{{ label | escape }}</span>
+  </a>
+{%- endif -%}

@@ -1,0 +1,109 @@
+{%- liquid
+  assign layout = block.settings.layout_mode
+  assign slide_id = 'JaneHeroSlide-' | append: section.id | append: '-' | append: slide_index
+
+  assign link_only = false
+  assign whole_slide_link = ''
+
+  assign b1_type = block.settings.button_1_type
+  assign b2_type = block.settings.button_2_type
+  assign b1_filled_stroke = false
+  assign b2_filled_stroke = false
+
+  if b1_type == 'filled_white' or b1_type == 'filled_black' or b1_type == 'stroke_white' or b1_type == 'stroke_black' or b1_type == 'customize'
+    assign b1_filled_stroke = true
+  endif
+  if b2_type == 'filled_white' or b2_type == 'filled_black' or b2_type == 'stroke_white' or b2_type == 'stroke_black' or b2_type == 'customize'
+    assign b2_filled_stroke = true
+  endif
+
+  if block.settings.button_1_label != blank and block.settings.button_2_label == blank
+    if b1_type == 'link_white' or b1_type == 'link_black'
+      unless b1_filled_stroke or b2_filled_stroke
+        assign link_only = true
+        assign whole_slide_link = block.settings.button_1_link
+      endunless
+    endif
+  endif
+
+  assign image_width = block.settings.image_width_percent | default: 43
+  assign image_side = block.settings.image_position | default: 'left'
+
+  assign animate_content = false
+  if section.settings.enable_fade_in_desktop or section.settings.enable_fade_in_mobile
+    assign animate_content = true
+  endif
+-%}
+
+<div
+  class="jane-hero__slide jane-hero__slide--{{ layout }}"
+  id="{{ slide_id }}"
+  {{ block.shopify_attributes }}
+  role="group"
+  aria-roledescription="{{ 'sections.jane_hero_banner.slide' | t }}"
+  aria-label="{{ slide_index }} {{ 'general.slider.of' | t }} {{ slide_total }}"
+  style="--hero-image-width: {{ image_width }}%;"
+  data-slide-index="{{ slide_index }}"
+>
+  {%- case layout -%}
+    {%- when 'split_50_50' -%}
+      <div class="jane-hero__split">
+        <div class="jane-hero__panel">
+          {%- if link_only and whole_slide_link != blank -%}
+            <a href="{{ whole_slide_link }}" class="jane-hero__slide-link" aria-label="{{ block.settings.title | escape }}">
+              {% render 'jane-hero-media', block: block, slide_index: slide_index, section_index: section.index, media_class: 'jane-hero__media--panel' %}
+            </a>
+          {%- else -%}
+            {% render 'jane-hero-media', block: block, slide_index: slide_index, section_index: section.index, media_class: 'jane-hero__media--panel' %}
+          {%- endif -%}
+          {% render 'jane-hero-content', block: block, animate_content: animate_content %}
+        </div>
+        <div class="jane-hero__panel">
+          {% render 'jane-hero-media',
+            block: block,
+            panel: 'panel_2',
+            slide_index: slide_index,
+            section_index: section.index,
+            media_class: 'jane-hero__media--panel'
+          %}
+          {% render 'jane-hero-content',
+            block: block,
+            panel: 'panel_2',
+            animate_content: animate_content
+          %}
+        </div>
+      </div>
+
+    {%- when 'image_with_text' -%}
+      <div class="jane-hero__image-text jane-hero__image-text--image-{{ image_side }}">
+        <div class="jane-hero__image-text-media">
+          {%- if link_only and whole_slide_link != blank -%}
+            <a href="{{ whole_slide_link }}" class="jane-hero__slide-link" aria-label="{{ block.settings.title | escape }}">
+              {% render 'jane-hero-media', block: block, slide_index: slide_index, section_index: section.index, media_class: 'jane-hero__media--image-text' %}
+            </a>
+          {%- else -%}
+            {% render 'jane-hero-media', block: block, slide_index: slide_index, section_index: section.index, media_class: 'jane-hero__media--image-text' %}
+          {%- endif -%}
+        </div>
+        <div class="jane-hero__image-text-content">
+          {% render 'jane-hero-content',
+            block: block,
+            animate_content: animate_content,
+            image_with_text_mobile: true
+          %}
+        </div>
+      </div>
+
+    {%- else -%}
+      <div class="jane-hero__fullwidth">
+        {%- if link_only and whole_slide_link != blank -%}
+          <a href="{{ whole_slide_link }}" class="jane-hero__slide-link" aria-label="{{ block.settings.title | escape }}">
+            {% render 'jane-hero-media', block: block, slide_index: slide_index, section_index: section.index, media_class: 'jane-hero__media--fullwidth' %}
+          </a>
+        {%- else -%}
+          {% render 'jane-hero-media', block: block, slide_index: slide_index, section_index: section.index, media_class: 'jane-hero__media--fullwidth' %}
+        {%- endif -%}
+        {% render 'jane-hero-content', block: block, animate_content: animate_content %}
+      </div>
+  {%- endcase -%}
+</div>

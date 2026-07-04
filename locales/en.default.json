@@ -358,6 +358,13 @@
       "carousel": "Carousel",
       "slide": "Slide"
     },
+    "jane_hero_banner": {
+      "carousel": "Carousel",
+      "slide": "Slide",
+      "load_slide": "Load slide",
+      "metafield_empty": "Hero content is not available from the product metafield. Showing theme editor slides.",
+      "metaobject_empty": "No hero metaobject selected. Showing theme editor slides."
+    },
     "page": {
       "title": "Page title"
     },
