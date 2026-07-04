@@ -127,6 +127,7 @@ templates/product.json       — Product template (includes disclosures section)
 | [javascript-guidelines.md](./javascript-guidelines.md) | 2026-07-03 | Web components, pubsub, cart JS |
 | [performance-optimization.md](./performance-optimization.md) | 2026-07-03 | Liquid, frontend, Core Web Vitals |
 | [image-aspect-ratio-guidelines.md](./image-aspect-ratio-guidelines.md) | 2026-07-04 | Figma image/video aspect ratios, resolutions, upload specs |
+| [typography-guidelines.md](./typography-guidelines.md) | 2026-07-04 | Figma typography spec, Dawn dynamic scale system, class mapping |
 | [shopify-development-rules.md](./shopify-development-rules.md) | 2026-07-03 | Workflow, precedence, planning, validation |
 | [project-patterns.md](./project-patterns.md) | 2026-07-03 | Reusable patterns, conventions, backlog |
 
