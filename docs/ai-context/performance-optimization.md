@@ -30,6 +30,7 @@ theme_api_version: Dawn 15.5.0 / Shopify OS 2.0
 - Lazy loading: `loading="lazy"` on disclosure icons, product cards, collection images
 - No deprecated `img_url`/`img_tag` — all use modern filters
 - Product media gallery with deferred loading (`component-deferred-media.css`)
+- **Jane aspect ratio & resolution targets:** see [image-aspect-ratio-guidelines.md](./image-aspect-ratio-guidelines.md) (Figma source of truth for per-section ratios, formats, and file-weight goals)
 
 ### Fonts
 

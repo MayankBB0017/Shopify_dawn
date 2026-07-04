@@ -13,7 +13,7 @@ Primary reference for feature development in the Jane Shopify theme.
 
 | Snippet | Used By | Notes |
 |---------|---------|-------|
-| `card-product.liquid` | featured-collection, related-products, main-collection-product-grid, collection-list | Primary product card |
+| `card-product.liquid` | featured-collection, related-products, main-collection-product-grid, collection-list | Primary product card — image spec: 4:5 · 1536×1920 ([image-aspect-ratio-guidelines.md](./image-aspect-ratio-guidelines.md)) |
 | `card-collection.liquid` | collection-list, main-list-collections | Collection card |
 | `product-disclosures.liquid` | disclosures section, main-product block, cart-drawer | Param `surface` filters display |
 | `cart-disclosure-indicator.liquid` | cart-drawer, main-cart-items | Per-line cart disclosures |
@@ -21,7 +21,7 @@ Primary reference for feature development in the Jane Shopify theme.
 | `price.liquid` | main-product, featured-product, card-product | Price with sale/compare |
 | `buy-buttons.liquid` | main-product, featured-product | Add to cart form |
 | `product-variant-picker.liquid` | main-product, featured-product | Variant/swatch selection |
-| `product-media-gallery.liquid` | main-product | Image/video gallery |
+| `product-media-gallery.liquid` | main-product | Image/video gallery — 4:5 product media ([image-aspect-ratio-guidelines.md](./image-aspect-ratio-guidelines.md)) |
 | `cart-drawer.liquid` | layout/theme.liquid | Drawer markup |
 | `pagination.liquid` | main-collection-product-grid, main-blog, main-search | Page navigation |
 | `loading-spinner.liquid` | Various | Loading state indicator |
