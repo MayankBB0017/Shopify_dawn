@@ -1,0 +1,105 @@
+# Jane Shopify Theme — Claude Code Instructions
+
+**Before any code changes**, read `/docs/ai-context/theme-overview.md` and relevant topic docs in `/docs/ai-context/`.
+
+## Documentation Freshness
+
+- Every doc has `last_analyzed` in frontmatter — if **>90 days old**, treat Shopify-platform claims as unverified
+- **Live sources win** over generated docs: Dev MCP / shopify.dev / Shopify CLI validation
+- Use Dev MCP to validate Liquid objects, filters, tags, and schema properties before writing code
+
+## Workflow
+
+**Analyze → Plan → Clarify → Implement → Test → Verify**
+
+Required for: new features, enhancements, integrations, refactors, new sections/blocks/templates, custom business logic, architecture changes.
+
+Small exceptions (typo, single schema setting, minor CSS, clear bug fix) may skip formal planning — but all rules below still apply.
+
+## Precedence (Conflict Resolution)
+
+1. Non-Negotiable Shopify Rules (below) — always win
+2. Live Shopify source validation — wins over generated docs
+3. Existing project conventions — for stylistic choices only
+4. Legacy code violating a rule — follow the rule in new/modified code; flag legacy, don't mass-refactor
+
+## Project Context
+
+- **Theme**: Dawn 15.5.0 fork — Dawn-style section-scoped blocks (no `/blocks/` folder)
+- **Custom features**: product disclosures, Standard Events, Standard Actions cart override
+- **Patterns**: external CSS/JS in `assets/`, pubsub event bus, web components
+- **Do not edit** `config/settings_data.json` unless explicitly requested
+- **Preserve** `"type": "@app"` block support in schemas
+
+## Non-Negotiable Shopify Rules
+
+### Liquid
+
+- `{% render 'snippet', param: value %}` — **NEVER** `{% include %}`
+- Pass all variables explicitly to `{% render %}` (isolated scope)
+- No parentheses in `{% if %}` conditions; no ternary operator
+- `{% paginate %}` for collections/arrays >50 items
+- `contains` works on strings only
+- `image_url` + `image_tag` — NOT `img_url` / `img_tag`
+- Never invent Liquid objects, filters, tags, schema properties, or APIs
+- Verify against live Shopify sources before use
+
+### Layout
+
+- `{{ content_for_header }}` in `<head>`; `{{ content_for_layout }}` in `<body>`
+
+### Schema & Theme Editor
+
+- Valid `{% schema %}` on every section/block
+- `{{ block.shopify_attributes }}` on every block wrapper top-level element
+- Presets on sections/blocks; `t:` keys for schema name/label
+- Do NOT edit `config/settings_data.json` unless requested
+- Preserve `"type": "@app"` unless requested
+
+### i18n
+
+- `{{ 'key' | t }}` for all customer/merchant-facing strings
+- Update `locales/en.default.json` (+ `.schema.json` for schema labels)
+- Hierarchical snake_case translation keys
+
+### CSS & JS
+
+- Prefer `{% stylesheet %}` / `{% javascript %}` for new colocated code
+- Liquid NOT rendered inside `{% stylesheet %}` or `{% javascript %}`
+- `{% style %}` for Theme Editor live-preview settings
+- Single dynamic CSS property → CSS variable; multiple → CSS classes
+- **This project** uses external `assets/*.css` and `assets/*.js` — match existing files when modifying Dawn components
+
+### Accessibility
+
+- WCAG 2.1 AA baseline; keyboard-nav check for new interactive components
+
+### Performance
+
+- Lazy-load images; responsive `image_url` widths; no `all_products` loops; paginate large lists; minimize global JS/CSS
+
+### Scope
+
+- Theme work = Liquid/storefront; App work = TOML/GraphQL/Polaris — don't mix
+
+## Development Principles
+
+Reuse before creating · Extend before replacing · Match existing patterns (unless rule conflict) · Preserve merchant configurability · Minimal diffs · `shopify theme check` before completing work · Pull before push to avoid overwriting merchant Theme Editor changes
+
+## Key Files
+
+`layout/theme.liquid` · `sections/main-product.liquid` · `snippets/product-disclosures.liquid` · `assets/standard-actions-override.js` · `assets/global.js` · `assets/pubsub.js`
+
+## Documentation Index
+
+| File | Purpose |
+|------|---------|
+| `docs/ai-context/theme-overview.md` | Start here |
+| `docs/ai-context/theme-architecture.md` | Structure, data flow |
+| `docs/ai-context/liquid-guidelines.md` | Liquid rules, schema |
+| `docs/ai-context/html-accessibility.md` | WCAG, a11y testing |
+| `docs/ai-context/css-guidelines.md` | CSS organization |
+| `docs/ai-context/javascript-guidelines.md` | Web components, pubsub |
+| `docs/ai-context/performance-optimization.md` | Performance patterns |
+| `docs/ai-context/shopify-development-rules.md` | Workflow, validation |
+| `docs/ai-context/project-patterns.md` | Reusable patterns, backlog |
