@@ -52,6 +52,7 @@
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'component-buttons.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -215,6 +216,20 @@
 
         --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
 
+        /* Brand tokens — buttons, inputs, variants */
+        --color-negro: 26, 25, 25;
+        --color-blanco: 255, 255, 255;
+        --color-gris: 243, 243, 243;
+        --color-gris-medio: 230, 226, 221;
+        --color-gris-oscuro: 105, 105, 105;
+        --color-ui-disabled: 180, 180, 180;
+        --button-radius-cta: 0.8rem;
+        --button-radius-variant: 0.4rem;
+        --button-hover-in-duration: 4000ms;
+        --button-hover-out-duration: 550ms;
+        --button-text-color-duration: 0.5s;
+        --button-dissolve-duration: 450ms;
+
         --popup-border-width: {{ settings.popup_border_thickness }}px;
         --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
         --popup-corner-radius: {{ settings.popup_corner_radius }}px;
@@ -317,6 +332,8 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'component-buttons.css' | asset_url | stylesheet_tag }}
+    {{ 'component-form-fields.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

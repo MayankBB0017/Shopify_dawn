@@ -178,9 +178,9 @@
                   {% else %}
                     role="link" aria-disabled="true"
                   {% endif %}
-                  class="button {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}"
+                  class="{% render 'cta-button-class', outline: block.settings.button_style_secondary, stroke_variant: 'white' %}"
                 >
-                  {{- block.settings.button_label | escape -}}
+                  <span class="button-label">{{ block.settings.button_label | escape }}</span>
                 </a>
               </div>
             {%- endif -%}

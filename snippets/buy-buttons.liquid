@@ -74,7 +74,7 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary button--filled-white{% else %}button--primary button--filled-black{% endif %}"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
@@ -82,7 +82,7 @@
               disabled
             {% endif %}
           >
-            <span>
+            <span class="button-label">
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
@@ -105,10 +105,10 @@
         <button
           type="submit"
           name="add"
-          class="product-form__submit button button--full-width button--primary"
+          class="product-form__submit button button--full-width button--primary button--filled-black"
           disabled
         >
-          {{ 'products.product.sold_out' | t }}
+          <span class="button-label">{{ 'products.product.sold_out' | t }}</span>
         </button>
       </div>
     </div>
@@ -138,7 +138,7 @@
           </span>
           <div class="pickup-availability-info">
             <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
-            <button class="pickup-availability-button link link--text underlined-link">
+            <button class="pickup-availability-button link link-button--14">
               {{ 'products.product.pickup_availability.refresh' | t }}
             </button>
           </div>

@@ -1,0 +1,24 @@
+{%- liquid
+  comment
+    Jane CTA classes for Dawn sections with Solid / Outline settings.
+
+    @param {boolean} [outline] - true when Outline style is enabled
+    @param {string} [style] - Dawn select value: 'primary' (solid) or 'secondary' (outline)
+    @param {string} [stroke_variant] - 'white' or 'black' stroke color when outline (default: black)
+  endcomment
+
+  assign stroke_color = stroke_variant | default: 'black'
+  assign is_outline = outline
+
+  if style == 'secondary'
+    assign is_outline = true
+  elsif style == 'primary'
+    assign is_outline = false
+  endif
+
+  if is_outline
+    echo 'button button--stroke-' | append: stroke_color
+  else
+    echo 'button button--primary button--filled-black'
+  endif
+-%}
