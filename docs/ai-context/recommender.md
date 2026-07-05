@@ -25,7 +25,7 @@ Tabbed gift/audience recommender: header (title + tab buttons + description) + p
 - **Standard Dawn `card-product`** — square media, section-scoped grid sizing; no custom card snippet
 - **Quick add** optional; buttons get `button--hover-dissolve` via JS
 - **Promo image fallback:** CMS image → collection featured image → Dawn placeholder SVG
-- **Layout modifiers:** container standard/full width; promo left or right on desktop
+- **Scroll fade-in** optional (desktop + mobile CMS toggles); staggered reveal for header, tabs, promo, and products
 
 **Does not extend** Dawn `featured-collection.liquid` — standalone section with dedicated CSS grid for the split layout.
 
@@ -159,6 +159,9 @@ Padding injected via `{% style %}` on `#GiftRecommender-{{ section.id }}`.
 | `show_vendor` | checkbox | `false` | Passed to `card-product` |
 | `show_rating` | checkbox | `false` | Passed to `card-product` |
 | `enable_quick_add` | checkbox | `true` | Loads quick-add assets when on |
+| **Animation** | | | |
+| `enable_fade_in_desktop` | checkbox | `true` | Staggered scroll fade-in on desktop |
+| `enable_fade_in_mobile` | checkbox | `true` | Staggered scroll fade-in on mobile |
 | **Padding** | range | 48/48 desktop · 32/32 mobile | Separate mobile/desktop top/bottom |
 | `color_scheme` | color_scheme | `scheme-1` | |
 | `accessibility_label` | text | — | Overrides `tablist` `aria-label` i18n default |
@@ -235,7 +238,10 @@ File: `assets/recommender.js`
 | Keyboard | Arrow Left/Right/Up/Down, Home, End — WAI-ARIA tabs pattern; focus stays on tab |
 | Description sync | Clones content from panel `<template>` into `[data-recommender-description]` |
 | Quick add styling | Adds `button--hover-dissolve` to `.quick-add__submit.button` |
-| Theme Editor | `shopify:section:load` re-binds · `shopify:block:select` activates matching panel |
+| Scroll fade-in | `IntersectionObserver` threshold `0.12` → `gift-recommender--fade-visible` |
+| Stagger targets | Heading, tabs, description, promo image, product cards (`.gift-recommender__animate` + `--gr-stagger-index`) |
+| Theme Editor / Add section preview | `Shopify.designMode` → `playFadeIn()` replays stagger animation |
+| Theme Editor | `shopify:section:load` re-binds · `shopify:block:select` activates matching panel · `shopify:section:select` replays fade |
 
 **No-JS degradation:** First panel visible; other panels `hidden`. Only first collection visible without JS.
 
@@ -265,6 +271,9 @@ Applied on `<gift-recommender>`:
 | `gift-recommender--container-full` | `container_width: full_width` (default) |
 | `gift-recommender--image-left` | `image_position: left` (default) |
 | `gift-recommender--image-right` | `image_position: right` |
+| `gift-recommender--fade-in-desktop` | `enable_fade_in_desktop` |
+| `gift-recommender--fade-in-mobile` | `enable_fade_in_mobile` |
+| `gift-recommender--fade-visible` | Scroll reveal active / Theme Editor preview |
 
 ---
 

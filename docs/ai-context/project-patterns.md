@@ -26,7 +26,19 @@ Primary reference for feature development in the Jane Shopify theme.
 | `pagination.liquid` | main-collection-product-grid, main-blog, main-search | Page navigation |
 | `loading-spinner.liquid` | Various | Loading state indicator |
 
-### Reusable Sections
+### JANÉ custom sections
+
+All net-new Jane sections use **JANÉ** in Theme Editor section + preset names and share preset category **JANÉ Custom Sections** (`t:sections.all.jane_custom_sections.category`).
+
+| Section file | Theme Editor name |
+|--------------|-------------------|
+| `jane-hero-banner.liquid` | JANÉ Hero banner |
+| `jane-blocks-banner.liquid` | JANÉ Blocks Banner |
+| `recommender.liquid` | JANÉ Recommender |
+| `instagram-grid.liquid` | JANÉ Instagram grid |
+| `highlighted-product.liquid` | JANÉ Highlighted product |
+
+### Frequently modified Dawn sections
 
 | Section | Purpose |
 |---------|---------|
@@ -36,9 +48,8 @@ Primary reference for feature development in the Jane Shopify theme.
 | `rich-text.liquid` | Flexible text content blocks |
 | `slideshow.liquid` | Image carousel |
 | `collapsible-content.liquid` | FAQ/accordion content |
-| `disclosures.liquid` | Jane product disclosure accordion |
+| `disclosures.liquid` | Theme disclosures section (Jane snippets/metaobjects) |
 | `apps.liquid` | Dedicated app block container |
-| `highlighted-product.liquid` | Lifestyle image + feature hotspots + product CTA |
 
 ### Shared Utilities (JS)
 

@@ -89,6 +89,18 @@ Inside each slide (layout-dependent):
 
 Panel 2 in 50-50 mode uses `panel_2_*` settings (media, overlay, content, buttons).
 
+### Preset (Theme Editor)
+
+**JANÉ Hero banner** preset category: **JANÉ Custom Sections**. Ships **3 slide blocks** matching the homepage (`templates/index.json`) layout demo:
+
+| Slide | `layout_mode` | Key settings |
+|-------|---------------|--------------|
+| 1 | `split_50_50` | Dual panels, white centered content, two filled-white CTAs per panel |
+| 2 | `fullwidth` | Full-bleed media, content `middle-center` (desktop) |
+| 3 | `image_with_text` | Image right 56%, black left-aligned text, single filled-black CTA |
+
+Section defaults: `height_desktop: large`, `height_mobile: medium`, zero padding, fade-in enabled, autoplay off. Images and links are left for the merchant to assign (not store-specific URLs in preset).
+
 ---
 
 ## Section settings

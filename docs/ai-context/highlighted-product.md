@@ -11,7 +11,7 @@ section_file: sections/highlighted-product.liquid
 >
 > **Original build brief:** [jane-highlighted-product.md](../ai-agent-prompts/jane-highlighted-product.md)
 
-**Naming:** Theme Editor label **JANÉ Highlighted product** (section + preset). Code uses `highlighted-product` / `sections.highlighted_product` — **no `jane` prefix** in filenames or Liquid keys.
+**Naming:** Theme Editor label **JANÉ Highlighted product** (section + preset). Preset category **JANÉ Custom Sections**. Code uses `highlighted-product` / `sections.highlighted_product` — **no `jane` prefix** in filenames or Liquid keys.
 
 ---
 

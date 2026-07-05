@@ -38,6 +38,9 @@
   if section.settings.container_width == 'standard'
     assign container_class = 'page-width'
     assign container_modifier = 'standard'
+  elsif section.settings.container_width == 'full_width'
+    assign container_class = ''
+    assign container_modifier = 'full'
   endif
 -%}
 
@@ -392,6 +395,7 @@
   "presets": [
     {
       "name": "t:sections.instagram_grid.presets.name",
+      "category": "t:sections.all.jane_custom_sections.category",
       "blocks": [
         {
           "type": "post",

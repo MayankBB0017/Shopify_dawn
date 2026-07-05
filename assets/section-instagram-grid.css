@@ -2,6 +2,8 @@
 
 instagram-grid {
   display: block;
+  width: 100%;
+  max-width: 100%;
 }
 
 .instagram-grid {
@@ -16,7 +18,6 @@ instagram-grid {
   --ig-row-gap-mobile: 0.7rem;
   --ig-square-mobile: 16.8rem;
   --ig-tall-h-mobile: 29.9rem;
-  --ig-section-max-width: 144rem;
   --ig-radius: 0.8rem;
 }
 
@@ -59,9 +60,14 @@ instagram-grid {
 }
 
 .instagram-grid--container-full .instagram-grid__shell {
-  max-width: var(--ig-section-max-width);
+  width: 100%;
+  max-width: 100%;
   padding-left: 1.6rem;
   padding-right: 1.6rem;
+}
+
+.instagram-grid--container-standard .instagram-grid__shell.page-width {
+  width: 100%;
 }
 
 @media screen and (min-width: 750px) {
@@ -72,7 +78,13 @@ instagram-grid {
 
   .instagram-grid__shell {
     gap: 3.2rem;
-    align-items: center;
+    align-items: stretch;
+  }
+
+  .instagram-grid--container-full .instagram-grid__header,
+  .instagram-grid--container-full .instagram-grid__footer {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -115,7 +127,7 @@ instagram-grid {
 .instagram-grid__columns {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: var(--ig-col-gap);
   width: 100%;
@@ -155,46 +167,43 @@ instagram-grid {
   }
 }
 
-/* 5-column desktop — fixed column widths (full width container) */
+/* 5-column desktop — proportional flex (full + standard) */
 
 @media screen and (min-width: 750px) {
-  .instagram-grid--container-full.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(1),
-  .instagram-grid--container-full.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(3),
-  .instagram-grid--container-full.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(5) {
-    width: var(--ig-square-5);
-    flex: 0 0 var(--ig-square-5);
-  }
-
-  .instagram-grid--container-full.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(2),
-  .instagram-grid--container-full.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(4) {
-    width: var(--ig-tall-w-5);
-    flex: 0 0 var(--ig-tall-w-5);
-  }
-}
-
-/* 5-column standard — proportional flex so grid fits page width */
-
-@media screen and (min-width: 750px) {
-  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop {
+  .instagram-grid--layout-5 .instagram-grid__columns--desktop {
     width: 100%;
     max-width: 100%;
   }
 
-  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(1),
-  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(3),
-  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(5) {
+  .instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(1),
+  .instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(3),
+  .instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(5) {
     flex: 248 1 0;
     width: auto;
     min-width: 0;
+  }
+
+  .instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(2),
+  .instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(4) {
+    flex: 284 1 0;
+    width: auto;
+    min-width: 0;
+  }
+
+  /* Standard container — cap columns at Figma design widths inside page-width */
+  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(1),
+  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(3),
+  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(5) {
     max-width: var(--ig-square-5);
   }
 
   .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(2),
   .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop .instagram-grid__column:nth-child(4) {
-    flex: 284 1 0;
-    width: auto;
-    min-width: 0;
     max-width: var(--ig-tall-w-5);
+  }
+
+  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__columns--desktop {
+    justify-content: center;
   }
 }
 
@@ -235,11 +244,6 @@ instagram-grid {
 
 @media screen and (min-width: 750px) {
   .instagram-grid--layout-5 .instagram-grid__tile--tall {
-    height: var(--ig-tall-h-5);
-  }
-
-  /* Standard container: tall height = two square rows + gap (100cqw = grid width) */
-  .instagram-grid--container-standard.instagram-grid--layout-5 .instagram-grid__tile--tall {
     height: calc((100cqw - 4 * var(--ig-col-gap)) * 496 / 1312 + var(--ig-row-gap-desktop));
   }
 }

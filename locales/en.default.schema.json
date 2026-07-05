@@ -398,6 +398,9 @@
         "padding_bottom": "Bottom"
       },
       "spacing": "Spacing",
+      "jane_custom_sections": {
+        "category": "JANÉ Custom Sections"
+      },
       "colors": {
         "label": "Color scheme",
         "has_cards_info": "To change the card color scheme, update your theme settings."
@@ -2284,6 +2287,15 @@
         "enable_quick_add": {
           "label": "Enable quick add"
         },
+        "header_animation": {
+          "content": "Animation"
+        },
+        "enable_fade_in_desktop": {
+          "label": "Enable fade-in on desktop"
+        },
+        "enable_fade_in_mobile": {
+          "label": "Enable fade-in on mobile"
+        },
         "enable_gallery": {
           "label": "Show second product image on hover",
           "info": "Uses the theme product card secondary image on hover."
@@ -2341,7 +2353,7 @@
       }
     },
     "instagram_grid": {
-      "name": "Instagram grid",
+      "name": "JANÉ Instagram grid",
       "settings": {
         "header_content": {
           "content": "Content"
@@ -2468,7 +2480,7 @@
         }
       },
       "presets": {
-        "name": "Instagram grid"
+        "name": "JANÉ Instagram grid"
       }
     },
     "highlighted_product": {

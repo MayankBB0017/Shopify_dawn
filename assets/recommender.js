@@ -1,42 +1,56 @@
 /**
- * Gift Recommender — accessible tab panels (collection swap without reload)
+ * Gift Recommender — accessible tab panels + scroll fade-in
  * Focus stays on selected tab after activation (WAI-ARIA tabs pattern).
  */
 class GiftRecommender extends HTMLElement {
+  constructor() {
+    super();
+    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  }
+
   connectedCallback() {
     this.refreshElements();
-    if (this.tabs.length === 0 || this.panels.length === 0) {
-      return;
+
+    if (this.tabs.length > 0 && this.panels.length > 0) {
+      this.onTabClick = this.onTabClick.bind(this);
+      this.onTabKeydown = this.onTabKeydown.bind(this);
+      this.onSectionLoad = this.onSectionLoad.bind(this);
+      this.onBlockSelect = this.onBlockSelect.bind(this);
+
+      this.tabs.forEach((tab) => {
+        tab.addEventListener('click', this.onTabClick);
+        tab.addEventListener('keydown', this.onTabKeydown);
+      });
+
+      document.addEventListener('shopify:section:load', this.onSectionLoad);
+      document.addEventListener('shopify:block:select', this.onBlockSelect);
+
+      this.applyQuickAddDissolve();
+      this.syncDescription(this.getActiveIndex());
     }
 
-    this.onTabClick = this.onTabClick.bind(this);
-    this.onTabKeydown = this.onTabKeydown.bind(this);
-    this.onSectionLoad = this.onSectionLoad.bind(this);
-    this.onBlockSelect = this.onBlockSelect.bind(this);
-
-    this.tabs.forEach((tab) => {
-      tab.addEventListener('click', this.onTabClick);
-      tab.addEventListener('keydown', this.onTabKeydown);
-    });
-
-    document.addEventListener('shopify:section:load', this.onSectionLoad);
-    document.addEventListener('shopify:block:select', this.onBlockSelect);
-
-    this.applyQuickAddDissolve();
-    this.syncDescription(this.getActiveIndex());
+    this.initFadeIn();
   }
 
   disconnectedCallback() {
-    if (!this.tabs) {
-      return;
+    if (this.tabs) {
+      this.tabs.forEach((tab) => {
+        tab.removeEventListener('click', this.onTabClick);
+        tab.removeEventListener('keydown', this.onTabKeydown);
+      });
     }
 
-    this.tabs.forEach((tab) => {
-      tab.removeEventListener('click', this.onTabClick);
-      tab.removeEventListener('keydown', this.onTabKeydown);
-    });
     document.removeEventListener('shopify:section:load', this.onSectionLoad);
     document.removeEventListener('shopify:block:select', this.onBlockSelect);
+
+    if (this.fadeObserver) {
+      this.fadeObserver.disconnect();
+    }
+
+    if (this.previewTimer) {
+      window.clearTimeout(this.previewTimer);
+      this.previewTimer = null;
+    }
   }
 
   refreshElements() {
@@ -51,14 +65,107 @@ class GiftRecommender extends HTMLElement {
     });
   }
 
+  isDesignPreview() {
+    return Boolean(
+      Shopify?.designMode || document.documentElement.classList.contains('shopify-design-mode')
+    );
+  }
+
+  shouldAnimate() {
+    if (this.reducedMotion.matches) {
+      return false;
+    }
+
+    if (window.matchMedia('(min-width: 750px)').matches) {
+      return this.classList.contains('gift-recommender--fade-in-desktop');
+    }
+
+    return this.classList.contains('gift-recommender--fade-in-mobile');
+  }
+
+  playFadeIn() {
+    if (!this.shouldAnimate()) {
+      this.classList.add('gift-recommender--fade-visible');
+      return;
+    }
+
+    this.classList.remove('gift-recommender--fade-visible');
+
+    if (this.previewTimer) {
+      window.clearTimeout(this.previewTimer);
+    }
+
+    this.previewTimer = window.setTimeout(() => {
+      this.previewTimer = null;
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          this.classList.add('gift-recommender--fade-visible');
+        });
+      });
+    }, 100);
+  }
+
+  initFadeIn() {
+    if (this.reducedMotion.matches) {
+      this.classList.add('gift-recommender--fade-visible');
+      return;
+    }
+
+    if (this.isDesignPreview()) {
+      this.playFadeIn();
+      return;
+    }
+
+    if (!this.shouldAnimate()) {
+      this.classList.add('gift-recommender--fade-visible');
+      return;
+    }
+
+    if (this.classList.contains('gift-recommender--fade-visible')) {
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      this.classList.add('gift-recommender--fade-visible');
+      return;
+    }
+
+    this.fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.classList.add('gift-recommender--fade-visible');
+            this.fadeObserver.disconnect();
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    this.fadeObserver.observe(this);
+
+    if (Shopify?.designMode) {
+      window.setTimeout(() => {
+        if (!this.classList.contains('gift-recommender--fade-visible')) {
+          this.playFadeIn();
+        }
+      }, 150);
+    }
+  }
+
+  refreshAfterUpdate() {
+    this.refreshElements();
+    this.applyQuickAddDissolve();
+    this.syncDescription(this.getActiveIndex());
+    this.playFadeIn();
+  }
+
   onSectionLoad(event) {
     if (!event.target.contains(this)) {
       return;
     }
 
-    this.refreshElements();
-    this.applyQuickAddDissolve();
-    this.syncDescription(this.getActiveIndex());
+    this.refreshAfterUpdate();
   }
 
   onBlockSelect(event) {
@@ -173,3 +280,17 @@ class GiftRecommender extends HTMLElement {
 }
 
 customElements.define('gift-recommender', GiftRecommender);
+
+function refreshGiftRecommenders(root = document) {
+  root.querySelectorAll('gift-recommender').forEach((recommender) => {
+    if (typeof recommender.refreshAfterUpdate === 'function') {
+      recommender.refreshAfterUpdate();
+    }
+  });
+}
+
+if (Shopify?.designMode) {
+  document.addEventListener('shopify:section:select', (event) => {
+    refreshGiftRecommenders(event.target);
+  });
+}

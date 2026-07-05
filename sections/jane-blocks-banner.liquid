@@ -91,7 +91,7 @@
 
 <jane-blocks-banner
   id="JaneBlocksBanner-{{ section.id }}"
-  class="jane-blocks-banner color-{{ section.settings.color_scheme }} gradient jane-blocks-banner--{{ auto_layout }} jane-blocks-banner--variant-{{ layout_variant }} jane-blocks-banner--container-{{ container_modifier }}{% if enable_spacing %} jane-blocks-banner--spaced{% endif %}{% unless enable_hover %} jane-blocks-banner--hover-disabled{% endunless %}{% if section.settings.enable_fade_in_desktop %} jane-blocks-banner--fade-in-desktop{% endif %}{% if section.settings.enable_fade_in_mobile %} jane-blocks-banner--fade-in-mobile{% endif %}{% if request.design_mode %} jane-blocks-banner--fade-visible{% endif %}"
+  class="jane-blocks-banner color-{{ section.settings.color_scheme }} gradient jane-blocks-banner--{{ auto_layout }} jane-blocks-banner--variant-{{ layout_variant }} jane-blocks-banner--container-{{ container_modifier }}{% if enable_spacing %} jane-blocks-banner--spaced{% endif %}{% unless enable_hover %} jane-blocks-banner--hover-disabled{% endunless %}{% if section.settings.enable_fade_in_desktop %} jane-blocks-banner--fade-in-desktop{% endif %}{% if section.settings.enable_fade_in_mobile %} jane-blocks-banner--fade-in-mobile{% endif %}"
   {% if section.settings.accessibility_label != blank %}
     aria-label="{{ section.settings.accessibility_label | escape }}"
   {% endif %}
@@ -790,6 +790,7 @@
   "presets": [
     {
       "name": "t:sections.jane_blocks_banner.presets.name",
+      "category": "t:sections.all.jane_custom_sections.category",
       "settings": {
         "enable_block_spacing": true,
         "block_border_radius": 8,

@@ -31,6 +31,14 @@
   if image_position != 'right'
     assign image_position = 'left'
   endif
+
+  assign enable_fade = false
+  if section.settings.enable_fade_in_desktop or section.settings.enable_fade_in_mobile
+    assign enable_fade = true
+  endif
+
+  assign description_stagger_index = tab_count | plus: 1
+  assign panel_stagger_offset = tab_count | plus: 2
 -%}
 
 {%- unless quick_add == 'none' -%}
@@ -50,23 +58,30 @@
 
 <gift-recommender
   id="GiftRecommender-{{ section.id }}"
-  class="gift-recommender gift-recommender--container-{{ container_modifier }} gift-recommender--image-{{ image_position }} color-{{ section.settings.color_scheme }} gradient"
+  class="gift-recommender gift-recommender--container-{{ container_modifier }} gift-recommender--image-{{ image_position }} color-{{ section.settings.color_scheme }} gradient{% if section.settings.enable_fade_in_desktop %} gift-recommender--fade-in-desktop{% endif %}{% if section.settings.enable_fade_in_mobile %} gift-recommender--fade-in-mobile{% endif %}"
   data-section-id="{{ section.id }}"
 >
   {%- if tab_count >= 2 -%}
     <div class="gift-recommender__header {{ container_class }}">
       {%- if section.settings.heading != blank -%}
-        <h2 class="gift-recommender__heading {{ section.settings.heading_size }} inline-richtext">
+        <h2 class="gift-recommender__heading {{ section.settings.heading_size }} inline-richtext{% if enable_fade %} gift-recommender__animate{% endif %}"{% if enable_fade %} style="--gr-stagger-index: 0;"{% endif %}>
           {{ section.settings.heading }}
         </h2>
       {%- endif -%}
 
       <div class="gift-recommender__tabs-wrap">
-        {% render 'recommender-tabs', section: section, tab_blocks: tab_blocks %}
+        {% render 'recommender-tabs',
+          section: section,
+          tab_blocks: tab_blocks,
+          enable_fade: enable_fade
+        %}
       </div>
 
       <div
-        class="gift-recommender__description caption rte"
+        class="gift-recommender__description caption rte{% if enable_fade %} gift-recommender__animate{% endif %}"
+        {% if enable_fade %}
+          style="--gr-stagger-index: {{ description_stagger_index }};"
+        {% endif %}
         data-recommender-description
       >
         {%- if first_description != blank -%}
@@ -83,7 +98,9 @@
           panel_index: forloop.index,
           is_active: forloop.first,
           quick_add: quick_add,
-          products_limit: products_limit
+          products_limit: products_limit,
+          enable_fade: enable_fade,
+          panel_stagger_offset: panel_stagger_offset
         %}
       {%- endfor -%}
     </div>
@@ -216,6 +233,22 @@
     },
     {
       "type": "header",
+      "content": "t:sections.recommender.settings.header_animation.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fade_in_desktop",
+      "label": "t:sections.recommender.settings.enable_fade_in_desktop.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fade_in_mobile",
+      "label": "t:sections.recommender.settings.enable_fade_in_mobile.label",
+      "default": true
+    },
+    {
+      "type": "header",
       "content": "t:sections.recommender.settings.header_padding.content"
     },
     {
@@ -318,6 +351,11 @@
   "presets": [
     {
       "name": "t:sections.recommender.presets.name",
+      "category": "t:sections.all.jane_custom_sections.category",
+      "settings": {
+        "enable_fade_in_desktop": true,
+        "enable_fade_in_mobile": true
+      },
       "blocks": [
         {
           "type": "recommendation",

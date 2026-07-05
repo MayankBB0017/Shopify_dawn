@@ -11,7 +11,7 @@ section_file: sections/instagram-grid.liquid
 >
 > **Original build brief:** [jane-instagram-grid.md](../ai-agent-prompts/jane-instagram-grid.md) (agent prompt — design spec and Figma targets)
 
-**Naming:** Theme Editor and preset use **Instagram grid**. Code uses `instagram-grid` / `sections.instagram_grid` — **no `jane` prefix** in filenames, CSS namespace, or locale keys (per project convention).
+**Naming:** Theme Editor label **JANÉ Instagram grid** (section + preset). Preset category **JANÉ Custom Sections**. Code uses `instagram-grid` / `sections.instagram_grid` — **no `jane` prefix** in filenames or CSS namespace.
 
 ---
 
@@ -169,7 +169,6 @@ Works with the **same 8-block preset** (videos at blocks 3 and 6) used for both 
 | `--ig-row-gap-mobile` | 0.7rem (7px) | Row gap mobile |
 | `--ig-square-mobile` | 16.8rem (168px) | Mobile column width |
 | `--ig-tall-h-mobile` | 29.9rem (299px) | Mobile tall tile (Figma) |
-| `--ig-section-max-width` | 144rem (1440px) | Full-width shell max |
 | `--ig-radius` | 0.8rem (8px) | Tile border radius |
 
 ### Tall tile height (column alignment)
@@ -177,10 +176,7 @@ Works with the **same 8-block preset** (videos at blocks 3 and 6) used for both 
 Tall video tiles must match **two square tiles + row gap** in adjacent image columns (not a fixed aspect ratio on equal-width 4-col columns):
 
 ```css
-/* 5-column full width */
-height: var(--ig-tall-h-5); /* 504px = 2×248 + 8px gap */
-
-/* 5-column standard (page-width) — 100cqw = masonry grid width */
+/* 5-column desktop — full + standard (100cqw = masonry grid width) */
 height: calc((100cqw - 4 * var(--ig-col-gap)) * 496 / 1312 + var(--ig-row-gap-desktop));
 ```
 
@@ -190,10 +186,10 @@ height: calc((100cqw - 4 * var(--ig-col-gap)) * 496 / 1312 + var(--ig-row-gap-de
 
 | Setting | Modifier class | Shell behaviour |
 |---------|----------------|-----------------|
-| **Full width** (default) | `instagram-grid--container-full` | Max width 144rem, centered; mobile horizontal padding 16px |
-| **Standard** | `instagram-grid--container-standard` + `page-width` on shell | Theme page width + Dawn horizontal padding |
+| **Full width** (default) | `instagram-grid--container-full` | `width: 100%`, no `page-width`; masonry columns scale proportionally edge-to-edge on desktop |
+| **Standard** | `instagram-grid--container-standard` + `page-width` on shell | Theme page width; columns capped at Figma design widths and centered when narrower than shell |
 
-**5-column + standard:** square/tall columns use proportional flex (`248` / `284` basis) so the grid fits inside `page-width`. Tall tile height uses a **container query** (`100cqw` on `.instagram-grid__grid`) so it equals two square rows + gap — avoids collapsed video tiles when nested `%` calcs fail.
+**5-column desktop:** both modes use proportional flex (`248` / `284` basis). Full width grows to fill the viewport; standard caps at design max widths inside `page-width`. Tall tile height uses a **container query** (`100cqw` on `.instagram-grid__grid`) so it equals two square rows + gap.
 
 Liquid defaults to **full width** when `container_width` is unset (existing sections before setting was added).
 
@@ -344,7 +340,7 @@ Section padding applied via `{% style %}` CSS variables on `#InstagramGrid-{{ se
 | `empty_manual` | Add up to 8 post blocks… |
 | `empty_app` | Add an Instagram app block… |
 
-**Schema** (`locales/en.default.schema.json` → `sections.instagram_grid`): full labels for settings, blocks, preset name **Instagram grid**.
+**Schema** (`locales/en.default.schema.json` → `sections.instagram_grid`): full labels for settings, blocks, preset name **JANÉ Instagram grid**.
 
 Non-English locale files may lack these keys (theme check warnings only).
 
@@ -363,7 +359,7 @@ Non-English locale files may lack these keys (theme check warnings only).
 
 ## Theme Editor usage
 
-1. **Add section** → **Instagram grid** preset
+1. **Add section** → **JANÉ Custom Sections** → **JANÉ Instagram grid** preset
 2. **Content source:** Manual — fill post blocks; App — add `@app` block from Instagram app
 3. **Content source:** Manual — fill post blocks; App — add `@app` block from Instagram app
 4. **Container width:** Full width vs Standard
@@ -406,3 +402,4 @@ Non-English locale files may lack these keys (theme check warnings only).
 | 2026-07-04 | Removed `desktop_layout` setting — desktop always 5-column; slots driven by block order |
 | 2026-07-04 | Standard container: fix video tiles via `100cqw` tall height + scoped full-width column rules |
 | 2026-07-04 | Full implementation reference doc (this file) |
+| 2026-07-05 | Full width container: proportional edge-to-edge columns (removed fixed-width centered grid) |

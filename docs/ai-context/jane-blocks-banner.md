@@ -286,7 +286,8 @@ When hover is disabled, all hover swap rules are scoped with `:not(.jane-blocks-
 | Desktop | Whole card fades (`opacity` + `translateY(2rem)`); stagger via `--jbb-stagger-index` |
 | Mobile | Card fade + static title secondary fade (0.15s extra delay) |
 | Reduced motion | `--fade-visible` applied immediately on connect |
-| Theme Editor | `request.design_mode` adds `--fade-visible` on load |
+| Theme Editor / Add section preview | `Shopify.designMode` → `playFadeIn()` replays staggered card fade (100ms delay + double rAF) |
+| Theme Editor updates | `shopify:section:load` / `shopify:section:select` → `refreshAfterUpdate()` |
 
 ---
 

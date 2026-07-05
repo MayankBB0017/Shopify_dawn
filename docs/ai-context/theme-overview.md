@@ -34,24 +34,30 @@ Dawn 15.5.0 provides the foundation: JSON templates, section groups, app blocks,
 
 ### Custom Implementations
 
-- `sections/disclosures.liquid` — product-page disclosure accordion
+#### JANÉ Custom Sections
+
+Net-new sections grouped under **JANÉ Custom Sections** in the Theme Editor “Add section” picker (`presets[].category` → `t:sections.all.jane_custom_sections.category`).
+
+| Theme Editor name | Section file | Doc |
+|-------------------|--------------|-----|
+| JANÉ Hero banner | `sections/jane-hero-banner.liquid` | [jane-hero-banner.md](./jane-hero-banner.md) |
+| JANÉ Blocks Banner | `sections/jane-blocks-banner.liquid` | [jane-blocks-banner.md](./jane-blocks-banner.md) |
+| JANÉ Recommender | `sections/recommender.liquid` | [recommender.md](./recommender.md) |
+| JANÉ Instagram grid | `sections/instagram-grid.liquid` | [instagram-grid.md](./instagram-grid.md) |
+| JANÉ Highlighted product | `sections/highlighted-product.liquid` | [highlighted-product.md](./highlighted-product.md) |
+
+#### Jane feature customizations (not new sections)
+
+Disclosures use the theme’s existing `sections/disclosures.liquid` section with Jane snippets and assets:
+
 - `snippets/product-disclosures.liquid` — shared disclosure renderer (product page + cart block)
 - `snippets/cart-disclosure-indicator.liquid` — cart-line disclosure UI
-- `assets/standard-actions-override.js` — custom Standard Actions cart refresh
+- `assets/disclosures.js`, `assets/component-disclosures.css` — disclosure accordion web component
 - `assets/cart-disclosure-modal.js`, `assets/cart-disclosure-tooltip.js` — cart disclosure UX
-- `assets/disclosures.js` — disclosure accordion web component
-- `sections/jane-hero-banner.liquid` — multi-slide hero carousel (Figma JANÉ Hero banner); see [jane-hero-banner.md](./jane-hero-banner.md)
-- `assets/section-jane-hero-banner.css`, `assets/jane-hero-banner.js` — hero layout, carousel, fade, transparent header
-- `snippets/jane-hero-*.liquid` — hero slide/media/content/button partials
-- `sections/jane-blocks-banner.liquid` — category strip + typology grid cards (Figma JANÉ Blocks Banner); see [jane-blocks-banner.md](./jane-blocks-banner.md)
-- `assets/section-jane-blocks-banner.css`, `snippets/jane-blocks-banner-card.liquid` — blocks banner layout and hover
-- `sections/recommender.liquid` — tabbed gift recommender (*Compra por edad*); see [recommender.md](./recommender.md) for full implementation reference
-- `assets/section-recommender.css`, `assets/recommender.js`, `snippets/recommender-*.liquid` — recommender tabs and panels
-- `sections/instagram-grid.liquid` — Instagram masonry grid (Figma BloqueRrss); see [instagram-grid.md](./instagram-grid.md)
-- `assets/section-instagram-grid.css`, `snippets/instagram-grid-*.liquid` — instagram grid masonry tiles
-- `sections/highlighted-product.liquid` — JANÉ Highlighted product (lifestyle image with feature hotspots + Descubrir CTA); see [highlighted-product.md](./highlighted-product.md)
-- `assets/section-highlighted-product.css`, `assets/section-highlighted-product.js`, `snippets/highlighted-product-hotspot.liquid` — hotspot layout and interaction
+- `assets/standard-actions-override.js` — custom Standard Actions cart refresh
 - `layout/theme.liquid` — StandardEvents CDN import + `data-template` on `<main>`
+
+Supporting assets for JANÉ custom sections are documented in each section’s reference file (e.g. `section-jane-hero-banner.css`, `recommender.js`).
 
 See [project-patterns.md](./project-patterns.md) for full pattern reference.
 
@@ -143,7 +149,7 @@ templates/product.json       — Product template (includes disclosures section)
 | [jane-hero-banner.md](./jane-hero-banner.md) | 2026-07-04 | JANÉ Hero banner — implemented section reference |
 | [jane-blocks-banner.md](./jane-blocks-banner.md) | 2026-07-04 | JANÉ Blocks Banner — implemented section reference |
 | [recommender.md](./recommender.md) | 2026-07-04 | JANÉ Recommender — tabs, split layout, schema, deferred Figma card UI |
-| [instagram-grid.md](./instagram-grid.md) | 2026-07-04 | Instagram grid — 5-col desktop, 2-col mobile, 8 posts, app mode |
+| [instagram-grid.md](./instagram-grid.md) | 2026-07-05 | JANÉ Instagram grid — 5-col desktop, 2-col mobile, 8 posts, app mode |
 | [highlighted-product.md](./highlighted-product.md) | 2026-07-05 | JANÉ Highlighted product — hotspots, per-block tooltip placement, CTA CMS, hero heights, product fallbacks |
 | [shopify-development-rules.md](./shopify-development-rules.md) | 2026-07-03 | Workflow, precedence, planning, validation |
 | [project-patterns.md](./project-patterns.md) | 2026-07-03 | Reusable patterns, conventions, backlog |
