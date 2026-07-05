@@ -38,6 +38,7 @@ Primary reference for feature development in the Jane Shopify theme.
 | `collapsible-content.liquid` | FAQ/accordion content |
 | `disclosures.liquid` | Jane product disclosure accordion |
 | `apps.liquid` | Dedicated app block container |
+| `highlighted-product.liquid` | Lifestyle image + feature hotspots + product CTA |
 
 ### Shared Utilities (JS)
 
@@ -173,6 +174,7 @@ When implementing features, check these files first:
 - **Blocks banner changes**: `sections/jane-blocks-banner.liquid`, `snippets/jane-blocks-banner-card.liquid`, `assets/section-jane-blocks-banner.css` — see [jane-blocks-banner.md](./jane-blocks-banner.md)
 - **Recommender changes**: `sections/recommender.liquid`, `snippets/recommender-*.liquid`, `assets/section-recommender.css`, `assets/recommender.js` — see [recommender.md](./recommender.md)
 - **Instagram grid changes**: `sections/instagram-grid.liquid`, `snippets/instagram-grid-*.liquid`, `assets/section-instagram-grid.css` — see [instagram-grid.md](./instagram-grid.md)
+- **Highlighted product changes**: `sections/highlighted-product.liquid`, `snippets/highlighted-product-hotspot.liquid`, `assets/section-highlighted-product.css`, `assets/section-highlighted-product.js` — see [highlighted-product.md](./highlighted-product.md)
 - **Global/layout**: `layout/theme.liquid`, `assets/global.js`, `config/settings_schema.json`
 - **Styling**: `assets/base.css` (global), relevant `component-*.css`
 - **Translations**: `locales/en.default.json`, `locales/en.default.schema.json`

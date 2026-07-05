@@ -2471,6 +2471,270 @@
         "name": "Instagram grid"
       }
     },
+    "highlighted_product": {
+      "name": "JANÉ Highlighted product",
+      "settings": {
+        "header_content": {
+          "content": "Content"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "subheading": {
+          "label": "Subheading",
+          "info": "Uses featured product title when blank."
+        },
+        "product": {
+          "label": "Featured product"
+        },
+        "header_hero_image": {
+          "content": "Hero image"
+        },
+        "image": {
+          "label": "Background image (desktop)",
+          "info": "Hero lifestyle image. Uses featured product image when blank. Recommended long edge 1920px."
+        },
+        "image_mobile": {
+          "label": "Background image (mobile)",
+          "info": "Optional mobile art direction. Falls back to desktop or featured product image when blank."
+        },
+        "height_desktop": {
+          "label": "Desktop height"
+        },
+        "height_mobile": {
+          "label": "Mobile height"
+        },
+        "header_button": {
+          "content": "Button"
+        },
+        "button_label": {
+          "label": "Button label"
+        },
+        "button_link": {
+          "label": "Button link override",
+          "info": "Uses featured product URL when blank."
+        },
+        "button_style": {
+          "label": "Button style",
+          "options__link_black": { "label": "Link black" },
+          "options__link_white": { "label": "Link white" },
+          "options__stroke_black": { "label": "Stroke black" },
+          "options__stroke_white": { "label": "Stroke white" },
+          "options__filled_black": { "label": "Filled black" },
+          "options__filled_white": { "label": "Filled white" }
+        },
+        "link_size": {
+          "label": "Link size",
+          "options__14": { "label": "14px" },
+          "options__16": { "label": "16px" }
+        },
+        "header_button_placement": {
+          "content": "Button placement"
+        },
+        "cta_horizontal_desktop": {
+          "label": "Horizontal position (desktop)"
+        },
+        "cta_horizontal_mobile": {
+          "label": "Horizontal position (mobile)"
+        },
+        "cta_horizontal": {
+          "options__left": { "label": "Left" },
+          "options__right": { "label": "Right" }
+        },
+        "cta_bottom_desktop": {
+          "label": "Distance from bottom (desktop)"
+        },
+        "cta_bottom_mobile": {
+          "label": "Distance from bottom (mobile)"
+        },
+        "cta_bottom": {
+          "info": "Percentage distance from the bottom of the hero image."
+        },
+        "height": {
+          "options__adapt": {
+            "label": "Original image ratio"
+          },
+          "options__fit_screen": {
+            "label": "Fit screen"
+          },
+          "options__large": {
+            "label": "Large"
+          },
+          "options__medium": {
+            "label": "Medium"
+          },
+          "options__small": {
+            "label": "Small"
+          }
+        },
+        "header_typography": {
+          "content": "Typography"
+        },
+        "heading_size_desktop": {
+          "label": "Title size (desktop)"
+        },
+        "heading_size_mobile": {
+          "label": "Title size (mobile)"
+        },
+        "heading_size": {
+          "options__h1": { "label": "H1" },
+          "options__h2": { "label": "H2" },
+          "options__h3": { "label": "H3" },
+          "options__h4": { "label": "H4" },
+          "options__h5": { "label": "H5" }
+        },
+        "body_size_desktop": {
+          "label": "Content size (desktop)"
+        },
+        "body_size_mobile": {
+          "label": "Content size (mobile)"
+        },
+        "body_size": {
+          "options__body_big": { "label": "Body big" },
+          "options__regular": { "label": "Regular" },
+          "options__small": { "label": "Small" }
+        },
+        "header_hotspots": {
+          "content": "Hotspots"
+        },
+        "default_hotspot": {
+          "label": "Active hotspot on load",
+          "options__first": { "label": "First hotspot" },
+          "options__none": { "label": "None" }
+        },
+        "open_hotspot_on": {
+          "label": "Open hotspot on",
+          "options__hover_and_click": { "label": "Hover and click" },
+          "options__hover": { "label": "Hover only" },
+          "options__click": { "label": "Click only" }
+        },
+        "hotspot_color_default": {
+          "label": "Hotspot color (default)",
+          "info": "Dot and ring when idle (not hovered or open)."
+        },
+        "hotspot_color_active": {
+          "label": "Hotspot color (active / hover)",
+          "info": "Dot and ring when hovered, focused, clicked, or tooltip is open."
+        },
+        "header_animation": {
+          "content": "Animation"
+        },
+        "enable_fade_in_desktop": {
+          "label": "Enable fade-in on desktop"
+        },
+        "enable_fade_in_mobile": {
+          "label": "Enable fade-in on mobile"
+        },
+        "header_layout": {
+          "content": "Layout"
+        },
+        "container_width": {
+          "label": "Container width",
+          "info": "Standard uses theme page width. Full width spans edge to edge.",
+          "options__standard": {
+            "label": "Standard"
+          },
+          "options__full_width": {
+            "label": "Full width"
+          }
+        },
+        "container_border_radius": {
+          "label": "Container corner radius",
+          "info": "Rounds the hero image when container width is Standard."
+        },
+        "padding_top": {
+          "label": "Top padding (desktop)"
+        },
+        "padding_bottom": {
+          "label": "Bottom padding (desktop)"
+        },
+        "padding_top_mobile": {
+          "label": "Top padding (mobile)"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom padding (mobile)"
+        },
+        "accessibility_label": {
+          "label": "Accessibility label",
+          "info": "Describes the hotspot group for screen readers."
+        }
+      },
+      "blocks": {
+        "hotspot": {
+          "name": "Hotspot",
+          "settings": {
+            "title": {
+              "label": "Feature title"
+            },
+            "description": {
+              "label": "Feature description"
+            },
+            "image": {
+              "label": "Feature image",
+              "info": "Displayed at 80×80px in the tooltip. Uses featured product image when blank."
+            },
+            "header_content": {
+              "content": "Feature content"
+            },
+            "header_hotspot_placement": {
+              "content": "Hotspot placement"
+            },
+            "header_hotspot_desktop": {
+              "content": "Desktop"
+            },
+            "position_x": {
+              "label": "Horizontal position"
+            },
+            "position_y": {
+              "label": "Vertical position"
+            },
+            "header_hotspot_mobile": {
+              "content": "Mobile"
+            },
+            "custom_mobile_position": {
+              "label": "Use custom mobile position"
+            },
+            "position_x_mobile": {
+              "label": "Horizontal position"
+            },
+            "position_y_mobile": {
+              "label": "Vertical position"
+            },
+            "link": {
+              "label": "Optional link",
+              "info": "When set, the feature title links to this URL."
+            },
+            "header_tooltip": {
+              "content": "Tooltip placement (desktop)"
+            },
+            "tooltip_position": {
+              "label": "Tooltip position",
+              "info": "Desktop only. Mobile tooltips stay fixed at the top center.",
+              "options__auto": { "label": "Auto (flip left/right)" },
+              "options__right": { "label": "Right" },
+              "options__left": { "label": "Left" },
+              "options__top": { "label": "Top" },
+              "options__bottom": { "label": "Bottom" }
+            },
+            "tooltip_spacing": {
+              "label": "Spacing from hotspot",
+              "info": "Distance between the hotspot dot and the tooltip edge."
+            },
+            "tooltip_offset_y": {
+              "label": "Vertical adjustment",
+              "info": "Fine-tune tooltip position up or down when placed left, right, or auto."
+            },
+            "tooltip_offset_x": {
+              "label": "Horizontal adjustment",
+              "info": "Fine-tune tooltip position left or right when placed top or bottom."
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "JANÉ Highlighted product"
+      }
+    },
     "multirow": {
       "name": "Multirow",
       "settings": {

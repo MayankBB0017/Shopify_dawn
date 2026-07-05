@@ -765,6 +765,161 @@
         "padding_bottom_mobile": 32,
         "color_scheme": ""
       }
+    },
+    "highlighted_product_WgzGdc": {
+      "type": "highlighted-product",
+      "blocks": {
+        "hotspot_aEKXnM": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Freno de pie",
+            "description": "Freno fácil de accionar y desbloquear pulsando con la planta del pie.",
+            "image": "shopify://shop_images/Lifestyle_1007A_Rossini_Antique-Rattan_1.png",
+            "link": "",
+            "position_x": 62,
+            "position_y": 40,
+            "custom_mobile_position": true,
+            "position_x_mobile": 76,
+            "position_y_mobile": 63,
+            "tooltip_position": "auto",
+            "tooltip_spacing": 16,
+            "tooltip_offset_y": -80,
+            "tooltip_offset_x": 0
+          }
+        },
+        "hotspot_8ttQ6P": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Capota ventilada",
+            "description": "Ventilación superior para paseos más frescos en días calurosos.",
+            "image": "shopify://shop_images/category_x2_57700ad6-4755-4daa-ae4e-016602fd0e7d.png",
+            "link": "",
+            "position_x": 53,
+            "position_y": 33,
+            "custom_mobile_position": true,
+            "position_x_mobile": 65,
+            "position_y_mobile": 52,
+            "tooltip_position": "auto",
+            "tooltip_spacing": 24,
+            "tooltip_offset_y": 0,
+            "tooltip_offset_x": 0
+          }
+        },
+        "hotspot_pChkmw": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Arnés magnético",
+            "description": "Sistema de cierre magnético para un ajuste rápido y seguro.",
+            "image": "shopify://shop_images/Captura_de_pantalla_2024-12-04_a_las_16.26.06_1.png",
+            "link": "",
+            "position_x": 43,
+            "position_y": 42,
+            "custom_mobile_position": true,
+            "position_x_mobile": 36,
+            "position_y_mobile": 56,
+            "tooltip_position": "auto",
+            "tooltip_spacing": 24,
+            "tooltip_offset_y": 0,
+            "tooltip_offset_x": 0
+          }
+        },
+        "hotspot_MDMNPD": {
+          "type": "hotspot",
+          "settings": {
+            "title": "",
+            "description": "",
+            "image": "shopify://shop_images/category_x2_9f96091d-5e20-4e5d-9998-bf516690d6d0.png",
+            "link": "",
+            "position_x": 27,
+            "position_y": 18,
+            "custom_mobile_position": true,
+            "position_x_mobile": 15,
+            "position_y_mobile": 40,
+            "tooltip_position": "auto",
+            "tooltip_spacing": 24,
+            "tooltip_offset_y": 0,
+            "tooltip_offset_x": 0
+          }
+        },
+        "hotspot_mFJ9t9": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Ruedas todoterreno",
+            "description": "Neumáticos de gran tamaño para absorber baches y irregularidades.",
+            "link": "",
+            "position_x": 32,
+            "position_y": 73,
+            "custom_mobile_position": true,
+            "position_x_mobile": 20,
+            "position_y_mobile": 74,
+            "tooltip_position": "auto",
+            "tooltip_spacing": 24,
+            "tooltip_offset_y": 0,
+            "tooltip_offset_x": 0
+          }
+        },
+        "hotspot_PzingU": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Cestilla XL",
+            "description": "Amplio espacio de almacenamiento para todo lo que necesitas fuera de casa.",
+            "link": "",
+            "position_x": 46,
+            "position_y": 84,
+            "custom_mobile_position": true,
+            "position_x_mobile": 42,
+            "position_y_mobile": 83,
+            "tooltip_position": "auto",
+            "tooltip_spacing": 24,
+            "tooltip_offset_y": 0,
+            "tooltip_offset_x": 0
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_aEKXnM",
+        "hotspot_8ttQ6P",
+        "hotspot_pChkmw",
+        "hotspot_MDMNPD",
+        "hotspot_mFJ9t9",
+        "hotspot_PzingU"
+      ],
+      "name": "t:sections.highlighted_product.presets.name",
+      "settings": {
+        "heading": "Nuevo lanzamiento",
+        "subheading": "Carrito Muum",
+        "product": "",
+        "button_label": "Descubrir",
+        "button_link": "",
+        "button_style": "stroke_black",
+        "link_size": "14",
+        "cta_horizontal_desktop": "left",
+        "cta_bottom_desktop": 11,
+        "cta_horizontal_mobile": "left",
+        "cta_bottom_mobile": 4,
+        "image": "shopify://shop_images/Rectangle_4143.png",
+        "image_mobile": "shopify://shop_images/Rectangle_4143_2aecf7b1-e8cb-46a1-b4d1-130aafa2fb9c.png",
+        "height_desktop": "fit_screen",
+        "height_mobile": "fit_screen",
+        "heading_size_desktop": "h2",
+        "heading_size_mobile": "h2",
+        "body_size_desktop": "text-body",
+        "body_size_mobile": "text-body",
+        "default_hotspot": "first",
+        "open_hotspot_on": "hover_and_click",
+        "hotspot_color_default": "#1a1919",
+        "hotspot_color_active": "#ffffff",
+        "enable_fade_in_desktop": true,
+        "enable_fade_in_mobile": true,
+        "container_width": "full_width",
+        "container_border_radius": 8,
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 64,
+        "padding_bottom_mobile": 64,
+        "color_scheme": "",
+        "accessibility_label": ""
+      }
     }
   },
   "order": [
@@ -774,6 +929,7 @@
     "177021381514078c66",
     "recommender_9VknFn",
     "image_with_text_LB7iX6",
-    "instagram_grid_jcd7MW"
+    "instagram_grid_jcd7MW",
+    "highlighted_product_WgzGdc"
   ]
 }

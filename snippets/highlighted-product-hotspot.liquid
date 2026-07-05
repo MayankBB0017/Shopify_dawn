@@ -1,0 +1,31 @@
+{%- liquid
+  assign pos_x = block.settings.position_x
+  assign pos_y = block.settings.position_y
+  assign pos_x_mobile = block.settings.position_x
+  assign pos_y_mobile = block.settings.position_y
+
+  if block.settings.custom_mobile_position
+    assign pos_x_mobile = block.settings.position_x_mobile
+    assign pos_y_mobile = block.settings.position_y_mobile
+  endif
+
+  assign hotspot_label = block.settings.title
+  if hotspot_label == blank
+    assign hotspot_label = 'sections.highlighted_product.hotspot_label_default' | t
+  endif
+-%}
+
+<button
+  type="button"
+  class="highlighted-product__hotspot highlighted-product__hotspot--animate"
+  data-hotspot-id="{{ block.id }}"
+  data-hotspot-index="{{ hotspot_index }}"
+  style="--hotspot-x: {{ pos_x }}; --hotspot-y: {{ pos_y }}; --hotspot-x-mobile: {{ pos_x_mobile }}; --hotspot-y-mobile: {{ pos_y_mobile }}; --reveal-order: {{ hotspot_index }};"
+  aria-expanded="false"
+  aria-controls="HighlightedProductTooltip-{{ section.id }}"
+  aria-label="{{ 'sections.highlighted_product.hotspot_label' | t: title: hotspot_label | escape }}"
+  {{ block.shopify_attributes }}
+>
+  <span class="highlighted-product__hotspot-ring" aria-hidden="true"></span>
+  <span class="highlighted-product__hotspot-dot" aria-hidden="true"></span>
+</button>

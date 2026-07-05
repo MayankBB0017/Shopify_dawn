@@ -380,6 +380,12 @@
       "empty_manual": "Add up to 8 post blocks (6 images and 2 videos) to build the grid.",
       "empty_app": "Add an Instagram app block to display your feed."
     },
+    "highlighted_product": {
+      "descubrir": "Descubrir",
+      "hotspot_label": "Product feature: {{ title }}",
+      "hotspot_label_default": "Product feature",
+      "accessibility": "Highlighted product features"
+    },
     "page": {
       "title": "Page title"
     },
