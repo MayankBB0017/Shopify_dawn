@@ -347,7 +347,9 @@
       "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>"
     },
     "video": {
-      "load_video": "Load video: {{ description }}"
+      "load_video": "Load video: {{ description }}",
+      "empty": "Add a desktop or mobile video, or paste a YouTube/Vimeo URL.",
+      "placeholder": "Video section preview — upload a video in section settings"
     },
     "slideshow": {
       "load_slide": "Load slide",

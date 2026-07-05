@@ -37,6 +37,9 @@ All net-new Jane sections use **JANÉ** in Theme Editor section + preset names a
 | `recommender.liquid` | JANÉ Recommender |
 | `instagram-grid.liquid` | JANÉ Instagram grid |
 | `highlighted-product.liquid` | JANÉ Highlighted product |
+| `video.liquid` | JANÉ Video section (extended Dawn section; JSON type `"video"`) |
+
+**New section prompts** must include the default CMS/UX requirements in [jane-section-prompt-defaults.md](../ai-agent-prompts/jane-section-prompt-defaults.md) (fade-in, padding, container, border radius, typography, alignment, buttons when applicable).
 
 ### Frequently modified Dawn sections
 
@@ -186,6 +189,7 @@ When implementing features, check these files first:
 - **Recommender changes**: `sections/recommender.liquid`, `snippets/recommender-*.liquid`, `assets/section-recommender.css`, `assets/recommender.js` — see [recommender.md](./recommender.md)
 - **Instagram grid changes**: `sections/instagram-grid.liquid`, `snippets/instagram-grid-*.liquid`, `assets/section-instagram-grid.css` — see [instagram-grid.md](./instagram-grid.md)
 - **Highlighted product changes**: `sections/highlighted-product.liquid`, `snippets/highlighted-product-hotspot.liquid`, `assets/section-highlighted-product.css`, `assets/section-highlighted-product.js` — see [highlighted-product.md](./highlighted-product.md)
+- **Video section changes**: `sections/video.liquid`, `snippets/video-section-media.liquid`, `assets/video-section.css`, `assets/video-section.js` — see [video-section.md](./video-section.md)
 - **Global/layout**: `layout/theme.liquid`, `assets/global.js`, `config/settings_schema.json`
 - **Styling**: `assets/base.css` (global), relevant `component-*.css`
 - **Translations**: `locales/en.default.json`, `locales/en.default.schema.json`

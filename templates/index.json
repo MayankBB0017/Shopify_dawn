@@ -596,6 +596,8 @@
         "show_vendor": false,
         "show_rating": false,
         "enable_quick_add": true,
+        "enable_fade_in_desktop": true,
+        "enable_fade_in_mobile": true,
         "padding_top_desktop": 48,
         "padding_bottom_desktop": 48,
         "padding_top_mobile": 32,
@@ -889,6 +891,10 @@
         "heading": "Nuevo lanzamiento",
         "subheading": "Carrito Muum",
         "product": "",
+        "image": "shopify://shop_images/Rectangle_4143.png",
+        "image_mobile": "shopify://shop_images/Rectangle_4143_2aecf7b1-e8cb-46a1-b4d1-130aafa2fb9c.png",
+        "height_desktop": "fit_screen",
+        "height_mobile": "fit_screen",
         "button_label": "Descubrir",
         "button_link": "",
         "button_style": "stroke_black",
@@ -897,10 +903,6 @@
         "cta_bottom_desktop": 11,
         "cta_horizontal_mobile": "left",
         "cta_bottom_mobile": 4,
-        "image": "shopify://shop_images/Rectangle_4143.png",
-        "image_mobile": "shopify://shop_images/Rectangle_4143_2aecf7b1-e8cb-46a1-b4d1-130aafa2fb9c.png",
-        "height_desktop": "fit_screen",
-        "height_mobile": "fit_screen",
         "heading_size_desktop": "h2",
         "heading_size_mobile": "h2",
         "body_size_desktop": "text-body",
@@ -920,6 +922,31 @@
         "color_scheme": "",
         "accessibility_label": ""
       }
+    },
+    "video_JKx4FJ": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "heading_alignment_desktop": "center",
+        "heading_alignment_mobile": "center",
+        "enable_video_looping": false,
+        "description": "",
+        "video": "shopify://files/videos/85522-589994829_medium.mp4",
+        "height_desktop": "adapt",
+        "video_mobile": "shopify://files/videos/mixkit-aerial-view-of-the-beautiful-turquoise-waves-crashing-on-the-51500-hd-ready.mp4",
+        "height_mobile": "adapt",
+        "container_width": "full_width",
+        "container_border_radius": 8,
+        "color_scheme": "",
+        "enable_fade_in_desktop": true,
+        "enable_fade_in_mobile": true,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 32,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 24
+      }
     }
   },
   "order": [
@@ -930,6 +957,7 @@
     "recommender_9VknFn",
     "image_with_text_LB7iX6",
     "instagram_grid_jcd7MW",
-    "highlighted_product_WgzGdc"
+    "highlighted_product_WgzGdc",
+    "video_JKx4FJ"
   ]
 }

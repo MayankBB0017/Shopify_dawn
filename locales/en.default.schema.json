@@ -4214,20 +4214,114 @@
       }
     },
     "video": {
-      "name": "Video",
+      "name": "JANÉ Video section",
       "settings": {
+        "header_content": {
+          "content": "Content"
+        },
         "heading": {
-          "label": "Heading",
-          "default": "Video"
+          "label": "Heading"
+        },
+        "heading_alignment_desktop": {
+          "label": "Heading alignment (desktop)"
+        },
+        "heading_alignment_mobile": {
+          "label": "Heading alignment (mobile)"
+        },
+        "heading_alignment": {
+          "options__left": {
+            "label": "Left"
+          },
+          "options__center": {
+            "label": "Center"
+          },
+          "options__right": {
+            "label": "Right"
+          }
+        },
+        "height_desktop": {
+          "label": "Section height (desktop)"
+        },
+        "height_mobile": {
+          "label": "Section height (mobile)"
+        },
+        "height": {
+          "options__adapt": {
+            "label": "Original video ratio"
+          },
+          "options__fit_screen": {
+            "label": "Fit screen"
+          },
+          "options__large": {
+            "label": "Large (770px)"
+          },
+          "options__medium": {
+            "label": "Medium (550px)"
+          },
+          "options__small": {
+            "label": "Small (400px)"
+          }
+        },
+        "container_width": {
+          "label": "Container width",
+          "info": "Standard uses theme page width. Full width spans edge to edge; heading stays in page width.",
+          "options__standard": {
+            "label": "Standard"
+          },
+          "options__full_width": {
+            "label": "Full width"
+          }
+        },
+        "container_border_radius": {
+          "label": "Container corner radius",
+          "info": "Rounds video corners when standard container width is selected."
+        },
+        "header_padding": {
+          "content": "Padding"
+        },
+        "padding_top_desktop": {
+          "label": "Top padding (desktop)"
+        },
+        "padding_bottom_desktop": {
+          "label": "Bottom padding (desktop)"
+        },
+        "padding_top_mobile": {
+          "label": "Top padding (mobile)"
+        },
+        "padding_bottom_mobile": {
+          "label": "Bottom padding (mobile)"
         },
         "cover_image": {
-          "label": "Cover image"
+          "label": "Cover image (desktop)",
+          "info": "Optional poster override for desktop. Uses video preview image when blank."
         },
         "video": {
-          "label": "Video"
+          "label": "Video (desktop)",
+          "info": "16:9 recommended · 1920×1080 · MP4 H.264 · 10–30 s · under 10–15 MB. Section height adapts to your video aspect ratio."
         },
         "enable_video_looping": {
           "label": "Loop video"
+        },
+        "header_desktop": {
+          "content": "Desktop video"
+        },
+        "header_mobile": {
+          "content": "Mobile video"
+        },
+        "mobile_fallback_paragraph": {
+          "content": "Upload a separate mobile video for portrait (9:16) layouts. When blank, desktop video is used on mobile."
+        },
+        "video_mobile": {
+          "label": "Video (mobile)",
+          "info": "9:16 recommended · 1080×1920 · MP4 H.264 · under 10–15 MB · 10–30 s. Remove audio for autoplay assets."
+        },
+        "video_url_mobile": {
+          "label": "URL (mobile)",
+          "info": "YouTube or Vimeo URL for mobile. Falls back to desktop URL when blank."
+        },
+        "cover_image_mobile": {
+          "label": "Cover image (mobile)",
+          "info": "Optional poster override for mobile. Falls back to mobile video preview, then desktop poster."
         },
         "header__1": {
           "content": "Shopify-hosted video"
@@ -4238,27 +4332,33 @@
         "header__3": {
           "content": "Layout"
         },
+        "header_animation": {
+          "content": "Animation"
+        },
+        "enable_fade_in_desktop": {
+          "label": "Enable fade-in on desktop"
+        },
+        "enable_fade_in_mobile": {
+          "label": "Enable fade-in on mobile"
+        },
         "paragraph": {
           "content": "Shows when no Shopify-hosted video is selected"
         },
         "video_url": {
-          "label": "URL",
-          "info": "Use a YouTube or Vimeo URL"
+          "label": "URL (desktop)",
+          "info": "YouTube or Vimeo URL. Used when no Shopify-hosted desktop video is selected."
         },
         "description": {
           "label": "Video alt text",
-          "info": "Describe the video for those using screen readers"
+          "info": "Describe the video for screen readers and iframe titles"
         },
         "image_padding": {
           "label": "Add image padding",
           "info": "Select image padding if you don't want your cover image to be cropped."
-        },
-        "full_width": {
-          "label": "Full width"
         }
       },
       "presets": {
-        "name": "Video"
+        "name": "JANÉ Video section"
       }
     },
     "slideshow": {

@@ -45,6 +45,7 @@ Net-new sections grouped under **JANÉ Custom Sections** in the Theme Editor “
 | JANÉ Recommender | `sections/recommender.liquid` | [recommender.md](./recommender.md) |
 | JANÉ Instagram grid | `sections/instagram-grid.liquid` | [instagram-grid.md](./instagram-grid.md) |
 | JANÉ Highlighted product | `sections/highlighted-product.liquid` | [highlighted-product.md](./highlighted-product.md) |
+| JANÉ Video section | `sections/video.liquid` (extended Dawn) | [video-section.md](./video-section.md) |
 
 #### Jane feature customizations (not new sections)
 
