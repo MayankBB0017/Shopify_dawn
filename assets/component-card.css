@@ -300,7 +300,9 @@
   height: 100%;
 }
 
-.card__heading {
+.card__heading,
+.card__heading.h5,
+h3.card__heading {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -312,7 +314,8 @@
 .card--horizontal .card__heading,
 .card--horizontal .price__container .price-item,
 .card--horizontal__quick-add {
-  font-size: calc(var(--font-heading-scale) * 1.2rem);
+  font-size: var(--font-size-product-title);
+  line-height: var(--font-line-height-product-title);
 }
 
 .card--horizontal
@@ -324,14 +327,6 @@
 
 .card--horizontal__quick-add:before {
   box-shadow: none;
-}
-
-@media only screen and (min-width: 750px) {
-  .card--horizontal .card__heading,
-  .card--horizontal .price__container .price-item,
-  .card--horizontal__quick-add {
-    font-size: calc(var(--font-heading-scale) * 1.3rem);
-  }
 }
 
 .card--card.card--media > .card__content {

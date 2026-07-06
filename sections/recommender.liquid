@@ -1,0 +1,382 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'section-recommender.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'recommender.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign tab_blocks = section.blocks | where: 'type', 'recommendation'
+  assign tab_count = tab_blocks.size
+
+  assign quick_add = 'none'
+  if section.settings.enable_quick_add
+    assign quick_add = 'standard'
+  endif
+
+  assign products_limit = section.settings.products_to_show
+
+  assign container_class = 'page-width'
+  assign container_modifier = 'standard'
+  if section.settings.container_width == 'full_width'
+    assign container_class = ''
+    assign container_modifier = 'full'
+  endif
+
+  assign first_description = section.settings.description
+  if tab_count > 0 and tab_blocks.first.settings.description != blank
+    assign first_description = tab_blocks.first.settings.description
+  endif
+
+  assign image_position = section.settings.image_position
+  if image_position != 'right'
+    assign image_position = 'left'
+  endif
+
+  assign enable_fade = false
+  if section.settings.enable_fade_in_desktop or section.settings.enable_fade_in_mobile
+    assign enable_fade = true
+  endif
+
+  assign description_stagger_index = tab_count | plus: 1
+  assign panel_stagger_offset = tab_count | plus: 2
+-%}
+
+{%- unless quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{%- style -%}
+  #GiftRecommender-{{ section.id }} {
+    --gr-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+    --gr-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --gr-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+    --gr-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+  }
+{%- endstyle -%}
+
+<gift-recommender
+  id="GiftRecommender-{{ section.id }}"
+  class="gift-recommender gift-recommender--container-{{ container_modifier }} gift-recommender--image-{{ image_position }} color-{{ section.settings.color_scheme }} gradient{% if section.settings.enable_fade_in_desktop %} gift-recommender--fade-in-desktop{% endif %}{% if section.settings.enable_fade_in_mobile %} gift-recommender--fade-in-mobile{% endif %}"
+  data-section-id="{{ section.id }}"
+>
+  {%- if tab_count >= 2 -%}
+    <div class="gift-recommender__header {{ container_class }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="gift-recommender__heading {{ section.settings.heading_size }} inline-richtext{% if enable_fade %} gift-recommender__animate{% endif %}"{% if enable_fade %} style="--gr-stagger-index: 0;"{% endif %}>
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      <div class="gift-recommender__tabs-wrap">
+        {% render 'recommender-tabs',
+          section: section,
+          tab_blocks: tab_blocks,
+          enable_fade: enable_fade
+        %}
+      </div>
+
+      <div
+        class="gift-recommender__description caption rte{% if enable_fade %} gift-recommender__animate{% endif %}"
+        {% if enable_fade %}
+          style="--gr-stagger-index: {{ description_stagger_index }};"
+        {% endif %}
+        data-recommender-description
+      >
+        {%- if first_description != blank -%}
+          {{ first_description }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="gift-recommender__panels{% if container_class != blank %} {{ container_class }}{% endif %}">
+      {%- for block in tab_blocks -%}
+        {% render 'recommender-panel',
+          block: block,
+          section: section,
+          panel_index: forloop.index,
+          is_active: forloop.first,
+          quick_add: quick_add,
+          products_limit: products_limit,
+          enable_fade: enable_fade,
+          panel_stagger_offset: panel_stagger_offset
+        %}
+      {%- endfor -%}
+    </div>
+  {%- elsif request.design_mode -%}
+    <div class="gift-recommender__empty page-width">
+      <p class="caption">{{ 'sections.recommender.empty_state' | t }}</p>
+    </div>
+  {%- endif -%}
+</gift-recommender>
+
+{% schema %}
+{
+  "name": "t:sections.recommender.name",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 6,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.recommender.settings.header_content.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.recommender.settings.heading.label",
+      "default": "Recomendador de regalos"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.recommender.settings.heading_size.label",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.recommender.settings.description.label",
+      "default": "<p>Encuentra el regalo perfecto según la etapa o el destinatario.</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.recommender.settings.header_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "t:sections.recommender.settings.container_width.label",
+      "info": "t:sections.recommender.settings.container_width.info",
+      "options": [
+        {
+          "value": "standard",
+          "label": "t:sections.recommender.settings.container_width.options__standard.label"
+        },
+        {
+          "value": "full_width",
+          "label": "t:sections.recommender.settings.container_width.options__full_width.label"
+        }
+      ],
+      "default": "full_width"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.recommender.settings.image_position.label",
+      "info": "t:sections.recommender.settings.image_position.info",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.recommender.settings.image_position.options__left.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.recommender.settings.image_position.options__right.label"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.recommender.settings.header_products.content"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.recommender.settings.products_to_show.label",
+      "info": "t:sections.recommender.settings.products_to_show.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gallery",
+      "default": true,
+      "label": "t:sections.recommender.settings.enable_gallery.label",
+      "info": "t:sections.recommender.settings.enable_gallery.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_rating.label",
+      "info": "t:sections.featured-collection.settings.show_rating.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "default": true,
+      "label": "t:sections.recommender.settings.enable_quick_add.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.recommender.settings.header_animation.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fade_in_desktop",
+      "label": "t:sections.recommender.settings.enable_fade_in_desktop.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fade_in_mobile",
+      "label": "t:sections.recommender.settings.enable_fade_in_mobile.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.recommender.settings.header_padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.recommender.settings.padding_top_desktop.label",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.recommender.settings.padding_bottom_desktop.label",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.recommender.settings.padding_top_mobile.label",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.recommender.settings.padding_bottom_mobile.label",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.recommender.settings.header_accessibility.content"
+    },
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "t:sections.recommender.settings.accessibility_label.label",
+      "info": "t:sections.recommender.settings.accessibility_label.info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "recommendation",
+      "name": "t:sections.recommender.blocks.recommendation.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "t:sections.recommender.blocks.recommendation.settings.tab_label.label",
+          "default": "Para bebé"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.recommender.blocks.recommendation.settings.collection.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image",
+          "label": "t:sections.recommender.blocks.recommendation.settings.promo_image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_mobile",
+          "label": "t:sections.recommender.blocks.recommendation.settings.promo_image_mobile.label",
+          "info": "t:sections.recommender.blocks.recommendation.settings.promo_image_mobile.info"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:sections.recommender.blocks.recommendation.settings.description.label",
+          "info": "t:sections.recommender.blocks.recommendation.settings.description.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.recommender.presets.name",
+      "category": "t:sections.all.jane_custom_sections.category",
+      "settings": {
+        "enable_fade_in_desktop": true,
+        "enable_fade_in_mobile": true
+      },
+      "blocks": [
+        {
+          "type": "recommendation",
+          "settings": {
+            "tab_label": "PARA bebé"
+          }
+        },
+        {
+          "type": "recommendation",
+          "settings": {
+            "tab_label": "PARA EMBARAZADAS"
+          }
+        },
+        {
+          "type": "recommendation",
+          "settings": {
+            "tab_label": "PARA PAPÁ"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

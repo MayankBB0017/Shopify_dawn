@@ -1,0 +1,128 @@
+{%- comment -%}
+  Renders one deferred-media block for the video section (desktop or mobile).
+
+  Accepts:
+  - breakpoint: {String} desktop | mobile
+  - video: {Object} resolved Shopify-hosted video (may be blank)
+  - video_url: {Object} resolved external video URL (may be blank)
+  - poster: {Object} resolved poster image (may be blank)
+  - section: {Object}
+  - sizes: {String}
+  - alt: {String} escaped aria-label text
+  - container_full: {Boolean} apply full-bleed media styling
+{%- endcomment -%}
+
+{%- liquid
+  assign show_placeholder = show_placeholder | default: false
+  assign container_full = container_full | default: false
+  assign video_id = video.id | default: video_url.id
+
+  assign fix_ratio = false
+  if video != null and poster != null
+    assign ratio_diff = video.aspect_ratio | minus: poster.aspect_ratio | abs
+    if ratio_diff < 0.01 and ratio_diff > 0
+      assign fix_ratio = true
+    endif
+  endif
+
+  assign poster_landscape_class = ''
+  if breakpoint == 'desktop'
+    assign poster_landscape_class = ' media--landscape'
+  endif
+
+  assign placeholder_ratio = '56.25%'
+  if breakpoint == 'mobile'
+    assign placeholder_ratio = '177.777778%'
+  endif
+
+  if video_id == blank and show_placeholder
+    assign media_uid = 'placeholder-' | append: breakpoint
+  else
+    assign media_uid = video_id | append: '-' | append: breakpoint
+  endif
+-%}
+
+{%- if show_placeholder and video_id == blank -%}
+  <div
+    class="video-section__media video-section__media--{{ breakpoint }} video-section__media--placeholder deferred-media gradient global-media-settings{% if container_full %} global-media-settings--full-width{% endif %}"
+    style="--ratio-percent: {{ placeholder_ratio }};"
+    role="img"
+    aria-label="{{ 'sections.video.placeholder' | t }}"
+  >
+    <div class="video-section__poster media deferred-media__poster video-section__poster--placeholder{{ poster_landscape_class }}">
+      {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+      <span class="deferred-media__poster-button motion-reduce" aria-hidden="true">
+        <span class="svg-wrapper">
+          {{- 'icon-play.svg' | inline_asset_content -}}
+        </span>
+      </span>
+    </div>
+  </div>
+{%- elsif video_id != blank -%}
+  <deferred-media
+    class="video-section__media video-section__media--{{ breakpoint }} deferred-media gradient global-media-settings{% if container_full %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}"
+    data-media-id="{{ media_uid }}"
+    {% if poster != null %}
+      style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
+    {% endif %}
+  >
+    <button
+      id="Deferred-Poster-{{ section.id }}-{{ media_uid }}"
+      class="video-section__poster media deferred-media__poster{{ poster_landscape_class }}"
+      type="button"
+      aria-label="{{ alt }}"
+    >
+      {%- if poster != null -%}
+        {{
+          poster
+          | image_url: width: 3840
+          | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+      {%- endif -%}
+      <span class="deferred-media__poster-button motion-reduce">
+        <span class="svg-wrapper">
+          {{- 'icon-play.svg' | inline_asset_content -}}
+        </span>
+      </span>
+    </button>
+    <template>
+      {%- if video == null and video_url != null -%}
+        {%- liquid
+          assign loop = ''
+          if section.settings.enable_video_looping
+            assign loop = '&loop=1&playlist=' | append: video_id
+          endif
+        -%}
+        {%- if video_url.type == 'youtube' -%}
+          <iframe
+            src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+            class="js-youtube"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            title="{{ section.settings.description | escape }}"
+          ></iframe>
+        {%- else -%}
+          <iframe
+            src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+            class="js-vimeo"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            title="{{ section.settings.description | escape }}"
+          ></iframe>
+        {%- endif -%}
+      {%- elsif video != null -%}
+        {{
+          video
+          | video_tag:
+            image_size: '1100x',
+            autoplay: true,
+            loop: section.settings.enable_video_looping,
+            controls: true,
+            muted: false
+        }}
+      {%- endif -%}
+    </template>
+  </deferred-media>
+{%- endif -%}

@@ -29,7 +29,10 @@
 
     {%- form 'recover_customer_password' -%}
       {% assign recover_success = form.posted_successfully? %}
-      <div class="field">
+      <div class="field field--labeled-top">
+        <label for="RecoverEmail">
+          {{ 'customer.login_page.email' | t }}
+        </label>
         <input
           type="email"
           value=""
@@ -45,9 +48,6 @@
           {% endif %}
           placeholder="{{ 'customer.login_page.email' | t }}"
         >
-        <label for="RecoverEmail">
-          {{ 'customer.login_page.email' | t }}
-        </label>
       </div>
       {%- if form.errors -%}
         <small id="RecoverEmail-email-error" class="form__message">
@@ -58,7 +58,7 @@
         </small>
       {%- endif -%}
 
-      <button>
+      <button class="button button--filled-black">
         {{ 'customer.login_page.submit' | t }}
       </button>
 
@@ -104,7 +104,10 @@
         </section>
       {%- endif -%}
 
-      <div class="field">
+      <div class="field field--labeled-top">
+        <label for="CustomerEmail">
+          {{ 'customer.login_page.email' | t }}
+        </label>
         <input
           type="email"
           name="customer[email]"
@@ -117,13 +120,13 @@
           {% endif %}
           placeholder="{{ 'customer.login_page.email' | t }}"
         >
-        <label for="CustomerEmail">
-          {{ 'customer.login_page.email' | t }}
-        </label>
       </div>
 
       {%- if form.password_needed -%}
-        <div class="field">
+        <div class="field field--labeled-top">
+          <label for="CustomerPassword">
+            {{ 'customer.login_page.password' | t }}
+          </label>
           <input
             type="password"
             value=""
@@ -135,9 +138,6 @@
             {% endif %}
             placeholder="{{ 'customer.login_page.password' | t }}"
           >
-          <label for="CustomerPassword">
-            {{ 'customer.login_page.password' | t }}
-          </label>
         </div>
 
         <a href="#recover">
@@ -145,7 +145,7 @@
         </a>
       {%- endif -%}
 
-      <button>
+      <button class="button button--filled-black">
         {{ 'customer.login_page.sign_in' | t }}
       </button>
 
@@ -161,7 +161,7 @@
       <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
 
       {%- form 'guest_login' -%}
-        <button>
+        <button class="button button--filled-black">
           {{ 'customer.login_page.guest_continue' | t }}
         </button>
       {%- endform -%}

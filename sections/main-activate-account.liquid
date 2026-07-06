@@ -45,7 +45,7 @@
       </ul>
     {%- endif -%}
 
-    <div class="field">
+    <div class="field field--labeled-top">
       <input
         type="password"
         name="customer[password]"
@@ -71,7 +71,7 @@
       {%- endif -%}
     </div>
 
-    <div class="field">
+    <div class="field field--labeled-top">
       <input
         type="password"
         name="customer[password_confirmation]"
@@ -97,10 +97,10 @@
       {%- endif -%}
     </div>
 
-    <button>
+    <button class="button button--filled-black">
       {{ 'customer.activate_account.submit' | t }}
     </button>
-    <button name="decline">
+    <button class="button button--stroke-black" name="decline">
       {{ 'customer.activate_account.cancel' | t }}
     </button>
   {%- endform -%}

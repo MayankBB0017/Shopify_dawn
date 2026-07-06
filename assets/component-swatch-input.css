@@ -1,4 +1,26 @@
-/* swatch-input lives in its own file for reusability of the swatch in other areas than the product form context */
+/* Image variant swatches on product form */
+.product-form__input--swatch .swatch-input__input + .swatch-input__label.swatch-input__label--square {
+  outline: none;
+  box-shadow: none;
+}
+
+.product-form__input--swatch .swatch-input__input + .swatch-input__label:hover,
+.product-form__input--swatch .swatch-input__input:hover + .swatch-input__label,
+.product-form__input--swatch .swatch-input__input:checked + .swatch-input__label {
+  outline: 0.05rem solid rgb(var(--color-negro));
+  outline-offset: 0;
+}
+
+.product-form__input--swatch .swatch-input__input:disabled + .swatch-input__label,
+.product-form__input--swatch .swatch-input__input.visually-disabled:not(:active):not(:checked) + .swatch-input__label {
+  opacity: 0.4;
+}
+
+.product-form__input--swatch .swatch-input__input:disabled + .swatch-input__label:hover,
+.product-form__input--swatch .swatch-input__input.visually-disabled:not(:active):not(:checked) + .swatch-input__label:hover {
+  outline: none;
+}
+
 .swatch-input__input + .swatch-input__label {
   --swatch-input--border-radius: 50%;
   display: inline-block;

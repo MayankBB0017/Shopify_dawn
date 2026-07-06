@@ -1,0 +1,106 @@
+{%- liquid
+  comment
+    Renders hero slide content (title, description, buttons).
+
+    @param {object} block
+    @param {string} [panel] - '' or 'panel_2'
+    @param {boolean} [animate_content] - enable slide content fade-in
+    @param {boolean} image_with_text_mobile - light background text mode
+  endcomment
+
+  if panel == 'panel_2'
+    assign title = block.settings.panel_2_title
+    assign description = block.settings.panel_2_description
+    assign heading_size_desktop = block.settings.panel_2_heading_size_desktop
+    assign heading_size_mobile = block.settings.panel_2_heading_size_mobile
+    assign body_size_desktop = block.settings.panel_2_body_size_desktop
+    assign body_size_mobile = block.settings.panel_2_body_size_mobile
+    assign title_color = block.settings.panel_2_title_color
+    assign description_color = block.settings.panel_2_description_color
+    assign content_position_desktop = block.settings.panel_2_content_position_desktop
+    assign content_position_mobile = block.settings.panel_2_content_position_mobile
+    assign text_alignment_desktop = block.settings.panel_2_text_alignment_desktop
+    assign text_alignment_mobile = block.settings.panel_2_text_alignment_mobile
+    assign button_1_label = block.settings.panel_2_button_1_label
+    assign button_1_link = block.settings.panel_2_button_1_link
+    assign button_1_type = block.settings.panel_2_button_1_type
+    assign button_2_label = block.settings.panel_2_button_2_label
+    assign button_2_link = block.settings.panel_2_button_2_link
+    assign button_2_type = block.settings.panel_2_button_2_type
+    assign link_size = block.settings.panel_2_link_size
+  else
+    assign title = block.settings.title
+    assign description = block.settings.description
+    assign heading_size_desktop = block.settings.heading_size_desktop
+    assign heading_size_mobile = block.settings.heading_size_mobile
+    assign body_size_desktop = block.settings.body_size_desktop
+    assign body_size_mobile = block.settings.body_size_mobile
+    assign title_color = block.settings.title_color
+    assign description_color = block.settings.description_color
+    assign content_position_desktop = block.settings.content_position_desktop
+    assign content_position_mobile = block.settings.content_position_mobile
+    assign text_alignment_desktop = block.settings.text_alignment_desktop
+    assign text_alignment_mobile = block.settings.text_alignment_mobile
+    assign button_1_label = block.settings.button_1_label
+    assign button_1_link = block.settings.button_1_link
+    assign button_1_type = block.settings.button_1_type
+    assign button_2_label = block.settings.button_2_label
+    assign button_2_link = block.settings.button_2_link
+    assign button_2_type = block.settings.button_2_type
+    assign link_size = block.settings.link_size
+  endif
+
+  assign content_position_mobile = content_position_mobile | default: 'bottom-center'
+  assign content_classes = ''
+  if animate_content
+    assign content_classes = content_classes | append: ' jane-hero__content--animate'
+  endif
+  if image_with_text_mobile
+    assign content_classes = content_classes | append: ' jane-hero__content--image-with-text-mobile'
+  endif
+-%}
+
+<div
+  class="jane-hero__content jane-hero__content--desktop-{{ content_position_desktop }} jane-hero__content--mobile-{{ content_position_mobile }} jane-hero__text--align-desktop-{{ text_alignment_desktop }} jane-hero__text--align-mobile-{{ text_alignment_mobile }}{{ content_classes }}"
+  style="--hero-title-color: {{ title_color }}; --hero-desc-color: {{ description_color }};"
+>
+  <div class="jane-hero__content-inner">
+    <div class="jane-hero__text-group">
+      {%- if title != blank -%}
+        <h2 class="jane-hero__title {{ heading_size_desktop }} jane-hero__title--mobile-{{ heading_size_mobile }}">
+          {{ title | escape }}
+        </h2>
+      {%- endif -%}
+      {%- if description != blank -%}
+        <div class="jane-hero__description {{ body_size_desktop }} jane-hero__description--mobile-{{ body_size_mobile }} rte">
+          {{ description }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if button_1_label != blank or button_2_label != blank -%}
+      <div class="jane-hero__buttons">
+        {%- if button_1_label != blank -%}
+          {% render 'jane-hero-button',
+            label: button_1_label,
+            link: button_1_link,
+            type: button_1_type,
+            link_size: link_size,
+            block: block,
+            button_index: 1
+          %}
+        {%- endif -%}
+        {%- if button_2_label != blank -%}
+          {% render 'jane-hero-button',
+            label: button_2_label,
+            link: button_2_link,
+            type: button_2_type,
+            link_size: link_size,
+            block: block,
+            button_index: 2
+          %}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
