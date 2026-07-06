@@ -97,6 +97,20 @@ Reuse before creating · Extend before replacing · Match existing patterns (unl
 
 Full docs: `/docs/ai-context/`
 
+## Documentation Index
+
+| File | Purpose |
+|------|---------|
+| `docs/ai-context/theme-overview.md` | Start here |
+| `docs/ai-context/theme-architecture.md` | Structure, data flow |
+| `docs/ai-context/liquid-guidelines.md` | Liquid rules, schema |
+| `docs/ai-context/html-accessibility.md` | WCAG, a11y testing |
+| `docs/ai-context/css-guidelines.md` | CSS organization |
+| `docs/ai-context/javascript-guidelines.md` | Web components, pubsub |
+| `docs/ai-context/performance-optimization.md` | Performance patterns |
+| `docs/ai-context/shopify-development-rules.md` | Workflow, validation |
+| `docs/ai-context/project-patterns.md` | Reusable patterns, backlog |
+
 ## JANÉ section development prompts
 
 When the user asks to **create or update an implementation prompt** for a **new or existing** JANÉ section (`docs/ai-agent-prompts/*.md`), **include these by default** (mark N/A only if the section truly lacks that element). Full spec: `docs/ai-agent-prompts/jane-section-prompt-defaults.md`.

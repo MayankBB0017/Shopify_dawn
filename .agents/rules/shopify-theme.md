@@ -95,6 +95,8 @@ Reuse before creating · Extend before replacing · Match existing patterns (unl
 
 `layout/theme.liquid` · `sections/main-product.liquid` · `snippets/product-disclosures.liquid` · `assets/standard-actions-override.js` · `assets/global.js` · `assets/pubsub.js`
 
+Full docs: @docs/ai-context/
+
 ## Documentation Index
 
 | File | Purpose |
@@ -108,3 +110,17 @@ Reuse before creating · Extend before replacing · Match existing patterns (unl
 | @docs/ai-context/performance-optimization.md | Performance patterns |
 | @docs/ai-context/shopify-development-rules.md | Workflow, validation |
 | @docs/ai-context/project-patterns.md | Reusable patterns, backlog |
+
+## JANÉ section development prompts
+
+When the user asks to **create or update an implementation prompt** for a **new or existing** JANÉ section (`docs/ai-agent-prompts/*.md`), **include these by default** (mark N/A only if the section truly lacks that element). Full spec: `docs/ai-agent-prompts/jane-section-prompt-defaults.md`.
+
+1. **Fade-in animation** — section + related content; `enable_fade_in_desktop` / `enable_fade_in_mobile` (default true); reduced-motion safe; stagger children where applicable
+2. **Padding** — separate mobile/desktop: `padding_top_desktop`, `padding_bottom_desktop`, `padding_top_mobile`, `padding_bottom_mobile` (0–100 px)
+3. **Container width** — `container_width`: `full_width` | `standard` (`.page-width`)
+4. **Border radius** — `container_border_radius`; **only visible/applied when standard container** (`visible_if`)
+5. **Buttons** *(if section has buttons)* — `button_style` (stroke/filled/link per `button-guidelines.md`)
+6. **Typography** *(if title/content)* — title: H1–H5 (`heading_size_desktop` / `heading_size_mobile`); content: Body big, Regular, Small (`body_size_desktop` / `body_size_mobile` → `text-body`, `caption-large`, `caption`)
+7. **Content alignment** *(if title/content)* — left | center | right (desktop + mobile, or single `content_alignment`)
+
+Also include JANÉ Theme Editor branding (section + preset name, **JANÉ Custom Sections** category) for net-new sections.
