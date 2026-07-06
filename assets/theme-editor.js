@@ -6,57 +6,23 @@ function hideProductModal() {
 document.addEventListener('shopify:block:select', function (event) {
   hideProductModal();
   const blockSelectedIsSlide = event.target.classList.contains('slideshow__slide');
-  if (blockSelectedIsSlide) {
-    const parentSlideshowComponent = event.target.closest('slideshow-component');
-    parentSlideshowComponent.pause();
+  if (!blockSelectedIsSlide) return;
 
-    setTimeout(function () {
-      parentSlideshowComponent.slider.scrollTo({
-        left: event.target.offsetLeft,
-      });
-    }, 200);
-    return;
-  }
-
-  const blockSelectedIsJaneHeroSlide = event.target.classList.contains('jane-hero__slide');
-  if (!blockSelectedIsJaneHeroSlide) return;
-
-  const parentJaneHero = event.target.closest('jane-hero-banner');
-  if (!parentJaneHero) return;
-
-  parentJaneHero.stopAutoplay?.();
+  const parentSlideshowComponent = event.target.closest('slideshow-component');
+  parentSlideshowComponent.pause();
 
   setTimeout(function () {
-    const slider = parentJaneHero.querySelector('[id^="JaneHeroSlider-"]');
-    const slides = parentJaneHero.querySelectorAll('.jane-hero__slide');
-    const index = Array.from(slides).indexOf(event.target);
-
-    if (typeof parentJaneHero.goToSlide === 'function' && index >= 0) {
-      parentJaneHero.goToSlide(index, 'auto');
-    } else if (slider) {
-      slider.scrollTo({
-        left: event.target.offsetLeft,
-        behavior: 'auto',
-      });
-    }
+    parentSlideshowComponent.slider.scrollTo({
+      left: event.target.offsetLeft,
+    });
   }, 200);
 });
 
 document.addEventListener('shopify:block:deselect', function (event) {
   const blockDeselectedIsSlide = event.target.classList.contains('slideshow__slide');
-  if (blockDeselectedIsSlide) {
-    const parentSlideshowComponent = event.target.closest('slideshow-component');
-    if (parentSlideshowComponent.autoplayButtonIsSetToPlay) parentSlideshowComponent.play();
-    return;
-  }
-
-  const blockDeselectedIsJaneHeroSlide = event.target.classList.contains('jane-hero__slide');
-  if (!blockDeselectedIsJaneHeroSlide) return;
-
-  const parentJaneHero = event.target.closest('jane-hero-banner');
-  if (!parentJaneHero || parentJaneHero.dataset.autoplay !== 'true') return;
-
-  parentJaneHero.startAutoplay?.();
+  if (!blockDeselectedIsSlide) return;
+  const parentSlideshowComponent = event.target.closest('slideshow-component');
+  if (parentSlideshowComponent.autoplayButtonIsSetToPlay) parentSlideshowComponent.play();
 });
 
 document.addEventListener('shopify:section:load', () => {

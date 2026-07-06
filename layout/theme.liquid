@@ -52,7 +52,6 @@
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'component-buttons.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -128,45 +127,14 @@
         --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
-        --font-body-weight-bold: {{ body_font_bold.weight }};
+        --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
 
         --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
-        --font-accent-family: var(--font-heading-family);
 
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
-
-        /* Typography defaults — Figma spec at 100% scale (mobile first) */
-        --font-size-h1: 3.2rem;
-        --font-line-height-h1: 3.6rem;
-        --font-size-h2: 2.7rem;
-        --font-line-height-h2: 3rem;
-        --font-size-h3: 1.8rem;
-        --font-line-height-h3: 2.2rem;
-        --font-weight-h3: 500;
-        --font-size-h4: 1.6rem;
-        --font-line-height-h4: 2rem;
-        --font-weight-h4: 500;
-        --font-size-body: 1.6rem;
-        --font-line-height-body: 2rem;
-        --font-size-body-medium: 1.4rem;
-        --font-line-height-body-medium: 1.7rem;
-        --font-size-body-small: 1.2rem;
-        --font-line-height-body-small: 1.5rem;
-        --font-size-product-title: 1.6rem;
-        --font-line-height-product-title: 2rem;
-        --font-weight-product-title: {{ body_font_bold.weight }};
-        --font-size-product-description: 1.4rem;
-        --font-line-height-product-description: 1.8rem;
-        --font-size-button: 1.4rem;
-        --font-line-height-button: 1.6rem;
-        --font-weight-button: 500;
-        --font-size-link: 1.4rem;
-        --font-line-height-link: 1.8rem;
-        --font-size-link-large: 1.6rem;
-        --font-line-height-link-large: 2rem;
 
         --media-padding: {{ settings.media_padding }}px;
         --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
@@ -215,20 +183,6 @@
         --blog-card-shadow-blur-radius: {{ settings.blog_card_shadow_blur | divided_by: 10.0 }}rem;
 
         --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
-
-        /* Brand tokens — buttons, inputs, variants */
-        --color-negro: 26, 25, 25;
-        --color-blanco: 255, 255, 255;
-        --color-gris: 243, 243, 243;
-        --color-gris-medio: 230, 226, 221;
-        --color-gris-oscuro: 105, 105, 105;
-        --color-ui-disabled: 180, 180, 180;
-        --button-radius-cta: 0.8rem;
-        --button-radius-variant: 0.4rem;
-        --button-hover-in-duration: 4000ms;
-        --button-hover-out-duration: 550ms;
-        --button-text-color-duration: 0.5s;
-        --button-dissolve-duration: 450ms;
 
         --popup-border-width: {{ settings.popup_border_thickness }}px;
         --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
@@ -292,19 +246,6 @@
         --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
       }
 
-      @media screen and (min-width: 750px) {
-        :root {
-          --font-size-h1: 5.4rem;
-          --font-line-height-h1: 6.1rem;
-          --font-size-h2: 3.2rem;
-          --font-line-height-h2: 3.6rem;
-          --font-size-product-title: 2rem;
-          --font-line-height-product-title: 2.4rem;
-          --font-size-product-description: 1.6rem;
-          --font-line-height-product-description: 2rem;
-        }
-      }
-
       *,
       *::before,
       *::after {
@@ -322,18 +263,22 @@
         flex-direction: column;
         min-height: 100%;
         margin: 0;
-        font-size: var(--font-size-body);
+        font-size: 1.5rem;
         letter-spacing: 0.06rem;
-        line-height: var(--font-line-height-body);
+        line-height: calc(1 + 0.8 / var(--font-body-scale));
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
       }
+
+      @media screen and (min-width: 750px) {
+        body {
+          font-size: 1.6rem;
+        }
+      }
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'component-buttons.css' | asset_url | stylesheet_tag }}
-    {{ 'component-form-fields.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

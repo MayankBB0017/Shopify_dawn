@@ -92,10 +92,10 @@
                       {% else %}
                         href="{{ block.settings.button_link }}"
                       {% endif %}
-                      class="{% render 'cta-button-class', outline: block.settings.button_style_secondary %}"
+                      class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
                       {{ block.shopify_attributes }}
                     >
-                      <span class="button-label">{{ block.settings.button_label | escape }}</span>
+                      {{ block.settings.button_label | escape }}
                     </a>
                   {%- endif -%}
               {%- endcase -%}

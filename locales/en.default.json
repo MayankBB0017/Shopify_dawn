@@ -347,9 +347,7 @@
       "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>"
     },
     "video": {
-      "load_video": "Load video: {{ description }}",
-      "empty": "Add a desktop or mobile video, or paste a YouTube/Vimeo URL.",
-      "placeholder": "Video section preview — upload a video in section settings"
+      "load_video": "Load video: {{ description }}"
     },
     "slideshow": {
       "load_slide": "Load slide",
@@ -359,34 +357,6 @@
       "play_slideshow": "Play slideshow",
       "carousel": "Carousel",
       "slide": "Slide"
-    },
-    "jane_hero_banner": {
-      "carousel": "Carousel",
-      "slide": "Slide",
-      "load_slide": "Load slide",
-      "metafield_empty": "Hero content is not available from the product metafield. Showing theme editor slides.",
-      "metaobject_empty": "No hero metaobject selected. Showing theme editor slides."
-    },
-    "jane_blocks_banner": {
-      "default_button_label": "Ver detalles",
-      "view_category": "View category"
-    },
-    "recommender": {
-      "tablist_label": "Gift recommendations",
-      "empty_state": "Add at least two recommendation blocks to enable tabs."
-    },
-    "instagram_grid": {
-      "view_more": "Ver más",
-      "view_post": "View Instagram post: {{ title }}",
-      "view_video": "View Instagram video: {{ title }}",
-      "empty_manual": "Add up to 8 post blocks (6 images and 2 videos) to build the grid.",
-      "empty_app": "Add an Instagram app block to display your feed."
-    },
-    "highlighted_product": {
-      "descubrir": "Descubrir",
-      "hotspot_label": "Product feature: {{ title }}",
-      "hotspot_label_default": "Product feature",
-      "accessibility": "Highlighted product features"
     },
     "page": {
       "title": "Page title"

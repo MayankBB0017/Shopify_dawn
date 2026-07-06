@@ -94,9 +94,9 @@
                   {% else %}
                     href="{{ block.settings.button_link }}"
                   {% endif %}
-                  class="{% render 'cta-button-class', style: section.settings.button_style %}"
+                  class="button button--{{ section.settings.button_style }}"
                 >
-                  <span class="button-label">{{ block.settings.button_label | escape }}</span>
+                  {{ block.settings.button_label | escape }}
                 </a>
               {%- endif -%}
             </div>

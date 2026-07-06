@@ -69,9 +69,9 @@
                     {% else %}
                       href="{{ block.settings.button_link }}"
                     {% endif %}
-                    class="{% render 'cta-button-class', outline: block.settings.button_style_secondary %}"
+                    class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
                   >
-                    <span class="button-label">{{ block.settings.button_label | escape }}</span>
+                    {{- block.settings.button_label | escape -}}
                   </a>
                 {%- endif -%}
                 {%- if block.settings.button_label_2 != blank -%}
@@ -81,9 +81,9 @@
                     {% else %}
                       href="{{ block.settings.button_link_2 }}"
                     {% endif %}
-                    class="{% render 'cta-button-class', outline: block.settings.button_style_secondary_2 %}"
+                    class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
                   >
-                    <span class="button-label">{{ block.settings.button_label_2 | escape }}</span>
+                    {{- block.settings.button_label_2 | escape -}}
                   </a>
                 {%- endif -%}
               </div>

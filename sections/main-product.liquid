@@ -211,7 +211,7 @@
                 {%- when 'custom_liquid' -%}
                   {{ block.settings.custom_liquid }}
                 {%- when 'collapsible_tab' -%}
-                  <div class="product__accordion accordion accordion--unfolding quick-add-hidden" {{ block.shopify_attributes }}>
+                  <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                     <details id="Details-{{ block.id }}-{{ section.id }}">
                       <summary>
                         <div class="summary__title">
@@ -549,7 +549,7 @@
                         aria-label="{{ 'accessibility.complementary_products' | t }}"
                         {{ block.shopify_attributes -}}
                         {% if block.settings.make_collapsible_row %}
-                          class="product__accordion accordion accordion--unfolding"
+                          class="product__accordion accordion"
                         {% endif %}
                       >
                         <div class="complementary-products__container">
