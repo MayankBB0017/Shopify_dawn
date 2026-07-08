@@ -188,8 +188,8 @@
      {%- if title_position == 'bottom' -%}
       {%- if card_collection != blank and card_style == 'card' or card_collection.featured_image -%}
         <div class="card__content">
-          <div class="card__information card--title-bottom">
-            <h3 class="card__heading">
+          <div class="card__information">
+            <h3 class="card__heading  card--title-bottom">
               <a
                 {% if card_collection == blank %}
                   role="link" aria-disabled="true"
@@ -227,8 +227,8 @@
 {%- if title_position == 'top' -%}
   {%- if card_collection != blank and card_style == 'card' or card_collection.featured_image -%}
     <div class="card__content">
-      <div class="card__information card--title-top">
-        <h3 class="card__heading">
+      <div class="card__information">
+        <h3 class="card__heading card--title-top">
           <a
             {% if card_collection == blank %}
               role="link" aria-disabled="true"
