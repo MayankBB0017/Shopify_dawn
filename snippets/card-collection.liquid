@@ -32,7 +32,7 @@
 -%}
 
 {% assign coolection_image = collection.metafields.custom.collection_image.value %}
-{{ coolection_image }}
+{{ coolection_image | json }}
 
 <div class="card-wrapper animate-arrow {% if wrapper_class and wrapper_class != 'none' %}{{ wrapper_class }}{% else %}collection-card-wrapper{% endif %}">
   <div
