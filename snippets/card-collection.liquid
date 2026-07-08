@@ -262,7 +262,7 @@
     </div>
   {%- endif -%}
 {%- endif -%}
-    {%- if card_collection == blank -%}
+    {% comment %} {%- if card_collection == blank -%}
       <div class="card__content">
         <div class="card__information">
           <h3 class="card__heading card__heading--placeholder">
@@ -275,6 +275,6 @@
           </h3>
         </div>
       </div>
-    {%- endif -%}
+    {%- endif -%} {% endcomment %}
   </div>
 </div>
