@@ -329,6 +329,10 @@
   /* .footer-block:only-child li {
     display: inline;
   } */
+  
+  .footer-block:only-child li {
+    display: block;
+  }
 
   .footer-block__details-content > li:not(:last-child) {
     margin-right: 1.5rem;
