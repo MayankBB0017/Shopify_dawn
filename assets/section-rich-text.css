@@ -73,7 +73,7 @@
   min-width: 22rem;
 } */
 
-a.button.button--secondary {
+.rich-text__buttons a.button.button--secondary {
     border-bottom: 1px solid #000;
     padding: 0;
 }
