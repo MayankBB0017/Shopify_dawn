@@ -88,17 +88,7 @@
   </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const track = document.getElementById('marquee-{{ section.id }}');
 
-  if (track.dataset.cloned) return;
-
-  track.dataset.cloned = true;
-
-  track.innerHTML += track.innerHTML;
-});
-</script>
 
 {% schema %}
 {
