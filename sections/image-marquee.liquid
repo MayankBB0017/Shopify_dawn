@@ -37,17 +37,11 @@
   from {
     transform: translateX(0);
   }
-
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% - (var(--gap) / 2)));
   }
 }
 
-@media screen and (max-width: 768px) {
-  .marquee-image {
-    width: calc(var(--image-width) * 0.75);
-  }
-}
 </style>
 
 <section
