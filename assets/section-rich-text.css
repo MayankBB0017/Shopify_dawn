@@ -81,6 +81,10 @@ a.button.button--secondary {
   box-shadow: none;
 }
 
+.rich-text__wrapper--left.page-width {
+  margin: 0;
+}
+
 .rich-text__buttons + .rich-text__buttons {
   margin-top: 1rem;
 }
