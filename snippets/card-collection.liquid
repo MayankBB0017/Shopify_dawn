@@ -49,35 +49,67 @@
       class="card__inner {% if card_style == 'standard' %}color-{{ card_color_scheme }} gradient{% endif %}{% if card_collection.featured_image or card_style == 'standard' %} ratio{% endif %}"
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
-      {%- if collection_image -%}
+      {% comment %} {%- if card_collection.featured_image -%}
         <div class="card__media">
           <div class="media media--transparent media--hover-effect">
             <img
               srcset="
-                {%- if collection_image.width >= 165 -%}{{ collection_image | image_url: width: 165 }} 165w,{%- endif -%}
-                {%- if collection_image.width >= 330 -%}{{ collection_image | image_url: width: 330 }} 330w,{%- endif -%}
-                {%- if collection_image.width >= 535 -%}{{ collection_image | image_url: width: 535 }} 535w,{%- endif -%}
-                {%- if collection_image.width >= 750 -%}{{ collection_image | image_url: width: 750 }} 750w,{%- endif -%}
-                {%- if collection_image.width >= 1000 -%}{{ collection_image | image_url: width: 1000 }} 1000w,{%- endif -%}
-                {%- if collection_image.width >= 1500 -%}{{ collection_image | image_url: width: 1500 }} 1500w,{%- endif -%}
-                {%- if collection_image.width >= 3000 -%}{{ collection_image | image_url: width: 3000 }} 3000w,{%- endif -%}
-                {{ collection_image | image_url }} {{ collection_image.width }}w
+                {%- if card_collection.featured_image.width >= 165 -%}{{ card_collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 330 -%}{{ card_collection.featured_image | image_url: width: 330 }} 330w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 535 -%}{{ card_collection.featured_image | image_url: width: 535 }} 535w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 750 -%}{{ card_collection.featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 1000 -%}{{ card_collection.featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 1500 -%}{{ card_collection.featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 3000 -%}{{ card_collection.featured_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                {{ card_collection.featured_image | image_url }} {{ card_collection.featured_image.width }}w
               "
-              src="{{ collection_image | image_url: width: 1500 }}"
+              src="{{ card_collection.featured_image | image_url: width: 1500 }}"
               sizes="
                 (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
                 (min-width: 750px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
                 calc(100vw - 3rem)
               "
-              alt="{{ collection_image.alt | escape }}"
-              height="{{ collection_image.height }}"
-              width="{{ collection_image.width }}"
+              alt="{{ card_collection.featured_image.alt | escape }}"
+              height="{{ card_collection.featured_image.height }}"
+              width="{{ card_collection.featured_image.width }}"
               loading="lazy"
               class="motion-reduce"
             >
           </div>
         </div>
-      {%- endif -%}
+      {%- endif -%} {% endcomment %}
+       {%- assign collection_image = card_collection.metafields.custom.collection_image.value -%}
+
+{%- if collection_image -%}
+  <div class="card__media">
+    <div class="media media--transparent media--hover-effect">
+      <img
+        srcset="
+          {%- if collection_image.width >= 165 -%}{{ collection_image | image_url: width: 165 }} 165w,{%- endif -%}
+          {%- if collection_image.width >= 330 -%}{{ collection_image | image_url: width: 330 }} 330w,{%- endif -%}
+          {%- if collection_image.width >= 535 -%}{{ collection_image | image_url: width: 535 }} 535w,{%- endif -%}
+          {%- if collection_image.width >= 750 -%}{{ collection_image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if collection_image.width >= 1000 -%}{{ collection_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+          {%- if collection_image.width >= 1500 -%}{{ collection_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if collection_image.width >= 3000 -%}{{ collection_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+          {{ collection_image | image_url }} {{ collection_image.width }}w
+        "
+        src="{{ collection_image | image_url: width: 1500 }}"
+        sizes="
+          (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+          (min-width: 750px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+          calc(100vw - 3rem)
+        "
+        alt="{{ collection_image.alt | escape }}"
+        width="{{ collection_image.width }}"
+        height="{{ collection_image.height }}"
+        loading="lazy"
+        class="motion-reduce"
+      >
+    </div>
+  </div>
+{%- endif -%}
+
       {%- if card_collection == blank -%}
         <div class="card__media">
           {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
