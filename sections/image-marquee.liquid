@@ -62,9 +62,9 @@
     <div class="image-marquee__track" id="marquee-{{ section.id }}">
       {% for block in section.blocks %}
         <div class="image-marquee__item" {{ block.shopify_attributes }}>
-          {% if block.settings.link != blank %}
+          {% comment %} {% if block.settings.link != blank %}
             <a href="{{ block.settings.link }}">
-          {% endif %}
+          {% endif %} {% endcomment %}
 
           {% if block.settings.image != blank %}
             {{
@@ -79,9 +79,9 @@
             {{ 'image' | placeholder_svg_tag }}
           {% endif %}
 
-          {% if block.settings.link != blank %}
+          {% comment %} {% if block.settings.link != blank %}
             </a>
-          {% endif %}
+          {% endif %} {% endcomment %}
         </div>
       {% endfor %}
     </div>
@@ -147,11 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
           "id": "image",
           "label": "Image"
         },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        }
+
       ]
     }
   ],
