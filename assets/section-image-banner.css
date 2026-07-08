@@ -452,6 +452,7 @@
 .banner__buttons a.button.button--secondary {
     border-bottom: 1px solid #fff;
     padding: 0;
+    min-width: 12rem;
 }
 
 .banner__buttons .button:after {
