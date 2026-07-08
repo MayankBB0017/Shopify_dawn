@@ -59,32 +59,26 @@
   "
 >
   <div class="image-marquee">
-    <div class="image-marquee__track" id="marquee-{{ section.id }}">
-      {% for block in section.blocks %}
-        <div class="image-marquee__item" {{ block.shopify_attributes }}>
-          {% comment %} {% if block.settings.link != blank %}
-            <a href="{{ block.settings.link }}">
-          {% endif %} {% endcomment %}
-
-          {% if block.settings.image != blank %}
-            {{
-              block.settings.image
-              | image_url: width: 600
-              | image_tag:
-                loading: 'lazy',
-                widths: '200,300,400,500,600',
-                class: 'marquee-image'
-            }}
-          {% else %}
-            {{ 'image' | placeholder_svg_tag }}
-          {% endif %}
-
-          {% comment %} {% if block.settings.link != blank %}
-            </a>
-          {% endif %} {% endcomment %}
-        </div>
-      {% endfor %}
-    </div>
+<div class="image-marquee__track">
+  {% for i in (1..2) %}
+    {% for block in section.blocks %}
+      <div class="image-marquee__item" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          {{
+            block.settings.image
+            | image_url: width: 600
+            | image_tag:
+              loading: 'lazy',
+              widths: '200,300,400,500,600',
+              class: 'marquee-image'
+          }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>
   </div>
 </section>
 
