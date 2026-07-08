@@ -196,7 +196,7 @@
                 {% else %}
                   href="{{ card_collection.url }}"
                 {% endif %}
-                class="full-unstyled-link card--title-bottom"
+                class="full-unstyled-link-bottom"
               >
                 {%- if card_collection.title != blank -%}
                   {{- card_collection.title | escape -}}
@@ -235,7 +235,7 @@
             {% else %}
               href="{{ card_collection.url }}"
             {% endif %}
-            class="full-unstyled-link card--title-top"
+            class="full-unstyled-link-top"
           >
             {%- if card_collection.title != blank -%}
               {{- card_collection.title | escape -}}
