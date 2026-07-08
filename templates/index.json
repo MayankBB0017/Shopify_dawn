@@ -292,7 +292,7 @@
       "settings": {
         "speed": 20,
         "image_width": 140,
-        "gap": 30
+        "gap": 50
       }
     }
   },
