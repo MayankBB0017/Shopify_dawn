@@ -449,6 +449,15 @@
   word-break: break-word;
 }
 
+.banner__buttons a.button.button--secondary {
+    border-bottom: 1px solid #fff;
+    padding: 0;
+}
+
+.banner__buttons .button:after {
+  box-shadow: none;
+}
+
 @media screen and (max-width: 749px) {
   .banner--content-align-mobile-right .banner__buttons--multiple {
     justify-content: flex-end;
