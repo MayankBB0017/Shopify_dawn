@@ -239,6 +239,57 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "image_marquee_yRJAU4": {
+      "type": "image-marquee",
+      "blocks": {
+        "image_Hwe4WN": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_jKwta7": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_gjfefD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Vector_b0123281-f4c1-4dc1-a7ba-dd9f4bb9a7fd.png"
+          }
+        },
+        "image_YHR3HY": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Vanity_Fair_Logo_887b57ff-799c-4cd7-9e13-2e3d6571c9f0.png"
+          }
+        },
+        "image_tUhMnH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Revista__Hola__logo_3b59ce76-d45a-49e9-bf0a-e596ce466441.png"
+          }
+        },
+        "image_cQTrG7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/VOGUE_LOGO_f16afd78-bbbd-4a40-9fa1-9059dd880289.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_Hwe4WN",
+        "image_jKwta7",
+        "image_gjfefD",
+        "image_YHR3HY",
+        "image_tUhMnH",
+        "image_cQTrG7"
+      ],
+      "name": "Image Marquee",
+      "settings": {
+        "speed": 20,
+        "image_width": 140,
+        "gap": 20
+      }
     }
   },
   "order": [
@@ -247,6 +298,7 @@
     "featured_collection",
     "177021381514078c66",
     "collection_list_3rbWQx",
-    "collection_list_yRCkfQ"
+    "collection_list_yRCkfQ",
+    "image_marquee_yRJAU4"
   ]
 }
