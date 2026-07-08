@@ -243,13 +243,17 @@
     "image_marquee_yRJAU4": {
       "type": "image-marquee",
       "blocks": {
-        "image_Hwe4WN": {
+        "image_EfhVwU": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/Glamour-Logo_025d6e02-cfae-44a2-9bd9-c77878251ee9.png"
+          }
         },
-        "image_jKwta7": {
+        "image_fw9LwJ": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/Marie_Claire_logo_d59e225c-6481-4a84-85d9-3f14eb354bee.png"
+          }
         },
         "image_gjfefD": {
           "type": "image",
@@ -277,8 +281,8 @@
         }
       },
       "block_order": [
-        "image_Hwe4WN",
-        "image_jKwta7",
+        "image_EfhVwU",
+        "image_fw9LwJ",
         "image_gjfefD",
         "image_YHR3HY",
         "image_tUhMnH",
