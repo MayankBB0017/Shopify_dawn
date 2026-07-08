@@ -1,0 +1,164 @@
+<style>
+    .image-marquee-section {
+  overflow: hidden;
+  width: 100%;
+  padding: 30px 0;
+}
+
+.image-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.image-marquee__track {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  width: max-content;
+  animation: marquee var(--speed) linear infinite;
+}
+
+.image-marquee:hover .image-marquee__track {
+  animation-play-state: paused;
+}
+
+.image-marquee__item {
+  flex: 0 0 auto;
+}
+
+.marquee-image {
+  width: var(--image-width);
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .marquee-image {
+    width: calc(var(--image-width) * 0.75);
+  }
+}
+</style>
+
+<section
+  class="image-marquee-section"
+  style="
+    --speed: {{ section.settings.speed }}s;
+    --gap: {{ section.settings.gap }}px;
+    --image-width: {{ section.settings.image_width }}px;
+  "
+>
+  <div class="image-marquee">
+    <div class="image-marquee__track" id="marquee-{{ section.id }}">
+      {% for block in section.blocks %}
+        <div class="image-marquee__item" {{ block.shopify_attributes }}>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}">
+          {% endif %}
+
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 600
+              | image_tag:
+                loading: 'lazy',
+                widths: '200,300,400,500,600',
+                class: 'marquee-image'
+            }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
+          {% endif %}
+
+          {% if block.settings.link != blank %}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const track = document.getElementById('marquee-{{ section.id }}');
+
+  if (track.dataset.cloned) return;
+
+  track.dataset.cloned = true;
+
+  track.innerHTML += track.innerHTML;
+});
+</script>
+
+{% schema %}
+{
+  "name": "Image Marquee",
+  "tag": "section",
+  "class": "section-image-marquee",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Animation Speed",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "default": 20,
+      "unit": "s"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image Width",
+      "min": 60,
+      "max": 300,
+      "step": 10,
+      "default": 140,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Marquee"
+    }
+  ]
+}
+{% endschema %}
