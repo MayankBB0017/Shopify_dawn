@@ -68,10 +68,10 @@
   word-break: break-word;
 }
 
-.rich-text__buttons--multiple > * {
+/* .rich-text__buttons--multiple > * {
   flex-grow: 1;
   min-width: 22rem;
-}
+} */
 
 .rich-text__buttons + .rich-text__buttons {
   margin-top: 1rem;
