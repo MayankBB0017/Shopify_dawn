@@ -186,6 +186,7 @@
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": false,
+        "collection_title_position": "top",
         "padding_top": 36,
         "padding_bottom": 36
       }
