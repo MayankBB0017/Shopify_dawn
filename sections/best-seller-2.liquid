@@ -1,0 +1,405 @@
+<section class="bs-ui">
+  <div class="bs-ui__header">
+    <h2>Best sellers:</h2>
+
+    <div class="bs-ui__tabs">
+      <span class="active">SWIMWEAR</span>
+      <span>INTIMATES</span>
+      <span>ACCESSORIES</span>
+    </div>
+
+    <div class="bs-ui__arrows">
+      <button class="bs-ui__prev">&#10094;</button>
+      <button class="bs-ui__next">&#10095;</button>
+    </div>
+  </div>
+
+  <div class="bs-ui__wrapper">
+
+    {% for block in section.blocks %}
+      <div class="bs-ui__card" {{ block.shopify_attributes }}>
+
+        {% if block.settings.badge != blank %}
+          <span class="bs-ui__badge">{{ block.settings.badge }}</span>
+        {% endif %}
+
+        <div class="bs-ui__image">
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 800
+              | image_tag:
+              loading: 'lazy',
+              class: 'bs-ui__img'
+            }}
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'bs-ui__img' }}
+          {% endif %}
+        </div>
+
+        <div class="bs-ui__content">
+
+  <div class="bs-ui__title-row">
+
+    <h4 class="bs-ui__title">
+      {{ block.settings.title }}
+    </h4>
+
+    {% if section.settings.wishlist_icon != blank %}
+      {{
+        section.settings.wishlist_icon
+        | image_url: width: 30
+        | image_tag:
+        class: 'bs-ui__wishlist'
+      }}
+    {% endif %}
+
+  </div>
+
+  <div class="bs-ui__price-row">
+
+    <span class="bs-ui__price">
+      {{ block.settings.price }}
+    </span>
+
+    {% if block.settings.compare_price != blank %}
+      <span class="bs-ui__compare">
+        {{ block.settings.compare_price }}
+      </span>
+    {% endif %}
+
+    {% if block.settings.discount != blank %}
+      <span class="bs-ui__discount">
+        {{ block.settings.discount }}
+      </span>
+    {% endif %}
+
+  </div>
+
+</div>
+        {% comment %} <div class="bs-ui__content">
+
+          <h4>{{ block.settings.title }}</h4>
+
+          <div class="bs-ui__bottom">
+
+            <div class="bs-ui__price">
+              <span class="current">{{ block.settings.price }}</span>
+
+              {% if block.settings.compare_price != blank %}
+                <span class="old">{{ block.settings.compare_price }}</span>
+              {% endif %}
+            </div>
+
+            <div class="bs-ui__icon">
+              ♡
+            </div>
+
+          </div>
+
+        </div> {% endcomment %}
+
+      </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<style>
+
+.bs-ui{
+    width:100%;
+    padding:60px 40px;
+}
+
+.bs-ui__header{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    margin-bottom:35px;
+}
+
+.bs-ui__header h2{
+    font-size:34px;
+    font-weight:400;
+}
+
+.bs-ui__tabs{
+    display:flex;
+    gap:25px;
+}
+
+.bs-ui__tabs span{
+    font-size:12px;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+
+.bs-ui__tabs .active{
+    border-bottom:1px solid #000;
+}
+
+.bs-ui__arrows{
+    margin-left:auto;
+    display:flex;
+    gap:10px;
+}
+
+.bs-ui__prev,
+.bs-ui__next{
+    width:40px;
+    height:40px;
+    border:1px solid #ddd;
+    background:#fff;
+    cursor:pointer;
+}
+
+.bs-ui__wrapper{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+}
+
+.bs-ui__card{
+    position:relative;
+}
+
+.bs-ui__badge{
+    position:absolute;
+    top:12px;
+    left:12px;
+    font-size:10px;
+    z-index:2;
+}
+
+.bs-ui__image{
+    aspect-ratio:3/4;
+    overflow:hidden;
+    background:#f7f7f7;
+}
+
+.bs-ui__img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:.4s;
+}
+
+.bs-ui__card:hover .bs-ui__img{
+    transform:scale(1.05);
+}
+
+.bs-ui__content{
+    padding-top:12px;
+}
+
+.bs-ui__content h4{
+    font-size:13px;
+    font-weight:400;
+    line-height:1.5;
+    {% comment %} min-height:40px; {% endcomment %}
+}
+
+{% comment %} .bs-ui__bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:-20px;
+} {% endcomment %}
+
+.bs-ui__price{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+{% comment %} .current{
+    font-size:14px;
+} {% endcomment %}
+
+{% comment %} .old{
+    text-decoration:line-through;
+    color:#999;
+    font-size:12px;
+} {% endcomment %}
+
+{% comment %} .bs-ui__icon{
+    font-size:18px;
+    margin-top : -34px;
+    cursor:pointer;
+} {% endcomment %}
+
+
+.bs-ui__content{
+    padding:10px 4px 0;
+}
+
+.bs-ui__title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.bs-ui__title{
+    flex:1;
+    margin:0;
+    font-size:12px;
+    font-weight:400;
+    line-height:1.4;
+    color:#222;
+}
+
+.bs-ui__wishlist{
+    width:12px;
+    height:12px;
+    object-fit:contain;
+    flex-shrink:0;
+    cursor:pointer;
+}
+
+.bs-ui__price-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-top:6px;
+}
+
+.bs-ui__price{
+    font-size:12px;
+    color:#111;
+}
+
+.bs-ui__compare{
+    font-size:11px;
+    color:#9a9a9a;
+    text-decoration:line-through;
+}
+
+.bs-ui__discount{
+    font-size:11px;
+    color:#c8a04d;
+}
+
+
+
+
+@media(max-width:991px){
+
+.bs-ui__wrapper{
+    grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+@media(max-width:767px){
+
+.bs-ui{
+    padding:30px 16px;
+}
+
+.bs-ui__header{
+    flex-wrap:wrap;
+}
+
+.bs-ui__wrapper{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.bs-ui__header h2{
+    font-size:26px;
+}
+
+.bs-ui__tabs{
+    gap:12px;
+}
+
+.bs-ui__tabs span{
+    font-size:11px;
+}
+
+}
+
+</style>
+{% schema %}
+{
+  "name": "Best Sellers UI new",
+  "tag": "section",
+  "class": "best-sellers-ui",
+ "settings": [
+  {
+    "type": "image_picker",
+    "id": "wishlist_icon",
+    "label": "Wishlist Icon"
+  }
+],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "NEW"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Bikini Balconette Butterfly braga clásica lazo"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "17.99€"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare Price",
+          "default": "21.99€"
+        },
+        {
+  "type": "text",
+  "id": "discount",
+  "label": "Discount",
+  "default": "15%"
+}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers new",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
