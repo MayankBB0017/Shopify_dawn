@@ -11,12 +11,10 @@
               <a href="{{ block.settings.link }}">
             {% endif %}
 
-            {{
+           {{
               block.settings.image
-              | image_url: width: 400
-              | image_tag: widths: '120,240,400', style: 'width:'
-              | append: block.settings.width
-              | append: 'px'
+              | image_url: width: 384
+              | image_tag: widths: '192,384'
             }}
 
             {% if block.settings.link != blank %}
