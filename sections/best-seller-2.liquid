@@ -1,341 +1,434 @@
-<section class="bs-ui">
-  <div class="bs-ui__header">
-    <h2>Best sellers:</h2>
+<section class="bs-slider">
 
-    <div class="bs-ui__tabs">
-      <span class="active">SWIMWEAR</span>
-      <span>INTIMATES</span>
-      <span>ACCESSORIES</span>
+  <div class="bs-slider__header">
+
+    <div class="bs-slider__left">
+      <h2>{{ section.settings.heading }}</h2>
+
+      <div class="bs-slider__tabs">
+        <span class="active">{{ section.settings.tab1 }}</span>
+        <span>{{ section.settings.tab2 }}</span>
+        <span>{{ section.settings.tab3 }}</span>
+      </div>
     </div>
 
-    <div class="bs-ui__arrows">
-      <button class="bs-ui__prev">&#10094;</button>
-      <button class="bs-ui__next">&#10095;</button>
-    </div>
-  </div>
-
-  <div class="bs-ui__wrapper">
-
-    {% for block in section.blocks %}
-      <div class="bs-ui__card" {{ block.shopify_attributes }}>
-
-        {% if block.settings.badge != blank %}
-          <span class="bs-ui__badge">{{ block.settings.badge }}</span>
+    <div class="bs-slider__nav">
+      <button class="bs-prev">
+        {% if section.settings.arrow_left != blank %}
+          {{
+            section.settings.arrow_left
+            | image_url: width: 40
+            | image_tag
+          }}
+        {% else %}
+          &#10094;
         {% endif %}
+      </button>
 
-        <div class="bs-ui__image">
-          {% if block.settings.image != blank %}
-            {{
-              block.settings.image
-              | image_url: width: 800
-              | image_tag:
-              loading: 'lazy',
-              class: 'bs-ui__img'
-            }}
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'bs-ui__img' }}
+      <button class="bs-next">
+        {% if section.settings.arrow_right != blank %}
+          {{
+            section.settings.arrow_right
+            | image_url: width: 40
+            | image_tag
+          }}
+        {% else %}
+          &#10095;
+        {% endif %}
+      </button>
+    </div>
+
+  </div>
+
+  <div class="swiper bs-swiper">
+
+    <div class="swiper-wrapper">
+
+      {% for block in section.blocks %}
+
+      <div class="swiper-slide">
+
+        <div class="bs-card">
+
+          {% if block.settings.badge != blank %}
+            <span class="bs-badge">{{ block.settings.badge }}</span>
           {% endif %}
-        </div>
 
-        <div class="bs-ui__content">
+          <div class="bs-image">
 
-  <div class="bs-ui__title-row">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                loading: 'lazy',
+                class: 'bs-img'
+              }}
+            {% endif %}
 
-    <h4 class="bs-ui__title">
-      {{ block.settings.title }}
-    </h4>
+          </div>
 
-    {% if section.settings.wishlist_icon != blank %}
-      {{
-        section.settings.wishlist_icon
-        | image_url: width: 30
-        | image_tag:
-        class: 'bs-ui__wishlist'
-      }}
-    {% endif %}
+          <div class="bs-info">
 
-  </div>
+            <div class="bs-title-row">
 
-  <div class="bs-ui__price-row">
+              <div class="bs-title">
+                {{ block.settings.title }}
+              </div>
 
-    <span class="bs-ui__price">
-      {{ block.settings.price }}
-    </span>
-
-    {% if block.settings.compare_price != blank %}
-      <span class="bs-ui__compare">
-        {{ block.settings.compare_price }}
-      </span>
-    {% endif %}
-
-    {% if block.settings.discount != blank %}
-      <span class="bs-ui__discount">
-        {{ block.settings.discount }}
-      </span>
-    {% endif %}
-
-  </div>
-
-</div>
-        {% comment %} <div class="bs-ui__content">
-
-          <h4>{{ block.settings.title }}</h4>
-
-          <div class="bs-ui__bottom">
-
-            <div class="bs-ui__price">
-              <span class="current">{{ block.settings.price }}</span>
-
-              {% if block.settings.compare_price != blank %}
-                <span class="old">{{ block.settings.compare_price }}</span>
+              {% if section.settings.bookmark != blank %}
+                {{
+                  section.settings.bookmark
+                  | image_url: width: 22
+                  | image_tag:
+                  class: 'bs-bookmark'
+                }}
               {% endif %}
+
             </div>
 
-            <div class="bs-ui__icon">
-              ♡
+            <div class="bs-price-row">
+
+              <span class="price">
+                {{ block.settings.price }}
+              </span>
+
+              {% if block.settings.compare_price != blank %}
+                <span class="compare">
+                  {{ block.settings.compare_price }}
+                </span>
+              {% endif %}
+
+              {% if block.settings.discount != blank %}
+                <span class="discount">
+                  {{ block.settings.discount }}
+                </span>
+              {% endif %}
+
             </div>
 
           </div>
 
-        </div> {% endcomment %}
+        </div>
 
       </div>
-    {% endfor %}
+
+      {% endfor %}
+
+    </div>
 
   </div>
+
 </section>
 
 <style>
 
-.bs-ui{
+.bs-slider{
     width:100%;
-    padding:60px 40px;
+    padding:50px 0;
+    background:#fff;
 }
 
-.bs-ui__header{
+.bs-slider__header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.bs-slider__left{
     display:flex;
     align-items:center;
     gap:30px;
-    margin-bottom:35px;
 }
 
-.bs-ui__header h2{
-    font-size:34px;
+.bs-slider__header h2{
+    font-size:32px;
     font-weight:400;
+    color:#111;
 }
 
-.bs-ui__tabs{
+.bs-slider__tabs{
     display:flex;
-    gap:25px;
+    gap:22px;
 }
 
-.bs-ui__tabs span{
-    font-size:12px;
-    letter-spacing:1px;
+.bs-slider__tabs span{
+    font-size:11px;
+    letter-spacing:1.5px;
+    color:#777;
     cursor:pointer;
+    text-transform:uppercase;
 }
 
-.bs-ui__tabs .active{
-    border-bottom:1px solid #000;
+.bs-slider__tabs .active{
+    color:#111;
+    border-bottom:1px solid #111;
+    padding-bottom:2px;
 }
 
-.bs-ui__arrows{
-    margin-left:auto;
+.bs-slider__nav{
     display:flex;
-    gap:10px;
+    gap:12px;
 }
 
-.bs-ui__prev,
-.bs-ui__next{
-    width:40px;
-    height:40px;
-    border:1px solid #ddd;
+.bs-prev,
+.bs-next{
+    width:42px;
+    height:42px;
+    border:none;
     background:#fff;
     cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:.3s;
 }
 
-.bs-ui__wrapper{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:18px;
+.bs-prev:hover,
+.bs-next:hover{
+    background:#f5f5f5;
 }
 
-.bs-ui__card{
+.bs-prev img,
+.bs-next img{
+    width:18px;
+}
+
+.bs-swiper{
+    overflow:hidden;
+}
+
+.bs-card{
     position:relative;
+    background:#fff;
 }
 
-.bs-ui__badge{
+.bs-badge{
     position:absolute;
     top:12px;
     left:12px;
     font-size:10px;
-    z-index:2;
+    color:#555;
+    text-transform:uppercase;
+    z-index:5;
 }
 
-.bs-ui__image{
+.bs-image{
+    width:100%;
     aspect-ratio:3/4;
+    background:#fafafa;
     overflow:hidden;
-    background:#f7f7f7;
 }
 
-.bs-ui__img{
+.bs-img{
     width:100%;
     height:100%;
-    object-fit:cover;
-    display:block;
-    transition:.4s;
+    object-fit:contain;
+    transition:.45s;
 }
 
-.bs-ui__card:hover .bs-ui__img{
-    transform:scale(1.05);
+.bs-card:hover .bs-img{
+    transform:scale(1.04);
 }
 
-.bs-ui__content{
-    padding-top:12px;
-}
-
-.bs-ui__content h4{
-    font-size:13px;
-    font-weight:400;
-    line-height:1.5;
-    {% comment %} min-height:40px; {% endcomment %}
-}
-
-{% comment %} .bs-ui__bottom{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:-20px;
-} {% endcomment %}
-
-.bs-ui__price{
-    display:flex;
-    gap:8px;
-    align-items:center;
-}
-
-{% comment %} .current{
-    font-size:14px;
-} {% endcomment %}
-
-{% comment %} .old{
-    text-decoration:line-through;
-    color:#999;
-    font-size:12px;
-} {% endcomment %}
-
-{% comment %} .bs-ui__icon{
-    font-size:18px;
-    margin-top : -34px;
-    cursor:pointer;
-} {% endcomment %}
-
-
-.bs-ui__content{
+.bs-info{
     padding:10px 4px 0;
 }
 
-.bs-ui__title-row{
+.bs-title-row{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
     gap:10px;
 }
 
-.bs-ui__title{
+.bs-title{
     flex:1;
-    margin:0;
     font-size:12px;
     font-weight:400;
     line-height:1.4;
     color:#222;
 }
 
-.bs-ui__wishlist{
+.bs-bookmark{
     width:12px;
     height:12px;
     object-fit:contain;
-    flex-shrink:0;
+    margin-top:2px;
     cursor:pointer;
 }
 
-.bs-ui__price-row{
+.bs-price-row{
     display:flex;
-    align-items:center;
     gap:6px;
+    align-items:center;
     margin-top:6px;
 }
 
-.bs-ui__price{
+.price{
     font-size:12px;
     color:#111;
 }
 
-.bs-ui__compare{
+.compare{
     font-size:11px;
-    color:#9a9a9a;
+    color:#9c9c9c;
     text-decoration:line-through;
 }
 
-.bs-ui__discount{
+.discount{
     font-size:11px;
-    color:#c8a04d;
+    color:#c59b48;
 }
 
+/* Swiper Slides */
 
+.bs-swiper .swiper-slide{
+    width:20%;
+}
 
+/* Tablet */
 
-@media(max-width:991px){
+@media(max-width:990px){
 
-.bs-ui__wrapper{
-    grid-template-columns:repeat(3,1fr);
+.bs-slider__header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.bs-slider__left{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.bs-swiper .swiper-slide{
+    width:33.333%;
 }
 
 }
+
+/* Mobile */
 
 @media(max-width:767px){
 
-.bs-ui{
-    padding:30px 16px;
+.bs-slider{
+    padding:35px 15px;
 }
 
-.bs-ui__header{
-    flex-wrap:wrap;
-}
-
-.bs-ui__wrapper{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-.bs-ui__header h2{
+.bs-slider__header h2{
     font-size:26px;
 }
 
-.bs-ui__tabs{
-    gap:12px;
+.bs-slider__tabs{
+    gap:14px;
 }
 
-.bs-ui__tabs span{
+.bs-slider__tabs span{
+    font-size:10px;
+}
+
+.bs-swiper .swiper-slide{
+    width:50%;
+}
+
+.bs-title{
     font-size:11px;
+}
+
+.price,
+.compare,
+.discount{
+    font-size:10px;
+}
+
+.bs-bookmark{
+    width:10px;
+    height:10px;
 }
 
 }
 
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  new Swiper('.bs-swiper', {
+    slidesPerView: 5,
+    spaceBetween: 18,
+    speed: 600,
+
+    navigation: {
+      nextEl: '.bs-next',
+      prevEl: '.bs-prev'
+    },
+
+    breakpoints: {
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 12
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 16
+      },
+      1200: {
+        slidesPerView: 5,
+        spaceBetween: 18
+      }
+    }
+  });
+});
+</script>
+
 {% schema %}
 {
-  "name": "Best Sellers UI new",
+  "name": "Best Sellers Slider",
   "tag": "section",
-  "class": "best-sellers-ui",
- "settings": [
-  {
-    "type": "image_picker",
-    "id": "wishlist_icon",
-    "label": "Wishlist Icon"
-  }
-],
-  "max_blocks": 10,
+  "class": "best-sellers-slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Best sellers:"
+    },
+    {
+      "type": "text",
+      "id": "tab1",
+      "label": "Tab 1",
+      "default": "SWIMWEAR"
+    },
+    {
+      "type": "text",
+      "id": "tab2",
+      "label": "Tab 2",
+      "default": "INTIMATES"
+    },
+    {
+      "type": "text",
+      "id": "tab3",
+      "label": "Tab 3",
+      "default": "ACCESSORIES"
+    },
+    {
+      "type": "image_picker",
+      "id": "bookmark",
+      "label": "Bookmark Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_left",
+      "label": "Left Arrow Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrow_right",
+      "label": "Right Arrow Icon"
+    }
+  ],
   "blocks": [
     {
       "type": "product",
@@ -355,7 +448,7 @@
         {
           "type": "text",
           "id": "title",
-          "label": "Product Title",
+          "label": "Title",
           "default": "Bikini Balconette Butterfly braga clásica lazo"
         },
         {
@@ -371,33 +464,24 @@
           "default": "21.99€"
         },
         {
-  "type": "text",
-  "id": "discount",
-  "label": "Discount",
-  "default": "15%"
-}
+          "type": "text",
+          "id": "discount",
+          "label": "Discount",
+          "default": "15%"
+        }
       ]
     }
   ],
+  "max_blocks": 12,
   "presets": [
     {
-      "name": "Best Sellers new",
+      "name": "Best Sellers Slider",
       "blocks": [
-        {
-          "type": "product"
-        },
-        {
-          "type": "product"
-        },
-        {
-          "type": "product"
-        },
-        {
-          "type": "product"
-        },
-        {
-          "type": "product"
-        }
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
       ]
     }
   ]
