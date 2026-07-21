@@ -155,88 +155,80 @@
       "name": "Editorial Grid",
       "settings": {}
     },
-    "collection_86Ujxb": {
-      "type": "collection",
+    "best_seller_YzixfF": {
+      "type": "best-seller",
       "blocks": {
-        "item_Pcegey": {
-          "type": "item",
+        "product_card_Q9DYra": {
+          "type": "product_card",
           "settings": {
-            "image": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
+            "image": "shopify://shop_images/productimages.png",
+            "link": "",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly Braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
           }
         },
-        "item_UkGCft": {
-          "type": "item",
+        "product_card_gM4yYF": {
+          "type": "product_card",
           "settings": {
-            "image": "shopify://shop_images/clothing_3_2_9ccf03c3-e8c3-4077-b15a-d42195b07ce0.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
+            "link": "",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly Braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
           }
         },
-        "item_DLnPT8": {
-          "type": "item",
+        "product_card_4hixGC": {
+          "type": "product_card",
           "settings": {
-            "image": "shopify://shop_images/bikini_2_1.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
+            "link": "",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly Braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
+        "product_card_fxRxfX": {
+          "type": "product_card",
+          "settings": {
+            "link": "",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly Braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
+        "product_card_4XeEWm": {
+          "type": "product_card",
+          "settings": {
+            "link": "",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly Braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
           }
         }
       },
       "block_order": [
-        "item_Pcegey",
-        "item_UkGCft",
-        "item_DLnPT8"
+        "product_card_Q9DYra",
+        "product_card_gM4yYF",
+        "product_card_4hixGC",
+        "product_card_fxRxfX",
+        "product_card_4XeEWm"
       ],
-      "disabled": true,
-      "name": "Collection Showcase",
-      "settings": {}
-    },
-    "collection_QcnQxT": {
-      "type": "collection",
-      "blocks": {
-        "item_UXUVG8": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/image_64426c2f-247a-4489-a0f2-f669705ca824.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        },
-        "item_iEQWfR": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/category_images_ec698908-6c8e-4e2c-96f5-8eaa7bb22158.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        },
-        "item_LmX3Bf": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/categoryimages.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        },
-        "item_RchXxr": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/category_images_1841db05-206b-45bc-9e1b-c838d9ef868b.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "item_UXUVG8",
-        "item_iEQWfR",
-        "item_LmX3Bf",
-        "item_RchXxr"
-      ],
-      "disabled": true,
-      "name": "Collection Showcase",
-      "settings": {}
+      "name": "Best Sellers",
+      "settings": {
+        "heading": "Best sellers:",
+        "tab_1": "SWIMWEAR",
+        "tab_2": "INTIMATES",
+        "tab_3": "ACCESSORIES"
+      }
     },
     "client_logos_8cnwfc": {
       "type": "client-logos",
@@ -321,8 +313,7 @@
     "177021381514078c66",
     "banner_2_ab9zBV",
     "collection_3_nTtfcE",
-    "collection_86Ujxb",
-    "collection_QcnQxT",
+    "best_seller_YzixfF",
     "client_logos_8cnwfc",
     "banner_8zUKAL"
   ]
