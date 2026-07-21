@@ -78,19 +78,47 @@
 
 /* Mobile */
 
+/* Mobile */
+
 @media (max-width:749px){
 
 .editorial-grid-4{
-    grid-template-columns:repeat(2,1fr);
+    display:flex;
+    overflow-x:auto;
+    overflow-y:hidden;
+    gap:8px;
+
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+
+    scrollbar-width:none;
+    padding:0 12px;
+}
+
+.editorial-grid-4::-webkit-scrollbar{
+    display:none;
 }
 
 .editorial-grid-4__card{
+    flex:0 0 82%;
     aspect-ratio:3/5;
+    scroll-snap-align:center;
+}
+
+.editorial-grid-4__image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .editorial-grid-4__title{
-    bottom:12px;
-    font-size:10px;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    text-align:center;
+    font-size:11px;
+    letter-spacing:1px;
 }
 
 }
