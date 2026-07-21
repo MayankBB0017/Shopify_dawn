@@ -275,17 +275,6 @@
             "discount": "15%"
           }
         },
-        "product_UDrMzH": {
-          "type": "product",
-          "settings": {
-            "image": "shopify://shop_images/6483a97270266a3f5955174d7b52fcd27261657d.png",
-            "badge": "",
-            "title": "Bikini Balconette Butterfly braga clásica lazo",
-            "price": "17.99€",
-            "compare_price": "21.99€",
-            "discount": "15%"
-          }
-        },
         "product_khyDVV": {
           "type": "product",
           "settings": {
@@ -303,7 +292,6 @@
         "product_maWVmT",
         "product_MbXQ8p",
         "product_BbLn9g",
-        "product_UDrMzH",
         "product_khyDVV"
       ],
       "name": "Best Sellers new",
