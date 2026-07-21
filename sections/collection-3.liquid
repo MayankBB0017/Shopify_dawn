@@ -1,7 +1,7 @@
-<div class="editorial-grid">
+<div class="editorial-grid-4">
 
   {% for block in section.blocks %}
-    <div class="editorial-card">
+    <div class="editorial-grid-4__card">
 
       {% if block.settings.image != blank %}
         {{
@@ -9,11 +9,11 @@
           | image_url: width: 1200
           | image_tag:
           loading: 'lazy',
-          class: 'editorial-image'
+          class: 'editorial-grid-4__image'
         }}
       {% endif %}
 
-      <div class="editorial-title">
+      <div class="editorial-grid-4__title">
         {{ block.settings.title }}
       </div>
 
@@ -21,23 +21,22 @@
   {% endfor %}
 
 </div>
-
 <style>
-    .editorial-grid{
+    .editorial-grid-4{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:0;
     width:100%;
 }
 
-.editorial-card{
+.editorial-grid-4__card{
     position:relative;
     overflow:hidden;
     aspect-ratio:3/5;
     background:#f5f5f5;
 }
 
-.editorial-image{
+.editorial-grid-4__image{
     width:100%;
     height:100%;
     object-fit:cover;
@@ -45,18 +44,17 @@
     transition:transform .4s ease;
 }
 
-.editorial-card:hover .editorial-image{
+.editorial-grid-4__card:hover .editorial-grid-4__image{
     transform:scale(1.05);
 }
 
-.editorial-title{
+.editorial-grid-4__title{
     position:absolute;
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
     width:100%;
     text-align:center;
-
     color:#fff;
     font-size:11px;
     font-weight:500;
@@ -68,11 +66,11 @@
 
 @media (max-width:990px){
 
-.editorial-grid{
+.editorial-grid-4{
     grid-template-columns:repeat(2,1fr);
 }
 
-.editorial-card{
+.editorial-grid-4__card{
     aspect-ratio:3/5;
 }
 
@@ -82,17 +80,17 @@
 
 @media (max-width:749px){
 
-.editorial-grid{
+.editorial-grid-4{
     grid-template-columns:repeat(2,1fr);
 }
 
-.editorial-card{
+.editorial-grid-4__card{
     aspect-ratio:3/5;
 }
 
-.editorial-title{
-    font-size:10px;
+.editorial-grid-4__title{
     bottom:12px;
+    font-size:10px;
 }
 
 }
