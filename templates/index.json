@@ -226,6 +226,71 @@
         "wishlist_icon": "shopify://shop_images/Iconos.png"
       }
     },
+    "best_seller_2_i9xGe4": {
+      "type": "best-seller-2",
+      "blocks": {
+        "product_7FEnNH": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/Frame_60404.png",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
+        "product_maWVmT": {
+          "type": "product",
+          "settings": {
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
+        "product_MbXQ8p": {
+          "type": "product",
+          "settings": {
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
+        "product_khyDVV": {
+          "type": "product",
+          "settings": {
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
+        "product_UDrMzH": {
+          "type": "product",
+          "settings": {
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        }
+      },
+      "block_order": [
+        "product_7FEnNH",
+        "product_maWVmT",
+        "product_MbXQ8p",
+        "product_khyDVV",
+        "product_UDrMzH"
+      ],
+      "name": "Best Sellers new",
+      "settings": {}
+    },
     "client_logos_8cnwfc": {
       "type": "client-logos",
       "blocks": {
@@ -310,6 +375,7 @@
     "banner_2_ab9zBV",
     "collection_3_nTtfcE",
     "best_seller_YzixfF",
+    "best_seller_2_i9xGe4",
     "client_logos_8cnwfc",
     "banner_8zUKAL"
   ]
