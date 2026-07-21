@@ -299,7 +299,6 @@
     padding:24px 12px;
 }
 
-/* Header */
 .bs-ui__header{
     display:flex;
     flex-direction:column;
@@ -308,87 +307,51 @@
     margin-bottom:20px;
 }
 
-.bs-ui__header h2{
-    font-size:28px;
-    line-height:1;
-    margin:0;
-}
-
-/* Tabs */
-.bs-ui__tabs{
-    width:100%;
-    display:flex;
-    justify-content:flex-start;
-    gap:18px;
-}
-
-.bs-ui__tabs span{
-    font-size:10px;
-    letter-spacing:.5px;
-}
-
-/* Hide arrows */
 .bs-ui__arrows{
     display:none;
 }
 
-/* Products */
+/* Horizontal scroll */
 .bs-ui__wrapper{
-    grid-template-columns:repeat(2,1fr);
-    gap:8px;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
 }
 
-/* Card */
+.bs-ui__wrapper::-webkit-scrollbar{
+    display:none;
+}
+
+/* Fixed card width */
 .bs-ui__card{
-    width:100%;
+    flex:0 0 48%;
+    scroll-snap-align:start;
 }
 
+/* Image */
 .bs-ui__image{
-    aspect-ratio:0.75;
+    aspect-ratio:3/4;
 }
 
 .bs-ui__img{
     width:100%;
     height:100%;
-    object-fit:cover;
-}
-
-/* Badge */
-.bs-ui__badge{
-    top:8px;
-    left:8px;
-    font-size:9px;
-}
-
-/* Content */
-.bs-ui__content{
-    padding:8px 2px 0;
+    object-fit:contain;
 }
 
 .bs-ui__title{
     font-size:10px;
-    line-height:1.3;
-}
-
-.bs-ui__wishlist{
-    width:10px;
-    height:10px;
-}
-
-/* Price */
-.bs-ui__price-row{
-    gap:4px;
-    margin-top:4px;
 }
 
 .bs-ui__price{
     font-size:10px;
 }
 
-.bs-ui__compare{
-    font-size:9px;
-}
-
+.bs-ui__compare,
 .bs-ui__discount{
     font-size:9px;
 }
