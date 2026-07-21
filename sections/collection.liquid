@@ -1,50 +1,28 @@
 <section class="collection-grid">
-    <div class="page-width">
-        <div class="collection-grid__wrapper">
+  <div class="collection-grid__wrapper">
+    {% for block in section.blocks %}
+      <a
+        href="{{ block.settings.link | default: '#' }}"
+        class="collection-card"
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.image != blank %}
+          {{
+            block.settings.image
+            | image_url: width: 900
+            | image_tag:
+              loading: 'lazy',
+              class: 'collection-card__image'
+          }}
+        {% endif %}
 
-            {% for block in section.blocks %}
-
-                {% assign collection = block.settings.collection %}
-                {% assign image = blank %}
-
-                {% if collection.metafields.custom.collection_image != blank %}
-                    {% assign image = collection.metafields.custom.collection_image %}
-                {% elsif collection.image != blank %}
-                    {% assign image = collection.image %}
-                {% elsif block.settings.fallback_image != blank %}
-                    {% assign image = block.settings.fallback_image %}
-                {% endif %}
-
-                {% if collection != blank %}
-                    <a
-                        href="{{ collection.url }}"
-                        class="collection-card"
-                        {{ block.shopify_attributes }}
-                    >
-
-                        {% if image %}
-                            {{
-                                image
-                                | image_url: width: 900
-                                | image_tag:
-                                    loading: 'lazy',
-                                    class: 'collection-card__image'
-                            }}
-                        {% endif %}
-
-                        <div class="collection-card__content">
-                            <h3>{{ collection.title }}</h3>
-                        </div>
-
-                    </a>
-                {% endif %}
-
-            {% endfor %}
-
+        <div class="collection-card__content">
+          <h3>{{ block.settings.title }}</h3>
         </div>
-    </div>
+      </a>
+    {% endfor %}
+  </div>
 </section>
-
 <style>
     .collection-grid{
     padding:60px 0;
