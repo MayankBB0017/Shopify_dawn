@@ -229,6 +229,17 @@
     "best_seller_2_i9xGe4": {
       "type": "best-seller-2",
       "blocks": {
+        "product_BbLn9g": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/product_images_2a65ef80-1c84-4b09-be70-f232101fd375.png",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
         "product_7FEnNH": {
           "type": "product",
           "settings": {
@@ -243,6 +254,7 @@
         "product_maWVmT": {
           "type": "product",
           "settings": {
+            "image": "shopify://shop_images/product_images_59fe5923-1bd1-49d2-abe2-fd430bb13763.png",
             "badge": "NEW",
             "title": "Bikini Balconette Butterfly braga clásica lazo",
             "price": "17.99€",
@@ -253,6 +265,7 @@
         "product_MbXQ8p": {
           "type": "product",
           "settings": {
+            "image": "shopify://shop_images/Frame_60404_22a7d886-d418-42aa-b757-88feec22453e.png",
             "badge": "NEW",
             "title": "Bikini Balconette Butterfly braga clásica lazo",
             "price": "17.99€",
@@ -263,6 +276,7 @@
         "product_khyDVV": {
           "type": "product",
           "settings": {
+            "image": "shopify://shop_images/Frame_60404_515df42a-c1b8-4815-931e-a343bf3d0ee5.png",
             "badge": "NEW",
             "title": "Bikini Balconette Butterfly braga clásica lazo",
             "price": "17.99€",
@@ -282,6 +296,7 @@
         }
       },
       "block_order": [
+        "product_BbLn9g",
         "product_7FEnNH",
         "product_maWVmT",
         "product_MbXQ8p",
@@ -289,7 +304,12 @@
         "product_UDrMzH"
       ],
       "name": "Best Sellers new",
-      "settings": {}
+      "settings": {
+        "heading": "Best sellers:",
+        "tab1": "SWIMWEAR",
+        "tab2": "INTIMATES",
+        "tab3": "ACCESSORIES"
+      }
     },
     "client_logos_8cnwfc": {
       "type": "client-logos",
