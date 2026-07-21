@@ -111,21 +111,27 @@
 </style>
 {%  schema %}
 {
-  "name": "Collection Grid",
+  "name": "Collection Showcase",
   "blocks": [
     {
-      "type": "collection",
-      "name": "Collection",
+      "type": "item",
+      "name": "Card",
       "settings": [
         {
-          "type": "collection",
-          "id": "collection",
-          "label": "Collection"
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
         },
         {
-          "type": "image_picker",
-          "id": "fallback_image",
-          "label": "Fallback Image"
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "BIKINIS TOP TRIÁNGULO"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
         }
       ]
     }
@@ -133,7 +139,7 @@
   "max_blocks": 12,
   "presets": [
     {
-      "name": "Collection Grid"
+      "name": "Collection Showcase"
     }
   ]
 }
