@@ -320,7 +320,10 @@
         "heading": "Best sellers:",
         "tab1": "SWIMWEAR",
         "tab2": "INTIMATES",
-        "tab3": "ACCESSORIES"
+        "tab3": "ACCESSORIES",
+        "bookmark": "shopify://shop_images/Iconos.png",
+        "arrow_left": "shopify://shop_images/Vector_9.png",
+        "arrow_right": "shopify://shop_images/Vector_9.png"
       }
     },
     "client_logos_8cnwfc": {
