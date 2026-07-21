@@ -229,17 +229,6 @@
     "best_seller_2_i9xGe4": {
       "type": "best-seller-2",
       "blocks": {
-        "product_BbLn9g": {
-          "type": "product",
-          "settings": {
-            "image": "shopify://shop_images/product_images_2a65ef80-1c84-4b09-be70-f232101fd375.png",
-            "badge": "NEW",
-            "title": "Bikini Balconette Butterfly braga clásica lazo",
-            "price": "17.99€",
-            "compare_price": "21.99€",
-            "discount": "15%"
-          }
-        },
         "product_7FEnNH": {
           "type": "product",
           "settings": {
@@ -273,6 +262,28 @@
             "discount": "15%"
           }
         },
+        "product_BbLn9g": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/product_images_2a65ef80-1c84-4b09-be70-f232101fd375.png",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
+        "product_UDrMzH": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/6483a97270266a3f5955174d7b52fcd27261657d.png",
+            "badge": "NEW",
+            "title": "Bikini Balconette Butterfly braga clásica lazo",
+            "price": "17.99€",
+            "compare_price": "21.99€",
+            "discount": "15%"
+          }
+        },
         "product_khyDVV": {
           "type": "product",
           "settings": {
@@ -284,7 +295,7 @@
             "discount": "15%"
           }
         },
-        "product_UDrMzH": {
+        "product_EpbLLD": {
           "type": "product",
           "settings": {
             "badge": "NEW",
@@ -296,12 +307,13 @@
         }
       },
       "block_order": [
-        "product_BbLn9g",
         "product_7FEnNH",
         "product_maWVmT",
         "product_MbXQ8p",
+        "product_BbLn9g",
+        "product_UDrMzH",
         "product_khyDVV",
-        "product_UDrMzH"
+        "product_EpbLLD"
       ],
       "name": "Best Sellers new",
       "settings": {
