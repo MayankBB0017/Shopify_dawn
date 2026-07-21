@@ -114,6 +114,47 @@
         "image_3": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png"
       }
     },
+    "collection_3_nTtfcE": {
+      "type": "collection-3",
+      "blocks": {
+        "item_qzkFiP": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/categoryimages.png",
+            "title": "BIKINIS TOP TRIÁNGULO"
+          }
+        },
+        "item_n4pyVH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/6483a97270266a3f5955174d7b52fcd27261657d.png",
+            "title": "BIKINIS TOP TRIÁNGULO"
+          }
+        },
+        "item_heabKG": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/category_images_ec698908-6c8e-4e2c-96f5-8eaa7bb22158.png",
+            "title": "BIKINIS TOP TRIÁNGULO"
+          }
+        },
+        "item_Rp8iEq": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/image_64426c2f-247a-4489-a0f2-f669705ca824.png",
+            "title": "BIKINIS TOP TRIÁNGULO"
+          }
+        }
+      },
+      "block_order": [
+        "item_qzkFiP",
+        "item_n4pyVH",
+        "item_heabKG",
+        "item_Rp8iEq"
+      ],
+      "name": "Editorial Grid",
+      "settings": {}
+    },
     "collection_86Ujxb": {
       "type": "collection",
       "blocks": {
@@ -271,47 +312,6 @@
         "right_image": "shopify://shop_images/category_x2_a1042bdb-05c5-4b64-a37d-4cba2b6a29e3.png",
         "right_text": ""
       }
-    },
-    "collection_3_nTtfcE": {
-      "type": "collection-3",
-      "blocks": {
-        "item_qzkFiP": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/categoryimages.png",
-            "title": "BIKINIS TOP TRIÁNGULO"
-          }
-        },
-        "item_n4pyVH": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/6483a97270266a3f5955174d7b52fcd27261657d.png",
-            "title": "BIKINIS TOP TRIÁNGULO"
-          }
-        },
-        "item_heabKG": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/category_images_ec698908-6c8e-4e2c-96f5-8eaa7bb22158.png",
-            "title": "BIKINIS TOP TRIÁNGULO"
-          }
-        },
-        "item_Rp8iEq": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/image_64426c2f-247a-4489-a0f2-f669705ca824.png",
-            "title": "BIKINIS TOP TRIÁNGULO"
-          }
-        }
-      },
-      "block_order": [
-        "item_qzkFiP",
-        "item_n4pyVH",
-        "item_heabKG",
-        "item_Rp8iEq"
-      ],
-      "name": "Editorial Grid",
-      "settings": {}
     }
   },
   "order": [
@@ -319,10 +319,10 @@
     "featured_collection",
     "177021381514078c66",
     "banner_2_ab9zBV",
+    "collection_3_nTtfcE",
     "collection_86Ujxb",
     "collection_QcnQxT",
     "client_logos_8cnwfc",
-    "banner_8zUKAL",
-    "collection_3_nTtfcE"
+    "banner_8zUKAL"
   ]
 }
