@@ -1,116 +1,109 @@
-<section class="collection-grid">
-  <div class="collection-grid__wrapper">
-    {% for block in section.blocks %}
-      <a
-        href="{{ block.settings.link | default: '#' }}"
-        class="collection-card"
-        {{ block.shopify_attributes }}
-      >
-        {% if block.settings.image != blank %}
-          {{
-            block.settings.image
-            | image_url: width: 900
-            | image_tag:
-              loading: 'lazy',
-              class: 'collection-card__image'
-          }}
-        {% endif %}
+<section class="collection-showcase">
+  <div class="page-width">
+    <div class="collection-showcase__grid">
+      {% for block in section.blocks %}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="collection-card"
+          {{ block.shopify_attributes }}
+        >
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 900
+              | image_tag:
+                loading: 'lazy',
+                class: 'collection-card__image'
+            }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
 
-        <div class="collection-card__content">
-          <h3>{{ block.settings.title }}</h3>
-        </div>
-      </a>
-    {% endfor %}
+          <div class="collection-card__content">
+            <h3>{{ block.settings.title }}</h3>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
+
 <style>
-    .collection-grid{
-    padding:60px 0;
+.collection-showcase {
+  padding: 0;
 }
 
-.collection-grid__wrapper{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    {% comment %} gap:20px; {% endcomment %}
+.collection-showcase .page-width {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
 }
 
-.collection-card{
-    position:relative;
-    display:block;
-    overflow:hidden;
-    text-decoration:none;
-    aspect-ratio:0.73;
+.collection-showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
 }
 
-.collection-card img{
-    width:100%;
-    height:auto;
-    object-fit:cover;
-    transition:.4s;
+.collection-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
 }
 
-.collection-card:hover img{
-    transform:scale(1.05);
+.collection-card__image {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.collection-card__content{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    padding:24px;
-    text-align:center;
-    color:#fff;
+.collection-card__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  text-align: center;
+  padding: 0 15px;
 }
 
-.collection-card__content h3{
-    margin:0;
-    font-size:22px;
-    font-weight:400;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color : white;
+.collection-card__content h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Tablet */
+@media screen and (max-width: 989px) {
+  .collection-showcase__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-@media(max-width:990px){
-
-.collection-grid__wrapper{
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
-}
-
-.collection-grid{
-    padding:40px 0;
-}
-
+  .collection-card__content h3 {
+    font-size: 16px;
+  }
 }
 
 /* Mobile */
+@media screen and (max-width: 749px) {
+  .collection-showcase__grid {
+    grid-template-columns: 1fr;
+  }
 
-@media(max-width:749px){
+  .collection-card__content {
+    bottom: 18px;
+  }
 
-.collection-grid__wrapper{
-    grid-template-columns:1fr;
-    gap:14px;
-}
-
-.collection-card{
-    aspect-ratio:0.72;
-}
-
-.collection-card__content{
-    padding:18px;
-}
-
-.collection-card__content h3{
-    font-size:16px;
-}
-
+  .collection-card__content h3 {
+    font-size: 14px;
+  }
 }
 </style>
-{%  schema %}
+
+{% schema %}
 {
   "name": "Collection Showcase",
   "blocks": [
@@ -137,7 +130,7 @@
       ]
     }
   ],
-  "max_blocks": 12,
+  "max_blocks": 8,
   "presets": [
     {
       "name": "Collection Showcase"
