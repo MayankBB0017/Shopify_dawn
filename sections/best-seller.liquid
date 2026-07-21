@@ -1,0 +1,381 @@
+<section class="bs-section">
+  <div class="bs-container">
+
+    <div class="bs-header">
+      <h2 class="bs-heading">{{ section.settings.heading }}</h2>
+
+      <div class="bs-tabs">
+        <span class="active">{{ section.settings.tab_1 }}</span>
+        <span>{{ section.settings.tab_2 }}</span>
+        <span>{{ section.settings.tab_3 }}</span>
+      </div>
+    </div>
+
+    <div class="bs-grid">
+
+      {% for block in section.blocks %}
+        <div class="bs-card" {{ block.shopify_attributes }}>
+
+          {% if block.settings.badge != blank %}
+            <span class="bs-badge">
+              {{ block.settings.badge }}
+            </span>
+          {% endif %}
+
+          <a href="{{ block.settings.link }}">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                loading: 'lazy',
+                class: 'bs-image'
+              }}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'bs-image' }}
+            {% endif %}
+          </a>
+
+          <div class="bs-content">
+
+            <h3 class="bs-title">
+              {{ block.settings.title }}
+            </h3>
+
+            <div class="bs-price">
+
+              <span class="current-price">
+                {{ block.settings.price }}
+              </span>
+
+              {% if block.settings.compare_price != blank %}
+                <span class="compare-price">
+                  {{ block.settings.compare_price }}
+                </span>
+              {% endif %}
+
+              {% if block.settings.discount != blank %}
+                <span class="discount">
+                  {{ block.settings.discount }}
+                </span>
+              {% endif %}
+
+            </div>
+
+          </div>
+
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.bs-section{
+    width:100%;
+    padding:70px 40px;
+    background:#fff;
+}
+
+.bs-container{
+    max-width:1500px;
+    margin:auto;
+}
+
+.bs-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.bs-heading{
+    font-size:42px;
+    font-weight:400;
+    color:#111;
+}
+
+.bs-tabs{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.bs-tabs span{
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#777;
+    cursor:pointer;
+}
+
+.bs-tabs .active{
+    color:#111;
+    border-bottom:1px solid #111;
+    padding-bottom:4px;
+}
+
+.bs-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+}
+
+.bs-card{
+    position:relative;
+}
+
+.bs-image{
+    width:100%;
+    aspect-ratio:3/4;
+    display:block;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.bs-card:hover .bs-image{
+    transform:scale(1.04);
+}
+
+.bs-badge{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#fff;
+    padding:4px 8px;
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    z-index:5;
+}
+
+.bs-content{
+    padding-top:14px;
+}
+
+.bs-title{
+    font-size:14px;
+    line-height:1.5;
+    font-weight:400;
+    color:#222;
+    min-height:45px;
+}
+
+.bs-price{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+    flex-wrap:wrap;
+}
+
+.current-price{
+    font-size:15px;
+    color:#111;
+}
+
+.compare-price{
+    color:#999;
+    text-decoration:line-through;
+    font-size:14px;
+}
+
+.discount{
+    color:#b8860b;
+    font-size:13px;
+}
+
+/* Large Tablet */
+
+@media screen and (max-width:1200px){
+
+.bs-grid{
+    grid-template-columns:repeat(4,1fr);
+}
+
+}
+
+/* Tablet */
+
+@media screen and (max-width:990px){
+
+.bs-section{
+    padding:50px 25px;
+}
+
+.bs-heading{
+    font-size:34px;
+}
+
+.bs-grid{
+    grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+/* Mobile */
+
+@media screen and (max-width:749px){
+
+.bs-section{
+    padding:35px 16px;
+}
+
+.bs-header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.bs-heading{
+    font-size:28px;
+}
+
+.bs-tabs{
+    gap:16px;
+}
+
+.bs-tabs span{
+    font-size:11px;
+}
+
+.bs-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.bs-title{
+    font-size:12px;
+}
+
+.current-price{
+    font-size:14px;
+}
+
+.compare-price,
+.discount{
+    font-size:12px;
+}
+
+.bs-badge{
+    font-size:10px;
+    padding:3px 6px;
+}
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "Best Sellers",
+  "tag": "section",
+  "class": "best-sellers-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Best sellers:"
+    },
+    {
+      "type": "text",
+      "id": "tab_1",
+      "label": "Tab 1",
+      "default": "SWIMWEAR"
+    },
+    {
+      "type": "text",
+      "id": "tab_2",
+      "label": "Tab 2",
+      "default": "INTIMATES"
+    },
+    {
+      "type": "text",
+      "id": "tab_3",
+      "label": "Tab 3",
+      "default": "ACCESSORIES"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product Link"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "NEW"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Bikini Balconette Butterfly Braga clásica lazo"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "17.99€"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare Price",
+          "default": "21.99€"
+        },
+        {
+          "type": "text",
+          "id": "discount",
+          "label": "Discount",
+          "default": "15%"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Best Sellers",
+      "blocks": [
+        {
+          "type": "product_card"
+        },
+        {
+          "type": "product_card"
+        },
+        {
+          "type": "product_card"
+        },
+        {
+          "type": "product_card"
+        },
+        {
+          "type": "product_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
