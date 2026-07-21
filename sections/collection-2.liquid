@@ -1,0 +1,140 @@
+<section class="collection-showcase">
+  <div class="page-width">
+    <div class="collection-showcase__grid">
+      {% for block in section.blocks %}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="collection-card"
+          {{ block.shopify_attributes }}
+        >
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 900
+              | image_tag:
+                loading: 'lazy',
+                class: 'collection-card__image'
+            }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          {% comment %} <div class="collection-card__content">
+            <h3>{{ block.settings.title }}</h3>
+          </div> {% endcomment %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+.collection-showcase {
+  padding: 0;
+}
+
+.collection-showcase .page-width {
+  {% comment %} max-width: 1440px;
+  margin: 0 auto;
+  padding: 0; {% endcomment %}
+}
+
+.collection-showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.collection-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.collection-card__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.collection-card__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  text-align: center;
+  padding: 0 15px;
+}
+
+.collection-card__content h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tablet */
+@media screen and (max-width: 989px) {
+  .collection-showcase__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .collection-card__content h3 {
+    font-size: 16px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 749px) {
+  .collection-showcase__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-card__content {
+    bottom: 18px;
+  }
+
+  .collection-card__content h3 {
+    font-size: 14px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Collection Showcase 2",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "BIKINIS TOP TRIÁNGULO"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Collection Showcase"
+    }
+  ]
+}
+{% endschema %}
