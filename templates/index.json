@@ -105,6 +105,51 @@
         "include_margins": true
       }
     },
+    "collection_QcnQxT": {
+      "type": "collection",
+      "blocks": {
+        "item_UXUVG8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/image_64426c2f-247a-4489-a0f2-f669705ca824.png",
+            "title": "BIKINIS TOP TRIÁNGULO",
+            "link": ""
+          }
+        },
+        "item_iEQWfR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/category_images_ec698908-6c8e-4e2c-96f5-8eaa7bb22158.png",
+            "title": "BIKINIS TOP TRIÁNGULO",
+            "link": ""
+          }
+        },
+        "item_LmX3Bf": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/categoryimages.png",
+            "title": "BIKINIS TOP TRIÁNGULO",
+            "link": ""
+          }
+        },
+        "item_RchXxr": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/category_images_1841db05-206b-45bc-9e1b-c838d9ef868b.png",
+            "title": "BIKINIS TOP TRIÁNGULO",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_UXUVG8",
+        "item_iEQWfR",
+        "item_LmX3Bf",
+        "item_RchXxr"
+      ],
+      "name": "Collection Showcase",
+      "settings": {}
+    },
     "client_logos_8cnwfc": {
       "type": "client-logos",
       "blocks": {
@@ -170,58 +215,13 @@
         "enable_animation": true,
         "animation_speed": 30
       }
-    },
-    "collection_QcnQxT": {
-      "type": "collection",
-      "blocks": {
-        "item_UXUVG8": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/image_64426c2f-247a-4489-a0f2-f669705ca824.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        },
-        "item_iEQWfR": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/category_images_ec698908-6c8e-4e2c-96f5-8eaa7bb22158.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        },
-        "item_LmX3Bf": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/categoryimages.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        },
-        "item_RchXxr": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/category_images_1841db05-206b-45bc-9e1b-c838d9ef868b.png",
-            "title": "BIKINIS TOP TRIÁNGULO",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "item_UXUVG8",
-        "item_iEQWfR",
-        "item_LmX3Bf",
-        "item_RchXxr"
-      ],
-      "name": "Collection Showcase",
-      "settings": {}
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
     "177021381514078c66",
-    "client_logos_8cnwfc",
-    "collection_QcnQxT"
+    "collection_QcnQxT",
+    "client_logos_8cnwfc"
   ]
 }
