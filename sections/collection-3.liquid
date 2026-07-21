@@ -68,6 +68,42 @@
     text-transform:uppercase;
 }
 
+.editorial-grid-4-wrapper{
+    position:relative;
+}
+
+/* Arrow */
+
+.editorial-grid-4__arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:36px;
+    height:36px;
+    border:none;
+    background:rgba(255,255,255,.9);
+    color:#222;
+    cursor:pointer;
+    z-index:20;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:.3s;
+}
+
+.editorial-grid-4__arrow:hover{
+    background:#fff;
+}
+
+.editorial-grid-4__arrow--left{
+    left:8px;
+}
+
+.editorial-grid-4__arrow--right{
+    right:8px;
+}
 /* Tablet */
 
 @media (max-width:990px){
@@ -130,7 +166,35 @@
 }
 </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', function(){
 
+    const grid = document.querySelector('.editorial-grid-4');
+
+    const prev = document.querySelector('.editorial-grid-4__arrow--left');
+
+    const next = document.querySelector('.editorial-grid-4__arrow--right');
+
+    if(grid){
+
+        next.addEventListener('click',function(){
+            grid.scrollBy({
+                left:300,
+                behavior:'smooth'
+            });
+        });
+
+        prev.addEventListener('click',function(){
+            grid.scrollBy({
+                left:-300,
+                behavior:'smooth'
+            });
+        });
+
+    }
+
+});
+</script>
 {% schema %}
 {
   "name": "Editorial Grid",
