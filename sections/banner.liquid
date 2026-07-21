@@ -1,4 +1,4 @@
-<section class="editorial-banner">
+<section id="editorial-{{ section.id }}" class="editorial-banner">
   <div class="editorial-wrapper">
 
     <!-- Left -->
@@ -6,7 +6,7 @@
       {% if section.settings.left_image != blank %}
         {{
           section.settings.left_image
-          | image_url: width: 1800
+          | image_url: width: 2000
           | image_tag:
           loading: 'lazy',
           class: 'editorial-image'
@@ -27,7 +27,7 @@
       {% if section.settings.right_image != blank %}
         {{
           section.settings.right_image
-          | image_url: width: 1800
+          | image_url: width: 2000
           | image_tag:
           loading: 'lazy',
           class: 'editorial-image'
@@ -47,42 +47,48 @@
 </section>
 
 <style>
-.editorial-banner{
-    {% comment %} padding:40px 20px;
-    background:#f5f5f5; {% endcomment %}
+/* Full Width */
+#shopify-section-{{ section.id }}{
+    width:100vw;
+    max-width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    padding:0;
 }
 
-.editorial-wrapper{
-    {% comment %} max-width:1200px; {% endcomment %}
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:0;
+#editorial-{{ section.id }}{
+    width:100%;
     background:#fff;
 }
 
-.editorial-item{
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:650px;
+#editorial-{{ section.id }} .editorial-wrapper{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    width:100%;
+    gap:0;
 }
 
-.editorial-image{
+#editorial-{{ section.id }} .editorial-item{
+    position:relative;
+    overflow:hidden;
+    aspect-ratio:1 / 1.25;
+    background:#f5f5f5;
+}
+
+#editorial-{{ section.id }} .editorial-image{
     width:100%;
     height:100%;
-    object-fit:contain; /* Full image visible */
+    object-fit:cover;
     display:block;
 }
 
-.editorial-label{
+#editorial-{{ section.id }} .editorial-label{
     position:absolute;
     top:18px;
     left:18px;
     color:#fff;
     font-size:11px;
+    font-weight:500;
     letter-spacing:2px;
     text-transform:uppercase;
     z-index:2;
@@ -93,14 +99,32 @@
     height:100%;
 }
 
-@media(max-width:768px){
+/* Tablet */
+@media screen and (max-width:990px){
 
-.editorial-wrapper{
-    grid-template-columns:1fr;
+#editorial-{{ section.id }} .editorial-item{
+    aspect-ratio:4 / 5;
 }
 
-.editorial-item{
-    min-height:450px;
+}
+
+/* Mobile */
+@media screen and (max-width:749px){
+
+#editorial-{{ section.id }} .editorial-wrapper{
+    display:flex;
+    flex-direction:column;
+}
+
+#editorial-{{ section.id }} .editorial-item{
+    width:100%;
+    aspect-ratio:9 / 16;
+}
+
+#editorial-{{ section.id }} .editorial-label{
+    top:14px;
+    left:14px;
+    font-size:10px;
 }
 
 }
