@@ -105,6 +105,42 @@
         "include_margins": true
       }
     },
+    "collection_86Ujxb": {
+      "type": "collection",
+      "blocks": {
+        "item_Pcegey": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/banadores_1_2_90782ae7-5ce2-46c5-bd6e-bfe91fbaedc0.png",
+            "title": "BIKINIS TOP TRIÁNGULO",
+            "link": ""
+          }
+        },
+        "item_UkGCft": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/clothing_3_2_9ccf03c3-e8c3-4077-b15a-d42195b07ce0.png",
+            "title": "BIKINIS TOP TRIÁNGULO",
+            "link": ""
+          }
+        },
+        "item_DLnPT8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/bikini_2_1.png",
+            "title": "BIKINIS TOP TRIÁNGULO",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_Pcegey",
+        "item_UkGCft",
+        "item_DLnPT8"
+      ],
+      "name": "Collection Showcase",
+      "settings": {}
+    },
     "collection_QcnQxT": {
       "type": "collection",
       "blocks": {
@@ -221,6 +257,7 @@
     "image_banner",
     "featured_collection",
     "177021381514078c66",
+    "collection_86Ujxb",
     "collection_QcnQxT",
     "client_logos_8cnwfc"
   ]
