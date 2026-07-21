@@ -19,9 +19,9 @@
             {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
           {% endif %}
 
-          <div class="collection-card__content">
+          {% comment %} <div class="collection-card__content">
             <h3>{{ block.settings.title }}</h3>
-          </div>
+          </div> {% endcomment %}
         </a>
       {% endfor %}
     </div>
