@@ -39,6 +39,46 @@
 
         <div class="bs-ui__content">
 
+  <div class="bs-ui__title-row">
+
+    <h4 class="bs-ui__title">
+      {{ block.settings.title }}
+    </h4>
+
+    {% if section.settings.wishlist_icon != blank %}
+      {{
+        section.settings.wishlist_icon
+        | image_url: width: 30
+        | image_tag:
+        class: 'bs-ui__wishlist'
+      }}
+    {% endif %}
+
+  </div>
+
+  <div class="bs-ui__price-row">
+
+    <span class="bs-ui__price">
+      {{ block.settings.price }}
+    </span>
+
+    {% if block.settings.compare_price != blank %}
+      <span class="bs-ui__compare">
+        {{ block.settings.compare_price }}
+      </span>
+    {% endif %}
+
+    {% if block.settings.discount != blank %}
+      <span class="bs-ui__discount">
+        {{ block.settings.discount }}
+      </span>
+    {% endif %}
+
+  </div>
+
+</div>
+        {% comment %} <div class="bs-ui__content">
+
           <h4>{{ block.settings.title }}</h4>
 
           <div class="bs-ui__bottom">
@@ -57,7 +97,7 @@
 
           </div>
 
-        </div>
+        </div> {% endcomment %}
 
       </div>
     {% endfor %}
@@ -161,12 +201,12 @@
     {% comment %} min-height:40px; {% endcomment %}
 }
 
-.bs-ui__bottom{
+{% comment %} .bs-ui__bottom{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-top:-20px;
-}
+} {% endcomment %}
 
 .bs-ui__price{
     display:flex;
@@ -174,21 +214,76 @@
     align-items:center;
 }
 
-.current{
+{% comment %} .current{
     font-size:14px;
-}
+} {% endcomment %}
 
-.old{
+{% comment %} .old{
     text-decoration:line-through;
     color:#999;
     font-size:12px;
-}
+} {% endcomment %}
 
-.bs-ui__icon{
+{% comment %} .bs-ui__icon{
     font-size:18px;
     margin-top : -34px;
     cursor:pointer;
+} {% endcomment %}
+
+
+.bs-ui__content{
+    padding:10px 4px 0;
 }
+
+.bs-ui__title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.bs-ui__title{
+    flex:1;
+    margin:0;
+    font-size:12px;
+    font-weight:400;
+    line-height:1.4;
+    color:#222;
+}
+
+.bs-ui__wishlist{
+    width:12px;
+    height:12px;
+    object-fit:contain;
+    flex-shrink:0;
+    cursor:pointer;
+}
+
+.bs-ui__price-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-top:6px;
+}
+
+.bs-ui__price{
+    font-size:12px;
+    color:#111;
+}
+
+.bs-ui__compare{
+    font-size:11px;
+    color:#9a9a9a;
+    text-decoration:line-through;
+}
+
+.bs-ui__discount{
+    font-size:11px;
+    color:#c8a04d;
+}
+
+
+
 
 @media(max-width:991px){
 
@@ -233,7 +328,13 @@
   "name": "Best Sellers UI",
   "tag": "section",
   "class": "best-sellers-ui",
-  "settings": [],
+ "settings": [
+  {
+    "type": "image_picker",
+    "id": "wishlist_icon",
+    "label": "Wishlist Icon"
+  }
+],
   "max_blocks": 10,
   "blocks": [
     {
@@ -268,7 +369,13 @@
           "id": "compare_price",
           "label": "Compare Price",
           "default": "21.99€"
-        }
+        },
+        {
+  "type": "text",
+  "id": "discount",
+  "label": "Discount",
+  "default": "15%"
+}
       ]
     }
   ],
