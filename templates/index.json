@@ -251,6 +251,16 @@
         "enable_animation": true,
         "animation_speed": 30
       }
+    },
+    "banner_8zUKAL": {
+      "type": "banner",
+      "name": "Editorial Split Banner",
+      "settings": {
+        "left_image": "shopify://shop_images/category_x2_d6c2e35b-a14b-4173-8891-e597cabc6a12.png",
+        "left_text": "",
+        "right_image": "shopify://shop_images/category_x2_a1042bdb-05c5-4b64-a37d-4cba2b6a29e3.png",
+        "right_text": ""
+      }
     }
   },
   "order": [
@@ -259,6 +269,7 @@
     "177021381514078c66",
     "collection_86Ujxb",
     "collection_QcnQxT",
-    "client_logos_8cnwfc"
+    "client_logos_8cnwfc",
+    "banner_8zUKAL"
   ]
 }
