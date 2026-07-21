@@ -107,6 +107,46 @@
     "client_logos_8cnwfc": {
       "type": "client-logos",
       "blocks": {
+        "logo_fyMJTm": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/VOGUE_LOGO_ce2fc2d2-e8f4-4ca0-98ef-2f73c417b0ff.png",
+            "link": "",
+            "width": 60
+          }
+        },
+        "logo_qQiH8W": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Glamour-Logo_4041ed8e-5a74-4ac2-9bf4-4294deba0bdf.png",
+            "link": "",
+            "width": 60
+          }
+        },
+        "logo_Lbmtrg": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Revista__Hola__logo_a3b354e3-6bb5-44b8-a548-f50649d6328e.png",
+            "link": "",
+            "width": 60
+          }
+        },
+        "logo_m88crW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Vector_478851ba-5ca2-4511-9de0-33b751960d55.png",
+            "link": "",
+            "width": 60
+          }
+        },
+        "logo_yjiNpx": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Vanity_Fair_Logo_a9bc8b2e-66c4-44be-a958-866642c0c5fb.png",
+            "link": "",
+            "width": 60
+          }
+        },
         "logo_dGJ7LU": {
           "type": "logo",
           "settings": {
@@ -117,6 +157,11 @@
         }
       },
       "block_order": [
+        "logo_fyMJTm",
+        "logo_qQiH8W",
+        "logo_Lbmtrg",
+        "logo_m88crW",
+        "logo_yjiNpx",
         "logo_dGJ7LU"
       ],
       "name": "Logo Marquee",
