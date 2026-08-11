@@ -163,6 +163,87 @@
         "ai_gen_block_b635247_t33cg9"
       ],
       "settings": {}
+    },
+    "17864364471529b49a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_07292d4_DWVViK": {
+          "type": "ai_gen_block_07292d4",
+          "settings": {
+            "heading": "Featured products",
+            "collections": [
+              "automated-collection",
+              "banadores",
+              "bikinis"
+            ],
+            "desktop_width_percent": 100,
+            "products_per_view": 4,
+            "layout_style": "a",
+            "product_count": 8,
+            "show_price": true,
+            "show_button": true,
+            "card_radius": 0,
+            "button_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_07292d4_DWVViK"
+      ],
+      "settings": {}
+    },
+    "178643660565229fda": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1786436677bf8afe99": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_626e45d_yb7iNU": {
+          "type": "ai_gen_block_626e45d",
+          "settings": {
+            "heading": "Explore our collections",
+            "enable_animation": true,
+            "marquee_speed": "22",
+            "marquee_direction": "left",
+            "icon_size": "medium",
+            "show_labels": true,
+            "desktop_width_percent": 100,
+            "background_color": "#FFFFFF",
+            "text_color": "#121212",
+            "icon_1": "shopify://shop_images/VOGUE_LOGO_ce2fc2d2-e8f4-4ca0-98ef-2f73c417b0ff.png",
+            "label_1": "",
+            "link_1": "",
+            "new_tab_1": false,
+            "icon_2": "shopify://shop_images/Glamour-Logo_4041ed8e-5a74-4ac2-9bf4-4294deba0bdf.png",
+            "label_2": "",
+            "link_2": "",
+            "new_tab_2": false,
+            "icon_3": "shopify://shop_images/Revista__Hola__logo_a3b354e3-6bb5-44b8-a548-f50649d6328e.png",
+            "label_3": "",
+            "link_3": "",
+            "new_tab_3": false,
+            "icon_4": "shopify://shop_images/Vanity_Fair_Logo_a9bc8b2e-66c4-44be-a958-866642c0c5fb.png",
+            "label_4": "",
+            "link_4": "",
+            "new_tab_4": false,
+            "icon_5": "shopify://shop_images/Vector_478851ba-5ca2-4511-9de0-33b751960d55.png",
+            "label_5": "",
+            "link_5": "",
+            "new_tab_5": false,
+            "icon_6": "shopify://shop_images/Group_2x_8ca936ef-0f6b-4441-8fcf-760d8ea0503e.png",
+            "label_6": "",
+            "link_6": "",
+            "new_tab_6": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_626e45d_yb7iNU"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -170,6 +251,9 @@
     "featured_collection",
     "177021381514078c66",
     "featured_collection_MCU3ff",
-    "17864361809d549c90"
+    "17864361809d549c90",
+    "17864364471529b49a",
+    "178643660565229fda",
+    "1786436677bf8afe99"
   ]
 }
