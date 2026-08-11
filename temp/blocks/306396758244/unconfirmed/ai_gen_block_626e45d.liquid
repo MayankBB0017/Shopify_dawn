@@ -1,6 +1,44 @@
-{% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
-{% endschema %}
+{% doc %}
+  @prompt
+    Create an "Icon List" section with marquee animation and grid fallback. Full specifications:
+    
+    **Section Structure:**
+    - Clean, premium, modern design
+    - Each icon item is added as a block in CMS
+    - Each block has: an icon image upload, a label/title (optional), and a URL link (optional)
+    
+    **Animation Mode (Marquee):**
+    - When animation is ENABLED: display icons in an infinite horizontal marquee (ticker/scroll) animation
+    - Marquee scrolls continuously and smoothly in a loop
+    - On hover over any icon item, the marquee pauses/stops animation
+    - Marquee speed should be controllable via a CMS setting (slow / medium / fast)
+    - Duplicate icon set seamlessly to create a true infinite loop effect with no visible gap or jump
+    
+    **Grid Mode (No Animation):**
+    - When animation is DISABLED: display icons in a responsive grid layout of 6 columns x 6 rows (6x6 grid)
+    - Grid is clean and evenly spaced
+    - On smaller screens, grid collapses to fewer columns responsively (e.g., 3 cols on tablet, 2 on mobile)
+    
+    **Section Settings:**
+    - Section heading (optional)
+    - Enable/Disable animation toggle (checkbox) — switches between marquee and grid layout
+    - Marquee speed selector (slow / medium / fast) — only relevant when animation is enabled
+    - Marquee direction (left / right)
+    - Icon size option (small / medium / large)
+    - Show/hide icon labels
+    
+    **Block Settings (per icon):**
+    - Icon image upload field (SVG or PNG)
+    - Label / title text (optional)
+    - Link URL (optional)
+    - Open link in new tab toggle (optional)
+    
+    **Behavior:**
+    - If animation enabled → render infinite marquee with hover-pause
+    - If animation disabled → render 6-column grid
+    - Smooth CSS-based marquee using keyframe animation, paused on hover via CSS or JS
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% style %}.ai-icon-list-{{ ai_gen_id }}{display:block;width:100%;color:{{ block.settings.text_color }};background:{{ block.settings.background_color }}}.ai-icon-list-{{ ai_gen_id }}__inner{width:{{ block.settings.desktop_width_percent }}%;max-width:100%;margin:0 auto;padding:32px 20px;overflow:hidden}.ai-icon-list-{{ ai_gen_id }}__heading{margin:0 0 28px;text-align:center;font-family:{{ settings.type_header_font.family }};font-size:28px}.ai-icon-list-{{ ai_gen_id }}__viewport{width:100%;overflow:hidden}.ai-icon-list-{{ ai_gen_id }}__track{display:flex;width:max-content;gap:32px}.ai-icon-list-{{ ai_gen_id }}__viewport--marquee .ai-icon-list-{{ ai_gen_id }}__track{animation:ai-icon-list-scroll-{{ ai_gen_id }} {{ block.settings.marquee_speed }}s linear infinite}.ai-icon-list-{{ ai_gen_id }}__track--reverse{animation-direction:reverse}.ai-icon-list-{{ ai_gen_id }}__viewport--marquee:hover .ai-icon-list-{{ ai_gen_id }}__track,.ai-icon-list-{{ ai_gen_id }}__viewport--marquee:focus-within .ai-icon-list-{{ ai_gen_id }}__track{animation-play-state:paused}.ai-icon-list-{{ ai_gen_id }}__set{display:flex;align-items:stretch;gap:32px}.ai-icon-list-{{ ai_gen_id }}__item{flex:0 0 auto;min-width:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center}.ai-icon-list-{{ ai_gen_id }}__link{display:flex;flex-direction:column;align-items:center;gap:10px;color:inherit;text-decoration:none;border-radius:4px;padding:4px}.ai-icon-list-{{ ai_gen_id }}__link:focus-visible{outline:2px solid currentColor;outline-offset:4px}.ai-icon-list-{{ ai_gen_id }}__image,.ai-icon-list-{{ ai_gen_id }}__placeholder{width:var(--ai-icon-size-{{ ai_gen_id }});height:var(--ai-icon-size-{{ ai_gen_id }});object-fit:contain;display:block}.ai-icon-list-{{ ai_gen_id }}__placeholder{background:rgba(18,18,18,.06);border-radius:50%}.ai-icon-list-{{ ai_gen_id }}__placeholder svg{width:100%;height:100%}.ai-icon-list-{{ ai_gen_id }}__label{max-width:140px;font-family:{{ settings.type_body_font.family }};font-size:14px}.ai-icon-list-{{ ai_gen_id }}__viewport--grid .ai-icon-list-{{ ai_gen_id }}__track{width:100%}.ai-icon-list-{{ ai_gen_id }}__viewport--grid .ai-icon-list-{{ ai_gen_id }}__set{width:100%;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px 20px}.ai-icon-list-{{ ai_gen_id }}__viewport--grid .ai-icon-list-{{ ai_gen_id }}__set+.ai-icon-list-{{ ai_gen_id }}__set{display:none}@keyframes ai-icon-list-scroll-{{ ai_gen_id }}{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 16px))}}@media(max-width:989px){.ai-icon-list-{{ ai_gen_id }}__viewport--grid .ai-icon-list-{{ ai_gen_id }}__set{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:549px){.ai-icon-list-{{ ai_gen_id }}__inner{padding:24px 16px}.ai-icon-list-{{ ai_gen_id }}__viewport--grid .ai-icon-list-{{ ai_gen_id }}__set{grid-template-columns:repeat(2,minmax(0,1fr))}.ai-icon-list-{{ ai_gen_id }}__set{gap:20px}}{% endstyle %}
+<icon-list-{{ ai_gen_id }} class="ai-icon-list-{{ ai_gen_id }}" {{ block.shopify_attributes }}><div class="ai-icon-list-{{ ai_gen_id }}__inner">{% if block.settings.heading != blank %}<h2 class="ai-icon-list-{{ ai_gen_id }}__heading">{{ block.settings.heading | escape }}</h2>{% endif %}{% if block.settings.icon_size == 'small' %}{% assign icon_size = 48 %}{% elsif block.settings.icon_size == 'large' %}{% assign icon_size = 88 %}{% else %}{% assign icon_size = 64 %}{% endif %}<div class="ai-icon-list-{{ ai_gen_id }}__viewport {% if block.settings.enable_animation %}ai-icon-list-{{ ai_gen_id }}__viewport--marquee{% else %}ai-icon-list-{{ ai_gen_id }}__viewport--grid{% endif %}" style="--ai-icon-size-{{ ai_gen_id }}:{{ icon_size }}px"><div class="ai-icon-list-{{ ai_gen_id }}__track {% if block.settings.marquee_direction == 'right' %}ai-icon-list-{{ ai_gen_id }}__track--reverse{% endif %}">{% for copy in (1..2) %}<div class="ai-icon-list-{{ ai_gen_id }}__set" {% if copy == 2 %}aria-hidden="true"{% endif %}>{% for i in (1..6) %}{% assign image_key = 'icon_' | append: i %}{% assign label_key = 'label_' | append: i %}{% assign link_key = 'link_' | append: i %}{% assign tab_key = 'new_tab_' | append: i %}{% assign image = block.settings[image_key] %}{% assign label = block.settings[label_key] %}{% assign link = block.settings[link_key] %}{% assign new_tab = block.settings[tab_key] %}<div class="ai-icon-list-{{ ai_gen_id }}__item">{% if link != blank %}<a class="ai-icon-list-{{ ai_gen_id }}__link" href="{{ link }}" {% if new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{% else %}<div class="ai-icon-list-{{ ai_gen_id }}__link">{% endif %}{% if image %}<img class="ai-icon-list-{{ ai_gen_id }}__image" src="{{ image | image_url: width:176 }}" alt="{{ label | escape }}" loading="lazy" width="{{ icon_size }}" height="{{ icon_size }}">{% else %}<div class="ai-icon-list-{{ ai_gen_id }}__placeholder">{{ 'image' | placeholder_svg_tag }}</div>{% endif %}{% if block.settings.show_labels and label != blank %}<span class="ai-icon-list-{{ ai_gen_id }}__label">{{ label | escape }}</span>{% endif %}{% if link != blank %}</a>{% else %}</div>{% endif %}</div>{% endfor %}</div>{% endfor %}</div></div></div></icon-list-{{ ai_gen_id }}>
+{% schema %}{"name":"Icon list","tag":null,"class":"icon-list-block","settings":[{"type":"text","id":"heading","label":"Heading","default":"Explore our collections"},{"type":"checkbox","id":"enable_animation","label":"Enable animation","default":true},{"type":"select","id":"marquee_speed","label":"Marquee speed","options":[{"value":"32","label":"Slow"},{"value":"22","label":"Medium"},{"value":"14","label":"Fast"}],"default":"22"},{"type":"select","id":"marquee_direction","label":"Marquee direction","options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}],"default":"left"},{"type":"select","id":"icon_size","label":"Icon size","options":[{"value":"small","label":"Small"},{"value":"medium","label":"Medium"},{"value":"large","label":"Large"}],"default":"medium"},{"type":"checkbox","id":"show_labels","label":"Show labels","default":true},{"type":"range","id":"desktop_width_percent","label":"Desktop width","min":50,"max":100,"step":5,"unit":"%","default":100},{"type":"color","id":"background_color","label":"Background","default":"#FFFFFF"},{"type":"color","id":"text_color","label":"Text","default":"#121212"},{"type":"image_picker","id":"icon_1","label":"Image 1"},{"type":"text","id":"label_1","label":"Label 1"},{"type":"url","id":"link_1","label":"Link 1"},{"type":"checkbox","id":"new_tab_1","label":"Open link 1 in new tab","default":false},{"type":"image_picker","id":"icon_2","label":"Image 2"},{"type":"text","id":"label_2","label":"Label 2"},{"type":"url","id":"link_2","label":"Link 2"},{"type":"checkbox","id":"new_tab_2","label":"Open link 2 in new tab","default":false},{"type":"image_picker","id":"icon_3","label":"Image 3"},{"type":"text","id":"label_3","label":"Label 3"},{"type":"url","id":"link_3","label":"Link 3"},{"type":"checkbox","id":"new_tab_3","label":"Open link 3 in new tab","default":false},{"type":"image_picker","id":"icon_4","label":"Image 4"},{"type":"text","id":"label_4","label":"Label 4"},{"type":"url","id":"link_4","label":"Link 4"},{"type":"checkbox","id":"new_tab_4","label":"Open link 4 in new tab","default":false},{"type":"image_picker","id":"icon_5","label":"Image 5"},{"type":"text","id":"label_5","label":"Label 5"},{"type":"url","id":"link_5","label":"Link 5"},{"type":"checkbox","id":"new_tab_5","label":"Open link 5 in new tab","default":false},{"type":"image_picker","id":"icon_6","label":"Image 6"},{"type":"text","id":"label_6","label":"Label 6"},{"type":"url","id":"link_6","label":"Link 6"},{"type":"checkbox","id":"new_tab_6","label":"Open link 6 in new tab","default":false}],"presets":[{"name":"Icon list"}]}{% endschema %}
