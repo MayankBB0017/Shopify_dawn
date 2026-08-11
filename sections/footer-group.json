@@ -13,6 +13,34 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "link_list_ztdXDz": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Robin",
+            "menu": "footer"
+          }
+        },
+        "link_list_7wk8Tc": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Ayuda",
+            "menu": "footer"
+          }
+        },
+        "link_list_8Jfmzd": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Contact",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_ztdXDz",
+        "link_list_7wk8Tc",
+        "link_list_8Jfmzd"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
