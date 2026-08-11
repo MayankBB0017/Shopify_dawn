@@ -163,6 +163,35 @@
         "ai_gen_block_b635247_t33cg9"
       ],
       "settings": {}
+    },
+    "17864364471529b49a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_07292d4_DWVViK": {
+          "type": "ai_gen_block_07292d4",
+          "settings": {
+            "heading": "Featured products",
+            "collections": [
+              "automated-collection",
+              "banadores",
+              "bikinis"
+            ],
+            "desktop_width_percent": 100,
+            "products_per_view": 4,
+            "layout_style": "a",
+            "product_count": 8,
+            "show_price": true,
+            "show_button": true,
+            "card_radius": 0,
+            "button_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_07292d4_DWVViK"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -170,6 +199,7 @@
     "featured_collection",
     "177021381514078c66",
     "featured_collection_MCU3ff",
-    "17864361809d549c90"
+    "17864361809d549c90",
+    "17864364471529b49a"
   ]
 }
