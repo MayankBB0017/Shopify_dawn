@@ -1,6 +1,47 @@
-{% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
-{% endschema %}
+{% doc %}
+  @prompt
+    Create a "Featured Products" section with tabbed collection filtering and a product slider. Full specifications:
+    
+    **Section Structure:**
+    - Single section with a clean, premium, modern design matching the Featured Collections section style
+    - Two layout variants that auto-adjust based on content (no separate sections needed)
+    
+    **Tabs Behavior:**
+    - Tabs are automatically generated based on the collections added as blocks in CMS
+    - Tabs are ONLY shown if more than one collection block is added — if only one collection, hide tabs and just show the slider
+    - Each tab label uses this priority:
+      1. Custom tab title entered in the block CMS settings
+      2. Collection title (fallback if CMS title is blank)
+    - Clicking a tab shows that collection's products in the slider below
+    - Active tab has a distinct highlighted style
+    
+    **Product Slider:**
+    - Use the theme's default/native slider component and CSS variables for consistency
+    - Products from the selected/active collection are displayed as a horizontal slider
+    - Each product card shows: product image, title, price, and an "Add to Cart" or "View" button
+    - Smooth transition when switching between tabs
+    
+    **Section Settings:**
+    - Section heading (optional)
+    - Products per view range picker (e.g., 2–8) — controls how many products are visible/fetched per collection
+    - Layout style selector (e.g., layout A or layout B)
+    - Show/hide product price
+    - Show/hide "Add to Cart" button
+    
+    **Block Settings (per collection block):**
+    - Collection picker
+    - Custom tab title (optional — falls back to collection title if blank)
+    - Products count range (min/max slider, e.g., 4–12 products to display from this collection)
+    
+    **Logic:**
+    - Render products from each collection block using Liquid (limit controlled by the range picker)
+    - Tab switching handled via lightweight JavaScript (no full page reload)
+    - If only one collection block exists, skip rendering tabs entirely and just show the slider directly
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% style %}
+.ai-featured-products-{{ ai_gen_id }}{display:block;width:{{ block.settings.desktop_width_percent }}%;max-width:100%;margin:0 auto;padding:48px 0;color:#121212}.ai-featured-products__heading-{{ ai_gen_id }}{margin:0 0 28px;font-size:clamp(28px,4vw,42px);line-height:1.1}.ai-featured-products__tabs-{{ ai_gen_id }}{display:flex;gap:8px;overflow-x:auto;margin-bottom:24px;padding:2px 0 8px;scrollbar-width:none}.ai-featured-products__tabs-{{ ai_gen_id }}::-webkit-scrollbar{display:none}.ai-featured-products__tab-{{ ai_gen_id }}{flex:0 0 auto;padding:10px 18px;border:1px solid rgba(18,18,18,.28);border-radius:999px;background:transparent;color:#121212;cursor:pointer;font:inherit}.ai-featured-products__tab-{{ ai_gen_id }}[aria-selected=true]{background:#121212;color:#fff;border-color:#121212}.ai-featured-products__panel-{{ ai_gen_id }}{display:none}.ai-featured-products__panel-{{ ai_gen_id }}[aria-hidden=false]{display:block}.ai-featured-products__track-{{ ai_gen_id }}{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - ({{ block.settings.products_per_view | minus:1 }} * 16px))/{{ block.settings.products_per_view }});gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 14px}.ai-featured-products__card-{{ ai_gen_id }}{scroll-snap-align:start}.ai-featured-products__image-{{ ai_gen_id }}{display:block;aspect-ratio:1;overflow:hidden;background:#f3f3f3;border-radius:{{ block.settings.card_radius }}px}.ai-featured-products__image-{{ ai_gen_id }} img{width:100%;height:100%;object-fit:cover}.ai-featured-products__info-{{ ai_gen_id }}{padding-top:14px}.ai-featured-products__title-{{ ai_gen_id }}{margin:0 0 7px;font-size:16px}.ai-featured-products__price-{{ ai_gen_id }}{margin-bottom:12px}.ai-featured-products__button-{{ ai_gen_id }}{display:inline-flex;justify-content:center;width:100%;padding:11px 14px;border:1px solid #121212;border-radius:{{ block.settings.button_radius }}px;background:#121212;color:#fff;text-decoration:none;cursor:pointer;font:inherit}@media(max-width:749px){.ai-featured-products-{{ ai_gen_id }}{padding:32px 0}.ai-featured-products__track-{{ ai_gen_id }}{grid-auto-columns:72%}}
+{% endstyle %}
+<featured-products-{{ ai_gen_id }} class="ai-featured-products-{{ ai_gen_id }}" {{ block.shopify_attributes }}>{% if block.settings.heading != blank %}<h2 class="ai-featured-products__heading-{{ ai_gen_id }}">{{ block.settings.heading | escape }}</h2>{% endif %}{% if block.settings.collections.size > 1 %}<div class="ai-featured-products__tabs-{{ ai_gen_id }}" role="tablist">{% for collection in block.settings.collections %}<button class="ai-featured-products__tab-{{ ai_gen_id }}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-index="{{ forloop.index0 }}">{{ collection.title | escape }}</button>{% endfor %}</div>{% endif %}{% for collection in block.settings.collections %}<div class="ai-featured-products__panel-{{ ai_gen_id }}" role="tabpanel" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"><div class="ai-featured-products__track-{{ ai_gen_id }}">{% for product in collection.products limit:block.settings.product_count %}<article class="ai-featured-products__card-{{ ai_gen_id }}"><a class="ai-featured-products__image-{{ ai_gen_id }}" href="{{ product.url }}">{% if product.featured_image %}<img src="{{ product.featured_image | image_url:width:800 }}" alt="{{ product.title | escape }}" loading="lazy" width="800" height="800">{% else %}<div>{{ 'product-apparel-1' | placeholder_svg_tag }}</div>{% endif %}</a><div class="ai-featured-products__info-{{ ai_gen_id }}"><h3 class="ai-featured-products__title-{{ ai_gen_id }}"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>{% if block.settings.show_price %}<div class="ai-featured-products__price-{{ ai_gen_id }}">{{ product.price | money }}</div>{% endif %}{% if block.settings.show_button %}<a class="ai-featured-products__button-{{ ai_gen_id }}" href="{{ product.url }}">View product</a>{% endif %}</div></article>{% endfor %}</div></div>{% endfor %}</featured-products-{{ ai_gen_id }}>
+<script>(function(){class FeaturedProducts{{ ai_gen_id }} extends HTMLElement{connectedCallback(){this.tabs=this.querySelectorAll('[role="tab"]');this.panels=this.querySelectorAll('[role="tabpanel"]');this.tabs.forEach(tab=>tab.addEventListener('click',()=>{this.tabs.forEach(t=>t.setAttribute('aria-selected',t===tab?'true':'false'));this.panels.forEach((p,i)=>p.setAttribute('aria-hidden',String(i!==Number(tab.dataset.index))))}))}}if(!customElements.get('featured-products-{{ ai_gen_id }}'))customElements.define('featured-products-{{ ai_gen_id }}',FeaturedProducts{{ ai_gen_id }})})();</script>
+{% schema %}{"name":"Featured products","tag":null,"class":"featured-products-block","settings":[{"type":"text","id":"heading","label":"Heading","default":"Featured products"},{"type":"collection_list","id":"collections","label":"Collections","limit":8},{"type":"range","id":"desktop_width_percent","label":"Desktop width","min":50,"max":100,"step":5,"unit":"%","default":100},{"type":"range","id":"products_per_view","label":"Products per view","min":2,"max":8,"step":1,"default":4},{"type":"select","id":"layout_style","label":"Layout","options":[{"value":"a","label":"Layout A"},{"value":"b","label":"Layout B"}],"default":"a"},{"type":"range","id":"product_count","label":"Products per collection","min":4,"max":12,"step":1,"default":8},{"type":"checkbox","id":"show_price","label":"Show price","default":true},{"type":"checkbox","id":"show_button","label":"Show view button","default":true},{"type":"range","id":"card_radius","label":"Card radius","min":0,"max":40,"step":2,"unit":"px","default":0},{"type":"range","id":"button_radius","label":"Button radius","min":0,"max":40,"step":2,"unit":"px","default":0}],"presets":[{"name":"Featured products"}]}{% endschema %}
