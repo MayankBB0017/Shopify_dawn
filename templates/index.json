@@ -215,6 +215,51 @@
         "ai_gen_block_626e45d_yb7iNU"
       ],
       "settings": {}
+    },
+    "17864371253044bc96": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_cc8bcb7_9AfdfJ": {
+          "type": "ai_gen_block_cc8bcb7",
+          "settings": {
+            "show_store_name": true,
+            "logo_width": 100,
+            "newsletter_heading": "Stay in the loop",
+            "newsletter_description": "Sign up for updates, new arrivals, and special offers.",
+            "email_label": "Email address",
+            "email_placeholder": "Your email address",
+            "subscribe_label": "Subscribe",
+            "facebook_url": "",
+            "instagram_url": "",
+            "twitter_url": "",
+            "tiktok_url": "",
+            "youtube_url": "",
+            "pinterest_url": "",
+            "menu_1": "footer",
+            "menu_1_heading": "",
+            "menu_2": "ayuda",
+            "menu_2_heading": "",
+            "menu_3": "contact",
+            "menu_3_heading": "",
+            "copyright_text": "© 2026 Store Name. All rights reserved.",
+            "privacy_url": "",
+            "terms_url": "",
+            "show_payment_icons": true,
+            "background_color": "#FFF9F9",
+            "text_color": "#000000",
+            "button_color": "#898989",
+            "button_text_color": "#121212",
+            "desktop_width_percent": 100,
+            "input_radius": 0,
+            "button_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_cc8bcb7_9AfdfJ"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -224,6 +269,7 @@
     "17864361809d549c90",
     "17864364471529b49a",
     "178643660565229fda",
-    "1786436677bf8afe99"
+    "1786436677bf8afe99",
+    "17864371253044bc96"
   ]
 }
