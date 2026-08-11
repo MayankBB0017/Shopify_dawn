@@ -1,6 +1,109 @@
+{% doc %}
+  @prompt
+    Create a "Featured Collections" section with the following specifications:
+    
+    **Layout & Structure:**
+    - Single section that supports 3 different layout variants (no separate sections needed)
+    - Layout automatically adjusts based on content added in the section settings
+    - Clean, premium, modern aesthetic
+    
+    **Collection Selection:**
+    - Merchant can select multiple collections via CMS/section settings
+    - Each collection is added as a block within the section
+    
+    **Image Priority Logic (per collection block):**
+    1. First: Render image from a collection metafield (e.g., `collection.metafields.custom.featured_image`)
+    2. Second: Fall back to the collection's own image (`collection.image`) if metafield is blank
+    3. Third: Fall back to a CMS-uploaded image set directly in the block settings if both above are missing
+    
+    **Three Layout Variants (auto-adjust based on content, no separate sections):**
+    - Layout 1: Grid layout — collections displayed in a uniform card grid (e.g., 2, 3, or 4 columns)
+    - Layout 2: Large hero-style layout — one featured collection displayed prominently with full-width or large image
+    - Layout 3: Horizontal scroll / list layout — collections displayed in a horizontal row or stacked list with image + title side by side
+    
+    **Section Settings:**
+    - Section heading (optional)
+    - Number of columns (for grid layout)
+    - Layout style selector (grid / hero / list)
+    - Image aspect ratio option (square, portrait, landscape)
+    - Show/hide collection title overlay on image
+    - CTA button text (optional, e.g., "Shop Now")
+    
+    **Block Settings (per collection):**
+    - Collection picker
+    - Fallback CMS image upload field
+    - Custom label/title override (optional)
+    - Custom CTA link override (optional)
+    
+    Ensure the Liquid code checks metafield → collection image → CMS image in that priority order for each block's image rendering.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-featured-collections-{{ ai_gen_id }} { display:block; width:{{ block.settings.desktop_width_percent }}%; max-width:100%; margin:0 auto; color:{{ block.settings.text_color }}; }
+  .ai-featured-collections-{{ ai_gen_id }}__heading { margin:0 0 28px; font-size:clamp(24px,3vw,40px); line-height:1.1; letter-spacing:-.02em; }
+  .ai-featured-collections-{{ ai_gen_id }}__items { display:grid; grid-template-columns:repeat({{ block.settings.columns }},minmax(0,1fr)); gap:{{ block.settings.gap }}px; }
+  .ai-featured-collections-{{ ai_gen_id }}__card { position:relative; min-width:0; overflow:hidden; background:{{ block.settings.card_background }}; border-radius:{{ block.settings.corner_radius }}px; }
+  .ai-featured-collections-{{ ai_gen_id }}__link { display:block; color:inherit; text-decoration:none; }
+  .ai-featured-collections-{{ ai_gen_id }}__media { position:relative; overflow:hidden; aspect-ratio:1/1; background:#f3f3f3; }
+  .ai-featured-collections-{{ ai_gen_id }}__media--portrait { aspect-ratio:4/5; }
+  .ai-featured-collections-{{ ai_gen_id }}__media--landscape { aspect-ratio:4/3; }
+  .ai-featured-collections-{{ ai_gen_id }}__media img { width:100%; height:100%; display:block; object-fit:cover; }
+  .ai-featured-collections-{{ ai_gen_id }}__placeholder { width:100%; height:100%; display:grid; place-items:center; color:#666; }
+  .ai-featured-collections-{{ ai_gen_id }}__placeholder svg { width:48%; height:48%; }
+  .ai-featured-collections-{{ ai_gen_id }}__content { padding:16px 2px 2px; }
+  .ai-featured-collections-{{ ai_gen_id }}__title { margin:0; font-size:18px; line-height:1.25; }
+  .ai-featured-collections-{{ ai_gen_id }}__cta { display:inline-block; margin-top:8px; font-size:14px; text-decoration:underline; text-underline-offset:3px; }
+  .ai-featured-collections-{{ ai_gen_id }}--overlay .ai-featured-collections-{{ ai_gen_id }}__content { position:absolute; right:0; bottom:0; left:0; padding:48px 20px 20px; color:#fff; background:linear-gradient(transparent,rgba(0,0,0,.72)); }
+  .ai-featured-collections-{{ ai_gen_id }}--hero .ai-featured-collections-{{ ai_gen_id }}__items { display:block; }
+  .ai-featured-collections-{{ ai_gen_id }}--hero .ai-featured-collections-{{ ai_gen_id }}__media { aspect-ratio:16/7; }
+  .ai-featured-collections-{{ ai_gen_id }}--hero .ai-featured-collections-{{ ai_gen_id }}__title { font-size:clamp(24px,4vw,48px); }
+  .ai-featured-collections-{{ ai_gen_id }}--list .ai-featured-collections-{{ ai_gen_id }}__items { display:flex; gap:{{ block.settings.gap }}px; overflow-x:auto; padding-bottom:8px; scrollbar-width:thin; }
+  .ai-featured-collections-{{ ai_gen_id }}--list .ai-featured-collections-{{ ai_gen_id }}__card { flex:0 0 min(78vw,360px); display:flex; align-items:center; }
+  .ai-featured-collections-{{ ai_gen_id }}--list .ai-featured-collections-{{ ai_gen_id }}__media { flex:0 0 112px; aspect-ratio:1/1; }
+  .ai-featured-collections-{{ ai_gen_id }}--list .ai-featured-collections-{{ ai_gen_id }}__content { padding:16px; }
+  @media screen and (max-width:749px) { .ai-featured-collections-{{ ai_gen_id }}__items { grid-template-columns:repeat(2,minmax(0,1fr)); } .ai-featured-collections-{{ ai_gen_id }}--hero .ai-featured-collections-{{ ai_gen_id }}__media { aspect-ratio:4/3; } }
+{% endstyle %}
+
+<div class="ai-featured-collections-{{ ai_gen_id }} ai-featured-collections-{{ ai_gen_id }}--{{ block.settings.layout_style }}{% if block.settings.show_overlay %} ai-featured-collections-{{ ai_gen_id }}--overlay{% endif %}" {{ block.shopify_attributes }}>
+  {% if block.settings.heading != blank %}<h2 class="ai-featured-collections-{{ ai_gen_id }}__heading">{{ block.settings.heading | escape }}</h2>{% endif %}
+  <div class="ai-featured-collections-{{ ai_gen_id }}__items">
+    {% for collection in block.settings.collections %}
+      {% assign collection_image = collection.metafields.custom.featured_image.value %}
+      {% if collection_image == blank %}{% assign collection_image = collection.image %}{% endif %}
+      {% if collection_image == blank %}{% assign collection_image = block.settings.fallback_image %}{% endif %}
+      <article class="ai-featured-collections-{{ ai_gen_id }}__card">
+        <a class="ai-featured-collections-{{ ai_gen_id }}__link" href="{{ collection.url }}">
+          <div class="ai-featured-collections-{{ ai_gen_id }}__media ai-featured-collections-{{ ai_gen_id }}__media--{{ block.settings.aspect_ratio }}">
+            {% if collection_image != blank %}<img src="{{ collection_image | image_url: width: 1400 }}" alt="{{ collection.title | escape }}" loading="lazy" width="{{ collection_image.width }}" height="{{ collection_image.height }}">{% else %}<div class="ai-featured-collections-{{ ai_gen_id }}__placeholder">{{ 'collection-apparel-1' | placeholder_svg_tag }}</div>{% endif %}
+          </div>
+          <div class="ai-featured-collections-{{ ai_gen_id }}__content"><h3 class="ai-featured-collections-{{ ai_gen_id }}__title">{{ collection.title | escape }}</h3>{% if block.settings.cta_text != blank %}<span class="ai-featured-collections-{{ ai_gen_id }}__cta">{{ block.settings.cta_text | escape }}</span>{% endif %}</div>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name":"Featured collections",
+  "tag":null,
+  "class":"featured-collections-block",
+  "settings":[
+    {"type":"text","id":"heading","label":"Heading","default":"Featured collections"},
+    {"type":"collection_list","id":"collections","label":"Collections","limit":12},
+    {"type":"image_picker","id":"fallback_image","label":"Fallback image"},
+    {"type":"select","id":"layout_style","label":"Layout","options":[{"value":"grid","label":"Grid"},{"value":"hero","label":"Hero"},{"value":"list","label":"Horizontal list"}],"default":"grid"},
+    {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
+    {"type":"select","id":"aspect_ratio","label":"Image ratio","options":[{"value":"square","label":"Square"},{"value":"portrait","label":"Portrait"},{"value":"landscape","label":"Landscape"}],"default":"square"},
+    {"type":"checkbox","id":"show_overlay","label":"Show title overlay","default":false},
+    {"type":"text","id":"cta_text","label":"CTA text","default":"Shop now"},
+    {"type":"range","id":"gap","label":"Spacing","min":8,"max":40,"step":4,"unit":"px","default":20},
+    {"type":"range","id":"corner_radius","label":"Corner radius","min":0,"max":40,"step":2,"unit":"px","default":0},
+    {"type":"range","id":"desktop_width_percent","label":"Desktop width","min":50,"max":100,"step":5,"unit":"%","default":100},
+    {"type":"color","id":"text_color","label":"Text","default":"#121212"},
+    {"type":"color","id":"card_background","label":"Card background","default":"#F3F3F3"}
+  ],
+  "presets":[{"name":"Featured collections"}]
+}
 {% endschema %}
