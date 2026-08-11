@@ -132,12 +132,44 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "17864361809d549c90": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b635247_t33cg9": {
+          "type": "ai_gen_block_b635247",
+          "settings": {
+            "heading": "Featured collections",
+            "collections": [
+              "bikinis",
+              "bikinis-top-balconette",
+              "bikinis-top-bandeau"
+            ],
+            "layout_style": "grid",
+            "columns": 3,
+            "aspect_ratio": "square",
+            "show_overlay": false,
+            "cta_text": "Shop now",
+            "gap": 20,
+            "corner_radius": 0,
+            "desktop_width_percent": 100,
+            "text_color": "#121212",
+            "card_background": "#F3F3F3"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b635247_t33cg9"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
     "177021381514078c66",
-    "featured_collection_MCU3ff"
+    "featured_collection_MCU3ff",
+    "17864361809d549c90"
   ]
 }
