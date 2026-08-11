@@ -1,6 +1,53 @@
-{% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
-{% endschema %}
+{% doc %}
+  @prompt
+    Redesign the existing Footer section with a custom layout. Full specifications:
+    
+    **Layout:**
+    - Two-column footer layout
+    - LEFT column: Newsletter signup form + Social media icons below it
+    - RIGHT column: Navigation menus (multiple menu blocks, displayed side by side or stacked)
+    - Below both columns: a bottom bar with copyright text, payment icons, and any legal links
+    
+    **Left Column (Newsletter + Social):**
+    - Optional logo image or store name at the top of the left column
+    - Newsletter heading text (e.g., "Stay in the loop")
+    - Newsletter subtext/description (optional)
+    - Email input field with a subscribe button
+    - Social media icons row below the newsletter form (Facebook, Instagram, Twitter/X, TikTok, YouTube, Pinterest — show only those with URLs filled in)
+    - Each social icon links to its respective URL set in section settings
+    
+    **Right Column (Menus):**
+    - Support multiple menu blocks, each with a menu picker and an optional custom heading
+    - Menus displayed in columns side by side within the right column
+    - Each menu shows its heading and a list of links below it
+    
+    **Bottom Bar:**
+    - Full-width bottom bar below both columns with a top border/divider
+    - Copyright text (editable in CMS, e.g., "© 2026 Store Name. All rights reserved.")
+    - Payment method icons (Visa, Mastercard, PayPal, etc.) on the right side of the bottom bar
+    - Optional links row (Privacy Policy, Terms of Service, etc.)
+    
+    **Section Settings:**
+    - Logo image upload (optional)
+    - Newsletter heading and description text
+    - Social media URLs (one per platform: Facebook, Instagram, Twitter, TikTok, YouTube, Pinterest)
+    - Copyright text
+    - Show/hide payment icons
+    - Background color and text color options
+    
+    **Block Settings (per menu block):**
+    - Menu picker (link list)
+    - Custom heading/title for the menu column (optional — falls back to menu title)
+    
+    **Design:**
+    - Clean, premium, modern aesthetic
+    - Responsive: stacks to single column on mobile (newsletter first, then menus, then bottom bar)
+    - Consistent spacing and typography using theme CSS variables, fix that in footer there is liquid error
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% style %}
+.ai-footer-{{ ai_gen_id }}{display:block;width:100%;color:{{ block.settings.text_color }};background:{{ block.settings.background_color }}}
+.ai-footer-{{ ai_gen_id }}__inner{width:{{ block.settings.desktop_width_percent }}%;max-width:1200px;margin:0 auto;padding:64px 24px 28px}.ai-footer-{{ ai_gen_id }}__main{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(0,1.6fr);gap:72px}.ai-footer-{{ ai_gen_id }}__brand{max-width:410px}.ai-footer-{{ ai_gen_id }}__logo{display:block;max-width:{{ block.settings.logo_width }}px;height:auto;margin-bottom:24px}.ai-footer-{{ ai_gen_id }}__store-name{margin:0 0 24px;font-size:22px;font-weight:600}.ai-footer-{{ ai_gen_id }}__heading{margin:0 0 10px;font-size:24px;line-height:1.2}.ai-footer-{{ ai_gen_id }}__description{margin:0 0 22px;opacity:.78;line-height:1.6}.ai-footer-{{ ai_gen_id }}__form{display:flex;gap:8px;margin-bottom:30px}.ai-footer-{{ ai_gen_id }}__input{min-width:0;flex:1;padding:14px 16px;color:{{ block.settings.text_color }};background:transparent;border:1px solid {{ block.settings.text_color }};border-radius:{{ block.settings.input_radius }}px}.ai-footer-{{ ai_gen_id }}__button{padding:14px 20px;color:{{ block.settings.button_text_color }};background:{{ block.settings.button_color }};border:1px solid {{ block.settings.button_color }};border-radius:{{ block.settings.button_radius }}px;cursor:pointer;font-weight:600}.ai-footer-{{ ai_gen_id }}__social{display:flex;flex-wrap:wrap;gap:16px}.ai-footer-{{ ai_gen_id }}__social a,.ai-footer-{{ ai_gen_id }}__menu-list a{color:{{ block.settings.text_color }};text-decoration:none;opacity:.78}.ai-footer-{{ ai_gen_id }}__social a:hover,.ai-footer-{{ ai_gen_id }}__menu-list a:hover{opacity:1;text-decoration:underline}.ai-footer-{{ ai_gen_id }}__menus{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}.ai-footer-{{ ai_gen_id }}__menu-title{margin:0 0 16px;font-size:15px}.ai-footer-{{ ai_gen_id }}__menu-list{list-style:none;padding:0;margin:0}.ai-footer-{{ ai_gen_id }}__menu-list li+li{margin-top:11px}.ai-footer-{{ ai_gen_id }}__bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid rgba(255,255,255,.25);margin-top:58px;padding-top:22px;font-size:13px}.ai-footer-{{ ai_gen_id }}__legal{display:flex;flex-wrap:wrap;gap:18px;margin-left:18px}.ai-footer-{{ ai_gen_id }}__legal a{color:inherit;opacity:.75;text-decoration:none}.ai-footer-{{ ai_gen_id }}__payments{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.ai-footer-{{ ai_gen_id }}__payments svg{width:38px;height:auto}@media(max-width:749px){.ai-footer-{{ ai_gen_id }}__inner{padding:44px 20px 24px}.ai-footer-{{ ai_gen_id }}__main{grid-template-columns:1fr;gap:42px}.ai-footer-{{ ai_gen_id }}__menus{grid-template-columns:1fr 1fr;gap:30px 20px}.ai-footer-{{ ai_gen_id }}__bottom{align-items:flex-start;flex-direction:column}}
+{% endstyle %}
+<footer class="ai-footer-{{ ai_gen_id }}" {{ block.shopify_attributes }}><div class="ai-footer-{{ ai_gen_id }}__inner"><div class="ai-footer-{{ ai_gen_id }}__main"><div class="ai-footer-{{ ai_gen_id }}__brand">{% if block.settings.logo %}<img class="ai-footer-{{ ai_gen_id }}__logo" src="{{ block.settings.logo | image_url: width: 600 }}" alt="{{ shop.name | escape }}" loading="lazy">{% elsif block.settings.show_store_name %}<p class="ai-footer-{{ ai_gen_id }}__store-name">{{ shop.name | escape }}</p>{% endif %}<h2 class="ai-footer-{{ ai_gen_id }}__heading">{{ block.settings.newsletter_heading }}</h2>{% if block.settings.newsletter_description != blank %}<p class="ai-footer-{{ ai_gen_id }}__description">{{ block.settings.newsletter_description }}</p>{% endif %}<div class="ai-footer-{{ ai_gen_id }}__form">{% form 'customer' %}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="ai-footer-email-{{ ai_gen_id }}">{{ block.settings.email_label }}</label><input id="ai-footer-email-{{ ai_gen_id }}" class="ai-footer-{{ ai_gen_id }}__input" type="email" name="contact[email]" placeholder="{{ block.settings.email_placeholder }}" autocomplete="email" required><button class="ai-footer-{{ ai_gen_id }}__button" type="submit">{{ block.settings.subscribe_label }}</button>{% endform %}</div><div class="ai-footer-{{ ai_gen_id }}__social" aria-label="Social media">{% assign social_names = 'facebook,instagram,twitter,tiktok,youtube,pinterest' | split: ',' %}{% for social_name in social_names %}{% assign social_key = social_name | append: '_url' %}{% assign social_url = block.settings[social_key] %}{% if social_url != blank %}<a href="{{ social_url }}" target="_blank" rel="noopener" aria-label="{{ social_name | capitalize }}">{{ social_name | capitalize }}</a>{% endif %}{% endfor %}</div></div><nav class="ai-footer-{{ ai_gen_id }}__menus" aria-label="Footer navigation">{% for i in (1..3) %}{% assign menu_key = 'menu_' | append: i %}{% assign heading_key = 'menu_' | append: i | append: '_heading' %}{% assign menu = block.settings[menu_key] %}{% if menu != blank %}<div><h3 class="ai-footer-{{ ai_gen_id }}__menu-title">{{ block.settings[heading_key] | default: menu.title }}</h3><ul class="ai-footer-{{ ai_gen_id }}__menu-list">{% for link in menu.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul></div>{% endif %}{% endfor %}</nav></div><div class="ai-footer-{{ ai_gen_id }}__bottom"><div><span>{{ block.settings.copyright_text }}</span><span class="ai-footer-{{ ai_gen_id }}__legal">{% if block.settings.privacy_url != blank %}<a href="{{ block.settings.privacy_url }}">Privacy policy</a>{% endif %}{% if block.settings.terms_url != blank %}<a href="{{ block.settings.terms_url }}">Terms of service</a>{% endif %}</span></div>{% if block.settings.show_payment_icons %}<div class="ai-footer-{{ ai_gen_id }}__payments">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</div>{% endif %}</div></div></footer>
+{% schema %}{"name":"Custom footer","tag":null,"class":"custom-footer-block","settings":[{"type":"header","content":"Brand and newsletter"},{"type":"image_picker","id":"logo","label":"Logo"},{"type":"checkbox","id":"show_store_name","label":"Show store name","default":true},{"type":"range","id":"logo_width","label":"Logo width","min":50,"max":300,"step":10,"unit":"px","default":100},{"type":"text","id":"newsletter_heading","label":"Heading","default":"Stay in the loop"},{"type":"textarea","id":"newsletter_description","label":"Description","default":"Sign up for updates, new arrivals, and special offers."},{"type":"text","id":"email_label","label":"Email label","default":"Email address"},{"type":"text","id":"email_placeholder","label":"Email placeholder","default":"Your email address"},{"type":"text","id":"subscribe_label","label":"Subscribe label","default":"Subscribe"},{"type":"header","content":"Social links"},{"type":"text","id":"facebook_url","label":"Facebook URL"},{"type":"text","id":"instagram_url","label":"Instagram URL"},{"type":"text","id":"twitter_url","label":"Twitter/X URL"},{"type":"text","id":"tiktok_url","label":"TikTok URL"},{"type":"text","id":"youtube_url","label":"YouTube URL"},{"type":"text","id":"pinterest_url","label":"Pinterest URL"},{"type":"header","content":"Navigation"},{"type":"link_list","id":"menu_1","label":"Menu 1"},{"type":"text","id":"menu_1_heading","label":"Menu 1 heading"},{"type":"link_list","id":"menu_2","label":"Menu 2"},{"type":"text","id":"menu_2_heading","label":"Menu 2 heading"},{"type":"link_list","id":"menu_3","label":"Menu 3"},{"type":"text","id":"menu_3_heading","label":"Menu 3 heading"},{"type":"header","content":"Bottom bar"},{"type":"text","id":"copyright_text","label":"Copyright","default":"© 2026 Store Name. All rights reserved."},{"type":"url","id":"privacy_url","label":"Privacy policy link"},{"type":"url","id":"terms_url","label":"Terms link"},{"type":"checkbox","id":"show_payment_icons","label":"Show payment icons","default":true},{"type":"header","content":"Colors and layout"},{"type":"color","id":"background_color","label":"Background","default":"#242833"},{"type":"color","id":"text_color","label":"Text","default":"#FFFFFF"},{"type":"color","id":"button_color","label":"Button","default":"#FFFFFF"},{"type":"color","id":"button_text_color","label":"Button text","default":"#121212"},{"type":"range","id":"desktop_width_percent","label":"Desktop width","min":50,"max":100,"step":5,"unit":"%","default":100},{"type":"range","id":"input_radius","label":"Input radius","min":0,"max":40,"step":2,"unit":"px","default":0},{"type":"range","id":"button_radius","label":"Button radius","min":0,"max":40,"step":2,"unit":"px","default":0}],"presets":[{"name":"Custom footer"}]}{% endschema %}
