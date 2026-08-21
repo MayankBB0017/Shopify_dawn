@@ -47,3 +47,11 @@
 .mega-menu[open] .header__menu-item span::before{
     width: 100%;
 }
+
+
+
+.mega-menu{
+    position:absolute;
+    width:100%;
+    max-width:100%;
+}
