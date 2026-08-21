@@ -48,6 +48,9 @@
   width: 100%;
 }
 
+.header-wrapper:has(header__menu-item:hover){
+
+}
 
 /* Change header background to white when mega menu is hovered or open */
 .header-wrapper:has(details.mega-menu:hover),
