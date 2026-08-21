@@ -57,6 +57,10 @@
   .header__heading-logo-wrapper{
     filter:invert(1);
   }
+
+  .header__inline-menu{
+      --color-link: 255, 255, 255;
+  }
 }
 
 .header-wrapper:has(details.mega-menu:hover) .header,
