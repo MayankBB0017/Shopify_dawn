@@ -44,6 +44,6 @@
     text-decoration:none;
 }
 
-.mega-menu[open] .header__menu-item::before{
+.mega-menu[open] .header__menu-item span::before{
     width: 100%;
 }
