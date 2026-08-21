@@ -18,10 +18,12 @@
           "type": "custom_mega_menu",
           "settings": {
             "menu_item": "Coche",
-            "link_1": "",
-            "text_1": "",
-            "link_2": "",
-            "text_2": "",
+            "image_1": "shopify://shop_images/Frame_7543.png",
+            "link_1": "#",
+            "text_1": "Kombikid 40-105 cm",
+            "image_2": "shopify://shop_images/Frame_7543_87456124-b0b9-43ee-817f-4bfa04a50478.png",
+            "link_2": "#",
+            "text_2": "Kombibaby 40-87 cm",
             "link_3": "",
             "text_3": ""
           }
