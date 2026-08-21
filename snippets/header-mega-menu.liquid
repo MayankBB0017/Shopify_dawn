@@ -30,7 +30,8 @@
                   {% endif %}
                 >
                   {{- link.title | escape -}}
-                </span> 
+                </span>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
               <div
                 id="MegaMenu-Content-{{ forloop.index }}"
@@ -104,8 +105,8 @@
                                     <div class="custom-mega-menu-image-link">
                                   {%- endif -%}
                                   
-                                  <div class="custom-mega-menu-image-wrapper media media--portrait">
-                                    {{ image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                                  <div class="custom-mega-menu-image-wrapper">
+                                    {{ image | image_url: width: 600 | image_tag: loading: 'lazy' }}
                                   </div>
                                   {%- if image_text != blank -%}
                                     <p class="custom-mega-menu-image-text">{{ image_text }}</p>

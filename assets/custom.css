@@ -112,3 +112,11 @@
   font-size: 1.4rem;
   text-align: center;
 }
+
+/* Change header background to white when mega menu is open */
+.header-wrapper:has(details.mega-menu[open]) {
+  background-color: #ffffff !important;
+}
+.header-wrapper:has(details.mega-menu[open]) .header {
+  background-color: #ffffff !important;
+}
