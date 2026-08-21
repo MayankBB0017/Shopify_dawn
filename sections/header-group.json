@@ -17,7 +17,7 @@
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "header-menu-m",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "always",
         "enable_transparent_header": true,
         "show_line_separator": false,
