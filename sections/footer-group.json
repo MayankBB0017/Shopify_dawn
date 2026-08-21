@@ -17,6 +17,7 @@
         "image_nGgyPA": {
           "type": "image",
           "settings": {
+            "image_text": "s",
             "image_width": 100,
             "alignment": "center"
           }
