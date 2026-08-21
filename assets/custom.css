@@ -97,10 +97,6 @@
   transition: transform var(--duration-default) ease;
 }
 
-.custom-mega-menu-image-link:hover .custom-mega-menu-image-wrapper img {
-  transform: scale(1.05);
-}
-
 .custom-mega-menu-image-link {
   text-decoration: none;
   color: rgb(var(--color-foreground));
