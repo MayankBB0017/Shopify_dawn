@@ -109,6 +109,11 @@
   grid-template-rows:1fr;
   gap:2rem;
 }
+
+.custom-mega-menu-columns:has(.custom-mega-menu-col--links-2:empty){
+  grid-template-columns: 1fr 2fr;
+}
+
 .custom-mega-menu-col--links-1 {
   flex: 0 0 250px;
   border-right: 1px solid rgba(var(--color-foreground), 0.1);
