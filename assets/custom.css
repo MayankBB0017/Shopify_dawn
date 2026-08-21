@@ -43,3 +43,7 @@
 .mega-menu[open] .header__menu-item{
     text-decoration:none;
 }
+
+.mega-menu[open] .header__menu-item::before{
+    width: 100%;
+}
