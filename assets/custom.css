@@ -1,0 +1,6 @@
+/*  Header Style */
+.header__inline-menu {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
