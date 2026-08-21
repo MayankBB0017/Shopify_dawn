@@ -46,7 +46,10 @@
                       >
                         {{ childlink.title | escape }}
                       </a>
-                      {% comment %} {%- if childlink.links != blank -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                                      {%- if childlink.links != blank -%}
                         <ul class="list-unstyled" role="list">
                           {%- for grandchildlink in childlink.links -%}
                             <li>
@@ -63,10 +66,7 @@
                             </li>
                           {%- endfor -%}
                         </ul>
-                      {%- endif -%} {% endcomment %}
-                    </li>
-                  {%- endfor -%}
-                </ul>
+                      {%- endif -%}
               </div>
             </details>
           </header-menu>
