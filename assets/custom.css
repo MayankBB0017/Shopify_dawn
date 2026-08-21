@@ -1,23 +1,23 @@
 /*  Header Style */
 .header--transparent{
-  position:fixed;
-  top:0;
-  width:100%;
+    position:fixed;
+    top:0;
+    width:100%;
 
-  background:transparent;
+    background:transparent;
 }
 
 .header__inline-menu {
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .header__menu-item{
-  font-size: 14px;
-  font-weight:400;
-  line-height: 20px;
-  text-transform:uppercase;   
+    font-size: 14px;
+    font-weight:400;
+    line-height: 20px;
+    text-transform:uppercase;   
 }
 
 /* Top Navigation Hover Line Animation */
@@ -41,126 +41,12 @@
 }
 /* Remove default Dawn underline */
 .mega-menu[open] .header__menu-item{
-  text-decoration:none;
+    text-decoration:none;
 }
 
-.mega-menu[open] .header__menu-item::before{
-  width: 100%;
+.mega-menu[open] .header__menu-item span::before{
+    width: 100%;
 }
 
-/* Change header background to white when mega menu is hovered or open */
-.header-wrapper:has(details.mega-menu:hover),
-.header-wrapper:has(details.mega-menu[open]) {
-  background-color: #ffffff !important;
-}
-.header-wrapper:has(details.mega-menu:hover) .header,
-.header-wrapper:has(details.mega-menu[open]) .header {
-  background-color: #ffffff !important;
-}
 
-/* Make Mega Menu show on hover */
-@media screen and (min-width: 990px) {
-  details.mega-menu {
-    position: static;
-  }
-  
-  details.mega-menu:hover > .mega-menu__content {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-    display: block !important;
-  }
-}
 
-/* Custom Mega Menu Layout (3 Columns) */
-.custom-mega-menu-content {
-  padding: 3rem 0;
-}
-.custom-mega-menu-columns {
-  display: flex;
-  gap: 4rem;
-}
-.custom-mega-menu-col--links-1 {
-  flex: 0 0 250px;
-  border-right: 1px solid rgba(var(--color-foreground), 0.1);
-}
-.custom-mega-menu-col--links-2 {
-  flex: 0 0 200px;
-}
-.custom-mega-menu-col--images {
-  flex: 1;
-}
-
-/* Level 3 items display */
-.custom-level-3-container {
-  display: none;
-}
-.custom-level-3-container.is-active {
-  display: block;
-}
-
-/* Level 2 Links Chevron & Colors */
-.custom-level-2-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: rgba(var(--color-foreground), 0.5);
-  font-size: 1.6rem;
-  font-weight: 500;
-  padding: 1rem 0;
-  text-decoration: none;
-}
-
-.custom-level-2-link::after {
-  content: '›';
-  font-size: 2rem;
-  line-height: 1;
-  opacity: 0;
-  transform: translateX(-5px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.custom-level-2-link:hover,
-.custom-level-2-link.is-active {
-  color: rgb(var(--color-foreground));
-}
-
-.custom-level-2-link:hover::after,
-.custom-level-2-link.is-active::after {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Image Grid */
-.custom-mega-menu-images {
-  display: grid;
-  gap: 2rem;
-}
-.custom-mega-menu-grid-1 { grid-template-columns: 1fr; }
-.custom-mega-menu-grid-2 { grid-template-columns: repeat(2, 1fr); }
-.custom-mega-menu-grid-3 { grid-template-columns: repeat(3, 1fr); }
-
-.custom-mega-menu-image-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.custom-mega-menu-image-wrapper {
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-
-.custom-mega-menu-image-wrapper img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  display: block;
-}
-
-.custom-mega-menu-image-text {
-  margin: 0;
-  font-size: 1.4rem;
-  text-align: left;
-}
