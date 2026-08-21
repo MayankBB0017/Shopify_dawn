@@ -90,6 +90,7 @@
 .custom-mega-menu-col--links-1 {
   flex: 0 0 250px;
   border-right: 1px solid rgba(var(--color-foreground), 0.1);
+  padding-right:30px;
 }
 .custom-mega-menu-col--links-2 {
   flex: 0 0 200px;
