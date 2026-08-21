@@ -52,6 +52,11 @@
 .header-wrapper:has(details.mega-menu:hover),
 .header-wrapper:has(details.mega-menu[open]) {
   background-color: #ffffff !important;
+
+
+  .header__heading-logo-wrapper{
+    filter:invert(1);
+  }
 }
 .header-wrapper:has(details.mega-menu:hover) .header,
 .header-wrapper:has(details.mega-menu[open]) .header {
