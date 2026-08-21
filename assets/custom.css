@@ -50,16 +50,19 @@
 
 .header-wrapper:has(.header__menu-item:hover){
   --color-button-text: 0,0,0;
+  background-color: #ffffff !important;
 }
 
 /* Change header background to white when mega menu is hovered or open */
 .header-wrapper:has(details.mega-menu:hover),
 .header-wrapper:has(details.mega-menu[open]) {
   background-color: #ffffff !important;
+  --color-button-text: 0,0,0;
 }
 
 .header-wrapper:has(details.mega-menu:hover) .header,
 .header-wrapper:has(details.mega-menu[open]) .header {
+  --color-button-text: 0,0,0;
   background-color: #ffffff !important;
 }
 
