@@ -167,9 +167,9 @@
     const megaMenuLinks = document.querySelectorAll('.custom-level-2-link');
     
     megaMenuLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        // Prevent default link navigation when acting as a toggle
-        e.preventDefault();
+      link.addEventListener('mouseenter', function(e) {
+        // Optional: you can prevent default if you don't want the parent link to be clickable
+        // e.preventDefault();
 
         const targetId = this.getAttribute('data-target');
         if (!targetId) return;
@@ -183,7 +183,7 @@
           el.style.display = 'none';
         });
         
-        // Add active class to clicked link and its target container
+        // Add active class to hovered link and its target container
         this.classList.add('is-active');
         const targetContainer = document.getElementById(targetId);
         if (targetContainer) {
