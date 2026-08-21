@@ -19,3 +19,9 @@
     line-height: 20px;
     text-transform:uppercase;   
 }
+
+.mega-menu__content{
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+}
