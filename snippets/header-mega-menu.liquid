@@ -62,8 +62,8 @@
 
                       <div class="custom-mega-menu-col custom-mega-menu-col--links-2" style="flex: 1; padding-left: 2.5rem;">
                         {%- for childlink in link.links -%}
+                          {%- if childlink.links != blank -%}
                           <div class="custom-level-3-container{% if forloop.first %} is-active{% endif %}" id="custom-level-3-{{ link.handle }}-{{ childlink.handle }}" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
-                            {%- if childlink.links != blank -%}
                               <ul class="list-unstyled" role="list">
                                 {%- for grandchildlink in childlink.links -%}
                                   <li>
@@ -77,8 +77,8 @@
                                   </li>
                                 {%- endfor -%}
                               </ul>
-                            {%- endif -%}
-                          </div>
+                            </div>
+                          {%- endif -%}
                         {%- endfor -%}
                       </div>
 
