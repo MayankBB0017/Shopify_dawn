@@ -40,7 +40,6 @@
   width: 100%;
 }
 /* Remove default Dawn underline */
-.header__active-menu-item, 
-.header__menu-item:hover span {
-  text-decoration: none !important;
+.header__menu-item[open]{
+    text-decoration:none;
 }
