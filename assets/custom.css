@@ -134,14 +134,6 @@
   transition: color 0.3s ease;
 }
 
-.custom-level-2-link::after {
-  content: '›';
-  font-size: 2rem;
-  line-height: 1;
-  color: rgba(var(--color-foreground), 0.3);
-  transition: color 0.3s ease;
-}
-
 .custom-level-2-link:hover,
 .custom-level-2-link.is-active {
   color: rgb(var(--color-foreground));
