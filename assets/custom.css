@@ -28,7 +28,7 @@
 .header__menu-item span::before {
   content: '';
   position: absolute;
-  top: -8px; /* Position above text */
+  top: -5px; /* Position above text */
   left: 0;
   width: 0;
   height: 1px;
