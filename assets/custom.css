@@ -40,10 +40,6 @@
   width: 100%;
 }
 /* Remove default Dawn underline */
-.header__menu-item{
-    text-decoration:none !important;
-}
-
 .mega-menu[open] .header__menu-item{
     text-decoration:none;
 }
