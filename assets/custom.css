@@ -57,12 +57,12 @@
 .header-wrapper:has(details.mega-menu:hover),
 .header-wrapper:has(details.mega-menu[open]) {
   background-color: #ffffff !important;
-  --color-button-text: 0,0,0;
+  --color-button-text: 0,0,0 !important;
 }
 
 .header-wrapper:has(details.mega-menu:hover) .header,
 .header-wrapper:has(details.mega-menu[open]) .header {
-  --color-button-text: 0,0,0;
+  --color-button-text: 0,0,0 !important;
   background-color: #ffffff !important;
 }
 
