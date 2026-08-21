@@ -51,6 +51,10 @@
 .header-wrapper:has(.header__menu-item:hover){
   --color-button-text: 0,0,0;
   background-color: #ffffff !important;
+
+  .header__heading-logo{
+    filter:invert(1);
+  }
 }
 
 /* Change header background to white when mega menu is hovered or open */
