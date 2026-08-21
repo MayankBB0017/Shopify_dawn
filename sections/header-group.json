@@ -19,6 +19,7 @@
         "menu": "header-menu-m",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "always",
+        "enable_transparent_header": true,
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
