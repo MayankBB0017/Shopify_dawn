@@ -1,0 +1,383 @@
+{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .split-slideshow-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .split-slide {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+  }
+  
+  @media screen and (min-width: 990px) {
+    .split-slide {
+      flex-direction: row;
+      height: 700px; /* Adjust as needed */
+    }
+  }
+
+  .split-slide__half {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligns content to bottom */
+    padding: 4rem;
+    overflow: hidden;
+  }
+
+  .split-slide__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  .split-slide__media img,
+  .split-slide__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Overlay gradient to ensure text readability */
+  .split-slide__media::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .split-slide__content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+  }
+
+  .split-slide__heading {
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .split-slide__text {
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+  }
+
+  .split-slide__buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .split-slide__buttons .button {
+    min-width: 150px;
+  }
+  
+  /* Button overrides to match reference image (White outline / White fill) */
+  .button--white-solid {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #fff;
+  }
+  .button--white-solid:hover {
+    background-color: transparent;
+    color: #fff;
+  }
+  .button--white-outline {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+  }
+  .button--white-outline:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  @media screen and (min-width: 990px) {
+    .split-slide__heading {
+      font-size: 5rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="split-slideshow-section">
+  <slideshow-component class="slider-mobile-gutter" role="region" aria-roledescription="Carousel" aria-label="Split Slideshow">
+    <div class="slideshow slider slider--everywhere" id="Slider-{{ section.id }}" aria-live="polite" aria-atomic="true">
+      {%- for block in section.blocks -%}
+        <div class="slideshow__slide slider__slide" id="Slide-{{ section.id }}-{{ forloop.index }}" {{ block.shopify_attributes }} role="group" aria-roledescription="Slide" aria-label="{{ forloop.index }} of {{ section.blocks.size }}" tabindex="-1">
+          
+          <div class="split-slide">
+            
+            {%- comment -%} LEFT HALF {%- endcomment -%}
+            <div class="split-slide__half" style="color: {{ block.settings.left_text_color }};">
+              <div class="split-slide__media">
+                {%- if block.settings.left_video != null -%}
+                  {{ block.settings.left_video | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: false, muted: true }}
+                {%- elsif block.settings.left_image != blank -%}
+                  {{ block.settings.left_image | image_url: width: 1500 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="split-slide__content">
+                {%- if block.settings.left_heading != blank -%}
+                  <h2 class="split-slide__heading" style="color: {{ block.settings.left_text_color }};">{{ block.settings.left_heading | escape }}</h2>
+                {%- endif -%}
+                {%- if block.settings.left_text != blank -%}
+                  <div class="split-slide__text">{{ block.settings.left_text }}</div>
+                {%- endif -%}
+                <div class="split-slide__buttons">
+                  {%- if block.settings.left_btn_1_label != blank -%}
+                    <a href="{{ block.settings.left_btn_1_link }}" class="button button--white-solid">{{ block.settings.left_btn_1_label | escape }}</a>
+                  {%- endif -%}
+                  {%- if block.settings.left_btn_2_label != blank -%}
+                    <a href="{{ block.settings.left_btn_2_link }}" class="button button--white-outline">{{ block.settings.left_btn_2_label | escape }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+            {%- comment -%} RIGHT HALF {%- endcomment -%}
+            <div class="split-slide__half" style="color: {{ block.settings.right_text_color }};">
+              <div class="split-slide__media">
+                {%- if block.settings.right_video != null -%}
+                  {{ block.settings.right_video | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: false, muted: true }}
+                {%- elsif block.settings.right_image != blank -%}
+                  {{ block.settings.right_image | image_url: width: 1500 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="split-slide__content">
+                {%- if block.settings.right_heading != blank -%}
+                  <h2 class="split-slide__heading" style="color: {{ block.settings.right_text_color }};">{{ block.settings.right_heading | escape }}</h2>
+                {%- endif -%}
+                {%- if block.settings.right_text != blank -%}
+                  <div class="split-slide__text">{{ block.settings.right_text }}</div>
+                {%- endif -%}
+                <div class="split-slide__buttons">
+                  {%- if block.settings.right_btn_1_label != blank -%}
+                    <a href="{{ block.settings.right_btn_1_link }}" class="button button--white-solid">{{ block.settings.right_btn_1_label | escape }}</a>
+                  {%- endif -%}
+                  {%- if block.settings.right_btn_2_label != blank -%}
+                    <a href="{{ block.settings.right_btn_2_link }}" class="button button--white-outline">{{ block.settings.right_btn_2_label | escape }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.blocks.size > 1 -%}
+      <div class="slideshow__controls slider-buttons no-js-hidden">
+        <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="Previous slide">
+          {% render 'icon-caret' %}
+        </button>
+        <div class="slider-counter slider-counter--dots">
+          <div class="slideshow__control-wrapper">
+            {%- for block in section.blocks -%}
+              <button class="slider-counter__link slider-counter__link--dots link" aria-label="Load slide {{ forloop.index }} of {{ section.blocks.size }}" aria-controls="Slider-{{ section.id }}">
+                <span class="dot"></span>
+              </button>
+            {%- endfor -%}
+          </div>
+        </div>
+        <button type="button" class="slider-button slider-button--next" name="next" aria-label="Next slide">
+          {% render 'icon-caret' %}
+        </button>
+      </div>
+    {%- endif -%}
+  </slideshow-component>
+</div>
+
+{%- if section.settings.auto_rotate -%}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Very basic autoplay logic if slideshow-component doesn't pick it up automatically
+      const slider = document.querySelector('#Slider-{{ section.id }}');
+      if (slider) {
+        let isPaused = false;
+        slider.addEventListener('mouseenter', () => isPaused = true);
+        slider.addEventListener('mouseleave', () => isPaused = false);
+        
+        setInterval(() => {
+          if (!isPaused && window.innerWidth >= 990) {
+            const nextButton = document.querySelector('#Slider-{{ section.id }}').closest('slideshow-component').querySelector('.slider-button--next');
+            if (nextButton) nextButton.click();
+          }
+        }, {{ section.settings.change_slides_speed | times: 1000 }});
+      }
+    });
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Split Slideshow",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto-rotate slides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 9,
+      "step": 2,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Split Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Left Half"
+        },
+        {
+          "type": "image_picker",
+          "id": "left_image",
+          "label": "Left Image"
+        },
+        {
+          "type": "video",
+          "id": "left_video",
+          "label": "Left Video (Overrides Image)"
+        },
+        {
+          "type": "color",
+          "id": "left_text_color",
+          "label": "Left Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "left_heading",
+          "label": "Left Heading",
+          "default": "Left Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "left_text",
+          "label": "Left Text",
+          "default": "<p>Description for the left side goes here.</p>"
+        },
+        {
+          "type": "text",
+          "id": "left_btn_1_label",
+          "label": "Left Button 1 Label",
+          "default": "COMPRAR"
+        },
+        {
+          "type": "url",
+          "id": "left_btn_1_link",
+          "label": "Left Button 1 Link"
+        },
+        {
+          "type": "text",
+          "id": "left_btn_2_label",
+          "label": "Left Button 2 Label",
+          "default": "VER DETALLES"
+        },
+        {
+          "type": "url",
+          "id": "left_btn_2_link",
+          "label": "Left Button 2 Link"
+        },
+        {
+          "type": "header",
+          "content": "Right Half"
+        },
+        {
+          "type": "image_picker",
+          "id": "right_image",
+          "label": "Right Image"
+        },
+        {
+          "type": "video",
+          "id": "right_video",
+          "label": "Right Video (Overrides Image)"
+        },
+        {
+          "type": "color",
+          "id": "right_text_color",
+          "label": "Right Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "right_heading",
+          "label": "Right Heading",
+          "default": "Right Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "right_text",
+          "label": "Right Text",
+          "default": "<p>Description for the right side goes here.</p>"
+        },
+        {
+          "type": "text",
+          "id": "right_btn_1_label",
+          "label": "Right Button 1 Label",
+          "default": "COMPRAR"
+        },
+        {
+          "type": "url",
+          "id": "right_btn_1_link",
+          "label": "Right Button 1 Link"
+        },
+        {
+          "type": "text",
+          "id": "right_btn_2_label",
+          "label": "Right Button 2 Label"
+        },
+        {
+          "type": "url",
+          "id": "right_btn_2_link",
+          "label": "Right Button 2 Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Slideshow",
+      "blocks": [
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
