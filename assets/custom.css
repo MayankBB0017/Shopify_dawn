@@ -92,7 +92,7 @@
 
 .custom-mega-menu-image-wrapper img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
   transition: transform var(--duration-default) ease;
 }
