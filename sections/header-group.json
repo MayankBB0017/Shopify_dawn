@@ -14,30 +14,20 @@
     "header": {
       "type": "header",
       "blocks": {
-        "custom_mega_menu_GpMMRD": {
+        "custom_mega_menu_wA3eM8": {
           "type": "custom_mega_menu",
           "settings": {
-            "menu_item": "Carritos",
-            "image_1": "shopify://shop_images/Frame_26087507.png",
-            "link_1": "#",
-            "text_1": "Crosslight",
-            "image_2": "shopify://shop_images/Frame_26087507-1.png",
-            "link_2": "#",
-            "text_2": "Crosslight",
-            "image_3": "shopify://shop_images/Frame_26087507-2.png",
-            "link_3": "#",
-            "text_3": "Crosslight"
+            "menu_item": "Carritos"
           }
         }
       },
       "block_order": [
-        "custom_mega_menu_GpMMRD"
+        "custom_mega_menu_wA3eM8"
       ],
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "header-menu-m",
-        "menu_type_desktop": "mega",
         "sticky_header_type": "always",
         "enable_transparent_header": true,
         "show_line_separator": false,
