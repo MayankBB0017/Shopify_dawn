@@ -17,7 +17,16 @@
         "custom_mega_menu_wA3eM8": {
           "type": "custom_mega_menu",
           "settings": {
-            "menu_item": "Carritos"
+            "menu_item": "Carritos",
+            "image_1": "shopify://shop_images/Frame_26087507.png",
+            "link_1": "",
+            "text_1": "Crosslight",
+            "image_2": "shopify://shop_images/Frame_26087507-1.png",
+            "link_2": "",
+            "text_2": "Crosslight",
+            "image_3": "shopify://shop_images/Frame_26087507-2.png",
+            "link_3": "",
+            "text_3": "Crosslight"
           }
         }
       },
@@ -37,7 +46,8 @@
         "enable_language_selector": false,
         "margin_bottom": 0,
         "padding_top": 20,
-        "padding_bottom": 20
+        "padding_bottom": 20,
+        "header_menu_color": ""
       }
     }
   },
