@@ -58,6 +58,7 @@
     filter:invert(1);
   }
 }
+
 .header-wrapper:has(details.mega-menu:hover) .header,
 .header-wrapper:has(details.mega-menu[open]) .header {
   background-color: #ffffff !important;
