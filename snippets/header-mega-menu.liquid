@@ -31,7 +31,7 @@
                 >
                   {{- link.title | escape -}}
                 </span>
-                {{- 'icon-caret.svg' | inline_asset_content -}}
+
               </summary>
 
               {%- if mega_menu_block -%}
@@ -41,7 +41,7 @@
                   tabindex="-1"
                 >
                   <div class="custom-mega-menu-wrapper page-width">
-                    <div class="custom-mega-menu-columns" style="display: flex; gap: 4rem; padding: 3rem 0;">
+                    <div class="custom-mega-menu-columns" style="display: flex; gap: 0; padding: 3rem 0;">
                       <div class="custom-mega-menu-col custom-mega-menu-col--links-1" style="flex: 0 0 250px; border-right: 1px solid rgba(var(--color-foreground), 0.1);">
                         <ul class="list-unstyled" role="list">
                           {%- for childlink in link.links -%}
@@ -53,13 +53,14 @@
                                 data-target="custom-level-3-{{ link.handle }}-{{ childlink.handle }}"
                               >
                                 {{- childlink.title | escape -}}
+                                {{- 'icon-caret.svg' | inline_asset_content -}}
                               </a>
                             </li>
                           {%- endfor -%}
                         </ul>
                       </div>
 
-                      <div class="custom-mega-menu-col custom-mega-menu-col--links-2" style="flex: 1; padding-left: 2rem;">
+                      <div class="custom-mega-menu-col custom-mega-menu-col--links-2" style="flex: 1; padding-left: 2.5rem;">
                         {%- for childlink in link.links -%}
                           <div class="custom-level-3-container{% if forloop.first %} is-active{% endif %}" id="custom-level-3-{{ link.handle }}-{{ childlink.handle }}" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
                             {%- if childlink.links != blank -%}
@@ -110,7 +111,7 @@
                             class="header__menu-item link link--text list-menu__item focus-inset caption-large"
                           >
                             <span>{{ childlink.title | escape }}</span>
-                            {{- 'icon-caret.svg' | inline_asset_content -}}
+
                           </summary>
                           <ul
                             id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
@@ -164,23 +165,12 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Top-level mega menu: disable click to toggle on desktop (rely on hover)
-    const megaMenuSummaries = document.querySelectorAll('details.mega-menu > summary');
-    megaMenuSummaries.forEach(summary => {
-      summary.addEventListener('click', (e) => {
-        if (window.innerWidth >= 990) {
-          e.preventDefault();
-        }
-      });
-    });
-
-    // Level 2 links interaction (hover)
     const megaMenuLinks = document.querySelectorAll('.custom-level-2-link');
     
     megaMenuLinks.forEach(link => {
-      link.addEventListener('mouseenter', function(e) {
-        // Optional: you can prevent default if you don't want the parent link to be clickable
-        // e.preventDefault();
+      link.addEventListener('click', function(e) {
+        // Prevent default link navigation when acting as a toggle
+        e.preventDefault();
 
         const targetId = this.getAttribute('data-target');
         if (!targetId) return;
@@ -194,7 +184,7 @@
           el.style.display = 'none';
         });
         
-        // Add active class to hovered link and its target container
+        // Add active class to clicked link and its target container
         this.classList.add('is-active');
         const targetContainer = document.getElementById(targetId);
         if (targetContainer) {
