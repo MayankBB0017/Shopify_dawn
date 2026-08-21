@@ -10,3 +10,9 @@
     align-items:center;
     justify-content:center;
 }
+
+.header__menu-item{
+    font-size: 14px;
+    font-weight:400;
+    line-height: 20px;
+}
