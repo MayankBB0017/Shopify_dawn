@@ -51,9 +51,9 @@
     flex-wrap: wrap;
   }
 
-  {% comment %} summary.list-menu__item {
+  summary.list-menu__item {
     padding-right: 2.7rem;
-  } {% endcomment %}
+  }
 
   .list-menu__item {
     display: flex;
@@ -215,11 +215,7 @@
 
     {%- liquid
       if section.settings.menu != blank
-        if section.settings.menu_type_desktop == 'dropdown'
-          render 'header-dropdown-menu'
-        elsif section.settings.menu_type_desktop != 'drawer'
-          render 'header-mega-menu'
-        endif
+        render 'header-mega-menu'
       endif
     %}
 
@@ -553,26 +549,6 @@
     },
     {
       "type": "select",
-      "id": "menu_type_desktop",
-      "options": [
-        {
-          "value": "dropdown",
-          "label": "t:sections.header.settings.menu_type_desktop.options__1.label"
-        },
-        {
-          "value": "mega",
-          "label": "t:sections.header.settings.menu_type_desktop.options__2.label"
-        },
-        {
-          "value": "drawer",
-          "label": "t:sections.header.settings.menu_type_desktop.options__3.label"
-        }
-      ],
-      "default": "dropdown",
-      "label": "t:sections.header.settings.menu_type_desktop.label"
-    },
-    {
-      "type": "select",
       "id": "sticky_header_type",
       "options": [
         {
@@ -687,6 +663,17 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "custom_mega_menu",
+      "name": "Mega menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "Menu Item Name"
+        }
+      ]
     }
   ]
 }

@@ -1,5 +1,5 @@
 {% comment %}
-  Renders a megamenu for the header.
+  Renders a megamenu or dropdown for the header based on block settings.
 
   Usage:
   {% render 'header-mega-menu' %}
@@ -9,9 +9,17 @@
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
       <li>
+        {%- assign mega_menu_block = null -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'custom_mega_menu' and block.settings.menu_item == link.title -%}
+            {%- assign mega_menu_block = block -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
         {%- if link.links != blank -%}
           <header-menu>
-            <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
+            <details id="Details-HeaderMenu-{{ forloop.index }}"{% if mega_menu_block %} class="mega-menu"{% endif %}>
               <summary
                 id="HeaderMenu-{{ link.handle }}"
                 class="header__menu-item list-menu__item link focus-inset"
@@ -23,52 +31,112 @@
                 >
                   {{- link.title | escape -}}
                 </span>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
-              <div
-                id="MegaMenu-Content-{{ forloop.index }}"
-                class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
-                tabindex="-1"
-              >
+
+              {%- if mega_menu_block -%}
+                <div
+                  id="MegaMenu-Content-{{ forloop.index }}"
+                  class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup custom-mega-menu-content"
+                  tabindex="-1"
+                >
+                  <div class="custom-mega-menu-wrapper page-width">
+                    <div class="custom-mega-menu-columns" style="display: flex; gap: 4rem; padding: 3rem 0;">
+                      <div class="custom-mega-menu-col custom-mega-menu-col--links-1" style="flex: 0 0 250px; border-right: 1px solid rgba(var(--color-foreground), 0.1);">
+                        <ul class="list-unstyled" role="list">
+                          {%- for childlink in link.links -%}
+                            <li>
+                              <a
+                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                                href="{{ childlink.url }}"
+                                class="mega-menu__link link custom-level-2-link{% if forloop.first %} is-active{% endif %}"
+                                data-target="custom-level-3-{{ link.handle }}-{{ childlink.handle }}"
+                              >
+                                {{- childlink.title | escape -}}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+
+                      <div class="custom-mega-menu-col custom-mega-menu-col--links-2" style="flex: 1; padding-left: 2rem;">
+                        {%- for childlink in link.links -%}
+                          <div class="custom-level-3-container{% if forloop.first %} is-active{% endif %}" id="custom-level-3-{{ link.handle }}-{{ childlink.handle }}" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
+                            {%- if childlink.links != blank -%}
+                              <ul class="list-unstyled" role="list">
+                                {%- for grandchildlink in childlink.links -%}
+                                  <li>
+                                    <a
+                                      id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                      href="{{ grandchildlink.url }}"
+                                      class="mega-menu__link link"
+                                    >
+                                      {{ grandchildlink.title | escape }}
+                                    </a>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            {%- endif -%}
+                          </div>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {%- else -%}
                 <ul
-                  class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
+                  id="HeaderMenu-MenuList-{{ forloop.index }}"
+                  class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
                   role="list"
+                  tabindex="-1"
                 >
                   {%- for childlink in link.links -%}
                     <li>
-                      <a
-                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                        href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
-                        {% endif %}
-                      >
-                        {{ childlink.title | escape }}
-                      </a>
+                      {%- if childlink.links == blank -%}
+                        <a
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          href="{{ childlink.url }}"
+                          class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
+                          {% if childlink.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{ childlink.title | escape }}
+                        </a>
+                      {%- else -%}
+                        <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
+                          <summary
+                            id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                            class="header__menu-item link link--text list-menu__item focus-inset caption-large"
+                          >
+                            <span>{{ childlink.title | escape }}</span>
+                            {{- 'icon-caret.svg' | inline_asset_content -}}
+                          </summary>
+                          <ul
+                            id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                            class="header__submenu list-menu motion-reduce"
+                          >
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                  href="{{ grandchildlink.url }}"
+                                  class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
+                                  {% if grandchildlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- endif -%}
                     </li>
                   {%- endfor -%}
                 </ul>
-                  {%- for childlink in link.links -%}
-                    {%- if childlink.links != blank -%}
-                    <ul class="list-unstyled" role="list">
-                      {%- for grandchildlink in childlink.links -%}
-                        <li>
-                          <a
-                            id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                            href="{{ grandchildlink.url }}"
-                            class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
-                            {% if grandchildlink.current %}
-                              aria-current="page"
-                            {% endif %}
-                          >
-                            {{ grandchildlink.title | escape }}
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
-                {%- endfor -%}
-              </div>
+              {%- endif -%}
             </details>
           </header-menu>
         {%- else -%}
@@ -93,3 +161,33 @@
     {%- endfor -%}
   </ul>
 </nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const megaMenuLinks = document.querySelectorAll('.custom-level-2-link');
+    
+    megaMenuLinks.forEach(link => {
+      link.addEventListener('mouseenter', function(e) {
+        const targetId = this.getAttribute('data-target');
+        if (!targetId) return;
+
+        const columnsContainer = this.closest('.custom-mega-menu-columns');
+        
+        // Remove active class from all links and containers in this mega menu
+        columnsContainer.querySelectorAll('.custom-level-2-link').forEach(el => el.classList.remove('is-active'));
+        columnsContainer.querySelectorAll('.custom-level-3-container').forEach(el => {
+          el.classList.remove('is-active');
+          el.style.display = 'none';
+        });
+        
+        // Add active class to hovered link and its target container
+        this.classList.add('is-active');
+        const targetContainer = document.getElementById(targetId);
+        if (targetContainer) {
+          targetContainer.classList.add('is-active');
+          targetContainer.style.display = 'block';
+        }
+      });
+    });
+  });
+</script>
