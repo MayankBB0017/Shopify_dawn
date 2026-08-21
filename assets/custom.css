@@ -1,5 +1,9 @@
 /*  Header Style */
-
+.header--transparent{
+    position:fixed;
+    top:0;
+    width:100%;
+}
 
 .header__inline-menu {
     display:flex;
