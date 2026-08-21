@@ -106,7 +106,8 @@
 .custom-mega-menu-columns {
   display:grid;
   grid-template-columns: 1fr 1fr 5fr;
-  grid-template-row:1fr;
+  grid-template-rows:1fr;
+  gap:2rem;
 }
 .custom-mega-menu-col--links-1 {
   flex: 0 0 250px;
