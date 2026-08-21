@@ -130,7 +130,7 @@
 /* Level 3 Links Styling */
 .custom-level-3-container .mega-menu__link {
   color: rgba(var(--color-foreground), 0.5);
-  font-size: 14px;
+  font-size: 16px;
   padding: 0.8rem 0;
   display: block;
   text-decoration: none;
@@ -199,6 +199,6 @@
 
 .custom-mega-menu-image-text {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   text-align: left;
 }
