@@ -402,5 +402,18 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+
+    <script>
+      document.querySelectorAll('header-menu details.mega-menu').forEach((menu) => {
+        menu.addEventListener('mouseenter', () => {
+          menu.open = true;
+        });
+
+        menu.addEventListener('mouseleave', () => {
+          menu.open = false;
+        });
+      });
+    </script>
   </body>
 </html>
