@@ -95,6 +95,7 @@
   height: 250px;
   object-fit: cover;
   transition: transform var(--duration-default) ease;
+  border-radius: 8px;
 }
 
 .custom-mega-menu-image-link {
