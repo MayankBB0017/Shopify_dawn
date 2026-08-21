@@ -13,6 +13,23 @@
   "sections": {
     "header": {
       "type": "header",
+      "blocks": {
+        "custom_mega_menu_GpMMRD": {
+          "type": "custom_mega_menu",
+          "settings": {
+            "menu_item": "Carritos",
+            "link_1": "",
+            "text_1": "",
+            "link_2": "",
+            "text_2": "",
+            "link_3": "",
+            "text_3": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom_mega_menu_GpMMRD"
+      ],
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
