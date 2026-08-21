@@ -19,3 +19,28 @@
     line-height: 20px;
     text-transform:uppercase;   
 }
+
+/* Top Navigation Hover Line Animation */
+.header__menu-item span {
+  position: relative;
+  display: inline-block;
+}
+.header__menu-item span::before {
+  content: '';
+  position: absolute;
+  top: -8px; /* Position above text */
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+.header__menu-item:hover span::before,
+.header__active-menu-item::before {
+  width: 100%;
+}
+/* Remove default Dawn underline */
+.header__active-menu-item, 
+.header__menu-item:hover span {
+  text-decoration: none !important;
+}
