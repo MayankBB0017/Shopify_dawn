@@ -104,8 +104,9 @@
   z-index: 3;
 }
 .custom-mega-menu-columns {
-  display: flex;
-  gap: 4rem;
+  display:grid;
+  grid-template-columns: 1fr 1fr 5fr;
+  grid-template-row:1fr;
 }
 .custom-mega-menu-col--links-1 {
   flex: 0 0 250px;
