@@ -76,19 +76,18 @@
 }
 
 .custom-mega-menu-images {
-  display: flex;
-  gap: 16px;
+  display: grid;
+  gap: 2rem;
 }
 
-.custom-mega-menu-grid-1 .custom-mega-menu-image-item { width: 502px; }
-.custom-mega-menu-grid-2 .custom-mega-menu-image-item { width: 502px; }
-.custom-mega-menu-grid-3 .custom-mega-menu-image-item { width: 239px; }
+.custom-mega-menu-grid-1 { grid-template-columns: 1fr; }
+.custom-mega-menu-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.custom-mega-menu-grid-3 { grid-template-columns: repeat(3, 1fr); }
 
 .custom-mega-menu-image-wrapper {
-  border-radius: 8px;
+  border-radius: 1rem;
   overflow: hidden;
   margin-bottom: 1rem;
-  height: 250px;
 }
 
 .custom-mega-menu-image-wrapper img {
