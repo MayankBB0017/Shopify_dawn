@@ -224,6 +224,7 @@ card-blocks.ccb {
 .ccb-card__description {
   margin-top: 0.8rem;
   font-weight: 400;
+  color: var(--ccb-desc, #fff);
   line-height: calc(1 + 0.5 / var(--font-body-scale, 1));
 }
 
@@ -253,47 +254,13 @@ card-blocks.ccb {
   outline-offset: -0.5rem;
 }
 
-/* ---------- Button (visual only, the card is the link) ---------- */
+/* ---------- Buttons (markup/styles come from custom-slideshow-button) ---------- */
+/* Buttons are real links sitting above the stretched card link (siblings, not nested). */
 .ccb-card__button-wrap {
+  position: relative;
+  z-index: 4;
   margin-top: 1.5rem;
   max-width: 100%;
-}
-
-.ccb-card__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 4.5rem;
-  padding: 0 3rem;
-  font-family: var(--font-body-family);
-  font-size: 1.5rem;
-  letter-spacing: 0.06rem;
-  line-height: 1.2;
-  text-align: center;
-  border: var(--buttons-border-width, 1px) solid var(--ccb-text);
-  border-radius: var(--buttons-radius, 0);
-  transition: opacity 0.2s ease;
-}
-
-.ccb-card__button--filled {
-  background: var(--ccb-text);
-  color: var(--ccb-card-bg);
-}
-
-.ccb-card__button--stroke {
-  background: transparent;
-  color: var(--ccb-text);
-}
-
-.ccb-card__button--link {
-  min-height: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--ccb-text);
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
 }
 
 /* ---------- Desktop hover (Default + Hover states) ---------- */
@@ -305,6 +272,7 @@ card-blocks.ccb {
   .ccb--hover-zoom .ccb-card__button-wrap {
     opacity: 0;
     transform: translateY(1.2rem);
+    pointer-events: none;
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
@@ -312,6 +280,7 @@ card-blocks.ccb {
   .ccb--hover-zoom .ccb-card:focus-within .ccb-card__button-wrap {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
   }
 }
 
