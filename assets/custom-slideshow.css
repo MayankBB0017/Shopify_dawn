@@ -94,10 +94,15 @@ custom-slideshow {
 /* --------------------------------------------------------------------------
    Media (image / video) and overlay
    -------------------------------------------------------------------------- */
+/* Width is always 100%. Height comes from --cs-h (fixed) or --cs-ratio (original),
+   then is capped by --cs-max-h. The media is cropped (object-fit: cover), so a
+   maximum height never makes it narrower. */
 .cs-slide__media {
   position: relative;
-  z-index: 0;
+  isolation: isolate;
   overflow: hidden;
+  width: 100%;
+  height: var(--cs-h, auto);
   aspect-ratio: var(--cs-ratio, 16 / 9);
   max-height: var(--cs-max-h, none);
 }
@@ -105,6 +110,13 @@ custom-slideshow {
 .cs-slideshow--fit .cs-slide__media {
   height: var(--cs-fit-h, 100svh);
   aspect-ratio: auto;
+}
+
+/* Layout 2: every slide is at least 810px tall on desktop (min-height beats max-height) */
+@media screen and (min-width: 750px) {
+  .cs-slideshow--two_col .cs-slide__media {
+    min-height: 810px;
+  }
 }
 
 .cs-slide__media picture {
@@ -144,13 +156,14 @@ custom-slideshow {
   }
 }
 
+/* Color and opacity are set per section by sections/custom-slideshow.liquid */
 .cs-overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
-  background: var(--cs-overlay-bg, #000);
-  opacity: var(--cs-overlay-opacity, 0.3);
+  background: #000;
+  opacity: 0.4;
 }
 
 /* --------------------------------------------------------------------------
@@ -278,6 +291,8 @@ custom-slideshow {
 .cs-title[data-size-m='h6'] { font-size: calc(var(--font-heading-scale, 1) * 1.6rem); }
 
 .cs-text {
+  font-family: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
   line-height: 1.5;
 }
 
@@ -318,16 +333,18 @@ custom-slideshow {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  min-height: 4.8rem;
-  padding: 0 3rem;
+  height: 36px;
+  padding: 0 20px;
   border: 1px solid transparent;
-  border-radius: 0;
+  border-radius: 8px;
   font-family: var(--font-body-family);
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.06rem;
-  line-height: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
@@ -373,7 +390,7 @@ custom-slideshow {
   background: none;
   border: 0;
   text-decoration: underline;
-  text-underline-offset: 0.4rem;
+  text-underline-offset: 4px;
   text-decoration-thickness: 0.1rem;
 }
 .cs-btn--link-white {
@@ -391,7 +408,7 @@ custom-slideshow {
   background: var(--cs-btn-bg, #fff);
   color: var(--cs-btn-color, #000);
   border: var(--cs-btn-bw, 1px) solid var(--cs-btn-border, #fff);
-  border-radius: var(--cs-btn-radius, 0);
+  border-radius: var(--cs-btn-radius, 8px);
 }
 
 .cs-btn:focus-visible,
@@ -402,31 +419,27 @@ custom-slideshow {
 }
 
 /* --------------------------------------------------------------------------
-   Navigation dots (bottom, centered)
+   Navigation dots (bottom, centered). Each dot is 24 x 6px with a 2px radius.
+   The button around it is 32 x 24px so it is easy to click, and gives an 8px gap.
    -------------------------------------------------------------------------- */
 .cs-dots {
   position: absolute;
   left: 50%;
-  bottom: 1.2rem;
+  bottom: 12px;
   z-index: 5;
   display: flex;
   align-items: center;
-  gap: 0;
-  padding: 0 0.6rem;
-  border-radius: 10rem;
-  background: rgba(0, 0, 0, 0.3);
   transform: translateX(-50%);
 }
 
-/* 2.4rem hit area around a small visual dot */
 .cs-dot {
   display: grid;
   place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 32px;
+  height: 24px;
   padding: 0;
   border: 0;
-  border-radius: 50%;
+  border-radius: 2px;
   background: none;
   cursor: pointer;
   appearance: none;
@@ -434,19 +447,15 @@ custom-slideshow {
 
 .cs-dot::before {
   content: '';
-  width: 0.8rem;
-  height: 0.8rem;
-  border-radius: 50%;
+  width: 24px;
+  height: 6px;
+  border-radius: 2px;
   background: var(--cs-dot, #fff);
-  opacity: 0.55;
-  transition: width 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
+  transition: background-color 0.25s ease;
 }
 
 .cs-dot.is-active::before {
-  width: 1.4rem;
-  border-radius: 1rem;
-  background: var(--cs-dot-active, #fff);
-  opacity: 1;
+  background: var(--cs-dot-active, #000);
 }
 
 /* --------------------------------------------------------------------------
