@@ -252,7 +252,7 @@
         "padding_desktop": 0,
         "padding_mobile": 0,
         "section_bg": "",
-        "fade_desktop": true,
+        "fade_desktop": false,
         "fade_mobile": false
       }
     }
