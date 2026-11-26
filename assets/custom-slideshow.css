@@ -1,0 +1,463 @@
+/* ==========================================================================
+   assets/custom-slideshow.css
+   Static styles. Dynamic values (ratio, colors, padding, ...) are set as CSS
+   variables / scoped rules by sections/custom-slideshow.liquid.
+   Mobile first. Desktop starts at 750px (Dawn's breakpoint).
+   ========================================================================== */
+
+custom-slideshow {
+  display: block;
+}
+
+.cs-slideshow {
+  --cs-fade: 0.6s;
+  position: relative;
+  overflow: hidden;
+  background: var(--cs-split-bg, #000);
+}
+
+.cs-slideshow:not(.cs-slideshow--split) {
+  background: #000;
+}
+
+.cs-empty {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: rgba(var(--color-foreground), 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   Track and slides
+   -------------------------------------------------------------------------- */
+.cs-track {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.cs-slide {
+  position: relative;
+  min-width: 0;
+}
+
+/* Layout 1 and 3: slides are stacked in one grid cell and cross-fade */
+.cs-slideshow:is(.cs-slideshow--full, .cs-slideshow--split) .cs-slide {
+  grid-area: 1 / 1;
+  z-index: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cs-slideshow:is(.cs-slideshow--full, .cs-slideshow--split) .cs-slide.is-active {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.cs-slideshow--fade:is(.cs-slideshow--full, .cs-slideshow--split) .cs-slide {
+  transition: opacity var(--cs-fade) ease, visibility 0s linear var(--cs-fade);
+}
+
+.cs-slideshow--fade:is(.cs-slideshow--full, .cs-slideshow--split) .cs-slide.is-active {
+  transition: opacity var(--cs-fade) ease, visibility 0s linear 0s;
+}
+
+/* Layout 2: only the visible slides are displayed (stacked on mobile) */
+.cs-slideshow--two_col .cs-slide {
+  display: none;
+}
+
+.cs-slideshow--two_col .cs-slide.is-active {
+  display: block;
+}
+
+.cs-slideshow--fade.cs-slideshow--two_col .cs-slide.is-active {
+  animation: cs-fade-in var(--cs-fade) ease both;
+}
+
+@keyframes cs-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .cs-slideshow--two_col .cs-track {
+    grid-template-columns: repeat(var(--cs-cols, 2), minmax(0, 1fr));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Media (image / video) and overlay
+   -------------------------------------------------------------------------- */
+.cs-slide__media {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  aspect-ratio: var(--cs-ratio, 16 / 9);
+  max-height: var(--cs-max-h, none);
+}
+
+.cs-slideshow--fit .cs-slide__media {
+  height: var(--cs-fit-h, 100svh);
+  aspect-ratio: auto;
+}
+
+.cs-slide__media picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.cs-img,
+.cs-video,
+.cs-slide__media .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-slide__media .placeholder-svg {
+  background: #2b2b2b;
+  fill: rgba(255, 255, 255, 0.25);
+}
+
+/* Separate desktop / mobile videos */
+.cs-video.cs-desktop-only {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .cs-video.cs-desktop-only {
+    display: block;
+  }
+
+  .cs-video.cs-mobile-only {
+    display: none;
+  }
+}
+
+.cs-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--cs-overlay-bg, #000);
+  opacity: var(--cs-overlay-opacity, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Content
+   -------------------------------------------------------------------------- */
+
+/* Layouts 1 and 2: content sits on top of the media */
+.cs-slideshow:not(.cs-slideshow--split) .cs-slide__content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.cs-slide__content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* Layout 3: text column has its own background */
+.cs-slideshow--split .cs-slide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.cs-slideshow--split .cs-slide__content {
+  position: relative;
+  background: var(--cs-split-bg, #121212);
+}
+
+/* Mobile: stack columns. Text is first in the HTML, "image first" reorders it */
+.cs-slideshow--split[data-mobile-order='image'] .cs-slide__media {
+  order: -1;
+}
+
+@media screen and (min-width: 750px) {
+  .cs-slideshow--split .cs-slide {
+    grid-template-columns: var(--cs-split-cols, 1fr 1fr);
+  }
+
+  .cs-slideshow--split[data-mobile-order] .cs-slide__media {
+    order: 0;
+  }
+}
+
+.cs-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 72rem;
+}
+
+/* Alignment: mobile first, desktop overrides from 750px */
+.cs-content[data-h-m='left'] {
+  align-items: flex-start;
+  text-align: left;
+  --cs-jc: flex-start;
+}
+.cs-content[data-h-m='center'] {
+  align-items: center;
+  text-align: center;
+  --cs-jc: center;
+}
+.cs-content[data-h-m='right'] {
+  align-items: flex-end;
+  text-align: right;
+  --cs-jc: flex-end;
+}
+.cs-content[data-v-m='top'] {
+  justify-content: flex-start;
+}
+.cs-content[data-v-m='middle'] {
+  justify-content: center;
+}
+.cs-content[data-v-m='bottom'] {
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 750px) {
+  .cs-content[data-h-d='left'] {
+    align-items: flex-start;
+    text-align: left;
+    --cs-jc: flex-start;
+  }
+  .cs-content[data-h-d='center'] {
+    align-items: center;
+    text-align: center;
+    --cs-jc: center;
+  }
+  .cs-content[data-h-d='right'] {
+    align-items: flex-end;
+    text-align: right;
+    --cs-jc: flex-end;
+  }
+  .cs-content[data-v-d='top'] {
+    justify-content: flex-start;
+  }
+  .cs-content[data-v-d='middle'] {
+    justify-content: center;
+  }
+  .cs-content[data-v-d='bottom'] {
+    justify-content: flex-end;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Title (H1 to H6 sizes) and description (small / regular / big)
+   -------------------------------------------------------------------------- */
+.cs-title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  letter-spacing: calc(var(--font-heading-scale, 1) * 0.06rem);
+  line-height: calc(1 + 0.3 / max(1, var(--font-heading-scale, 1)));
+  overflow-wrap: break-word;
+}
+
+.cs-title[data-size-m='h1'] { font-size: calc(var(--font-heading-scale, 1) * 3.6rem); }
+.cs-title[data-size-m='h2'] { font-size: calc(var(--font-heading-scale, 1) * 3.2rem); }
+.cs-title[data-size-m='h3'] { font-size: calc(var(--font-heading-scale, 1) * 2.6rem); }
+.cs-title[data-size-m='h4'] { font-size: calc(var(--font-heading-scale, 1) * 2.2rem); }
+.cs-title[data-size-m='h5'] { font-size: calc(var(--font-heading-scale, 1) * 1.8rem); }
+.cs-title[data-size-m='h6'] { font-size: calc(var(--font-heading-scale, 1) * 1.6rem); }
+
+.cs-text {
+  line-height: 1.5;
+}
+
+.cs-text > :first-child { margin-top: 0; }
+.cs-text > :last-child { margin-bottom: 0; }
+.cs-text p { margin: 0; }
+.cs-text p + p { margin-top: 1rem; }
+
+.cs-text[data-size-m='small'] { font-size: 1.4rem; }
+.cs-text[data-size-m='regular'] { font-size: 1.6rem; }
+.cs-text[data-size-m='big'] { font-size: 1.9rem; }
+
+@media screen and (min-width: 750px) {
+  .cs-title[data-size-d='h1'] { font-size: calc(var(--font-heading-scale, 1) * 5.6rem); }
+  .cs-title[data-size-d='h2'] { font-size: calc(var(--font-heading-scale, 1) * 4.8rem); }
+  .cs-title[data-size-d='h3'] { font-size: calc(var(--font-heading-scale, 1) * 3.6rem); }
+  .cs-title[data-size-d='h4'] { font-size: calc(var(--font-heading-scale, 1) * 2.8rem); }
+  .cs-title[data-size-d='h5'] { font-size: calc(var(--font-heading-scale, 1) * 2.2rem); }
+  .cs-title[data-size-d='h6'] { font-size: calc(var(--font-heading-scale, 1) * 1.8rem); }
+
+  .cs-text[data-size-d='small'] { font-size: 1.5rem; }
+  .cs-text[data-size-d='regular'] { font-size: 1.8rem; }
+  .cs-text[data-size-d='big'] { font-size: 2.4rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.cs-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: var(--cs-jc, flex-start);
+}
+
+.cs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 4.8rem;
+  padding: 0 3rem;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.06rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.cs-btn--filled-white {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+.cs-btn--filled-black {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+.cs-btn--filled-white:hover,
+.cs-btn--filled-black:hover,
+.cs-btn--custom:hover {
+  opacity: 0.85;
+}
+
+.cs-btn--stroke-white {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+.cs-btn--stroke-white:hover {
+  background: #fff;
+  color: #000;
+}
+.cs-btn--stroke-black {
+  background: transparent;
+  color: #000;
+  border-color: #000;
+}
+.cs-btn--stroke-black:hover {
+  background: #000;
+  color: #fff;
+}
+
+.cs-btn--link-white,
+.cs-btn--link-black {
+  padding: 0;
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+  text-decoration-thickness: 0.1rem;
+}
+.cs-btn--link-white {
+  color: #fff;
+}
+.cs-btn--link-black {
+  color: #000;
+}
+.cs-btn--link-white:hover,
+.cs-btn--link-black:hover {
+  text-decoration-thickness: 0.2rem;
+}
+
+.cs-btn--custom {
+  background: var(--cs-btn-bg, #fff);
+  color: var(--cs-btn-color, #000);
+  border: var(--cs-btn-bw, 1px) solid var(--cs-btn-border, #fff);
+  border-radius: var(--cs-btn-radius, 0);
+}
+
+.cs-btn:focus-visible,
+.cs-dot:focus-visible {
+  outline: 0.2rem solid #fff;
+  outline-offset: 0.2rem;
+  box-shadow: 0 0 0 0.2rem #000;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation dots (bottom, centered)
+   -------------------------------------------------------------------------- */
+.cs-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 1.2rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 0.6rem;
+  border-radius: 10rem;
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateX(-50%);
+}
+
+/* 2.4rem hit area around a small visual dot */
+.cs-dot {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.cs-dot::before {
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--cs-dot, #fff);
+  opacity: 0.55;
+  transition: width 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
+}
+
+.cs-dot.is-active::before {
+  width: 1.4rem;
+  border-radius: 1rem;
+  background: var(--cs-dot-active, #fff);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cs-slide,
+  .cs-slide.is-active,
+  .cs-dot::before,
+  .cs-btn {
+    transition: none !important;
+    animation: none !important;
+  }
+}
