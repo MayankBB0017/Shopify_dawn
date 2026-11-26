@@ -352,7 +352,6 @@ custom-slideshow {
     overflow: hidden;
 }
 
-
 .cs-btn--filled-white {
   background: #fff;
   color: #000;
@@ -369,6 +368,9 @@ custom-slideshow {
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease-out;
 }
+.cs-btn--filled-white:hover {
+  color: #fff
+}
 .cs-btn--filled-black {
   background: #000;
   color: #fff;
@@ -384,6 +386,9 @@ custom-slideshow {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease-out;
+}
+.cs-btn--filled-black:hover {
+  color: #000
 }
 .cs-btn--filled-white:hover,
 .cs-btn--filled-black:hover,
@@ -408,7 +413,7 @@ custom-slideshow {
     transition: transform 0.3s ease-out;
 }
 .cs-btn--stroke-white:hover {
-  color: #000;
+  color: #000!important;
 }
 .cs-btn--stroke-black {
   background: transparent;
