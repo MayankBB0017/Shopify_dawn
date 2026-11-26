@@ -106,31 +106,15 @@
           {%- endfor -%}
         {%- endcapture -%}
 
-        {%- capture button_1 -%}
-          {%- render 'custom-slideshow-button',
-            block: block,
-            index: 1,
-            layout: layout
-          -%}
+        {%- capture button_html -%}
+          {%- render 'card-blocks-button', block: block, index: 1, layout: layout -%}
+          {%- render 'card-blocks-button', block: block, index: 2, layout: layout -%}
         {%- endcapture -%}
-
-        {%- capture button_2 -%}
-          {%- render 'custom-slideshow-button',
-            block: block,
-            index: 2,
-            layout: layout
-          -%}
+        {%- capture buttons_wrapped -%}
+          {%- if button_html != blank -%}
+            <div class="ccb-card__button-wrap cs-buttons">{{ button_html }}</div>
+          {%- endif -%}
         {%- endcapture -%}
-
-        {%- assign button_1 = button_1 | strip -%}
-        {%- assign button_2 = button_2 | strip -%}
-
-        {%- if button_1 != blank or button_2 != blank -%}
-          <div class="ccb-card__button-wrap cs-buttons">
-            {{ button_1 }}
-            {{ button_2 }}
-          </div>
-        {%- endif -%}
 
         <li class="ccb__item" {{ block.shopify_attributes }}>
           <div
@@ -206,14 +190,12 @@
                 {%- endif -%}
 
                 {%- unless b.pin_button_bottom -%}
-                  {% render 'custom-slideshow-button', block: block, index: 1, layout: layout %}
-                  {% render 'custom-slideshow-button', block: block, index: 2, layout: layout %}
+                  {{ buttons_wrapped }}
                 {%- endunless -%}
               </div>
 
               {%- if b.pin_button_bottom -%}
-                {% render 'custom-slideshow-button', block: block, index: 1, layout: layout %}
-                {% render 'custom-slideshow-button', block: block, index: 2, layout: layout %}
+                {{ buttons_wrapped }}
               {%- endif -%}
             </div>
           </div>
@@ -334,82 +316,7 @@
         { "type": "url", "id": "link", "label": "Card link", "info": "The whole card becomes clickable." },
 
         { "type": "header", "content": "Buttons" },
-
-        {
-          "type": "header",
-          "content": "Button 1"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button label",
-          "default": "Shop now"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button link"
-        },
-        {
-          "type": "select",
-          "id": "button_style",
-          "label": "Button style",
-          "options": [
-            {
-              "value": "primary",
-              "label": "Primary"
-            },
-            {
-              "value": "secondary",
-              "label": "Secondary"
-            },
-            {
-              "value": "outline",
-              "label": "Outline"
-            }
-          ],
-          "default": "primary"
-        },
-        {
-          "type": "header",
-          "content": "Button 2"
-        },
-        {
-          "type": "text",
-          "id": "button_label_2",
-          "label": "Button label"
-        },
-        {
-          "type": "url",
-          "id": "button_link_2",
-          "label": "Button link"
-        },
-        {
-          "type": "select",
-          "id": "button_style_2",
-          "label": "Button style",
-          "options": [
-            {
-              "value": "primary",
-              "label": "Primary"
-            },
-            {
-              "value": "secondary",
-              "label": "Secondary"
-            },
-            {
-              "value": "outline",
-              "label": "Outline"
-            }
-          ],
-          "default": "primary"
-        },
-        {
-          "type": "checkbox",
-          "id": "pin_button_bottom",
-          "label": "Pin buttons to bottom of card",
-          "default": false
-        },
+        { "type": "checkbox", "id": "pin_button_bottom", "label": "Pin buttons to bottom of card", "default": false },
 
         { "type": "header", "content": "Content position" },
         {
