@@ -245,14 +245,14 @@
         "columns_desktop": "3",
         "columns_mobile": "carousel",
         "aspect_ratio": "4 / 5",
-        "card_radius": 8,
+        "card_radius": 10,
         "hover_effect": "zoom",
         "gap_desktop": 0,
         "gap_mobile": 0,
         "padding_desktop": 0,
         "padding_mobile": 0,
         "section_bg": "",
-        "fade_desktop": false,
+        "fade_desktop": true,
         "fade_mobile": false
       }
     }
