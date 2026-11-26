@@ -348,17 +348,42 @@ custom-slideshow {
   white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  position: relative;
+    overflow: hidden;
 }
+
 
 .cs-btn--filled-white {
   background: #fff;
   color: #000;
   border-color: #fff;
 }
+.cs-btn--filled-white::after {
+    content: "";
+    position: absolute; 
+    width: 220%;
+    height: 200%;
+    background: radial-gradient( circle, #000 10%, transparent 10%);
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-out;
+}
 .cs-btn--filled-black {
   background: #000;
   color: #fff;
   border-color: #000;
+}
+.cs-btn--filled-black::after {
+    content: "";
+    position: absolute; 
+    width: 220%;
+    height: 200%;
+    background: radial-gradient( circle, #fff 10%, transparent 10%);
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-out;
 }
 .cs-btn--filled-white:hover,
 .cs-btn--filled-black:hover,
@@ -370,6 +395,17 @@ custom-slideshow {
   background: transparent;
   color: #fff;
   border-color: #fff;
+}
+.cs-btn--stroke-white::after {
+    content: "";
+    position: absolute; 
+    width: 220%;
+    height: 200%;
+    background: radial-gradient( circle, #fff 10%, transparent 10%);
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-out;
 }
 .cs-btn--stroke-white:hover {
   background: #fff;
