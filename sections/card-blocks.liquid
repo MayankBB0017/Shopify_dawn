@@ -1,0 +1,437 @@
+{{ 'section-card-blocks.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-card-blocks.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign s = section.settings
+  assign devices = 'desktop,mobile' | split: ','
+  assign cols_d = s.columns_desktop | plus: 0
+  if s.columns_mobile == 'carousel'
+    assign sizes_m = '80vw'
+  else
+    assign cols_m = s.columns_mobile | plus: 0
+    assign sizes_m = 'calc(100vw / ' | append: cols_m | append: ')'
+  endif
+  assign sizes_d = 'calc(100vw / ' | append: cols_d | append: ')'
+  if s.columns_mobile == 'carousel'
+    assign cols_m = 1
+  endif
+-%}
+
+<noscript>
+  <style>
+    #ccb-{{ section.id }}.ccb--fade-m,
+    #ccb-{{ section.id }}.ccb--fade-d { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
+
+<card-blocks
+  id="ccb-{{ section.id }}"
+  class="ccb ccb--d-{{ s.columns_desktop }} ccb--m-{{ s.columns_mobile }} ccb--hover-{{ s.hover_effect }}{% if s.fade_desktop %} ccb--fade-d{% endif %}{% if s.fade_mobile %} ccb--fade-m{% endif %}"
+  style="
+    --ccb-section-bg: {{ s.section_bg | default: 'transparent' }};
+    --ccb-cols-d: {{ cols_d }};
+    --ccb-cols-m: {{ cols_m }};
+    --ccb-gap-d: {{ s.gap_desktop }}px;
+    --ccb-gap-m: {{ s.gap_mobile }}px;
+    --ccb-pad-d: {{ s.padding_desktop }}px;
+    --ccb-pad-m: {{ s.padding_mobile }}px;
+    --ccb-radius: {{ s.card_radius }}px;
+    --ccb-ratio: {{ s.aspect_ratio }};
+  "
+>
+  <div class="page-width">
+    {%- if s.heading != blank -%}
+      <div class="title-wrapper ccb__heading-wrap">
+        <h2 class="title {{ s.heading_size }}">{{ s.heading | escape }}</h2>
+      </div>
+    {%- endif -%}
+
+    <ul class="ccb__list" role="list" data-ccb-list>
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign b = block.settings
+
+          comment
+            Media: a device without its own media falls back to the other device's media.
+          endcomment
+          assign dv = b.video_desktop
+          assign di = b.image_desktop
+          assign mv = b.video_mobile
+          assign mi = b.image_mobile
+          if dv == blank and di == blank
+            assign dv = mv
+            assign di = mi
+          endif
+          if mv == blank and mi == blank
+            assign mv = dv
+            assign mi = di
+          endif
+
+          comment
+            Overlay
+          endcomment
+          assign oc = b.overlay_color
+          assign oc_clear = oc | color_modify: 'alpha', 0
+          case b.overlay_type
+            when 'solid'
+              assign overlay_bg = oc
+            when 'gradient_bottom'
+              assign overlay_bg = 'linear-gradient(to top, ' | append: oc | append: ', ' | append: oc_clear | append: ')'
+            when 'gradient_top'
+              assign overlay_bg = 'linear-gradient(to bottom, ' | append: oc | append: ', ' | append: oc_clear | append: ')'
+            else
+              assign overlay_bg = 'transparent'
+          endcase
+          assign overlay_opacity = b.overlay_opacity | divided_by: 100.0
+        -%}
+
+        {%- capture pos_style -%}
+          {%- assign pos_list = b.position_mobile | append: ',' | append: b.position_desktop | split: ',' -%}
+          {%- for pos in pos_list -%}
+            {%- assign parts = pos | split: '-' -%}
+            {%- assign key = 'd' -%}
+            {%- if forloop.first -%}{%- assign key = 'm' -%}{%- endif -%}
+            {%- case parts[0] -%}
+              {%- when 'top' -%}{%- assign j = 'flex-start' -%}
+              {%- when 'bottom' -%}{%- assign j = 'flex-end' -%}
+              {%- else -%}{%- assign j = 'center' -%}
+            {%- endcase -%}
+            {%- case parts[1] -%}
+              {%- when 'left' -%}{%- assign a = 'flex-start' -%}{%- assign t = 'left' -%}
+              {%- when 'right' -%}{%- assign a = 'flex-end' -%}{%- assign t = 'right' -%}
+              {%- else -%}{%- assign a = 'center' -%}{%- assign t = 'center' -%}
+            {%- endcase -%}
+            --ccb-j-{{ key }}:{{ j }};--ccb-a-{{ key }}:{{ a }};--ccb-t-{{ key }}:{{ t }};
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- capture button_html -%}
+          {%- if b.button_label != blank -%}
+            {%- comment -%} A span, not a link: the whole card is already the link (no nested <a>). {%- endcomment -%}
+            <div class="ccb-card__button-wrap">
+              <span class="ccb-card__button ccb-card__button--{{ b.button_style }}">{{ b.button_label | escape }}</span>
+            </div>
+          {%- endif -%}
+        {%- endcapture -%}
+
+        <li class="ccb__item" {{ block.shopify_attributes }}>
+          <div
+            class="ccb-card ccb-body--{{ b.body_size }}"
+            style="
+              --ccb-text: {{ b.text_color }};
+              --ccb-card-bg: {{ b.background_color }};
+              --ccb-overlay: {{ overlay_bg }};
+              --ccb-overlay-opacity: {{ overlay_opacity }};
+              {{ pos_style | strip | strip_newlines }}
+            "
+          >
+            <div class="ccb-card__media">
+              {%- if dv == blank and di == blank and mv == blank and mi == blank -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'ccb-card__img placeholder-svg' }}
+              {%- else -%}
+                {%- for device in devices -%}
+                  {%- if device == 'desktop' -%}
+                    {%- assign video = dv -%}
+                    {%- assign image = di -%}
+                    {%- assign sizes = sizes_d -%}
+                  {%- else -%}
+                    {%- assign video = mv -%}
+                    {%- assign image = mi -%}
+                    {%- assign sizes = sizes_m -%}
+                  {%- endif -%}
+                  <div class="ccb-card__slot ccb-card__slot--{{ device }}">
+                    {%- if video != blank -%}
+                      {{
+                        video
+                        | video_tag: image_size: '1100x', autoplay: true, loop: true, muted: true, controls: false, preload: 'metadata', class: 'ccb-card__img'
+                      }}
+                    {%- elsif image != blank -%}
+                      {%- assign alt = image.alt | default: '' -%}
+                      {{
+                        image
+                        | image_url: width: 1600
+                        | image_tag: loading: 'lazy', widths: '375, 550, 750, 1100, 1500, 1600', sizes: sizes, class: 'ccb-card__img', alt: alt
+                      }}
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+
+            <div class="ccb-card__overlay" aria-hidden="true"></div>
+
+            <div class="ccb-card__inner">
+              <div class="ccb-card__text">
+                {%- if b.title != blank -%}
+                  <h3 class="ccb-card__title">
+                    {%- capture title_inner -%}
+                      <span class="ccb-card__title-m {{ b.title_size_mobile }}">{{ b.title | escape }}</span>
+                      <span class="ccb-card__title-d {{ b.title_size_desktop }}">{{ b.title | escape }}</span>
+                    {%- endcapture -%}
+                    {%- if b.link != blank -%}
+                      <a href="{{ b.link }}" class="ccb-card__link">{{ title_inner }}</a>
+                    {%- else -%}
+                      {{ title_inner }}
+                    {%- endif -%}
+                  </h3>
+                {%- elsif b.link != blank -%}
+                  <a
+                    href="{{ b.link }}"
+                    class="ccb-card__link"
+                    aria-label="{{ b.button_label | default: 'Open card' | escape }}"
+                  ></a>
+                {%- endif -%}
+
+                {%- if b.description != blank -%}
+                  <div class="ccb-card__description">{{ b.description | escape | newline_to_br }}</div>
+                {%- endif -%}
+
+                {%- unless b.pin_button_bottom -%}
+                  {{ button_html }}
+                {%- endunless -%}
+              </div>
+
+              {%- if b.pin_button_bottom -%}
+                {{ button_html }}
+              {%- endif -%}
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if s.columns_mobile == 'carousel' and section.blocks.size > 1 -%}
+      <div class="ccb__controls">
+        <button type="button" class="ccb__arrow ccb__arrow--prev" data-ccb-prev aria-label="{{ 'accessibility.previous_slide' | t }}">
+          {% render 'icon-caret' %}
+        </button>
+        <button type="button" class="ccb__arrow ccb__arrow--next" data-ccb-next aria-label="{{ 'accessibility.next_slide' | t }}">
+          {% render 'icon-caret' %}
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+</card-blocks>
+
+{% schema %}
+{
+  "name": "Card blocks",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Title" },
+    { "type": "text", "id": "heading", "label": "Title", "default": "Card blocks" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Title size",
+      "options": [
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Extra large" }
+      ],
+      "default": "h1"
+    },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Desktop columns",
+      "options": [
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" },
+        { "value": "4", "label": "4 columns" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Mobile layout",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Card aspect ratio",
+      "options": [
+        { "value": "4 / 5", "label": "4:5" },
+        { "value": "1 / 1", "label": "1:1" },
+        { "value": "3 / 2", "label": "3:2" }
+      ],
+      "default": "4 / 5"
+    },
+    { "type": "range", "id": "card_radius", "label": "Card corner radius", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+
+    { "type": "header", "content": "Desktop hover" },
+    {
+      "type": "select",
+      "id": "hover_effect",
+      "label": "Hover effect",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "zoom", "label": "Zoom in" }
+      ],
+      "default": "zoom"
+    },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "gap_desktop", "label": "Gap between cards (desktop)", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "gap_mobile", "label": "Gap between cards (mobile)", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_desktop", "label": "Section padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_mobile", "label": "Section padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "section_bg", "label": "Section background" },
+
+    { "type": "header", "content": "Animation" },
+    { "type": "checkbox", "id": "fade_desktop", "label": "Fade in on desktop", "default": false },
+    { "type": "checkbox", "id": "fade_mobile", "label": "Fade in on mobile", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "header", "content": "Media" },
+        { "type": "image_picker", "id": "image_desktop", "label": "Desktop image" },
+        { "type": "video", "id": "video_desktop", "label": "Desktop video", "info": "Replaces the desktop image if set." },
+        { "type": "image_picker", "id": "image_mobile", "label": "Mobile image" },
+        { "type": "video", "id": "video_mobile", "label": "Mobile video", "info": "Replaces the mobile image if set." },
+
+        { "type": "header", "content": "Content" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Card title" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "url", "id": "link", "label": "Card link", "info": "The whole card becomes clickable." },
+
+        { "type": "header", "content": "Button" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "filled", "label": "Filled" },
+            { "value": "stroke", "label": "Stroke" },
+            { "value": "link", "label": "Link" }
+          ],
+          "default": "filled"
+        },
+        { "type": "checkbox", "id": "pin_button_bottom", "label": "Pin button to bottom of card", "default": false },
+
+        { "type": "header", "content": "Content position" },
+        {
+          "type": "select",
+          "id": "position_desktop",
+          "label": "Desktop position",
+          "options": [
+            { "value": "top-left", "label": "Top left" },
+            { "value": "top-center", "label": "Top center" },
+            { "value": "top-right", "label": "Top right" },
+            { "value": "center-left", "label": "Middle left" },
+            { "value": "center-center", "label": "Middle center" },
+            { "value": "center-right", "label": "Middle right" },
+            { "value": "bottom-left", "label": "Bottom left" },
+            { "value": "bottom-center", "label": "Bottom center" },
+            { "value": "bottom-right", "label": "Bottom right" }
+          ],
+          "default": "bottom-left"
+        },
+        {
+          "type": "select",
+          "id": "position_mobile",
+          "label": "Mobile position",
+          "options": [
+            { "value": "top-left", "label": "Top left" },
+            { "value": "top-center", "label": "Top center" },
+            { "value": "top-right", "label": "Top right" },
+            { "value": "center-left", "label": "Middle left" },
+            { "value": "center-center", "label": "Middle center" },
+            { "value": "center-right", "label": "Middle right" },
+            { "value": "bottom-left", "label": "Bottom left" },
+            { "value": "bottom-center", "label": "Bottom center" },
+            { "value": "bottom-right", "label": "Bottom right" }
+          ],
+          "default": "bottom-left"
+        },
+
+        { "type": "header", "content": "Typography" },
+        {
+          "type": "select",
+          "id": "title_size_desktop",
+          "label": "Title size (desktop)",
+          "options": [
+            { "value": "h5", "label": "Heading 5" },
+            { "value": "h4", "label": "Heading 4" },
+            { "value": "h3", "label": "Heading 3" },
+            { "value": "h2", "label": "Heading 2" },
+            { "value": "h1", "label": "Heading 1" }
+          ],
+          "default": "h3"
+        },
+        {
+          "type": "select",
+          "id": "title_size_mobile",
+          "label": "Title size (mobile)",
+          "options": [
+            { "value": "h5", "label": "Heading 5" },
+            { "value": "h4", "label": "Heading 4" },
+            { "value": "h3", "label": "Heading 3" },
+            { "value": "h2", "label": "Heading 2" },
+            { "value": "h1", "label": "Heading 1" }
+          ],
+          "default": "h4"
+        },
+        {
+          "type": "select",
+          "id": "body_size",
+          "label": "Description size",
+          "options": [
+            { "value": "16", "label": "16px" },
+            { "value": "14", "label": "14px" },
+            { "value": "12", "label": "12px" }
+          ],
+          "default": "14"
+        },
+
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+        { "type": "color", "id": "background_color", "label": "Card background", "default": "#121212" },
+
+        { "type": "header", "content": "Overlay" },
+        {
+          "type": "select",
+          "id": "overlay_type",
+          "label": "Overlay type",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "solid", "label": "Solid" },
+            { "value": "gradient_bottom", "label": "Gradient from bottom" },
+            { "value": "gradient_top", "label": "Gradient from top" }
+          ],
+          "default": "none"
+        },
+        { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#000000" },
+        { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 40 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card blocks",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
