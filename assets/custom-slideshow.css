@@ -112,9 +112,10 @@ custom-slideshow {
   aspect-ratio: auto;
 }
 
-/* Layout 2: every slide is at least 810px tall on desktop (min-height beats max-height) */
+/* Layouts 2 and 3: every slide is at least 810px tall on desktop (min-height beats
+   max-height). In Layout 3 the text column stretches to the image column height. */
 @media screen and (min-width: 750px) {
-  .cs-slideshow--two_col .cs-slide__media {
+  .cs-slideshow:is(.cs-slideshow--two_col, .cs-slideshow--split) .cs-slide__media {
     min-height: 810px;
   }
 }
