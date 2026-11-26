@@ -137,9 +137,104 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "card_blocks_8eR67C": {
+      "type": "card-blocks",
+      "blocks": {
+        "card_MzDeak": {
+          "type": "card",
+          "settings": {
+            "image_desktop": "shopify://shop_images/557a82d136a08d354b17e079af8006f62dd19bd9.png",
+            "title": "Carritos",
+            "description": "",
+            "link": "",
+            "button_label": "Ver Todo",
+            "button_style": "stroke",
+            "pin_button_bottom": false,
+            "position_desktop": "bottom-left",
+            "position_mobile": "bottom-left",
+            "title_size_desktop": "h3",
+            "title_size_mobile": "h4",
+            "body_size": "14",
+            "text_color": "#FFFFFF",
+            "background_color": "#121212",
+            "overlay_type": "none",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "card_AXmwGp": {
+          "type": "card",
+          "settings": {
+            "image_desktop": "shopify://shop_images/64c691100296c42f3c988851cccf311988fe8467.png",
+            "title": "Novedades",
+            "description": "",
+            "link": "",
+            "button_label": "Ver Todo",
+            "button_style": "stroke",
+            "pin_button_bottom": false,
+            "position_desktop": "bottom-left",
+            "position_mobile": "bottom-left",
+            "title_size_desktop": "h3",
+            "title_size_mobile": "h4",
+            "body_size": "14",
+            "text_color": "#FFFFFF",
+            "background_color": "#121212",
+            "overlay_type": "none",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "card_CRgTe3": {
+          "type": "card",
+          "settings": {
+            "image_desktop": "shopify://shop_images/a055b21096edf1f348b8b3f976b400dfab3c5881.jpg",
+            "title": "Sillas de coche",
+            "description": "",
+            "link": "",
+            "button_label": "Ver Todo",
+            "button_style": "stroke",
+            "pin_button_bottom": false,
+            "position_desktop": "bottom-left",
+            "position_mobile": "bottom-left",
+            "title_size_desktop": "h3",
+            "title_size_mobile": "h4",
+            "body_size": "14",
+            "text_color": "#FFFFFF",
+            "background_color": "#121212",
+            "overlay_type": "none",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        }
+      },
+      "block_order": [
+        "card_MzDeak",
+        "card_AXmwGp",
+        "card_CRgTe3"
+      ],
+      "custom_css": [],
+      "name": "Card blocks",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "columns_desktop": "3",
+        "columns_mobile": "1",
+        "aspect_ratio": "4 / 5",
+        "card_radius": 0,
+        "hover_effect": "zoom",
+        "gap_desktop": 0,
+        "gap_mobile": 0,
+        "padding_desktop": 0,
+        "padding_mobile": 0,
+        "section_bg": "",
+        "fade_desktop": false,
+        "fade_mobile": false
+      }
     }
   },
   "order": [
-    "custom_slideshow_ReiBeQ"
+    "custom_slideshow_ReiBeQ",
+    "card_blocks_8eR67C"
   ]
 }
