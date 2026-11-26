@@ -5,6 +5,7 @@
   Accepts:
   - block: the slide block
   - index: 1 or 2 (which button to render)
+  - layout: the section layout (full, two_col or split)
 {%- endcomment -%}
 
 {%- liquid
@@ -20,7 +21,24 @@
 
   assign label = block.settings[label_key]
   assign link = block.settings[link_key]
-  assign btn_style = block.settings[style_key] | default: 'filled_white'
+  assign btn_style = block.settings[style_key] | default: 'default'
+
+  # "Default" depends on the layout
+  if btn_style == 'default'
+    if layout == 'split'
+      if index == 1
+        assign btn_style = 'filled_black'
+      else
+        assign btn_style = 'link_black'
+      endif
+    else
+      if index == 1
+        assign btn_style = 'filled_white'
+      else
+        assign btn_style = 'stroke_white'
+      endif
+    endif
+  endif
 -%}
 
 {%- if label != blank -%}
@@ -30,7 +48,7 @@
       --cs-btn-color: {{ block.settings[color_key] | default: '#000000' }};
       --cs-btn-border: {{ block.settings[border_key] | default: '#ffffff' }};
       --cs-btn-bw: {{ block.settings[width_key] | default: 1 }}px;
-      --cs-btn-radius: {{ block.settings[radius_key] | default: 0 }}px;
+      --cs-btn-radius: {{ block.settings[radius_key] | default: 8 }}px;
     {%- endif -%}
   {%- endcapture -%}
 

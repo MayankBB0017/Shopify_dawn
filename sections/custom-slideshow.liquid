@@ -9,6 +9,11 @@
 {{ 'custom-slideshow.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'custom-slideshow.js' | asset_url }}" defer="defer"></script>
 
+{%- comment -%} Instrument Sans (used for the description) {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+
 {%- liquid
   assign layout = section.settings.layout
   assign slide_count = section.blocks.size
@@ -39,35 +44,66 @@
     assign autoplay_on = true
   endif
 
-  # Aspect ratios ("adapt" = use the first slide's image)
-  assign first_block = section.blocks.first
+  # Default text color (Layout 3 text sits on a light background)
+  assign default_text_color = '#ffffff'
+  if layout == 'split'
+    assign default_text_color = '#000000'
+  endif
 
-  assign ratio_d = section.settings.ratio_desktop
-  if ratio_d == 'adapt'
-    assign ratio_d = '16 / 9'
+  # "Original" size uses the first slide's own image ratio
+  assign first_block = section.blocks.first
+  assign ratio_d = '16 / 9'
+  assign ratio_m = '16 / 9'
+  if first_block.settings.media_type != 'video' or layout == 'split'
     if first_block.settings.image != blank
       assign ratio_d = first_block.settings.image.aspect_ratio
+      assign ratio_m = ratio_d
+    endif
+    if first_block.settings.image_mobile != blank
+      assign ratio_m = first_block.settings.image_mobile.aspect_ratio
     endif
   endif
 
-  assign ratio_m = section.settings.ratio_mobile
-  if ratio_m == 'adapt'
-    assign ratio_m = '1 / 1'
-    assign adapt_img_m = first_block.settings.image_mobile | default: first_block.settings.image
-    if adapt_img_m != blank
-      assign ratio_m = adapt_img_m.aspect_ratio
-    endif
-  endif
+  # Media size: "original" = height follows the ratio, others = fixed height
+  assign height_d = 'auto'
+  assign aspect_d = ratio_d
+  case section.settings.size_desktop
+    when 'large'
+      assign height_d = '770px'
+      assign aspect_d = 'auto'
+    when 'medium'
+      assign height_d = '550px'
+      assign aspect_d = 'auto'
+    when 'small'
+      assign height_d = '400px'
+      assign aspect_d = 'auto'
+  endcase
 
-  # Maximum height (0 = no limit)
+  assign height_m = 'auto'
+  assign aspect_m = ratio_m
+  case section.settings.size_mobile
+    when 'large'
+      assign height_m = '770px'
+      assign aspect_m = 'auto'
+    when 'medium'
+      assign height_m = '550px'
+      assign aspect_m = 'auto'
+    when 'small'
+      assign height_m = '400px'
+      assign aspect_m = 'auto'
+  endcase
+
+  # Maximum height (0 = no limit). Ignored when "Fit to screen" is on.
   assign max_h_d = 'none'
-  if section.settings.max_height_desktop > 0
-    assign max_h_d = section.settings.max_height_desktop | append: section.settings.max_height_unit
-  endif
   assign max_h_m = 'none'
-  if section.settings.max_height_mobile > 0
-    assign max_h_m = section.settings.max_height_mobile | append: section.settings.max_height_unit
-  endif
+  unless section.settings.fit_screen
+    if section.settings.max_height_desktop > 0
+      assign max_h_d = section.settings.max_height_desktop | append: section.settings.max_height_unit
+    endif
+    if section.settings.max_height_mobile > 0
+      assign max_h_m = section.settings.max_height_mobile | append: section.settings.max_height_unit
+    endif
+  endunless
 
   # Fit to screen: on mobile, stacked slides share the screen
   assign fit_m = '100svh'
@@ -96,9 +132,9 @@
 
 {%- capture overlay_bg -%}
   {%- if section.settings.overlay_type == 'gradient' -%}
-    linear-gradient({{ section.settings.gradient_direction }}, {{ section.settings.gradient_start }}, {{ section.settings.gradient_end }})
+    linear-gradient({{ section.settings.gradient_direction | default: 'to top' }}, {{ section.settings.gradient_start | default: '#000000' }}, {{ section.settings.gradient_end | default: '#ffffff' }})
   {%- else -%}
-    {{ section.settings.overlay_color }}
+    {{ section.settings.overlay_color | default: '#000000' }}
   {%- endif -%}
 {%- endcapture -%}
 
@@ -109,17 +145,23 @@
   }
 
   #CustomSlideshow-{{ section.id }} {
-    --cs-ratio: {{ ratio_m }};
+    --cs-h: {{ height_m }};
+    --cs-ratio: {{ aspect_m }};
     --cs-max-h: {{ max_h_m }};
     --cs-fit-h: {{ fit_m }};
     --cs-cols: {{ per_view }};
-    --cs-overlay-bg: {{ overlay_bg | strip }};
-    --cs-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
     --cs-dot: {{ section.settings.dot_color }};
     --cs-dot-active: {{ section.settings.dot_active_color }};
     --cs-split-bg: {{ section.settings.split_text_bg }};
     --cs-split-cols: {{ split_text_w }}fr {{ split_image_w }}fr;
   }
+
+  {%- if show_overlay -%}
+    #CustomSlideshow-{{ section.id }} .cs-overlay {
+      background: {{ overlay_bg | strip }};
+      opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    }
+  {%- endif -%}
 
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
@@ -128,16 +170,29 @@
     }
 
     #CustomSlideshow-{{ section.id }} {
-      --cs-ratio: {{ ratio_d }};
+      --cs-h: {{ height_d }};
+      --cs-ratio: {{ aspect_d }};
       --cs-max-h: {{ max_h_d }};
       --cs-fit-h: 100svh;
     }
   }
 
   {%- for block in section.blocks -%}
-    {%- assign sel = '#CustomSlide-' | append: block.id -%}
-    {{ sel }} .cs-title { color: {{ block.settings.title_color }}; }
-    {{ sel }} .cs-text { color: {{ block.settings.text_color }}; }
+    {%- liquid
+      assign sel = '#CustomSlide-' | append: block.id
+
+      assign title_color = block.settings.title_color
+      if title_color == blank or title_color.alpha == 0
+        assign title_color = default_text_color
+      endif
+
+      assign text_color = block.settings.text_color
+      if text_color == blank or text_color.alpha == 0
+        assign text_color = default_text_color
+      endif
+    -%}
+    {{ sel }} .cs-title { color: {{ title_color }}; }
+    {{ sel }} .cs-text { color: {{ text_color }}; }
     {{ sel }} .cs-inner { gap: {{ block.settings.gap }}px; }
     {{ sel }} .cs-content {
       padding: {{ block.settings.padding_top_mobile }}px {{ block.settings.padding_right_mobile }}px {{ block.settings.padding_bottom_mobile }}px {{ block.settings.padding_left_mobile }}px;
@@ -189,13 +244,27 @@
             assign video_d = block.settings.video
             assign video_m = block.settings.video_mobile
 
-            # Layout 3 is image-only
-            assign show_video = false
+            # One media type per slide. Layout 3 is image-only.
+            assign use_video = false
             if layout != 'split' and block.settings.media_type == 'video'
-              if video_d != blank or video_m != blank
-                assign show_video = true
-              endif
+              assign use_video = true
             endif
+
+            # Alignment: "auto" = center (Layouts 1-2) or left (Layout 3)
+            assign auto_h = 'center'
+            if layout == 'split'
+              assign auto_h = 'left'
+            endif
+            assign h_d = block.settings.h_align_desktop
+            if h_d == 'auto' or h_d == blank
+              assign h_d = auto_h
+            endif
+            assign h_m = block.settings.h_align_mobile
+            if h_m == 'auto' or h_m == blank
+              assign h_m = auto_h
+            endif
+            assign v_d = block.settings.v_align_desktop | default: 'bottom'
+            assign v_m = block.settings.v_align_mobile | default: 'bottom'
 
             assign placeholder_n = forloop.index0 | modulo: 2 | plus: 1
             assign placeholder_name = 'hero-apparel-' | append: placeholder_n
@@ -203,13 +272,15 @@
 
           {%- capture media_html -%}
             <div class="cs-slide__media">
-              {%- if show_video -%}
+              {%- if use_video -%}
                 {%- if video_d != blank and video_m != blank -%}
                   {{ video_d | video_tag: image_size: '1920x', loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', class: 'cs-video cs-desktop-only' }}
                   {{ video_m | video_tag: image_size: '1080x', loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', class: 'cs-video cs-mobile-only' }}
-                {%- else -%}
+                {%- elsif video_d != blank or video_m != blank -%}
                   {%- assign video_single = video_d | default: video_m -%}
                   {{ video_single | video_tag: image_size: '1920x', loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', class: 'cs-video' }}
+                {%- else -%}
+                  {{ placeholder_name | placeholder_svg_tag: 'cs-img placeholder-svg' }}
                 {%- endif -%}
               {%- elsif image_d != blank or image_m != blank -%}
                 {%- assign img_main = image_d | default: image_m -%}
@@ -245,10 +316,10 @@
           {%- capture content_html -%}
             <div
               class="cs-slide__content cs-content"
-              data-h-d="{{ block.settings.h_align_desktop }}"
-              data-v-d="{{ block.settings.v_align_desktop }}"
-              data-h-m="{{ block.settings.h_align_mobile }}"
-              data-v-m="{{ block.settings.v_align_mobile }}"
+              data-h-d="{{ h_d }}"
+              data-v-d="{{ v_d }}"
+              data-h-m="{{ h_m }}"
+              data-v-m="{{ v_m }}"
             >
               <div class="cs-inner">
                 {%- if block.settings.heading != blank -%}
@@ -272,8 +343,8 @@
                 {%- endif -%}
 
                 {%- capture buttons_html -%}
-                  {%- render 'custom-slideshow-button', block: block, index: 1 -%}
-                  {%- render 'custom-slideshow-button', block: block, index: 2 -%}
+                  {%- render 'custom-slideshow-button', block: block, index: 1, layout: layout -%}
+                  {%- render 'custom-slideshow-button', block: block, index: 2, layout: layout -%}
                 {%- endcapture -%}
                 {%- if buttons_html != blank -%}
                   <div class="cs-buttons">{{ buttons_html }}</div>
@@ -333,15 +404,27 @@
   "class": "custom-slideshow-section",
   "max_blocks": 10,
   "settings": [
-    { "type": "header", "content": "Layout" },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
     {
       "type": "select",
       "id": "layout",
       "label": "Layout",
       "options": [
-        { "value": "full", "label": "Layout 1 - Full-width slide" },
-        { "value": "two_col", "label": "Layout 2 - Two-column slides" },
-        { "value": "split", "label": "Layout 3 - Text left, image right" }
+        {
+          "value": "full",
+          "label": "Layout 1 - Full-width slide"
+        },
+        {
+          "value": "two_col",
+          "label": "Layout 2 - Two-column slides"
+        },
+        {
+          "value": "split",
+          "label": "Layout 3 - Text left, image right"
+        }
       ],
       "default": "full"
     },
@@ -350,12 +433,18 @@
       "id": "two_col_advance",
       "label": "Slides move",
       "options": [
-        { "value": "pair", "label": "Two slides at a time" },
-        { "value": "single", "label": "One slide at a time" }
+        {
+          "value": "pair",
+          "label": "Two slides at a time"
+        },
+        {
+          "value": "single",
+          "label": "One slide at a time"
+        }
       ],
       "default": "pair",
       "visible_if": "{{ section.settings.layout == 'two_col' }}",
-      "info": "Layout 2 stacks the two columns on mobile."
+      "info": "Layout 2 stacks the two columns on mobile. Each slide is at least 810px tall on desktop."
     },
     {
       "type": "range",
@@ -374,8 +463,14 @@
       "id": "split_mobile_order",
       "label": "Mobile order",
       "options": [
-        { "value": "text", "label": "Text first" },
-        { "value": "image", "label": "Image first" }
+        {
+          "value": "text",
+          "label": "Text first"
+        },
+        {
+          "value": "image",
+          "label": "Image first"
+        }
       ],
       "default": "image",
       "visible_if": "{{ section.settings.layout == 'split' }}"
@@ -384,54 +479,83 @@
       "type": "color",
       "id": "split_text_bg",
       "label": "Text column background",
-      "default": "#121212",
+      "default": "#ffffff",
       "visible_if": "{{ section.settings.layout == 'split' }}",
       "info": "Text sits on this color, not on the image."
     },
-
-    { "type": "header", "content": "Media size" },
     {
-      "type": "select",
-      "id": "ratio_desktop",
-      "label": "Aspect ratio (desktop)",
-      "options": [
-        { "value": "adapt", "label": "Adapt to first image" },
-        { "value": "16 / 9", "label": "16:9" },
-        { "value": "4 / 3", "label": "4:3" },
-        { "value": "3 / 4", "label": "3:4" },
-        { "value": "1 / 1", "label": "1:1" },
-        { "value": "21 / 9", "label": "21:9" }
-      ],
-      "default": "16 / 9"
+      "type": "header",
+      "content": "Media size"
     },
     {
       "type": "select",
-      "id": "ratio_mobile",
-      "label": "Aspect ratio (mobile)",
+      "id": "size_desktop",
+      "label": "Media size (desktop)",
       "options": [
-        { "value": "adapt", "label": "Adapt to first image" },
-        { "value": "16 / 9", "label": "16:9" },
-        { "value": "4 / 3", "label": "4:3" },
-        { "value": "3 / 4", "label": "3:4" },
-        { "value": "1 / 1", "label": "1:1" },
-        { "value": "21 / 9", "label": "21:9" }
+        {
+          "value": "original",
+          "label": "Original image ratio"
+        },
+        {
+          "value": "large",
+          "label": "Large (770px height)"
+        },
+        {
+          "value": "medium",
+          "label": "Medium (550px height)"
+        },
+        {
+          "value": "small",
+          "label": "Small (400px height)"
+        }
       ],
-      "default": "3 / 4"
+      "default": "original",
+      "info": "Original keeps the first image's ratio. Media always fills the slide (cropped, never stretched)."
+    },
+    {
+      "type": "select",
+      "id": "size_mobile",
+      "label": "Media size (mobile)",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original image ratio"
+        },
+        {
+          "value": "large",
+          "label": "Large (770px height)"
+        },
+        {
+          "value": "medium",
+          "label": "Medium (550px height)"
+        },
+        {
+          "value": "small",
+          "label": "Small (400px height)"
+        }
+      ],
+      "default": "original"
     },
     {
       "type": "checkbox",
       "id": "fit_screen",
       "label": "Fit to screen",
       "default": false,
-      "info": "Slide height matches the screen height and the aspect ratio is ignored. In Layout 2 and 3 on mobile, each stacked item takes half the screen."
+      "info": "Slide height matches the screen height. Overrides media size and maximum height. In Layouts 2 and 3 on mobile, each stacked item takes half the screen."
     },
     {
       "type": "select",
       "id": "max_height_unit",
       "label": "Maximum height unit",
       "options": [
-        { "value": "px", "label": "Pixels (px)" },
-        { "value": "vh", "label": "Screen height (vh)" }
+        {
+          "value": "px",
+          "label": "Pixels (px)"
+        },
+        {
+          "value": "vh",
+          "label": "Screen height (vh)"
+        }
       ],
       "default": "px"
     },
@@ -443,7 +567,7 @@
       "max": 1200,
       "step": 20,
       "default": 0,
-      "info": "0 = no limit. If the unit is vh, use values from 20 to 100."
+      "info": "0 = no limit. If the unit is vh, use values from 20 to 100. Ignored when Fit to screen is on."
     },
     {
       "type": "range",
@@ -455,16 +579,27 @@
       "default": 0,
       "info": "0 = no limit."
     },
-
-    { "type": "header", "content": "Overlay (Layouts 1 and 2)" },
+    {
+      "type": "header",
+      "content": "Overlay (Layouts 1 and 2)"
+    },
     {
       "type": "select",
       "id": "overlay_type",
       "label": "Overlay type",
       "options": [
-        { "value": "none", "label": "None" },
-        { "value": "color", "label": "Solid color" },
-        { "value": "gradient", "label": "Gradient" }
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "color",
+          "label": "Solid color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
       ],
       "default": "color"
     },
@@ -494,10 +629,22 @@
       "id": "gradient_direction",
       "label": "Gradient direction",
       "options": [
-        { "value": "to top", "label": "Bottom to top" },
-        { "value": "to bottom", "label": "Top to bottom" },
-        { "value": "to left", "label": "Right to left" },
-        { "value": "to right", "label": "Left to right" }
+        {
+          "value": "to top",
+          "label": "Bottom to top"
+        },
+        {
+          "value": "to bottom",
+          "label": "Top to bottom"
+        },
+        {
+          "value": "to left",
+          "label": "Right to left"
+        },
+        {
+          "value": "to right",
+          "label": "Left to right"
+        }
       ],
       "default": "to top",
       "visible_if": "{{ section.settings.overlay_type == 'gradient' }}"
@@ -510,11 +657,13 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 30,
+      "default": 40,
       "visible_if": "{{ section.settings.overlay_type != 'none' }}"
     },
-
-    { "type": "header", "content": "Animation" },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
     {
       "type": "checkbox",
       "id": "enable_fade",
@@ -539,8 +688,10 @@
       "default": 5,
       "visible_if": "{{ section.settings.autoplay }}"
     },
-
-    { "type": "header", "content": "Navigation dots" },
+    {
+      "type": "header",
+      "content": "Navigation dots"
+    },
     {
       "type": "paragraph",
       "content": "Dots only appear when there is more than one slide to navigate."
@@ -555,10 +706,12 @@
       "type": "color",
       "id": "dot_active_color",
       "label": "Active dot color",
-      "default": "#ffffff"
+      "default": "#000000"
     },
-
-    { "type": "header", "content": "Accessibility" },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
     {
       "type": "text",
       "id": "a11y_label",
@@ -566,8 +719,10 @@
       "default": "Slideshow",
       "info": "Read aloud by screen readers."
     },
-
-    { "type": "header", "content": "Section spacing" },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
     {
       "type": "range",
       "id": "padding_top",
@@ -594,28 +749,39 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "header", "content": "Media" },
+        {
+          "type": "header",
+          "content": "Media"
+        },
         {
           "type": "select",
           "id": "media_type",
           "label": "Media type",
           "options": [
-            { "value": "image", "label": "Image" },
-            { "value": "video", "label": "Video" }
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
           ],
           "default": "image",
-          "info": "Layout 3 always uses the images below and ignores video."
+          "info": "Only the fields of the selected type are shown. Layout 3 supports Image only, so set the slide to Image there."
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image (desktop)"
+          "label": "Image (desktop)",
+          "visible_if": "{{ block.settings.media_type == 'image' }}"
         },
         {
           "type": "image_picker",
           "id": "image_mobile",
           "label": "Image (mobile)",
-          "info": "Optional. Desktop image is used if empty."
+          "info": "Optional. Desktop image is used if empty.",
+          "visible_if": "{{ block.settings.media_type == 'image' }}"
         },
         {
           "type": "video",
@@ -631,8 +797,10 @@
           "visible_if": "{{ block.settings.media_type == 'video' }}",
           "info": "Optional. Desktop video is used if empty."
         },
-
-        { "type": "header", "content": "Content" },
+        {
+          "type": "header",
+          "content": "Content"
+        },
         {
           "type": "inline_richtext",
           "id": "heading",
@@ -645,8 +813,10 @@
           "label": "Description",
           "default": "<p>Share details about your offer, collection or story.</p>"
         },
-
-        { "type": "header", "content": "Button 1" },
+        {
+          "type": "header",
+          "content": "Button 1"
+        },
         {
           "type": "text",
           "id": "button_1_label",
@@ -654,21 +824,51 @@
           "default": "Shop now",
           "info": "Leave empty to hide the button."
         },
-        { "type": "url", "id": "button_1_link", "label": "Link" },
+        {
+          "type": "url",
+          "id": "button_1_link",
+          "label": "Link"
+        },
         {
           "type": "select",
           "id": "button_1_style",
           "label": "Style",
           "options": [
-            { "value": "filled_white", "label": "Filled white" },
-            { "value": "filled_black", "label": "Filled black" },
-            { "value": "stroke_white", "label": "Stroke white" },
-            { "value": "stroke_black", "label": "Stroke black" },
-            { "value": "link_white", "label": "Link white" },
-            { "value": "link_black", "label": "Link black" },
-            { "value": "custom", "label": "Customize" }
+            {
+              "value": "default",
+              "label": "Default (by layout)"
+            },
+            {
+              "value": "filled_white",
+              "label": "Filled white"
+            },
+            {
+              "value": "filled_black",
+              "label": "Filled black"
+            },
+            {
+              "value": "stroke_white",
+              "label": "Stroke white"
+            },
+            {
+              "value": "stroke_black",
+              "label": "Stroke black"
+            },
+            {
+              "value": "link_white",
+              "label": "Link white"
+            },
+            {
+              "value": "link_black",
+              "label": "Link black"
+            },
+            {
+              "value": "custom",
+              "label": "Customize"
+            }
           ],
-          "default": "filled_white"
+          "default": "default",
+          "info": "Default = Filled white / Stroke white in Layouts 1-2 and Filled black / Link black in Layout 3."
         },
         {
           "type": "color",
@@ -710,11 +910,13 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 0,
+          "default": 8,
           "visible_if": "{{ block.settings.button_1_style == 'custom' }}"
         },
-
-        { "type": "header", "content": "Button 2" },
+        {
+          "type": "header",
+          "content": "Button 2"
+        },
         {
           "type": "text",
           "id": "button_2_label",
@@ -722,21 +924,51 @@
           "default": "Learn more",
           "info": "Leave empty to hide the button."
         },
-        { "type": "url", "id": "button_2_link", "label": "Link" },
+        {
+          "type": "url",
+          "id": "button_2_link",
+          "label": "Link"
+        },
         {
           "type": "select",
           "id": "button_2_style",
           "label": "Style",
           "options": [
-            { "value": "filled_white", "label": "Filled white" },
-            { "value": "filled_black", "label": "Filled black" },
-            { "value": "stroke_white", "label": "Stroke white" },
-            { "value": "stroke_black", "label": "Stroke black" },
-            { "value": "link_white", "label": "Link white" },
-            { "value": "link_black", "label": "Link black" },
-            { "value": "custom", "label": "Customize" }
+            {
+              "value": "default",
+              "label": "Default (by layout)"
+            },
+            {
+              "value": "filled_white",
+              "label": "Filled white"
+            },
+            {
+              "value": "filled_black",
+              "label": "Filled black"
+            },
+            {
+              "value": "stroke_white",
+              "label": "Stroke white"
+            },
+            {
+              "value": "stroke_black",
+              "label": "Stroke black"
+            },
+            {
+              "value": "link_white",
+              "label": "Link white"
+            },
+            {
+              "value": "link_black",
+              "label": "Link black"
+            },
+            {
+              "value": "custom",
+              "label": "Customize"
+            }
           ],
-          "default": "stroke_white"
+          "default": "default",
+          "info": "Default = Filled white / Stroke white in Layouts 1-2 and Filled black / Link black in Layout 3."
         },
         {
           "type": "color",
@@ -778,68 +1010,134 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 0,
+          "default": 8,
           "visible_if": "{{ block.settings.button_2_style == 'custom' }}"
         },
-
-        { "type": "header", "content": "Content alignment" },
+        {
+          "type": "header",
+          "content": "Content alignment"
+        },
         {
           "type": "select",
           "id": "h_align_desktop",
           "label": "Horizontal alignment (desktop)",
           "options": [
-            { "value": "left", "label": "Left" },
-            { "value": "center", "label": "Center" },
-            { "value": "right", "label": "Right" }
+            {
+              "value": "auto",
+              "label": "Default (center, or left in Layout 3)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
           ],
-          "default": "center"
+          "default": "auto"
         },
         {
           "type": "select",
           "id": "v_align_desktop",
           "label": "Vertical alignment (desktop)",
           "options": [
-            { "value": "top", "label": "Top" },
-            { "value": "middle", "label": "Middle" },
-            { "value": "bottom", "label": "Bottom" }
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
           ],
-          "default": "middle"
+          "default": "bottom"
         },
         {
           "type": "select",
           "id": "h_align_mobile",
           "label": "Horizontal alignment (mobile)",
           "options": [
-            { "value": "left", "label": "Left" },
-            { "value": "center", "label": "Center" },
-            { "value": "right", "label": "Right" }
+            {
+              "value": "auto",
+              "label": "Default (center, or left in Layout 3)"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
           ],
-          "default": "center"
+          "default": "auto"
         },
         {
           "type": "select",
           "id": "v_align_mobile",
           "label": "Vertical alignment (mobile)",
           "options": [
-            { "value": "top", "label": "Top" },
-            { "value": "middle", "label": "Middle" },
-            { "value": "bottom", "label": "Bottom" }
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
           ],
-          "default": "middle"
+          "default": "bottom"
         },
-
-        { "type": "header", "content": "Typography" },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
         {
           "type": "select",
           "id": "title_size_desktop",
           "label": "Title size (desktop)",
           "options": [
-            { "value": "h1", "label": "H1 (largest)" },
-            { "value": "h2", "label": "H2" },
-            { "value": "h3", "label": "H3" },
-            { "value": "h4", "label": "H4" },
-            { "value": "h5", "label": "H5" },
-            { "value": "h6", "label": "H6 (smallest)" }
+            {
+              "value": "h1",
+              "label": "H1 (largest)"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6 (smallest)"
+            }
           ],
           "default": "h2",
           "info": "Sets the visual size. The title is always output as an H2 tag."
@@ -849,12 +1147,30 @@
           "id": "title_size_mobile",
           "label": "Title size (mobile)",
           "options": [
-            { "value": "h1", "label": "H1 (largest)" },
-            { "value": "h2", "label": "H2" },
-            { "value": "h3", "label": "H3" },
-            { "value": "h4", "label": "H4" },
-            { "value": "h5", "label": "H5" },
-            { "value": "h6", "label": "H6 (smallest)" }
+            {
+              "value": "h1",
+              "label": "H1 (largest)"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6 (smallest)"
+            }
           ],
           "default": "h3"
         },
@@ -863,9 +1179,18 @@
           "id": "text_size_desktop",
           "label": "Description size (desktop)",
           "options": [
-            { "value": "small", "label": "Small" },
-            { "value": "regular", "label": "Regular" },
-            { "value": "big", "label": "Big" }
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "regular",
+              "label": "Regular"
+            },
+            {
+              "value": "big",
+              "label": "Big"
+            }
           ],
           "default": "regular"
         },
@@ -874,9 +1199,18 @@
           "id": "text_size_mobile",
           "label": "Description size (mobile)",
           "options": [
-            { "value": "small", "label": "Small" },
-            { "value": "regular", "label": "Regular" },
-            { "value": "big", "label": "Big" }
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "regular",
+              "label": "Regular"
+            },
+            {
+              "value": "big",
+              "label": "Big"
+            }
           ],
           "default": "regular"
         },
@@ -884,16 +1218,18 @@
           "type": "color",
           "id": "title_color",
           "label": "Title color",
-          "default": "#ffffff"
+          "info": "Leave empty for the default: white in Layouts 1-2, black in Layout 3."
         },
         {
           "type": "color",
           "id": "text_color",
           "label": "Description color",
-          "default": "#ffffff"
+          "info": "Leave empty for the default: white in Layouts 1-2, black in Layout 3."
         },
-
-        { "type": "header", "content": "Spacing" },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
         {
           "type": "range",
           "id": "gap",
