@@ -302,8 +302,8 @@ custom-slideshow {
 .cs-text p { margin: 0; }
 .cs-text p + p { margin-top: 1rem; }
 
-.cs-text[data-size-m='small'] { font-size: 1.4rem; }
-.cs-text[data-size-m='regular'] { font-size: 1.6rem; }
+.cs-text[data-size-m='small'] { font-size: 1.3rem; }
+.cs-text[data-size-m='regular'] { font-size: 1.5rem; }
 .cs-text[data-size-m='big'] { font-size: 1.9rem; }
 
 @media screen and (min-width: 750px) {
@@ -314,8 +314,8 @@ custom-slideshow {
   .cs-title[data-size-d='h5'] { font-size: calc(var(--font-heading-scale, 1) * 2.2rem); }
   .cs-title[data-size-d='h6'] { font-size: calc(var(--font-heading-scale, 1) * 1.8rem); }
 
-  .cs-text[data-size-d='small'] { font-size: 1.5rem; }
-  .cs-text[data-size-d='regular'] { font-size: 1.8rem; }
+  .cs-text[data-size-d='small'] { font-size: 1.4rem; }
+  .cs-text[data-size-d='regular'] { font-size: 1.6rem; }
   .cs-text[data-size-d='big'] { font-size: 2.4rem; }
 }
 
