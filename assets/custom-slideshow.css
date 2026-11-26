@@ -350,6 +350,7 @@ custom-slideshow {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
   position: relative;
     overflow: hidden;
+    z-index: 1
 }
 
 .cs-btn--filled-white {
@@ -367,6 +368,7 @@ custom-slideshow {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease-out;
+    z-index: -1
 }
 .cs-btn--filled-white:hover {
   color: #fff
@@ -386,6 +388,7 @@ custom-slideshow {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease-out;
+    z-index: -1
 }
 .cs-btn--filled-black:hover {
   color: #000
@@ -411,6 +414,7 @@ custom-slideshow {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease-out;
+    z-index: -1
 }
 .cs-btn--stroke-white:hover {
   color: #000!important;
@@ -430,6 +434,7 @@ custom-slideshow {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease-out;
+    z-index: -1
 }
 .cs-btn--stroke-black:hover::after, .cs-btn--stroke-white:hover::after, .cs-btn--filled-black:hover::after, .cs-btn--filled-white:hover::after {
     transform: translate(-50%, -50%) scale(5);
