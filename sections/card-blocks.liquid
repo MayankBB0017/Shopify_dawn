@@ -466,8 +466,7 @@
               "label": "Customize"
             }
           ],
-          "default": "default",
-          "info": "Default = Filled white / Stroke white in Layouts 1-2 and Filled black / Link black in Layout 3."
+          "default": "stroke_white",
         },
         {
           "type": "color",
@@ -512,106 +511,7 @@
           "default": 8,
           "visible_if": "{{ block.settings.button_1_style == 'custom' }}"
         },
-        {
-          "type": "header",
-          "content": "Button 2"
-        },
-        {
-          "type": "text",
-          "id": "button_2_label",
-          "label": "Label",
-          "default": "Learn more",
-          "info": "Leave empty to hide the button."
-        },
-        {
-          "type": "url",
-          "id": "button_2_link",
-          "label": "Link"
-        },
-        {
-          "type": "select",
-          "id": "button_2_style",
-          "label": "Style",
-          "options": [
-            {
-              "value": "default",
-              "label": "Default (by layout)"
-            },
-            {
-              "value": "filled_white",
-              "label": "Filled white"
-            },
-            {
-              "value": "filled_black",
-              "label": "Filled black"
-            },
-            {
-              "value": "stroke_white",
-              "label": "Stroke white"
-            },
-            {
-              "value": "stroke_black",
-              "label": "Stroke black"
-            },
-            {
-              "value": "link_white",
-              "label": "Link white"
-            },
-            {
-              "value": "link_black",
-              "label": "Link black"
-            },
-            {
-              "value": "custom",
-              "label": "Customize"
-            }
-          ],
-          "default": "default",
-          "info": "Default = Filled white / Stroke white in Layouts 1-2 and Filled black / Link black in Layout 3."
-        },
-        {
-          "type": "color",
-          "id": "button_2_bg",
-          "label": "Background color",
-          "default": "#ffffff",
-          "visible_if": "{{ block.settings.button_2_style == 'custom' }}"
-        },
-        {
-          "type": "color",
-          "id": "button_2_color",
-          "label": "Text color",
-          "default": "#000000",
-          "visible_if": "{{ block.settings.button_2_style == 'custom' }}"
-        },
-        {
-          "type": "color",
-          "id": "button_2_border",
-          "label": "Border color",
-          "default": "#ffffff",
-          "visible_if": "{{ block.settings.button_2_style == 'custom' }}"
-        },
-        {
-          "type": "range",
-          "id": "button_2_border_width",
-          "label": "Border width",
-          "min": 0,
-          "max": 8,
-          "step": 1,
-          "unit": "px",
-          "default": 1,
-          "visible_if": "{{ block.settings.button_2_style == 'custom' }}"
-        },
-        {
-          "type": "range",
-          "id": "button_2_radius",
-          "label": "Corner radius",
-          "min": 0,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
-          "default": 8,
-          "visible_if": "{{ block.settings.button_2_style == 'custom' }}"
-        },
+        
         { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 40 }
       ]
     }
