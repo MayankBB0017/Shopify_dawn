@@ -157,10 +157,10 @@
             "title_size_mobile": "h4",
             "body_size": "14",
             "text_color": "#FFFFFF",
-            "background_color": "#121212",
+            "background_color": "#FFFFFF",
             "overlay_type": "none",
             "overlay_color": "#000000",
-            "overlay_opacity": 40
+            "overlay_opacity": 50
           }
         },
         "card_AXmwGp": {
@@ -228,7 +228,7 @@
         "padding_desktop": 0,
         "padding_mobile": 0,
         "section_bg": "",
-        "fade_desktop": false,
+        "fade_desktop": true,
         "fade_mobile": false
       }
     }
