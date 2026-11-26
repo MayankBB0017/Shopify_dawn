@@ -233,7 +233,7 @@
       ],
       "name": "Custom slideshow",
       "settings": {
-        "layout": "two_col",
+        "layout": "split",
         "two_col_advance": "pair",
         "split_image_width": 55,
         "split_mobile_order": "image",
