@@ -12,50 +12,6 @@
     "custom_slideshow_ah9P69": {
       "type": "custom-slideshow",
       "blocks": {
-        "slide_VYYGXa": {
-          "type": "slide",
-          "settings": {
-            "media_type": "video",
-            "video": "shopify://files/videos/85522-589994829_medium.mp4",
-            "heading": "Slide title",
-            "text": "<p>Share details about your offer, collection or story.</p>",
-            "button_1_label": "Shop now",
-            "button_1_link": "",
-            "button_1_style": "default",
-            "button_1_bg": "#ffffff",
-            "button_1_color": "#000000",
-            "button_1_border": "#ffffff",
-            "button_1_border_width": 1,
-            "button_1_radius": 8,
-            "button_2_label": "Learn more",
-            "button_2_link": "",
-            "button_2_style": "default",
-            "button_2_bg": "#ffffff",
-            "button_2_color": "#000000",
-            "button_2_border": "#ffffff",
-            "button_2_border_width": 1,
-            "button_2_radius": 8,
-            "h_align_desktop": "auto",
-            "v_align_desktop": "bottom",
-            "h_align_mobile": "auto",
-            "v_align_mobile": "bottom",
-            "title_size_desktop": "h2",
-            "title_size_mobile": "h3",
-            "text_size_desktop": "regular",
-            "text_size_mobile": "regular",
-            "title_color": "",
-            "text_color": "",
-            "gap": 16,
-            "padding_top_desktop": 48,
-            "padding_bottom_desktop": 48,
-            "padding_left_desktop": 48,
-            "padding_right_desktop": 48,
-            "padding_top_mobile": 24,
-            "padding_bottom_mobile": 24,
-            "padding_left_mobile": 24,
-            "padding_right_mobile": 24
-          }
-        },
         "slide_PjDPJP": {
           "type": "slide",
           "settings": {
@@ -100,11 +56,55 @@
             "padding_left_mobile": 24,
             "padding_right_mobile": 24
           }
+        },
+        "slide_VYYGXa": {
+          "type": "slide",
+          "settings": {
+            "media_type": "video",
+            "video": "shopify://files/videos/85522-589994829_medium.mp4",
+            "heading": "Slide title",
+            "text": "<p>Share details about your offer, collection or story.</p>",
+            "button_1_label": "Shop now",
+            "button_1_link": "",
+            "button_1_style": "default",
+            "button_1_bg": "#ffffff",
+            "button_1_color": "#000000",
+            "button_1_border": "#ffffff",
+            "button_1_border_width": 1,
+            "button_1_radius": 8,
+            "button_2_label": "Learn more",
+            "button_2_link": "",
+            "button_2_style": "default",
+            "button_2_bg": "#ffffff",
+            "button_2_color": "#000000",
+            "button_2_border": "#ffffff",
+            "button_2_border_width": 1,
+            "button_2_radius": 8,
+            "h_align_desktop": "auto",
+            "v_align_desktop": "bottom",
+            "h_align_mobile": "auto",
+            "v_align_mobile": "bottom",
+            "title_size_desktop": "h2",
+            "title_size_mobile": "h3",
+            "text_size_desktop": "regular",
+            "text_size_mobile": "regular",
+            "title_color": "",
+            "text_color": "",
+            "gap": 16,
+            "padding_top_desktop": 48,
+            "padding_bottom_desktop": 48,
+            "padding_left_desktop": 48,
+            "padding_right_desktop": 48,
+            "padding_top_mobile": 24,
+            "padding_bottom_mobile": 24,
+            "padding_left_mobile": 24,
+            "padding_right_mobile": 24
+          }
         }
       },
       "block_order": [
-        "slide_VYYGXa",
-        "slide_PjDPJP"
+        "slide_PjDPJP",
+        "slide_VYYGXa"
       ],
       "name": "Custom slideshow",
       "settings": {
@@ -127,7 +127,7 @@
         "autoplay": false,
         "autoplay_speed": 5,
         "dot_color": "#ffffff",
-        "dot_active_color": "#ffffff",
+        "dot_active_color": "#000000",
         "a11y_label": "Slideshow",
         "padding_top": 0,
         "padding_bottom": 0
