@@ -106,15 +106,31 @@
           {%- endfor -%}
         {%- endcapture -%}
 
-        {%- capture button_html -%}
-          {%- render 'custom-slideshow-button', block: block, index: 1, layout: layout -%}
-          {%- render 'custom-slideshow-button', block: block, index: 2, layout: layout -%}
+        {%- capture button_1 -%}
+          {%- render 'custom-slideshow-button',
+            block: block,
+            index: 1,
+            layout: layout
+          -%}
         {%- endcapture -%}
-        {%- capture buttons_wrapped -%}
-          {%- if button_html != blank -%}
-            <div class="ccb-card__button-wrap cs-buttons">{{ button_html }}</div>
-          {%- endif -%}
+
+        {%- capture button_2 -%}
+          {%- render 'custom-slideshow-button',
+            block: block,
+            index: 2,
+            layout: layout
+          -%}
         {%- endcapture -%}
+
+        {%- assign button_1 = button_1 | strip -%}
+        {%- assign button_2 = button_2 | strip -%}
+
+        {%- if button_1 != blank or button_2 != blank -%}
+          <div class="ccb-card__button-wrap cs-buttons">
+            {{ button_1 }}
+            {{ button_2 }}
+          </div>
+        {%- endif -%}
 
         <li class="ccb__item" {{ block.shopify_attributes }}>
           <div
@@ -190,12 +206,14 @@
                 {%- endif -%}
 
                 {%- unless b.pin_button_bottom -%}
-                  {{ buttons_wrapped }}
+                  {% render 'custom-slideshow-button', block: block, index: 1, layout: layout %}
+                  {% render 'custom-slideshow-button', block: block, index: 2, layout: layout %}
                 {%- endunless -%}
               </div>
 
               {%- if b.pin_button_bottom -%}
-                {{ buttons_wrapped }}
+                {% render 'custom-slideshow-button', block: block, index: 1, layout: layout %}
+                {% render 'custom-slideshow-button', block: block, index: 2, layout: layout %}
               {%- endif -%}
             </div>
           </div>
