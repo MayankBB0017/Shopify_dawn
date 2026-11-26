@@ -262,6 +262,13 @@ card-blocks.ccb {
   margin-top: 1.5rem;
   max-width: 100%;
 }
+.ccb-card__title,
+.ccb-card__title a,
+.ccb-card__title a span,
+.ccb-card__title-m,
+.ccb-card__title-d {
+  color: #FFFFFF !important;
+}
 
 /* ---------- Desktop hover (Default + Hover states) ---------- */
 @media screen and (min-width: 990px) and (hover: hover) {
