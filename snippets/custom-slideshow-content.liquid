@@ -1,0 +1,39 @@
+
+<div
+  class="custom-slideshow__content"
+  style="--content-align: {{ block.settings.content_alignment }};"
+>
+  {% if block.settings.title != blank %}
+    <h2 class="custom-slideshow__title">
+      {{ block.settings.title | escape }}
+    </h2>
+  {% endif %}
+
+  {% if block.settings.description != blank %}
+    <div class="custom-slideshow__description">
+      {{ block.settings.description }}
+    </div>
+  {% endif %}
+
+  <div class="custom-slideshow__buttons">
+    {% for button_block in section.blocks %}
+      {% if button_block.type == 'button'
+        and button_block.settings.slide_index == slide_index
+        and button_block.settings.label != blank
+      %}
+        <a
+          href="{{ button_block.settings.link | default: '#' }}"
+          class="custom-slideshow__button {{ button_block.settings.button_type }}"
+          style="
+            --button-bg: {{ button_block.settings.button_bg }};
+            --button-color: {{ button_block.settings.button_color }};
+            --button-border: {{ button_block.settings.button_border }};
+          "
+          {{ button_block.shopify_attributes }}
+        >
+          {{ button_block.settings.label | escape }}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
