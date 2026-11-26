@@ -1,0 +1,51 @@
+{%- comment -%}
+  snippets/custom-slideshow-button.liquid
+  Renders ONE slide button. The button is skipped when its label is empty.
+
+  Accepts:
+  - block: the slide block
+  - index: 1 or 2 (which button to render)
+{%- endcomment -%}
+
+{%- liquid
+  assign prefix = 'button_' | append: index | append: '_'
+  assign label_key = prefix | append: 'label'
+  assign link_key = prefix | append: 'link'
+  assign style_key = prefix | append: 'style'
+  assign bg_key = prefix | append: 'bg'
+  assign color_key = prefix | append: 'color'
+  assign border_key = prefix | append: 'border'
+  assign width_key = prefix | append: 'border_width'
+  assign radius_key = prefix | append: 'radius'
+
+  assign label = block.settings[label_key]
+  assign link = block.settings[link_key]
+  assign btn_style = block.settings[style_key] | default: 'filled_white'
+-%}
+
+{%- if label != blank -%}
+  {%- capture custom_vars -%}
+    {%- if btn_style == 'custom' -%}
+      --cs-btn-bg: {{ block.settings[bg_key] | default: '#ffffff' }};
+      --cs-btn-color: {{ block.settings[color_key] | default: '#000000' }};
+      --cs-btn-border: {{ block.settings[border_key] | default: '#ffffff' }};
+      --cs-btn-bw: {{ block.settings[width_key] | default: 1 }}px;
+      --cs-btn-radius: {{ block.settings[radius_key] | default: 0 }}px;
+    {%- endif -%}
+  {%- endcapture -%}
+
+  <a
+    class="cs-btn cs-btn--{{ btn_style | replace: '_', '-' }}"
+    {% if link != blank %}
+      href="{{ link }}"
+    {% else %}
+      role="link"
+      aria-disabled="true"
+    {% endif %}
+    {% if custom_vars != blank %}
+      style="{{ custom_vars | strip | strip_newlines }}"
+    {% endif %}
+  >
+    {{- label | escape -}}
+  </a>
+{%- endif -%}
