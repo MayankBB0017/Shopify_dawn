@@ -138,12 +138,14 @@
         "padding_bottom": 0
       }
     },
-    "card_blocks_XnUqgA": {
+    "card_blocks_9q3eCc": {
       "type": "card-blocks",
       "blocks": {
-        "card_qaYtCV": {
+        "card_dLfjrb": {
           "type": "card",
           "settings": {
+            "image_desktop": "shopify://shop_images/7358a4bb781bf1aa0107dd015b5d6fc18d06c22c.jpg",
+            "image_mobile": "shopify://shop_images/7358a4bb781bf1aa0107dd015b5d6fc18d06c22c.jpg",
             "title": "Card title",
             "description": "",
             "link": "",
@@ -155,15 +157,17 @@
             "body_size": "14",
             "text_color": "#FFFFFF",
             "description_color": "#FFFFFF",
-            "background_color": "#121212",
+            "background_color": "#fff",
             "overlay_type": "none",
             "overlay_color": "#000000",
             "overlay_opacity": 40
           }
         },
-        "card_xKggmb": {
+        "card_BcpWCe": {
           "type": "card",
           "settings": {
+            "image_desktop": "shopify://shop_images/4aa38170d496ff7d9dc6011b9aa21ed4fe98f71a.jpg",
+            "image_mobile": "shopify://shop_images/4aa38170d496ff7d9dc6011b9aa21ed4fe98f71a.jpg",
             "title": "Card title",
             "description": "",
             "link": "",
@@ -175,15 +179,17 @@
             "body_size": "14",
             "text_color": "#FFFFFF",
             "description_color": "#FFFFFF",
-            "background_color": "#121212",
+            "background_color": "#fff",
             "overlay_type": "none",
             "overlay_color": "#000000",
             "overlay_opacity": 40
           }
         },
-        "card_B8TWaw": {
+        "card_bFjxMF": {
           "type": "card",
           "settings": {
+            "image_desktop": "shopify://shop_images/37d7d1128d56510bcee3b56f9c93ecee03437d78.jpg",
+            "image_mobile": "shopify://shop_images/37d7d1128d56510bcee3b56f9c93ecee03437d78.jpg",
             "title": "Card title",
             "description": "",
             "link": "",
@@ -195,7 +201,7 @@
             "body_size": "14",
             "text_color": "#FFFFFF",
             "description_color": "#FFFFFF",
-            "background_color": "#121212",
+            "background_color": "#fff",
             "overlay_type": "none",
             "overlay_color": "#000000",
             "overlay_opacity": 40
@@ -203,13 +209,13 @@
         }
       },
       "block_order": [
-        "card_qaYtCV",
-        "card_xKggmb",
-        "card_B8TWaw"
+        "card_dLfjrb",
+        "card_BcpWCe",
+        "card_bFjxMF"
       ],
       "name": "Card blocks",
       "settings": {
-        "heading": "Card blocks",
+        "heading": "",
         "heading_size": "h1",
         "use_page_width": false,
         "columns_desktop": "3",
@@ -229,6 +235,6 @@
   },
   "order": [
     "custom_slideshow_ReiBeQ",
-    "card_blocks_XnUqgA"
+    "card_blocks_9q3eCc"
   ]
 }
