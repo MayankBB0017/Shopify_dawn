@@ -44,12 +44,6 @@
     assign autoplay_on = true
   endif
 
-  # Default text color (Layout 3 text sits on a light background)
-  assign default_text_color = '#ffffff'
-  if layout == 'split'
-    assign default_text_color = '#000000'
-  endif
-
   # "Original" size uses the first slide's own image ratio
   assign first_block = section.blocks.first
   assign ratio_d = '16 / 9'
@@ -181,14 +175,12 @@
     {%- liquid
       assign sel = '#CustomSlide-' | append: block.id
 
+      # Layouts 1-2 use the white colors, Layout 3 has its own colors (light background)
       assign title_color = block.settings.title_color
-      if title_color == blank or title_color.alpha == 0
-        assign title_color = default_text_color
-      endif
-
       assign text_color = block.settings.text_color
-      if text_color == blank or text_color.alpha == 0
-        assign text_color = default_text_color
+      if layout == 'split'
+        assign title_color = block.settings.title_color_split
+        assign text_color = block.settings.text_color_split
       endif
     -%}
     {{ sel }} .cs-title { color: {{ title_color }}; }
@@ -426,7 +418,8 @@
           "label": "Layout 3 - Text left, image right"
         }
       ],
-      "default": "full"
+      "default": "full",
+      "info": "Layouts 2 and 3 have a minimum slide height of 810px on desktop."
     },
     {
       "type": "select",
@@ -1217,14 +1210,30 @@
         {
           "type": "color",
           "id": "title_color",
-          "label": "Title color",
-          "info": "Leave empty for the default: white in Layouts 1-2, black in Layout 3."
+          "label": "Title color (Layouts 1 and 2)",
+          "info": "Used in Layouts 1 and 2.",
+          "default": "#ffffff"
         },
         {
           "type": "color",
           "id": "text_color",
-          "label": "Description color",
-          "info": "Leave empty for the default: white in Layouts 1-2, black in Layout 3."
+          "label": "Description color (Layouts 1 and 2)",
+          "info": "Used in Layouts 1 and 2.",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "title_color_split",
+          "label": "Title color (Layout 3)",
+          "default": "#000000",
+          "info": "Used in Layout 3 only."
+        },
+        {
+          "type": "color",
+          "id": "text_color_split",
+          "label": "Description color (Layout 3)",
+          "default": "#000000",
+          "info": "Used in Layout 3 only."
         },
         {
           "type": "header",
