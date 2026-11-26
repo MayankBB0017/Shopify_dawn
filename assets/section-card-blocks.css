@@ -114,7 +114,7 @@ card-blocks.ccb {
   position: relative;
   overflow: hidden;
   aspect-ratio: var(--ccb-ratio, 4 / 5);
-  border-radius: var(--ccb-radius, 0);
+  border-radius: 0;
   background: var(--ccb-card-bg, #121212);
   color: var(--ccb-text, #fff);
   isolation: isolate;
