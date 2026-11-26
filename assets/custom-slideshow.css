@@ -115,7 +115,7 @@ custom-slideshow {
 /* Layout 2: every slide is at least 810px tall on desktop (min-height beats max-height) */
 @media screen and (min-width: 750px) {
   .cs-slideshow--two_col .cs-slide__media {
-    min-height: 810px;
+      aspect-ratio: 1 / 1;
   }
 }
 
