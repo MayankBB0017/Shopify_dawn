@@ -408,7 +408,6 @@ custom-slideshow {
     transition: transform 0.3s ease-out;
 }
 .cs-btn--stroke-white:hover {
-  background: #fff;
   color: #000;
 }
 .cs-btn--stroke-black {
@@ -416,8 +415,18 @@ custom-slideshow {
   color: #000;
   border-color: #000;
 }
+.cs-btn--stroke-black::after {
+    content: "";
+    position: absolute; 
+    width: 220%;
+    height: 200%;
+    background: radial-gradient( circle, #000 10%, transparent 10%);
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-out;
+}
 .cs-btn--stroke-black:hover {
-  background: #000;
   color: #fff;
 }
 
