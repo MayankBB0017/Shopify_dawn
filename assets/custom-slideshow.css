@@ -426,6 +426,9 @@ custom-slideshow {
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease-out;
 }
+.cs-btn--stroke-black:hover::after, .cs-btn--stroke-white:hover::after, .cs-btn--filled-black:hover::after, .cs-btn--filled-white:hover::after {
+    transform: translate(-50%, -50%) scale(5);
+}
 .cs-btn--stroke-black:hover {
   color: #fff;
 }
