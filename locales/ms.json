@@ -1,0 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "products": {
+    "product": {
+      "pickup_availability": {
+        "in_stock_at_html": "Dalam stok di <span class=\"color-foreground\">{{ location_name }}</span>",
+        "in_stock_in_store": "Stok tersedia di kedai",
+        "in_store_only": "Buat pembelian secara bersemuka di kedai ini. Pengambilan tidak ditawarkan di sini.",
+        "also_sold_in_store": "Turut dijual di kedai — anda boleh membeli produk ini secara bersemuka di sini"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "products": {
+    "product": {
+      "pickup_availability": {
+        "in_stock_at_html": "<span class=\"color-foreground\">{{ location_name }}</span> వద్ద స్టాక్ ఉంది",
+        "in_stock_in_store": "స్టోర్‌లో స్టాక్ ఉంది",
+        "in_store_only": "ఈ స్టోర్‌లో నేరుగా కొనుగోలు చేయండి. ఇక్కడ పికప్ సదుపాయం లేదు.",
+        "also_sold_in_store": "స్టోర్‌లో కూడా లభిస్తుంది. దీన్ని ఇక్కడ నేరుగా కొనుగోలు చేయవచ్చు"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "blocks": {
+        "buy_buttons": {
+          "settings": {
+            "show_physical_stores": {
+              "label": "Prikaži razpoložljivost v fizičnih prodajalnah",
+              "info": "Prikaže tudi lokacije, označene kot fizična prodajalna, ki imajo izdelek na zalogi, tudi če ne ponujajo prevzema."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -279,10 +279,6 @@
             </button>
           </quick-order-list-remove-all-button>
         </div>
-
-        <script type="application/json" data-cart-contents>
-          {{ cart | line_items_for: product | map: "variant_id" | json }}
-        </script>
       </div>
     {%- endif -%}
   </quick-order-list>

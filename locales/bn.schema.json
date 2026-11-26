@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "blocks": {
+        "buy_buttons": {
+          "settings": {
+            "show_physical_stores": {
+              "label": "ফিজিক্যাল স্টোরে ইন-স্টোর উপলভ্যতা দেখান",
+              "info": "এমনকি পিকআপ অফার না করলেও, ফিজিক্যাল স্টোরফ্রন্ট হিসেবে চিহ্নিত এবং পণ্যটি স্টকে আছে এমন লোকেশনগুলোকেও তালিকায় দেখায়।"
+            }
+          }
+        }
+      }
+    }
+  }
+}

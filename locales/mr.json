@@ -1,0 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "products": {
+    "product": {
+      "pickup_availability": {
+        "in_stock_at_html": "<span class=\"color-foreground\">{{ location_name }}</span> येथे स्टॉकमध्ये आहे",
+        "in_stock_in_store": "स्टोअरमध्ये स्टॉक उपलब्ध आहे",
+        "in_store_only": "या स्टोअरमध्ये प्रत्यक्ष येऊन खरेदी करा. येथे पिकअपची सुविधा नाही.",
+        "also_sold_in_store": "स्टोअरमध्येही उपलब्ध आहे. तुम्ही येथे प्रत्यक्ष येऊन खरेदी करू शकता"
+      }
+    }
+  }
+}

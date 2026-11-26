@@ -1,0 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "products": {
+    "product": {
+      "pickup_availability": {
+        "in_stock_at_html": "En stock en <span class=\"color-foreground\">{{ location_name }}</span>",
+        "in_stock_in_store": "En stock na tenda",
+        "in_store_only": "Compra en persoa nesta tenda. Aquí non se ofrece o servizo de recollida.",
+        "also_sold_in_store": "Tamén se vende na tenda: podes compralo aquí en persoa"
+      }
+    }
+  }
+}

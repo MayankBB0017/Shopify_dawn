@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "blocks": {
+        "buy_buttons": {
+          "settings": {
+            "show_physical_stores": {
+              "label": "Afișează disponibilitatea în magazinele fizice",
+              "info": "Listează, de asemenea, locațiile marcate ca magazin fizic care au produsul în stoc, chiar și atunci când nu oferă ridicare."
+            }
+          }
+        }
+      }
+    }
+  }
+}

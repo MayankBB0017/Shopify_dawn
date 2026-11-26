@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "blocks": {
+        "buy_buttons": {
+          "settings": {
+            "show_physical_stores": {
+              "label": "ફિઝિકલ સ્ટોર્સમાં ઇન-સ્ટોર ઉપલબ્ધતા બતાવો",
+              "info": "ફિઝિકલ સ્ટોરફ્રન્ટ તરીકે માર્ક કરેલાં અને પ્રોડક્ટ સ્ટૉકમાં હોય તેવાં સ્થાનો પણ સૂચિબદ્ધ કરે છે, પછી ભલે તેઓ પિકઅપ ઑફર કરતા ન હોય."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "blocks": {
+        "buy_buttons": {
+          "settings": {
+            "show_physical_stores": {
+              "label": "Εμφάνιση διαθεσιμότητας σε φυσικά καταστήματα",
+              "info": "Εμφανίζει επίσης τις τοποθεσίες που έχουν επισημανθεί ως φυσικό κατάστημα και έχουν το προϊόν σε απόθεμα, ακόμα και αν δεν προσφέρουν παραλαβή."
+            }
+          }
+        }
+      }
+    }
+  }
+}

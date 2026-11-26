@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "blocks": {
+        "buy_buttons": {
+          "settings": {
+            "show_physical_stores": {
+              "label": "Bolti elérhetőség megjelenítése a fizikai boltokban",
+              "info": "Felsorolja azokat a fizikai kirakatként megjelölt helyszíneket is, ahol a termék készleten van, még akkor is, ha nem biztosítanak átvételt."
+            }
+          }
+        }
+      }
+    }
+  }
+}

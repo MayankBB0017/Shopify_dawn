@@ -1,0 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "products": {
+    "product": {
+      "pickup_availability": {
+        "in_stock_at_html": "В наявності в <span class=\"color-foreground\">{{ location_name }}</span>",
+        "in_stock_in_store": "У наявності в магазині",
+        "in_store_only": "Товар можна придбати безпосередньо в цьому магазині. Самовивіз тут недоступний.",
+        "also_sold_in_store": "Також продається в магазині — можна придбати на місці"
+      }
+    }
+  }
+}
