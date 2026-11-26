@@ -116,7 +116,7 @@
         "ratio_mobile": "adapt",
         "fit_screen": false,
         "max_height_unit": "px",
-        "max_height_desktop": 0,
+        "max_height_desktop": 820,
         "max_height_mobile": 0,
         "overlay_type": "color",
         "overlay_color": "#000000",
