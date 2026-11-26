@@ -207,7 +207,7 @@
             "link": "shopify://collections/banadores",
             "button_label": "Ver Todo",
             "button_link": "shopify://collections",
-            "button_style": "primary",
+            "button_style": "secondary",
             "button_label_2": "",
             "button_link_2": "",
             "button_style_2": "primary",
