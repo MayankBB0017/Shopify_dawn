@@ -138,69 +138,63 @@
         "padding_bottom": 0
       }
     },
-    "card_blocks_8eR67C": {
+    "card_blocks_XnUqgA": {
       "type": "card-blocks",
       "blocks": {
-        "card_MzDeak": {
+        "card_qaYtCV": {
           "type": "card",
           "settings": {
-            "image_desktop": "shopify://shop_images/557a82d136a08d354b17e079af8006f62dd19bd9.png",
-            "title": "Carritos",
+            "title": "Card title",
             "description": "",
             "link": "",
-            "button_label": "Ver Todo",
-            "button_style": "stroke",
             "pin_button_bottom": false,
-            "position_desktop": "bottom-left",
-            "position_mobile": "bottom-left",
+            "position_desktop": "top-left",
+            "position_mobile": "top-left",
             "title_size_desktop": "h3",
             "title_size_mobile": "h4",
             "body_size": "14",
             "text_color": "#FFFFFF",
-            "background_color": "#FFFFFF",
-            "overlay_type": "none",
-            "overlay_color": "#000000",
-            "overlay_opacity": 50
-          }
-        },
-        "card_AXmwGp": {
-          "type": "card",
-          "settings": {
-            "image_desktop": "shopify://shop_images/64c691100296c42f3c988851cccf311988fe8467.png",
-            "title": "Novedades",
-            "description": "",
-            "link": "",
-            "button_label": "Ver Todo",
-            "button_style": "stroke",
-            "pin_button_bottom": false,
-            "position_desktop": "bottom-left",
-            "position_mobile": "bottom-left",
-            "title_size_desktop": "h3",
-            "title_size_mobile": "h4",
-            "body_size": "14",
-            "text_color": "#FFFFFF",
+            "description_color": "#FFFFFF",
             "background_color": "#121212",
             "overlay_type": "none",
             "overlay_color": "#000000",
             "overlay_opacity": 40
           }
         },
-        "card_CRgTe3": {
+        "card_xKggmb": {
           "type": "card",
           "settings": {
-            "image_desktop": "shopify://shop_images/a055b21096edf1f348b8b3f976b400dfab3c5881.jpg",
-            "title": "Sillas de coche",
+            "title": "Card title",
             "description": "",
             "link": "",
-            "button_label": "Ver Todo",
-            "button_style": "stroke",
             "pin_button_bottom": false,
-            "position_desktop": "bottom-left",
-            "position_mobile": "bottom-left",
+            "position_desktop": "top-left",
+            "position_mobile": "top-left",
             "title_size_desktop": "h3",
             "title_size_mobile": "h4",
             "body_size": "14",
             "text_color": "#FFFFFF",
+            "description_color": "#FFFFFF",
+            "background_color": "#121212",
+            "overlay_type": "none",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "card_B8TWaw": {
+          "type": "card",
+          "settings": {
+            "title": "Card title",
+            "description": "",
+            "link": "",
+            "pin_button_bottom": false,
+            "position_desktop": "top-left",
+            "position_mobile": "top-left",
+            "title_size_desktop": "h3",
+            "title_size_mobile": "h4",
+            "body_size": "14",
+            "text_color": "#FFFFFF",
+            "description_color": "#FFFFFF",
             "background_color": "#121212",
             "overlay_type": "none",
             "overlay_color": "#000000",
@@ -209,17 +203,17 @@
         }
       },
       "block_order": [
-        "card_MzDeak",
-        "card_AXmwGp",
-        "card_CRgTe3"
+        "card_qaYtCV",
+        "card_xKggmb",
+        "card_B8TWaw"
       ],
-      "custom_css": [],
       "name": "Card blocks",
       "settings": {
-        "heading": "",
+        "heading": "Card blocks",
         "heading_size": "h1",
+        "use_page_width": false,
         "columns_desktop": "3",
-        "columns_mobile": "1",
+        "columns_mobile": "carousel",
         "aspect_ratio": "4 / 5",
         "card_radius": 0,
         "hover_effect": "zoom",
@@ -228,13 +222,13 @@
         "padding_desktop": 0,
         "padding_mobile": 0,
         "section_bg": "",
-        "fade_desktop": true,
+        "fade_desktop": false,
         "fade_mobile": false
       }
     }
   },
   "order": [
     "custom_slideshow_ReiBeQ",
-    "card_blocks_8eR67C"
+    "card_blocks_XnUqgA"
   ]
 }
