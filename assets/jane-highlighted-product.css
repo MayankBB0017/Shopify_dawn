@@ -99,6 +99,11 @@
   margin: 0 0 24px;
   padding-inline: 36px;
 }
+/* Button styling */
+#JaneHighlighted-{{ section.id }} .jane-button {
+  text-transform: uppercase;
+  border-radius: 8px;
+}
 
 .jane-highlighted .jane-highlighted__title {
   color: var(--jane-title-color, #171717);
