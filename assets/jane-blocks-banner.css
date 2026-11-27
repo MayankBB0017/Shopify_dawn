@@ -912,3 +912,20 @@
 .jbb__grid {
   width: 100% !important;
 }
+
+/* FIX: Mobile 1 Column Layout */
+
+@media screen and (max-width: 749px) {
+  .jbb.jbb--mobile-one .jbb__grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-flow: row !important;
+  }
+
+  .jbb.jbb--mobile-one .jbb__grid > .jbb__item {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+  }
+}
