@@ -1,564 +1,240 @@
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{% comment %}
+  JANÉ Split Hero Banner — Shopify Dawn 15.4.1
+  One Slide block contains BOTH left and right panels.
+  Each panel independently supports image OR video.
+{% endcomment %}
+{{ 'jane-hero-banner.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'jane-hero-banner.js' | asset_url }}" defer="defer"></script>
 
-{%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
-  {%- style -%}
-    @media screen and (max-width: 749px) {
-      #Banner-{{ section.id }}::before,
-      #Banner-{{ section.id }} .banner__media::before,
-      #Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
-      }
-    }
-
-    @media screen and (min-width: 750px) {
-      #Banner-{{ section.id }}::before,
-      #Banner-{{ section.id }} .banner__media::before {
-        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
-      }
-    }
-  {%- endstyle -%}
-{%- endif -%}
-
-{%- style -%}
-  #Banner-{{ section.id }}::after {
-    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
-  }
-{%- endstyle -%}
-
-{%- style -%}
-  #shopify-section-{{ section.id }} {
-    padding-top: {{ section.settings.space_top_desktop }}px;
-    padding-bottom: {{ section.settings.space_bottom_desktop }}px;
-  }
-
-  @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} {
-      padding-top: {{ section.settings.space_top_mobile }}px;
-      padding-bottom: {{ section.settings.space_bottom_mobile }}px;
-    }
-  }
-{%- endstyle -%}
-
-{%- liquid
-  assign full_width = '100vw'
-  assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
-
-  if section.settings.image_behavior == 'ambient'
-    assign half_width = '60vw'
-    assign full_width = '120vw'
-    assign stacked_sizes = '(min-width: 750px) 60vw, 120vw'
-    assign widths = '450, 660, 900, 1320, 1800, 2136, 2400, 3600, 7680'
-  elsif section.settings.image_behavior == 'fixed' or section.settings.image_behavior == 'zoom-in'
-    assign half_width = '100vw'
-    assign stacked_sizes = '100vw'
-  else
-    assign half_width = '50vw'
-    assign stacked_sizes = '(min-width: 750px) 50vw, 100vw'
-  endif
-  assign fetch_priority = 'auto'
-  if section.index == 1
-    assign fetch_priority = 'high'
-  endif
--%}
-
-<div
-  id="Banner-{{ section.id }}"
-  class="banner banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.image_height == 'adapt' and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+<section
+  id="JaneHero-{{ section.id }}"
+  class="jane-hero jane-hero--{{ section.settings.layout }} jane-hero--desktop-{{ section.settings.desktop_height }} jane-hero--mobile-{{ section.settings.mobile_height }}"
+  data-jane-hero
+  data-slide-count="{{ section.blocks.size }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
+  style="
+    --jhb-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --jhb-gap: {{ section.settings.panel_gap }}px;
+    --jhb-title-size: {{ section.settings.title_size }}px;
+    --jhb-title-size-mobile: {{ section.settings.title_size_mobile }}px;
+    --jhb-body-size: {{ section.settings.body_size }}px;
+    --jhb-content-padding: {{ section.settings.content_padding }}px;
+  "
 >
-  {%- if section.settings.image != blank -%}
-    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {%- liquid
-        assign image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
-        if section.settings.image_2 != blank
-          assign image_class = 'banner__media-image-half'
-        endif
-        if section.settings.image_2 != blank and section.settings.stack_images_on_mobile
-          assign sizes = stacked_sizes
-        elsif section.settings.image_2 != blank
-          assign sizes = half_width
-        else
-          assign sizes = full_width
-        endif
-      -%}
-      {{
-        section.settings.image
-        | image_url: width: 3840
-        | image_tag:
-          width: section.settings.image.width,
-          height: image_height,
-          class: image_class,
-          sizes: sizes,
-          widths: widths,
-          fetchpriority: fetch_priority
-      }}
-    </div>
-  {%- elsif section.settings.image_2 == blank -%}
-    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
-  {%- endif -%}
-  {%- if section.settings.image_2 != blank -%}
-    <div class="banner__media media{% if section.settings.image != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {%- liquid
-        assign image_height_2 = section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio
-        if section.settings.image != blank
-          assign image_class_2 = 'banner__media-image-half'
-        endif
-        if section.settings.image != blank and section.settings.stack_images_on_mobile
-          assign sizes = stacked_sizes
-        elsif section.settings.image_2 != blank
-          assign sizes = half_width
-        else
-          assign sizes = full_width
-        endif
-      -%}
-      {{
-        section.settings.image_2
-        | image_url: width: 3840
-        | image_tag:
-          width: section.settings.image_2.width,
-          height: image_height_2,
-          class: image_class_2,
-          sizes: sizes,
-          widths: widths,
-          fetchpriority: fetch_priority
-      }}
-    </div>
-  {%- endif -%}
-  <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+  {%- if section.blocks.size > 0 -%}
+    <div class="jane-hero__track" data-jane-track>
       {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'heading' -%}
-            <h2
-              class="banner__heading inline-richtext {{ block.settings.heading_size }}"
-              {{ block.shopify_attributes }}
-            >
-              {{ block.settings.heading }}
-            </h2>
-          {%- when 'text' -%}
-            <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-              <p>{{ block.settings.text }}</p>
-            </div>
-          {%- when 'buttons' -%}
-            <div
-              class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}"
-              {{ block.shopify_attributes }}
-            >
-              {%- if block.settings.button_label_1 != blank -%}
-                <a
-                  {% if block.settings.button_link_1 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_1 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_1 | escape -}}
-                </a>
-              {%- endif -%}
-              {%- if block.settings.button_label_2 != blank -%}
-                <a
-                  {% if block.settings.button_link_2 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_2 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_2 | escape -}}
-                </a>
-              {%- endif -%}
-            </div>
-        {%- endcase -%}
+        <article
+          class="jane-hero__slide{% if forloop.first %} is-active{% endif %}"
+          data-jane-slide
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="jane-hero__panels">
+            {%- for panel in (1..2) -%}
+              {%- liquid
+                if panel == 1
+                  assign panel_name = 'left'
+                  assign panel_image = block.settings.left_image
+                  assign panel_video = block.settings.left_video
+                  assign panel_mobile_image = block.settings.left_mobile_image
+                  assign panel_mobile_video = block.settings.left_mobile_video
+                  assign panel_title = block.settings.left_title
+                  assign panel_description = block.settings.left_description
+                  assign panel_button_label = block.settings.left_button_label
+                  assign panel_button_link = block.settings.left_button_link
+                  assign panel_position = block.settings.left_position
+                  assign panel_alignment = block.settings.left_alignment
+                  assign panel_text_color = block.settings.left_text_color
+                  assign panel_overlay = block.settings.left_overlay
+                  assign panel_gradient = block.settings.left_gradient
+                else
+                  assign panel_name = 'right'
+                  assign panel_image = block.settings.right_image
+                  assign panel_video = block.settings.right_video
+                  assign panel_mobile_image = block.settings.right_mobile_image
+                  assign panel_mobile_video = block.settings.right_mobile_video
+                  assign panel_title = block.settings.right_title
+                  assign panel_description = block.settings.right_description
+                  assign panel_button_label = block.settings.right_button_label
+                  assign panel_button_link = block.settings.right_button_link
+                  assign panel_position = block.settings.right_position
+                  assign panel_alignment = block.settings.right_alignment
+                  assign panel_text_color = block.settings.right_text_color
+                  assign panel_overlay = block.settings.right_overlay
+                  assign panel_gradient = block.settings.right_gradient
+                endif
+              -%}
+
+              <div
+                class="jane-hero__panel jane-hero__panel--{{ panel_name }} jane-hero__position--{{ panel_position }} jane-hero__align--{{ panel_alignment }}"
+                style="--jhb-panel-overlay: {{ panel_overlay | divided_by: 100.0 }}; --jhb-panel-text: {{ panel_text_color }};"
+              >
+                <div class="jane-hero__media">
+                  {%- comment -%} Desktop: video takes priority; image is fallback when video is empty. {%- endcomment -%}
+                  {%- if panel_video != blank -%}
+                    {{ panel_video | video_tag: image_size: '2000x', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'jane-hero__video jane-hero__video--desktop' }}
+                  {%- elsif panel_image != blank -%}
+                    {{ panel_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '550, 750, 1100, 1500, 1800, 2200', class: 'jane-hero__image jane-hero__image--desktop', alt: panel_image.alt | escape }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'jane-hero__placeholder' }}
+                  {%- endif -%}
+
+                  {%- comment -%} Mobile media: use mobile upload first, otherwise reuse desktop media. {%- endcomment -%}
+                  {%- if panel_mobile_video != blank -%}
+                    {{ panel_mobile_video | video_tag: image_size: '1200x', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'jane-hero__video jane-hero__video--mobile' }}
+                  {%- elsif panel_mobile_image != blank -%}
+                    {{ panel_mobile_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '375, 550, 750, 1000, 1200, 1400', class: 'jane-hero__image jane-hero__image--mobile', alt: panel_mobile_image.alt | escape }}
+                  {%- elsif panel_video != blank -%}
+                    {{ panel_video | video_tag: image_size: '1200x', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'jane-hero__video jane-hero__video--mobile' }}
+                  {%- elsif panel_image != blank -%}
+                    {{ panel_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '375, 550, 750, 1000, 1200, 1400', class: 'jane-hero__image jane-hero__image--mobile', alt: panel_image.alt | escape }}
+                  {%- endif -%}
+                </div>
+
+                <div class="jane-hero__shade{% if panel_gradient %} jane-hero__shade--gradient{% endif %}"></div>
+
+                <div class="jane-hero__content">
+                  {%- if panel_title != blank -%}
+                    <h2 class="jane-hero__title">{{ panel_title | escape }}</h2>
+                  {%- endif -%}
+                  {%- if panel_description != blank -%}
+                    <div class="jane-hero__description rte">{{ panel_description }}</div>
+                  {%- endif -%}
+                  {%- if panel_button_label != blank -%}
+                    <a class="jane-hero__button" href="{{ panel_button_link | default: '#' }}">
+                      {{ panel_button_label | escape }}
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </article>
       {%- endfor -%}
     </div>
-  </div>
-</div>
+
+    {%- if section.blocks.size > 1 -%}
+      <div class="jane-hero__controls" data-jane-controls aria-label="Hero slides">
+        <button class="jane-hero__arrow" type="button" data-jane-prev aria-label="Previous slide">‹</button>
+        <div class="jane-hero__dots">
+          {%- for block in section.blocks -%}
+            <button
+              class="jane-hero__dot{% if forloop.first %} is-active{% endif %}"
+              type="button"
+              data-jane-dot="{{ forloop.index0 }}"
+              aria-label="Go to slide {{ forloop.index }}"
+              {% if forloop.first %}aria-current="true"{% endif %}
+            ></button>
+          {%- endfor -%}
+        </div>
+        <button class="jane-hero__arrow" type="button" data-jane-next aria-label="Next slide">›</button>
+      </div>
+    {%- endif -%}
+  {%- else -%}
+    <div class="jane-hero__empty">
+      <p>Add a Slide block. Each block includes a left panel and a right panel.</p>
+    </div>
+  {%- endif -%}
+</section>
 
 {% schema %}
 {
-  "name": "t:sections.image-banner.name",
+  "name": "JANÉ split hero",
   "tag": "section",
-  "class": "section",
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  },
+  "class": "section jane-hero-section",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "t:sections.image-banner.settings.image.label"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": "t:sections.image-banner.settings.image_2.label"
-    },
-    {
-      "type": "range",
-      "id": "image_overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "unit": "%",
-      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
-      "default": 0
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop layout",
+      "options": [
+        { "value": "split", "label": "50 / 50 split" },
+        { "value": "full", "label": "Full width (left panel only)" }
+      ],
+      "default": "split"
     },
     {
       "type": "select",
-      "id": "image_height",
+      "id": "desktop_height",
+      "label": "Desktop height",
       "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.image-banner.settings.image_height.options__1.label"
-        },
-        {
-          "value": "small",
-          "label": "t:sections.image-banner.settings.image_height.options__2.label"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.image-banner.settings.image_height.options__3.label"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.image-banner.settings.image_height.options__4.label"
-        }
+        { "value": "small", "label": "Small — 420px" },
+        { "value": "medium", "label": "Medium — 560px" },
+        { "value": "large", "label": "Large — 700px" },
+        { "value": "screen", "label": "Full screen" }
       ],
-      "default": "medium",
-      "label": "t:sections.image-banner.settings.image_height.label"
+      "default": "large"
     },
     {
       "type": "select",
-      "id": "image_behavior",
+      "id": "mobile_height",
+      "label": "Mobile panel height",
       "options": [
-        {
-          "value": "none",
-          "label": "t:sections.all.animation.image_behavior.options__1.label"
-        },
-        {
-          "value": "ambient",
-          "label": "t:sections.all.animation.image_behavior.options__2.label"
-        },
-        {
-          "value": "fixed",
-          "label": "t:sections.all.animation.image_behavior.options__3.label"
-        },
-        {
-          "value": "zoom-in",
-          "label": "t:sections.all.animation.image_behavior.options__4.label"
-        }
+        { "value": "small", "label": "Small — 320px" },
+        { "value": "medium", "label": "Medium — 420px" },
+        { "value": "large", "label": "Large — 520px" },
+        { "value": "screen", "label": "Full screen" }
       ],
-      "default": "none",
-      "label": "t:sections.all.animation.image_behavior.label"
+      "default": "medium"
     },
-    {
-      "type": "header",
-      "content": "t:sections.image-banner.settings.content.content"
-    },
-    {
-      "type": "select",
-      "id": "desktop_content_position",
-      "options": [
-        {
-          "value": "top-left",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__1.label"
-        },
-        {
-          "value": "top-center",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__2.label"
-        },
-        {
-          "value": "top-right",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__3.label"
-        },
-        {
-          "value": "middle-left",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__4.label"
-        },
-        {
-          "value": "middle-center",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__5.label"
-        },
-        {
-          "value": "middle-right",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__6.label"
-        },
-        {
-          "value": "bottom-left",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__7.label"
-        },
-        {
-          "value": "bottom-center",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__8.label"
-        },
-        {
-          "value": "bottom-right",
-          "label": "t:sections.image-banner.settings.desktop_content_position.options__9.label"
-        }
-      ],
-      "default": "middle-center",
-      "label": "t:sections.image-banner.settings.desktop_content_position.label"
-    },
-    {
-      "type": "select",
-      "id": "desktop_content_alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__2.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__3.label"
-        }
-      ],
-      "default": "center",
-      "label": "t:sections.image-banner.settings.desktop_content_alignment.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_text_box",
-      "default": true,
-      "label": "t:sections.image-banner.settings.show_text_box.label"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.image-banner.settings.mobile.content"
-    },
-    {
-      "type": "checkbox",
-      "id": "stack_images_on_mobile",
-      "default": true,
-      "label": "t:sections.image-banner.settings.stack_images_on_mobile.label"
-    },    
-    {
-      "type": "select",
-      "id": "mobile_content_alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__2.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__3.label"
-        }
-      ],
-      "default": "center",
-      "label": "t:sections.image-banner.settings.mobile_content_alignment.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_text_below",
-      "default": true,
-      "label": "t:sections.image-banner.settings.show_text_below.label"
-    },
-    {
-      "type": "header",
-      "content": "Spacing Section"
-    },
-    {
-      "type": "range",
-      "id": "space_top_desktop",
-      "label": "Space Top Desktop",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "space_bottom_desktop",
-      "label": "Space Bottom Desktop",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "space_top_mobile",
-      "label": "Space Top Mobile",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "space_bottom_mobile",
-      "label": "Space Bottom Mobile",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 0
-    }],
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay slides (only when 2+ blocks)", "default": false },
+    { "type": "range", "id": "autoplay_speed", "label": "Autoplay interval", "min": 3, "max": 12, "step": 1, "unit": "s", "default": 5 },
+    { "type": "range", "id": "panel_gap", "label": "Gap between panels", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "content_padding", "label": "Content padding", "min": 16, "max": 80, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "title_size", "label": "Title size desktop", "min": 24, "max": 72, "step": 2, "unit": "px", "default": 44 },
+    { "type": "range", "id": "title_size_mobile", "label": "Title size mobile", "min": 20, "max": 48, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "body_size", "label": "Description size", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 }
+  ],
   "blocks": [
     {
-      "type": "heading",
-      "name": "t:sections.image-banner.blocks.heading.name",
-      "limit": 1,
+      "type": "slide",
+      "name": "Slide",
       "settings": [
-        {
-          "type": "inline_richtext",
-          "id": "heading",
-          "default": "t:sections.image-banner.blocks.heading.settings.heading.default",
-          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
-        },
-        {
-          "type": "select",
-          "id": "heading_size",
-          "options": [
-            {
-              "value": "h2",
-              "label": "t:sections.all.heading_size.options__1.label"
-            },
-            {
-              "value": "h1",
-              "label": "t:sections.all.heading_size.options__2.label"
-            },
-            {
-              "value": "h0",
-              "label": "t:sections.all.heading_size.options__3.label"
-            },
-            {
-              "value": "hxl",
-              "label": "t:sections.all.heading_size.options__4.label"
-            },
-            {
-              "value": "hxxl",
-              "label": "t:sections.all.heading_size.options__5.label"
-            }
-          ],
-          "default": "h1",
-          "label": "t:sections.all.heading_size.label"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "t:sections.image-banner.blocks.text.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "inline_richtext",
-          "id": "text",
-          "default": "t:sections.image-banner.blocks.text.settings.text.default",
-          "label": "t:sections.image-banner.blocks.text.settings.text.label"
-        },
-        {
-          "type": "select",
-          "id": "text_style",
-          "options": [
-            {
-              "value": "body",
-              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__1.label"
-            },
-            {
-              "value": "subtitle",
-              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__2.label"
-            },
-            {
-              "value": "caption-with-letter-spacing",
-              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__3.label"
-            }
-          ],
-          "default": "body",
-          "label": "t:sections.image-banner.blocks.text.settings.text_style.label"
-        }
-      ]
-    },
-    {
-      "type": "buttons",
-      "name": "t:sections.image-banner.blocks.buttons.name",
-      "limit": 1,
-      "settings": [
-        {
-        "type": "header",
-        "content": "t:sections.image-banner.blocks.buttons.settings.header_1.content"
-        },
-        {
-          "type": "text",
-          "id": "button_label_1",
-          "default": "t:sections.image-banner.blocks.buttons.settings.button_label_1.default",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
-          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
-        },
-        {
-          "type": "url",
-          "id": "button_link_1",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_style_secondary_1",
-          "default": false,
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
-        },
-        {
-        "type": "header",
-        "content": "t:sections.image-banner.blocks.buttons.settings.header_2.content"
-        },
-        {
-          "type": "text",
-          "id": "button_label_2",
-          "default": "t:sections.image-banner.blocks.buttons.settings.button_label_2.default",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
-          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
-        },
-        {
-          "type": "url",
-          "id": "button_link_2",
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_style_secondary_2",
-          "default": false,
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
-        }
+        { "type": "header", "content": "LEFT SIDE — media" },
+        { "type": "image_picker", "id": "left_image", "label": "Left desktop image" },
+        { "type": "video", "id": "left_video", "label": "Left desktop video" },
+        { "type": "image_picker", "id": "left_mobile_image", "label": "Left mobile image (optional)" },
+        { "type": "video", "id": "left_mobile_video", "label": "Left mobile video (optional)" },
+        { "type": "text", "id": "left_title", "label": "Left title", "default": "Esto es vida" },
+        { "type": "richtext", "id": "left_description", "label": "Left description", "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>" },
+        { "type": "select", "id": "left_position", "label": "Left content position", "options": [
+          { "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" }
+        ], "default": "bottom" },
+        { "type": "select", "id": "left_alignment", "label": "Left text alignment", "options": [
+          { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }
+        ], "default": "left" },
+        { "type": "color", "id": "left_text_color", "label": "Left text color", "default": "#FFFFFF" },
+        { "type": "range", "id": "left_overlay", "label": "Left overlay opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 20 },
+        { "type": "checkbox", "id": "left_gradient", "label": "Left gradient overlay", "default": true },
+        { "type": "text", "id": "left_button_label", "label": "Left button label", "default": "COMPRAR" },
+        { "type": "url", "id": "left_button_link", "label": "Left button link" },
+
+        { "type": "header", "content": "RIGHT SIDE — media" },
+        { "type": "image_picker", "id": "right_image", "label": "Right desktop image" },
+        { "type": "video", "id": "right_video", "label": "Right desktop video" },
+        { "type": "image_picker", "id": "right_mobile_image", "label": "Right mobile image (optional)" },
+        { "type": "video", "id": "right_mobile_video", "label": "Right mobile video (optional)" },
+        { "type": "text", "id": "right_title", "label": "Right title", "default": "Carrito Keep full equipped" },
+        { "type": "richtext", "id": "right_description", "label": "Right description", "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>" },
+        { "type": "select", "id": "right_position", "label": "Right content position", "options": [
+          { "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" }
+        ], "default": "bottom" },
+        { "type": "select", "id": "right_alignment", "label": "Right text alignment", "options": [
+          { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }
+        ], "default": "left" },
+        { "type": "color", "id": "right_text_color", "label": "Right text color", "default": "#FFFFFF" },
+        { "type": "range", "id": "right_overlay", "label": "Right overlay opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 20 },
+        { "type": "checkbox", "id": "right_gradient", "label": "Right gradient overlay", "default": true },
+        { "type": "text", "id": "right_button_label", "label": "Right button label", "default": "COMPRAR" },
+        { "type": "url", "id": "right_button_link", "label": "Right button link" }
       ]
     }
   ],
+  "max_blocks": 5,
   "presets": [
-    {
-      "name": "t:sections.image-banner.presets.name",
-      "blocks": [
-        {
-          "type": "heading"
-        },
-        {
-          "type": "text"
-        },
-        {
-          "type": "buttons"
-        }
-      ]
-    }
+    { "name": "JANÉ split hero", "blocks": [{ "type": "slide" }] }
   ]
 }
 {% endschema %}
