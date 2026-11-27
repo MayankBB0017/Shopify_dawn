@@ -1,3 +1,4 @@
+
 {% comment %}
   JANÉ Highlighted Product
   File: sections/jane-highlighted-product.liquid
@@ -180,7 +181,7 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
             <button
 class="jane-hotspot"
               type="button"
-aria-label="{{ block.settings.bullet_title | default: 'Feature' | escape }}"
+aria-label="{% if block.settings.bullet_title != blank %}{{ block.settings.bullet_title | escape }}{% elsif block.settings.product != blank %}{{ block.settings.product.title | escape }}{% else %}Feature{% endif %}"
               aria-expanded="false"
               data-jane-hotspot
               data-index="{{ bullet_index }}"
@@ -237,6 +238,21 @@ aria-label="{{ block.settings.bullet_title | default: 'Feature' | escape }}"
                 "
                 {{ block.shopify_attributes }}
               >
+
+                {% assign selected_product = block.settings.product %}
+
+                {% if selected_product != blank and selected_product.featured_image != blank %}
+                  {{
+                    selected_product.featured_image
+                    | image_url: width: 320
+                    | image_tag:
+                      class: 'jane-bullet-card__image',
+                      widths: '80, 120, 160, 240, 320',
+                      sizes: '120px',
+                      loading: 'lazy',
+                      alt: selected_product.title | escape
+                  }}
+                {% endif %}
 
                 {% if block.settings.bullet_title != blank or block.settings.bullet_description != blank %}
                   <div class="jane-bullet-card__copy">
@@ -711,6 +727,11 @@ aria-label="{{ block.settings.bullet_title | default: 'Feature' | escape }}"
       "type": "bullet",
       "name": "Product bullet",
       "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select product"
+        },
         {
           "type": "text",
           "id": "bullet_title",
