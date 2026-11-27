@@ -1,9 +1,4 @@
 
-/* =========================================
-   JANÉ - BLOCKS BANNER
-   JavaScript
-========================================= */
-
 (() => {
   'use strict';
 
@@ -21,9 +16,6 @@
     const prev = section.querySelector('[data-jbb-prev]');
     const next = section.querySelector('[data-jbb-next]');
 
-    /* =====================================
-       MOBILE CAROUSEL
-    ===================================== */
 
     const scrollAmount = () => {
 
@@ -55,10 +47,6 @@
         behavior: 'smooth'
       });
     });
-
-    /* =====================================
-       FADE IN ANIMATION
-    ===================================== */
 
     const fadeObserver = () => {
 
@@ -103,10 +91,6 @@
 
     fadeObserver();
 
-    /* =====================================
-       VIDEO AUTOPLAY
-    ===================================== */
-
     section.querySelectorAll('video[autoplay]').forEach((video) => {
 
       video.muted = true;
@@ -149,10 +133,6 @@
 
   };
 
-  /* =====================================
-     INITIALIZE ALL SECTIONS
-  ===================================== */
-
   const init = (root = document) => {
 
     if (root.matches?.('[data-jbb-section]')) {
@@ -164,11 +144,6 @@
     );
 
   };
-
-  /* =====================================
-     DOCUMENT READY
-  ===================================== */
-
   if (document.readyState === 'loading') {
 
     document.addEventListener(
@@ -182,9 +157,6 @@
 
   }
 
-  /* =====================================
-     SHOPIFY THEME EDITOR EVENTS
-  ===================================== */
 
   document.addEventListener(
     'shopify:section:load',
