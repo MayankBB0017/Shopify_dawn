@@ -487,7 +487,7 @@
         "padding_bottom": 0,
         "color_scheme": "",
         "button_label": "Descubrir",
-        "button_link": "",
+        "button_link": "shopify://collections",
         "button_type": "stroke",
         "button_position": "image",
         "button_alignment": "left",
