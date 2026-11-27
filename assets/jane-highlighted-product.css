@@ -382,18 +382,19 @@
 ===================================== */
 
 .jane-highlighted .jane-hotspot {
-  width: 23px;
-  height: 23px;
-  padding: 0;
-  border: 1px solid #171717;
-  border-radius: 50%;
-  background: transparent;
-  display: flex;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  border: 1px solid #171717 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-sizing: border-box !important;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-  transition: border-color 0.2s ease;
+  aspect-ratio: 1 / 1;
 }
 
 .jane-highlighted .jane-hotspot__dot {
