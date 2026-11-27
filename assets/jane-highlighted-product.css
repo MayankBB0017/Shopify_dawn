@@ -1,73 +1,35 @@
 
+/* ==================================================
+   JANE - HIGHLIGHTED PRODUCT
+   Complete CSS | Shopify Dawn
+================================================== */
+
+/* SECTION */
+
 .jane-highlighted {
-  padding-block: var(--jane-pad-top) var(--jane-pad-bottom);
-  color: var(--jane-body-color);
+  width: 100%;
+  padding-top: var(--jane-pad-top, 0px);
+  padding-bottom: var(--jane-pad-bottom, 0px);
+  color: var(--jane-body-color, #171717);
+  overflow: visible;
 }
 
-.jane-highlighted .jane-highlighted__inner {
-  width: min(100%, var(--jane-max-width));
-  margin-inline: auto;
+.jane-highlighted__inner {
+  width: min(100%, var(--jane-max-width, 1600px));
+  margin: 0 auto;
+  position: relative;
 }
 
-.jane-highlighted .jane-highlighted__heading {
-  z-index: 3;
-}
-
-.jane-highlighted .jane-highlighted__heading--outside {
-  margin: 0 0 24px;
-  padding-inline: 36px;
-}
-
-.jane-highlighted .jane-highlighted__heading--inside {
-  position: absolute;
-  top: 6.5%;
-  left: 4%;
-  width: min(40%, 420px);
-  padding: 0;
-}
-
-.jane-highlighted .jane-highlighted__title {
-  color: var(--jane-title-color);
-  font-family: inherit;
-  font-size: var(--jane-title-size);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: normal;
-  margin: 0 0 8px;
-}
-
-.jane-highlighted .jane-highlighted__description {
-  color: var(--jane-body-color);
-  font-family: inherit;
-  font-size: var(--jane-body-size);
-  font-weight: 400;
-  line-height: 1.45;
-}
-
-.jane-highlighted .jane-highlighted__description p {
-  margin: 0;
-}
-
-.jane-highlighted .jane-align-left {
-  text-align: left;
-}
-
-.jane-highlighted .jane-align-center {
-  text-align: center;
-}
-
-.jane-highlighted .jane-align-right {
-  text-align: right;
-}
-
-/* =================================
+/* ==================================================
    MAIN IMAGE
-================================= */
+================================================== */
 
 .jane-highlighted .jane-highlighted__visual {
   position: relative;
+  isolation: isolate;
   width: 100%;
   overflow: hidden;
+  display: block;
   background: #e7d9bd;
 }
 
@@ -87,375 +49,47 @@
   aspect-ratio: 1 / 1;
 }
 
+/* Picture */
+
 .jane-highlighted .jane-highlighted__picture {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
 }
 
 .jane-highlighted .jane-highlighted__image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: var(--jane-image-fit, cover);
-  object-position: center;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: var(--jane-image-fit, contain);
+  object-position: var(--jane-image-position, center center);
   image-rendering: auto;
 }
+
+/* Image overlay */
 
 .jane-highlighted .jane-highlighted__image-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: rgba(0, 0, 0, var(--jane-overlay));
+  background: rgba(0, 0, 0, var(--jane-overlay, 0));
 }
 
-/* =================================
-   HOTSPOTS
-================================= */
+/* ==================================================
+   TITLE AND DESCRIPTION
+================================================== */
 
-.jane-highlighted .jane-hotspot {
+.jane-highlighted .jane-highlighted__heading {
+  z-index: 3;
+}
+
+.jane-highlighted .jane-highlighted__heading--inside {
   position: absolute;
-  z-index: 4;
-  left: var(--hotspot-x);
-  top: var(--hotspot-y);
-
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
-
-  padding: 0;
-  box-sizing: border-box;
-  aspect-ratio: 1 / 1;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid #171717;
-  border-radius: 50%;
-  background: transparent;
-
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-}
-
-.jane-highlighted .jane-hotspot__dot {
-  display: block;
-  width: 23px;
-  height: 23px;
-  min-width: 23px;
-  min-height: 23px;
-  flex: 0 0 23px;
-
-  margin: 0;
-  border-radius: 50%;
-  background: #171717;
-
-  transition: background .2s ease;
-}
-
-.jane-highlighted .jane-hotspot:hover,
-.jane-highlighted .jane-hotspot.is-active {
-  border-color: #fff;
-}
-
-.jane-highlighted .jane-hotspot:hover .jane-hotspot__dot,
-.jane-highlighted .jane-hotspot.is-active .jane-hotspot__dot {
-  background: #fff;
-}
-
-/* =================================
-   PRODUCT POPUP
-================================= */
-
-.jane-highlighted .jane-highlighted__bullet-content {
-  display: none;
-}
-
-.jane-highlighted .jane-bullet-card {
-  position: absolute;
-  left: var(--card-x);
-  top: var(--card-y);
-  transform: translate(-100%, -115%);
-
-  width: 324px;
-  height: 122px;
-  min-height: 122px;
-  max-width: calc(100% - 20px);
-
-  padding: 16px;
-  gap: 16px;
-  box-sizing: border-box;
-
-  display: none;
-  align-items: center;
-
-  background: #fff;
-  color: #171717;
-  border: none;
-  border-radius: 8px;
-
-  opacity: 1;
-  z-index: 6;
-}
-
-.jane-highlighted .jane-bullet-card.is-active {
-  display: flex;
-}
-
-.jane-highlighted .jane-bullet-card__image {
-  display: block;
-
-  width: 90px;
-  height: 90px;
-  min-width: 90px;
-  min-height: 90px;
-  flex: 0 0 90px;
-
-  object-fit: contain;
-  border-radius: 0;
-  margin: 0;
-}
-
-.jane-highlighted .jane-bullet-card__copy {
-  flex: 1;
-  min-width: 0;
-}
-
-.jane-highlighted .jane-bullet-card__title {
-  margin: 0 0 6px;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-.jane-highlighted .jane-bullet-card__description {
-  font-size: 12px;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.jane-highlighted .jane-bullet-card__description p {
-  margin: 0;
-}
-
-/* =================================
-   BUTTON
-================================= */
-
-.jane-highlighted .jane-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;
-
-  padding: 10px 30px;
-  font: inherit;
-  font-size: 12px;
-  line-height: 1.2;
-
-  text-decoration: none;
-  text-transform: none;
-  cursor: pointer;
-
-  transition:
-    color .2s ease,
-    background .2s ease,
-    border-color .2s ease;
-}
-
-.jane-highlighted .jane-button--filled {
-  color: #fff;
-  background: #171717;
-  border: 1px solid #171717;
-}
-
-.jane-highlighted .jane-button--filled:hover {
-  color: #171717;
-  background: transparent;
-}
-
-.jane-highlighted .jane-button--stroke {
-  color: #171717;
-  background: transparent;
-  border: 1px solid #171717;
-}
-
-.jane-highlighted .jane-button--stroke:hover {
-  color: #fff;
-  background: #171717;
-}
-
-.jane-highlighted .jane-button--link {
-  min-height: 0;
-  padding: 4px 0;
-  color: #171717;
-  background: transparent;
-  border: 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.jane-highlighted .jane-button--link:hover {
-  opacity: .6;
-}
-
-.jane-highlighted .jane-highlighted__visual > .jane-button {
-  position: absolute;
-  z-index: 5;
+  top: 6.5%;
   left: 4%;
-  bottom: 6%;
-}
-
-.jane-highlighted .jane-highlighted__button-wrap {
-  padding: 18px 36px 0;
-}
-
-.jane-highlighted .jane-highlighted__button-wrap.jane-align-center {
-  text-align: center;
-}
-
-.jane-highlighted .jane-highlighted__button-wrap.jane-align-right {
-  text-align: right;
-}
-
-/* =================================
-   PLACEHOLDER
-================================= */
-
-.jane-highlighted .jane-highlighted__placeholder {
-  min-height: 260px;
-  text-align: center;
-  background: #eee;
-}
-
-.jane-highlighted .jane-highlighted__placeholder svg {
-  width: 100%;
-  max-height: 400px;
-}
-
-/* =================================
-   FADE ANIMATION
-================================= */
-
-.jane-highlighted [data-jane-animate] {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .7s ease, transform .7s ease;
-}
-
-.jane-highlighted [data-jane-animate].is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =================================
-   MOBILE RESPONSIVE
-================================= */
-
-@media screen and (max-width: 749px) {
-
-  .jane-highlighted {
-    padding-block: var(--jane-pad-top) var(--jane-pad-bottom);
-  }
-
-  .jane-highlighted .jane-highlighted__heading--outside {
-    padding-inline: 20px;
-    margin-bottom: 16px;
-  }
-
-  .jane-highlighted .jane-highlighted__heading--inside {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    text-align: center;
-  }
-
-  .jane-highlighted .jane-highlighted__title {
-    font-size: var(--jane-title-size-mobile);
-    margin-bottom: 6px;
-  }
-
-  .jane-highlighted .jane-highlighted__description {
-    font-size: var(--jane-body-size-mobile);
-  }
-
-  .jane-highlighted .jane-ratio-wide,
-  .jane-highlighted .jane-ratio-landscape {
-    aspect-ratio: 3 / 4;
-  }
-
-  .jane-highlighted .jane-highlighted__image {
-    object-fit: var(--jane-mobile-image-fit, cover);
-  }
-
-  /* Mobile hotspot position */
-  .jane-highlighted .jane-hotspot {
-    left: var(--hotspot-mobile-x);
-    top: var(--hotspot-mobile-y);
-
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
-  }
-
-  .jane-highlighted .jane-hotspot__dot {
-    width: 17px;
-    height: 17px;
-    min-width: 17px;
-    min-height: 17px;
-    flex: 0 0 17px;
-  }
-
-  /* Mobile popup */
-  .jane-highlighted .jane-bullet-card {
-    left: var(--card-mobile-x, 51.5px);
-    top: var(--card-mobile-y, 108px);
-    transform: none;
-
-    width: 271px;
-    height: 117px;
-    min-height: 117px;
-    max-width: calc(100% - 24px);
-
-    padding: 12px;
-    gap: 12px;
-
-    border-radius: 8px;
-  }
-
-  .jane-highlighted .jane-bullet-card__image {
-    width: 80px;
-    height: 80px;
-    min-width: 80px;
-    min-height: 80px;
-    flex: 0 0 80px;
-  }
-
-  .jane-highlighted .jane-highlighted__visual > .jane-button {
-    left: 5%;
-    bottom: 4%;
-  }
-
-  .jane-highlighted .jane-highlighted__button-wrap {
-    padding: 14px 20px 0;
-  }
-}
-
-/* =================================
-   REDUCED MOTION
-================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .jane-highlighted *,
-  .jane-highlighted *::before,
-  .jane-highlighted *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
+  width: min(40%, 420px);
+  padding: 0;
 }
