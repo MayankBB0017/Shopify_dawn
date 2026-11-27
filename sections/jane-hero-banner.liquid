@@ -76,6 +76,9 @@
                   assign body_size_desktop = block.settings.left_body_size_desktop
                   assign body_size_mobile = block.settings.left_body_size_mobile
                   assign panel_button_text_color = block.settings.left_button_text_color
+                  assign panel_button_bg_color = block.settings.left_button_bg_color
+                  assign panel_button_border_color = block.settings.left_button_border_color
+                  assign panel_button_border_width = block.settings.left_button_border_width
                   assign panel_button_style = block.settings.left_button_style
                   assign panel_button_label = block.settings.left_button_label
                   assign panel_button_link = block.settings.left_button_link
@@ -99,6 +102,9 @@
                   assign body_size_desktop = block.settings.right_body_size_desktop
                   assign body_size_mobile = block.settings.right_body_size_mobile
                   assign panel_button_text_color = block.settings.right_button_text_color
+                  assign panel_button_bg_color = block.settings.right_button_bg_color
+                  assign panel_button_border_color = block.settings.right_button_border_color
+                  assign panel_button_border_width = block.settings.right_button_border_width
                   assign panel_button_style = block.settings.right_button_style
                   assign panel_button_label = block.settings.right_button_label
                   assign panel_button_link = block.settings.right_button_link
@@ -155,7 +161,7 @@
 
               <div
                 class="jane-hero__panel jane-hero__panel--{{ panel_name }} jane-hero__position--{{ panel_position }} jane-hero__align--{{ panel_alignment }}"
-                style="--jhb-panel-overlay: {{ panel_overlay | divided_by: 100.0 }}; --jhb-panel-text: {{ panel_text_color }}; --jhb-panel-title-desktop: {{ title_desktop_px }}px; --jhb-panel-title-mobile: {{ title_mobile_px }}px; --jhb-panel-body-desktop: {{ body_desktop_px }}px; --jhb-panel-body-mobile: {{ body_mobile_px }}px; --jhb-panel-button-text: {{ panel_button_text_color }};"
+                style="--jhb-panel-overlay: {{ panel_overlay | divided_by: 100.0 }}; --jhb-panel-text: {{ panel_text_color }}; --jhb-panel-title-desktop: {{ title_desktop_px }}px; --jhb-panel-title-mobile: {{ title_mobile_px }}px; --jhb-panel-body-desktop: {{ body_desktop_px }}px; --jhb-panel-body-mobile: {{ body_mobile_px }}px; --jhb-panel-button-text: {{ panel_button_text_color }}; --jhb-panel-button-bg: {{ panel_button_bg_color }}; --jhb-panel-button-border: {{ panel_button_border_color }}; --jhb-panel-button-border-width: {{ panel_button_border_width }}px;"
               >
                 <div class="jane-hero__media">
                   {%- comment -%} Desktop: video takes priority; image is fallback when video is empty. {%- endcomment -%}
@@ -559,6 +565,28 @@
           "default": "#000000"
         },
         {
+          "type": "color",
+          "id": "left_button_bg_color",
+          "label": "Left button background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "left_button_border_color",
+          "label": "Left button border color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "left_button_border_width",
+          "label": "Left button border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
           "type": "select",
           "id": "left_button_style",
           "label": "Left buttons style",
@@ -788,6 +816,28 @@
           "id": "right_button_text_color",
           "label": "Right button text color",
           "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "right_button_bg_color",
+          "label": "Right button background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "right_button_border_color",
+          "label": "Right button border color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "right_button_border_width",
+          "label": "Right button border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
         },
         {
           "type": "select",
