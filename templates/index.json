@@ -15,6 +15,7 @@
         "slide_QUcwhT": {
           "type": "slide",
           "settings": {
+            "desktop_image": "shopify://shop_images/Tender_Moment_by_the_Window.png",
             "desktop_video": "shopify://files/videos/Hero-banner.mp4",
             "title": "Esto es vida",
             "description": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>",
