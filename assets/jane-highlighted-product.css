@@ -554,20 +554,32 @@ object-fit: contain;
     padding: 0;
   }
 
-  .jane-highlighted .jane-bullet-card__image {
-  width: 60px;
-  height: 70px;
-  min-width: 60px;
-  min-height: 70px;
-  flex: 0 0 60px;
-  object-fit: contain;
+  /* MOBILE POPUP - FIXED TOP POSITION */
+
+.jane-highlighted .jane-bullet-card {
+  position: absolute;
+  left: 50%;
+  top: 8.5%;
+  width: 316px;
+  max-width: calc(100% - 24px);
+  height: 122px;
+  min-height: 122px;
+  padding: 10px;
+  gap: 12px;
+  border-radius: 8px;
+  transform: translate(-50%, 0);
+  box-sizing: border-box;
+  align-items: center;
 }
 
-  .jane-highlighted .jane-bullet-card__image {
-    width: 75px;
-    height: 85px;
-    flex: 0 0 75px;
-  }
+.jane-highlighted .jane-bullet-card__image {
+  width: 80px;
+  height: 95px;
+  min-width: 80px;
+  min-height: 95px;
+  flex: 0 0 80px;
+  object-fit: contain;
+}
 
   .jane-highlighted .jane-bullet-card__title {
     font-size: 17px;
