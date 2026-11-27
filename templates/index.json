@@ -193,9 +193,9 @@
       ],
       "name": "JANÉ - Blocks Banner",
       "settings": {
-        "heading": "Discover JANÉ",
+        "heading": "Products typology",
         "description": "",
-        "desktop_layout": "two",
+        "desktop_layout": "featured-left",
         "mobile_layout": "stacked",
         "show_arrows": true,
         "image_ratio": "adapt",
