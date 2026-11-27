@@ -348,3 +348,31 @@
     bottom: 4%;
   }
 }
+
+/* FIX: Original image ratio and section visibility */
+
+.jane-highlighted .jane-highlighted__visual.jane-ratio-adapt {
+  aspect-ratio: var(--jane-image-ratio, 2.1 / 1) !important;
+  position: relative !important;
+  width: 100%;
+  min-height: 200px;
+}
+
+.jane-highlighted .jane-highlighted__picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.jane-highlighted .jane-highlighted__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: var(--jane-image-fit, contain);
+}
+
+.jane-highlighted .jane-highlighted__inner {
+  display: block;
+  min-height: 1px;
+}
