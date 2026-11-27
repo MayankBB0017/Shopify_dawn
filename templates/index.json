@@ -37,10 +37,37 @@
             "right_button_label": "COMPRAR",
             "right_button_link": ""
           }
+        },
+        "slide_yPzaM8": {
+          "type": "slide",
+          "settings": {
+            "left_image": "shopify://shop_images/Tender_Moment_by_the_Window.png",
+            "left_video": "shopify://files/videos/Hero-banner.mp4",
+            "left_title": "Esto es vida",
+            "left_description": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>",
+            "left_position": "bottom-left",
+            "left_alignment": "left",
+            "left_text_color": "#ffffff",
+            "left_overlay": 20,
+            "left_gradient": true,
+            "left_button_label": "COMPRAR",
+            "left_button_link": "",
+            "right_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
+            "right_title": "Carrito Keep full equipped",
+            "right_description": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>",
+            "right_position": "bottom-left",
+            "right_alignment": "left",
+            "right_text_color": "#ffffff",
+            "right_overlay": 20,
+            "right_gradient": true,
+            "right_button_label": "COMPRAR",
+            "right_button_link": ""
+          }
         }
       },
       "block_order": [
-        "slide_QUcwhT"
+        "slide_QUcwhT",
+        "slide_yPzaM8"
       ],
       "name": "JANÉ hero banner",
       "settings": {
