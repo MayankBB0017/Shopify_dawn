@@ -1,35 +1,73 @@
 
-/* ==================================================
-   JANE - HIGHLIGHTED PRODUCT
-   Complete CSS | Shopify Dawn
-================================================== */
-
-/* SECTION */
-
 .jane-highlighted {
-  width: 100%;
-  padding-top: var(--jane-pad-top, 0px);
-  padding-bottom: var(--jane-pad-bottom, 0px);
-  color: var(--jane-body-color, #171717);
-  overflow: visible;
+  padding-block: var(--jane-pad-top) var(--jane-pad-bottom);
+  color: var(--jane-body-color);
 }
 
-.jane-highlighted__inner {
-  width: min(100%, var(--jane-max-width, 1600px));
-  margin: 0 auto;
-  position: relative;
+.jane-highlighted .jane-highlighted__inner {
+  width: min(100%, var(--jane-max-width));
+  margin-inline: auto;
 }
 
-/* ==================================================
+.jane-highlighted .jane-highlighted__heading {
+  z-index: 3;
+}
+
+.jane-highlighted .jane-highlighted__heading--outside {
+  margin: 0 0 24px;
+  padding-inline: 36px;
+}
+
+.jane-highlighted .jane-highlighted__heading--inside {
+  position: absolute;
+  top: 6.5%;
+  left: 4%;
+  width: min(40%, 420px);
+  padding: 0;
+}
+
+.jane-highlighted .jane-highlighted__title {
+  color: var(--jane-title-color);
+  font-family: inherit;
+  font-size: var(--jane-title-size);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: normal;
+  margin: 0 0 8px;
+}
+
+.jane-highlighted .jane-highlighted__description {
+  color: var(--jane-body-color);
+  font-family: inherit;
+  font-size: var(--jane-body-size);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.jane-highlighted .jane-highlighted__description p {
+  margin: 0;
+}
+
+.jane-highlighted .jane-align-left {
+  text-align: left;
+}
+
+.jane-highlighted .jane-align-center {
+  text-align: center;
+}
+
+.jane-highlighted .jane-align-right {
+  text-align: right;
+}
+
+/* =================================
    MAIN IMAGE
-================================================== */
+================================= */
 
 .jane-highlighted .jane-highlighted__visual {
   position: relative;
-  isolation: isolate;
   width: 100%;
   overflow: hidden;
-  display: block;
   background: #e7d9bd;
 }
 
@@ -49,248 +87,137 @@
   aspect-ratio: 1 / 1;
 }
 
-/* Picture */
-
 .jane-highlighted .jane-highlighted__picture {
-  position: absolute;
-  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
 }
 
 .jane-highlighted .jane-highlighted__image {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: var(--jane-image-fit, contain);
-  object-position: var(--jane-image-position, center center);
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--jane-image-fit, cover);
+  object-position: center;
   image-rendering: auto;
 }
-
-/* Image overlay */
 
 .jane-highlighted .jane-highlighted__image-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: rgba(0, 0, 0, var(--jane-overlay, 0));
+  background: rgba(0, 0, 0, var(--jane-overlay));
 }
 
-/* ==================================================
-   TITLE AND DESCRIPTION
-================================================== */
-
-.jane-highlighted .jane-highlighted__heading {
-  z-index: 3;
-}
-
-.jane-highlighted .jane-highlighted__heading--inside {
-  position: absolute;
-  top: 6.5%;
-  left: 4%;
-  width: min(40%, 420px);
-  padding: 0;
-}
-
-.jane-highlighted .jane-highlighted__heading--outside {
-  position: relative;
-  margin: 0 0 24px;
-  padding-inline: 36px;
-}
-
-.jane-highlighted .jane-highlighted__title {
-  color: var(--jane-title-color, #171717);
-  font-family: inherit;
-  font-size: var(--jane-title-size, 20px);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: normal;
-  margin: 0 0 8px;
-}
-
-.jane-highlighted .jane-highlighted__description {
-  color: var(--jane-body-color, #171717);
-  font-family: inherit;
-  font-size: var(--jane-body-size, 14px);
-  font-weight: 400;
-  line-height: 1.45;
-}
-
-.jane-highlighted .jane-highlighted__description p {
-  margin: 0;
-}
-
-/* Text alignment */
-
-.jane-highlighted .jane-align-left {
-  text-align: left;
-}
-
-.jane-highlighted .jane-align-center {
-  text-align: center;
-}
-
-.jane-highlighted .jane-align-right {
-  text-align: right;
-}
-
-/* ==================================================
-   HOTSPOT - NORMAL STATE
-================================================== */
+/* =================================
+   HOTSPOTS
+================================= */
 
 .jane-highlighted .jane-hotspot {
-  appearance: none !important;
-  -webkit-appearance: none !important;
-
   position: absolute;
-  z-index: 7;
-
+  z-index: 4;
   left: var(--hotspot-x);
   top: var(--hotspot-y);
 
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  min-height: 32px !important;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
 
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
 
-  border: 1px solid #171717 !important;
-  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  background: transparent !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  box-sizing: border-box !important;
-  flex: 0 0 32px !important;
-
-  aspect-ratio: 1 / 1 !important;
-
-  line-height: 0 !important;
-  font-size: 0 !important;
+  border: 1px solid #171717;
+  border-radius: 50%;
+  background: transparent;
 
   transform: translate(-50%, -50%);
   cursor: pointer;
-
-  transition: border-color 0.2s ease;
 }
-
-/* Inner dot */
 
 .jane-highlighted .jane-hotspot__dot {
-  display: block !important;
+  display: block;
+  width: 23px;
+  height: 23px;
+  min-width: 23px;
+  min-height: 23px;
+  flex: 0 0 23px;
 
-  width: 23px !important;
-  height: 23px !important;
+  margin: 0;
+  border-radius: 50%;
+  background: #171717;
 
-  min-width: 23px !important;
-  min-height: 23px !important;
-
-  flex: 0 0 23px !important;
-
-  border: 0 !important;
-  border-radius: 50% !important;
-
-  background: #171717 !important;
-
-  box-sizing: border-box !important;
-  aspect-ratio: 1 / 1 !important;
-
-  transition: background 0.2s ease;
+  transition: background .2s ease;
 }
-
-/* ==================================================
-   HOTSPOT - HOVER / ACTIVE STATE
-================================================== */
 
 .jane-highlighted .jane-hotspot:hover,
 .jane-highlighted .jane-hotspot.is-active {
-  border-color: #ffffff !important;
+  border-color: #fff;
 }
 
 .jane-highlighted .jane-hotspot:hover .jane-hotspot__dot,
 .jane-highlighted .jane-hotspot.is-active .jane-hotspot__dot {
-  background: #ffffff !important;
+  background: #fff;
 }
 
-/* ==================================================
-   BULLET CONTENT - INSIDE IMAGE
-================================================== */
+/* =================================
+   PRODUCT POPUP
+================================= */
 
 .jane-highlighted .jane-highlighted__bullet-content {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-
-  display: block;
-
-  padding: 0;
-  margin: 0;
-
-  pointer-events: none;
-  overflow: visible;
+  display: none;
 }
-
-/* Popup card */
 
 .jane-highlighted .jane-bullet-card {
   position: absolute;
-
   left: var(--card-x);
   top: var(--card-y);
-
   transform: translate(-100%, -115%);
 
-  width: 588px;
-  max-width: 55%;
-  min-height: 180px;
+  width: 324px;
+  height: 122px;
+  min-height: 122px;
+  max-width: calc(100% - 20px);
 
-  padding: 28px 35px;
-
-  background: #ffffff;
-  color: #171717;
-
-  border: none;
-  border-radius: 15px;
+  padding: 16px;
+  gap: 16px;
+  box-sizing: border-box;
 
   display: none;
   align-items: center;
-  gap: 28px;
 
-  pointer-events: auto;
-  box-shadow: none;
-  box-sizing: border-box;
+  background: #fff;
+  color: #171717;
+  border: none;
+  border-radius: 8px;
+
+  opacity: 1;
+  z-index: 6;
 }
-
-/* Only active popup visible */
 
 .jane-highlighted .jane-bullet-card.is-active {
   display: flex;
 }
 
-/* Popup image */
-
 .jane-highlighted .jane-bullet-card__image {
   display: block;
 
-  width: 138px;
-  height: 163px;
+  width: 90px;
+  height: 90px;
+  min-width: 90px;
+  min-height: 90px;
+  flex: 0 0 90px;
 
-  flex: 0 0 138px;
-
-  object-fit: cover;
-  object-position: center;
-
+  object-fit: contain;
+  border-radius: 0;
   margin: 0;
 }
-
-/* Popup text */
 
 .jane-highlighted .jane-bullet-card__copy {
   flex: 1;
@@ -298,60 +225,50 @@
 }
 
 .jane-highlighted .jane-bullet-card__title {
-  margin: 0 0 14px;
-
+  margin: 0 0 6px;
   font-family: inherit;
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 1.2;
-
-  color: #171717;
 }
 
 .jane-highlighted .jane-bullet-card__description {
-  font-family: inherit;
-  font-size: 23px;
-  font-weight: 400;
-  line-height: 1.35;
-
-  color: #171717;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
 }
 
 .jane-highlighted .jane-bullet-card__description p {
   margin: 0;
 }
 
-/* ==================================================
+/* =================================
    BUTTON
-================================================== */
+================================= */
 
 .jane-highlighted .jane-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   min-height: 40px;
-  padding: 10px 30px;
 
-  font-family: inherit;
+  padding: 10px 30px;
+  font: inherit;
   font-size: 12px;
   line-height: 1.2;
 
   text-decoration: none;
   text-transform: none;
-
   cursor: pointer;
 
   transition:
-    color 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease;
+    color .2s ease,
+    background .2s ease,
+    border-color .2s ease;
 }
 
-/* Filled */
-
 .jane-highlighted .jane-button--filled {
-  color: #ffffff;
+  color: #fff;
   background: #171717;
   border: 1px solid #171717;
 }
@@ -361,8 +278,6 @@
   background: transparent;
 }
 
-/* Stroke */
-
 .jane-highlighted .jane-button--stroke {
   color: #171717;
   background: transparent;
@@ -370,47 +285,33 @@
 }
 
 .jane-highlighted .jane-button--stroke:hover {
-  color: #ffffff;
+  color: #fff;
   background: #171717;
 }
-
-/* Link */
 
 .jane-highlighted .jane-button--link {
   min-height: 0;
   padding: 4px 0;
-
   color: #171717;
   background: transparent;
   border: 0;
-
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .jane-highlighted .jane-button--link:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
-
-/* Button on image */
 
 .jane-highlighted .jane-highlighted__visual > .jane-button {
   position: absolute;
-  z-index: 8;
-
+  z-index: 5;
   left: 4%;
   bottom: 6%;
 }
 
-/* Button below image */
-
 .jane-highlighted .jane-highlighted__button-wrap {
-  position: relative;
   padding: 18px 36px 0;
-}
-
-.jane-highlighted .jane-highlighted__button-wrap .jane-button {
-  position: relative;
 }
 
 .jane-highlighted .jane-highlighted__button-wrap.jane-align-center {
@@ -421,9 +322,9 @@
   text-align: right;
 }
 
-/* ==================================================
+/* =================================
    PLACEHOLDER
-================================================== */
+================================= */
 
 .jane-highlighted .jane-highlighted__placeholder {
   min-height: 260px;
@@ -436,17 +337,14 @@
   max-height: 400px;
 }
 
-/* ==================================================
+/* =================================
    FADE ANIMATION
-================================================== */
+================================= */
 
 .jane-highlighted [data-jane-animate] {
   opacity: 0;
   transform: translateY(24px);
-
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+  transition: opacity .7s ease, transform .7s ease;
 }
 
 .jane-highlighted [data-jane-animate].is-visible {
@@ -454,17 +352,14 @@
   transform: translateY(0);
 }
 
-/* ==================================================
+/* =================================
    MOBILE RESPONSIVE
-================================================== */
+================================= */
 
 @media screen and (max-width: 749px) {
 
-  /* Section */
-
   .jane-highlighted {
-    padding-top: var(--jane-pad-top, 0px);
-    padding-bottom: var(--jane-pad-bottom, 0px);
+    padding-block: var(--jane-pad-top) var(--jane-pad-bottom);
   }
 
   .jane-highlighted .jane-highlighted__heading--outside {
@@ -472,14 +367,21 @@
     margin-bottom: 16px;
   }
 
-  /* Image */
-
-  .jane-highlighted .jane-highlighted__visual {
-    width: 100%;
+  .jane-highlighted .jane-highlighted__heading--inside {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    text-align: center;
   }
 
-  .jane-highlighted .jane-ratio-adapt {
-    aspect-ratio: var(--jane-image-ratio, 2.1 / 1);
+  .jane-highlighted .jane-highlighted__title {
+    font-size: var(--jane-title-size-mobile);
+    margin-bottom: 6px;
+  }
+
+  .jane-highlighted .jane-highlighted__description {
+    font-size: var(--jane-body-size-mobile);
   }
 
   .jane-highlighted .jane-ratio-wide,
@@ -488,87 +390,52 @@
   }
 
   .jane-highlighted .jane-highlighted__image {
-    object-fit: var(--jane-mobile-image-fit, contain);
+    object-fit: var(--jane-mobile-image-fit, cover);
   }
 
-  /* Heading */
-
-  .jane-highlighted .jane-highlighted__heading--inside {
-    top: 5%;
-    left: 5%;
-    width: 90%;
-  }
-
-  .jane-highlighted .jane-highlighted__title {
-    font-size: var(--jane-title-size-mobile, 20px);
-    margin-bottom: 6px;
-  }
-
-  .jane-highlighted .jane-highlighted__description {
-    font-size: var(--jane-body-size-mobile, 14px);
-  }
-
-  /* Hotspots */
-
+  /* Mobile hotspot position */
   .jane-highlighted .jane-hotspot {
     left: var(--hotspot-mobile-x);
     top: var(--hotspot-mobile-y);
 
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    min-height: 32px !important;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
   }
 
   .jane-highlighted .jane-hotspot__dot {
-    width: 23px !important;
-    height: 23px !important;
-    min-width: 23px !important;
-    min-height: 23px !important;
-    flex-basis: 23px !important;
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+    min-height: 17px;
+    flex: 0 0 17px;
   }
 
-  /* Popup */
-
-  .jane-highlighted .jane-highlighted__bullet-content {
-    position: absolute;
-    inset: 0;
-    padding: 0;
-  }
-
+  /* Mobile popup */
   .jane-highlighted .jane-bullet-card {
-    left: var(--card-mobile-x);
-    top: var(--card-mobile-y);
+    left: var(--card-mobile-x, 51.5px);
+    top: var(--card-mobile-y, 108px);
+    transform: none;
 
-    width: 90%;
-    max-width: 90%;
-    min-height: auto;
+    width: 271px;
+    height: 117px;
+    min-height: 117px;
+    max-width: calc(100% - 24px);
 
-    padding: 14px;
+    padding: 12px;
     gap: 12px;
 
-    border-radius: 10px;
-
-    transform: translate(-50%, -115%);
+    border-radius: 8px;
   }
 
   .jane-highlighted .jane-bullet-card__image {
-    width: 75px;
-    height: 85px;
-    flex: 0 0 75px;
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+    flex: 0 0 80px;
   }
-
-  .jane-highlighted .jane-bullet-card__title {
-    font-size: 17px;
-    margin-bottom: 6px;
-  }
-
-  .jane-highlighted .jane-bullet-card__description {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  /* Button */
 
   .jane-highlighted .jane-highlighted__visual > .jane-button {
     left: 5%;
@@ -580,15 +447,15 @@
   }
 }
 
-/* ==================================================
-   ACCESSIBILITY
-================================================== */
+/* =================================
+   REDUCED MOTION
+================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .jane-highlighted *,
   .jane-highlighted *::before,
   .jane-highlighted *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
   }
 }
