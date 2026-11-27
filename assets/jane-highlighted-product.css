@@ -490,8 +490,10 @@ object-fit: contain;
   /* Image */
 
   .jane-highlighted .jane-highlighted__visual {
-    width: 100%;
-  }
+  width: 100%;
+  height: 661px;
+  aspect-ratio: auto;
+}
 
   .jane-highlighted .jane-ratio-adapt {
     aspect-ratio: var(--jane-image-ratio, 2.1 / 1);
