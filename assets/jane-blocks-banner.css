@@ -1,11 +1,12 @@
 
 /* =========================================
-   JANÉ BLOCKS BANNER
+   JANÉ - BLOCKS BANNER
+   Complete Responsive CSS
 ========================================= */
 
 .jbb {
-  padding-top: var(--jbb-padding-top);
-  padding-bottom: var(--jbb-padding-bottom);
+  padding-top: var(--jbb-padding-top, 24px);
+  padding-bottom: var(--jbb-padding-bottom, 24px);
   overflow: hidden;
 }
 
@@ -19,8 +20,8 @@
 
 .jbb__section-heading {
   margin: 0;
-  color: var(--jbb-title-color);
-  font-size: var(--jbb-title-desktop);
+  color: var(--jbb-title-color, #171717);
+  font-size: var(--jbb-title-desktop, 32px);
   line-height: 1.2;
   font-weight: 500;
 }
@@ -29,12 +30,14 @@
   margin-top: 8px;
 }
 
-/* GRID */
+/* =========================================
+   DEFAULT GRID
+========================================= */
 
 .jbb__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--jbb-gap);
+  gap: var(--jbb-gap, 8px);
 }
 
 /* 2 IMAGES */
@@ -77,7 +80,35 @@
   grid-row: span 2;
 }
 
-/* ITEM */
+/* =========================================
+   2 TOP + 4 BOTTOM LAYOUT
+========================================= */
+
+.jbb--desktop-two-plus-four .jbb__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: row;
+  gap: var(--jbb-gap, 8px);
+}
+
+/* TOP TWO LARGE IMAGES */
+
+.jbb--desktop-two-plus-four .jbb__item:nth-child(1),
+.jbb--desktop-two-plus-four .jbb__item:nth-child(2) {
+  grid-column: span 2;
+  grid-row: auto;
+}
+
+/* BOTTOM FOUR SMALL IMAGES */
+
+.jbb--desktop-two-plus-four .jbb__item:nth-child(n+3) {
+  grid-column: span 1;
+  grid-row: auto;
+}
+
+/* =========================================
+   BANNER ITEM
+========================================= */
 
 .jbb__item {
   min-width: 0;
@@ -87,11 +118,12 @@
 .jbb__link {
   position: relative;
   display: block;
+  width: 100%;
   height: 100%;
   overflow: hidden;
   color: inherit;
   text-decoration: none;
-  border-radius: var(--jbb-radius);
+  border-radius: var(--jbb-radius, 5px);
 }
 
 .jbb__media {
@@ -103,7 +135,9 @@
   background: #eee;
 }
 
-/* IMAGE RATIOS */
+/* =========================================
+   IMAGE RATIOS
+========================================= */
 
 .jbb__media--adapt {
   min-height: 1px;
@@ -136,29 +170,60 @@
   object-position: center;
 }
 
-.jbb__media--adapt .jbb__image {
-  height: auto;
+/* =========================================
+   2 TOP + 4 BOTTOM IMAGE SIZING
+========================================= */
+
+/* Top two large banners */
+
+.jbb--desktop-two-plus-four
+.jbb__item:nth-child(-n+2) .jbb__media {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
 }
 
-.jbb__item:first-child .jbb__media {
-  min-height: 100%;
+/* Bottom four square banners */
+
+.jbb--desktop-two-plus-four
+.jbb__item:nth-child(n+3) .jbb__media {
+  aspect-ratio: 1 / 1;
+  min-height: 0;
 }
 
-/* OVERLAY */
+/* Force image to fill banner */
+
+.jbb--desktop-two-plus-four .jbb__media picture {
+  position: absolute;
+  inset: 0;
+}
+
+.jbb--desktop-two-plus-four .jbb__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================
+   IMAGE OVERLAY
+========================================= */
 
 .jbb__overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
+
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, var(--jbb-overlay)) 0%,
-    rgba(0, 0, 0, 0) 65%
+    rgba(0, 0, 0, var(--jbb-overlay, 0.30)) 0%,
+    rgba(0, 0, 0, 0.10) 35%,
+    transparent 70%
   );
 }
 
-/* CONTENT */
+/* =========================================
+   CONTENT POSITION
+========================================= */
 
 .jbb__content {
   position: absolute;
@@ -166,23 +231,31 @@
   left: 0;
   right: 0;
   padding: 24px;
-  color: var(--jbb-text-color);
+  color: var(--jbb-text-color, #fff);
   pointer-events: none;
 }
+
+/* Top left */
 
 .jbb__content--top-left {
   top: 0;
 }
+
+/* Top center */
 
 .jbb__content--top-center {
   top: 0;
   text-align: center;
 }
 
+/* Center left */
+
 .jbb__content--center-left {
   top: 50%;
   transform: translateY(-50%);
 }
+
+/* Center */
 
 .jbb__content--center {
   top: 50%;
@@ -190,16 +263,22 @@
   text-align: center;
 }
 
+/* Bottom left */
+
 .jbb__content--bottom-left {
   bottom: 0;
 }
+
+/* Bottom center */
 
 .jbb__content--bottom-center {
   bottom: 0;
   text-align: center;
 }
 
-/* TITLES */
+/* =========================================
+   TYPOGRAPHY
+========================================= */
 
 .jbb__eyebrow {
   margin: 0 0 8px;
@@ -211,10 +290,12 @@
 .jbb__title {
   margin: 0;
   color: inherit;
+
   font-size: var(
     --jbb-block-title-desktop,
-    var(--jbb-title-desktop)
+    var(--jbb-title-desktop, 32px)
   );
+
   line-height: 1.15;
   font-weight: 500;
 }
@@ -225,22 +306,29 @@
   line-height: 1.5;
 }
 
-/* BUTTON */
+/* =========================================
+   BUTTON
+========================================= */
 
 .jbb__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   margin-top: 14px;
   padding: 10px 24px;
   min-height: 38px;
+
   border: 1px solid currentColor;
+
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-/* HOVER */
+/* =========================================
+   HOVER EFFECT
+========================================= */
 
 .jbb__image {
   transition: transform 0.5s ease;
@@ -250,7 +338,9 @@
   transform: scale(1.025);
 }
 
-/* CAROUSEL CONTROLS */
+/* =========================================
+   CAROUSEL CONTROLS
+========================================= */
 
 .jbb__controls {
   display: none;
@@ -262,50 +352,57 @@
 .jbb__arrow {
   width: 38px;
   height: 38px;
+
   border: 1px solid #222;
   border-radius: 50%;
+
   background: transparent;
   color: #222;
+
   cursor: pointer;
 }
 
 /* =========================================
-   MOBILE
+   MOBILE RESPONSIVE
 ========================================= */
 
 @media screen and (max-width: 749px) {
+
+  /* Header */
 
   .jbb__header {
     margin-bottom: 12px;
   }
 
   .jbb__section-heading {
-    font-size: var(--jbb-title-mobile);
+    font-size: var(--jbb-title-mobile, 22px);
   }
 
-  /* STACKED */
+  /* STACKED LAYOUT */
 
   .jbb--mobile-stacked .jbb__grid {
     display: grid;
     grid-template-columns: 1fr;
   }
 
-  /* TWO COLUMNS */
+  /* TWO COLUMN LAYOUT */
 
   .jbb--mobile-two .jbb__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* MOBILE CAROUSEL */
+  /* CAROUSEL LAYOUT */
 
   .jbb--mobile-carousel .jbb__grid {
     display: flex;
     overflow-x: auto;
+
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+
     scrollbar-width: none;
-    gap: var(--jbb-gap);
+    gap: var(--jbb-gap, 8px);
   }
 
   .jbb--mobile-carousel .jbb__grid::-webkit-scrollbar {
@@ -321,6 +418,40 @@
     display: flex;
   }
 
+  /* RESET DESKTOP SPANS */
+
+  .jbb__item,
+  .jbb--desktop-two-plus-four .jbb__item {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  /* Mobile image dimensions */
+
+  .jbb__media {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  .jbb--desktop-two-plus-four
+  .jbb__media {
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+  }
+
+  .jbb__media picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .jbb__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Mobile text */
+
   .jbb__content {
     padding: 14px;
   }
@@ -328,8 +459,12 @@
   .jbb__title {
     font-size: var(
       --jbb-block-title-mobile,
-      var(--jbb-title-mobile)
+      var(--jbb-title-mobile, 22px)
     );
+  }
+
+  .jbb__eyebrow {
+    font-size: 10px;
   }
 
   .jbb__text {
@@ -341,144 +476,37 @@
     padding: 8px 16px;
   }
 
-  .jbb__media {
-    min-height: 160px;
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+
+  .jbb__content {
+    padding: 16px;
   }
 
-  .jbb__item:first-child .jbb__media {
-    min-height: 160px;
-  }
-
-  .jbb--mobile-stacked .jbb__media--adapt .jbb__image,
-  .jbb--mobile-two .jbb__media--adapt .jbb__image {
-    height: auto;
-  }
-
-  .jbb--mobile-stacked .jbb__item:first-child {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .jbb--mobile-two .jbb__item:first-child {
-    grid-column: auto;
-    grid-row: auto;
+  .jbb__title {
+    font-size: min(
+      var(--jbb-block-title-desktop, 32px),
+      28px
+    );
   }
 
 }
 
-/* ACCESSIBILITY */
+/* =========================================
+   REDUCED MOTION
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .jbb__image,
   .jbb__grid {
     transition: none;
     scroll-behavior: auto;
   }
-}
 
-
-/* =========================================
-   JANÉ - 2 TOP + 4 BOTTOM LAYOUT
-========================================= */
-
-.jbb--desktop-two-plus-four .jbb__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--jbb-gap);
-}
-
-/* TOP TWO LARGE IMAGES */
-
-.jbb--desktop-two-plus-four .jbb__item:nth-child(1),
-.jbb--desktop-two-plus-four .jbb__item:nth-child(2) {
-  grid-column: span 2;
-}
-
-.jbb--desktop-two-plus-four .jbb__item:nth-child(1) .jbb__media,
-.jbb--desktop-two-plus-four .jbb__item:nth-child(2) .jbb__media {
-  aspect-ratio: 16 / 9;
-  min-height: 0;
-}
-
-/* BOTTOM FOUR SMALL IMAGES */
-
-.jbb--desktop-two-plus-four .jbb__item:nth-child(n+3) {
-  grid-column: span 1;
-}
-
-.jbb--desktop-two-plus-four .jbb__item:nth-child(n+3) .jbb__media {
-  aspect-ratio: 1 / 1;
-  min-height: 0;
-}
-
-/* IMAGE DISPLAY */
-
-.jbb--desktop-two-plus-four .jbb__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* MOBILE RESPONSIVE */
-
-@media screen and (max-width: 749px) {
-
-  .jbb--desktop-two-plus-four.jbb--mobile-stacked .jbb__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .jbb--desktop-two-plus-four.jbb--mobile-two .jbb__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .jbb--desktop-two-plus-four.jbb--mobile-carousel .jbb__grid {
-    display: flex;
-  }
-
-  .jbb--desktop-two-plus-four .jbb__item {
-    grid-column: auto !important;
-    grid-row: auto !important;
-  }
-
-  .jbb--desktop-two-plus-four .jbb__media {
-    aspect-ratio: 4 / 5;
-    min-height: 0;
-  }
-
-}
-
-/* FORCE 2 TOP + 4 BOTTOM */
-
-@media screen and (min-width: 750px) {
-
-  .jbb--desktop-two-plus-four .jbb__grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: var(--jbb-gap, 8px);
-  }
-
-  .jbb--desktop-two-plus-four .jbb__item:nth-child(1),
-  .jbb--desktop-two-plus-four .jbb__item:nth-child(2) {
-    grid-column: span 2 !important;
-  }
-
-  .jbb--desktop-two-plus-four .jbb__item:nth-child(n+3) {
-    grid-column: span 1 !important;
-  }
-
-  .jbb--desktop-two-plus-four .jbb__item:nth-child(-n+2) .jbb__media {
-    aspect-ratio: 16 / 9;
-    min-height: 0;
-  }
-
-  .jbb--desktop-two-plus-four .jbb__item:nth-child(n+3) .jbb__media {
-    aspect-ratio: 1 / 1;
-    min-height: 0;
-  }
-
-  .jbb--desktop-two-plus-four .jbb__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 }
