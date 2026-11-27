@@ -93,3 +93,502 @@
   width: min(40%, 420px);
   padding: 0;
 }
+
+.jane-highlighted .jane-highlighted__heading--outside {
+  position: relative;
+  margin: 0 0 24px;
+  padding-inline: 36px;
+}
+
+.jane-highlighted .jane-highlighted__title {
+  color: var(--jane-title-color, #171717);
+  font-family: inherit;
+  font-size: var(--jane-title-size, 20px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: normal;
+  margin: 0 0 8px;
+}
+
+.jane-highlighted .jane-highlighted__description {
+  color: var(--jane-body-color, #171717);
+  font-family: inherit;
+  font-size: var(--jane-body-size, 14px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.jane-highlighted .jane-highlighted__description p {
+  margin: 0;
+}
+
+/* Text alignment */
+
+.jane-highlighted .jane-align-left {
+  text-align: left;
+}
+
+.jane-highlighted .jane-align-center {
+  text-align: center;
+}
+
+.jane-highlighted .jane-align-right {
+  text-align: right;
+}
+
+/* ==================================================
+   HOTSPOT - NORMAL STATE
+================================================== */
+
+.jane-highlighted .jane-hotspot {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  position: absolute;
+  z-index: 7;
+
+  left: var(--hotspot-x);
+  top: var(--hotspot-y);
+
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: 1px solid #171717 !important;
+  border-radius: 50% !important;
+
+  background: transparent !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+  flex: 0 0 32px !important;
+
+  aspect-ratio: 1 / 1 !important;
+
+  line-height: 0 !important;
+  font-size: 0 !important;
+
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+
+  transition: border-color 0.2s ease;
+}
+
+/* Inner dot */
+
+.jane-highlighted .jane-hotspot__dot {
+  display: block !important;
+
+  width: 23px !important;
+  height: 23px !important;
+
+  min-width: 23px !important;
+  min-height: 23px !important;
+
+  flex: 0 0 23px !important;
+
+  border: 0 !important;
+  border-radius: 50% !important;
+
+  background: #171717 !important;
+
+  box-sizing: border-box !important;
+  aspect-ratio: 1 / 1 !important;
+
+  transition: background 0.2s ease;
+}
+
+/* ==================================================
+   HOTSPOT - HOVER / ACTIVE STATE
+================================================== */
+
+.jane-highlighted .jane-hotspot:hover,
+.jane-highlighted .jane-hotspot.is-active {
+  border-color: #ffffff !important;
+}
+
+.jane-highlighted .jane-hotspot:hover .jane-hotspot__dot,
+.jane-highlighted .jane-hotspot.is-active .jane-hotspot__dot {
+  background: #ffffff !important;
+}
+
+/* ==================================================
+   BULLET CONTENT - INSIDE IMAGE
+================================================== */
+
+.jane-highlighted .jane-highlighted__bullet-content {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+
+  display: block;
+
+  padding: 0;
+  margin: 0;
+
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* Popup card */
+
+.jane-highlighted .jane-bullet-card {
+  position: absolute;
+
+  left: var(--card-x);
+  top: var(--card-y);
+
+  transform: translate(-100%, -115%);
+
+  width: 588px;
+  max-width: 55%;
+  min-height: 180px;
+
+  padding: 28px 35px;
+
+  background: #ffffff;
+  color: #171717;
+
+  border: none;
+  border-radius: 15px;
+
+  display: none;
+  align-items: center;
+  gap: 28px;
+
+  pointer-events: auto;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+/* Only active popup visible */
+
+.jane-highlighted .jane-bullet-card.is-active {
+  display: flex;
+}
+
+/* Popup image */
+
+.jane-highlighted .jane-bullet-card__image {
+  display: block;
+
+  width: 138px;
+  height: 163px;
+
+  flex: 0 0 138px;
+
+  object-fit: cover;
+  object-position: center;
+
+  margin: 0;
+}
+
+/* Popup text */
+
+.jane-highlighted .jane-bullet-card__copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.jane-highlighted .jane-bullet-card__title {
+  margin: 0 0 14px;
+
+  font-family: inherit;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+
+  color: #171717;
+}
+
+.jane-highlighted .jane-bullet-card__description {
+  font-family: inherit;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.35;
+
+  color: #171717;
+}
+
+.jane-highlighted .jane-bullet-card__description p {
+  margin: 0;
+}
+
+/* ==================================================
+   BUTTON
+================================================== */
+
+.jane-highlighted .jane-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 40px;
+  padding: 10px 30px;
+
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.2;
+
+  text-decoration: none;
+  text-transform: none;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Filled */
+
+.jane-highlighted .jane-button--filled {
+  color: #ffffff;
+  background: #171717;
+  border: 1px solid #171717;
+}
+
+.jane-highlighted .jane-button--filled:hover {
+  color: #171717;
+  background: transparent;
+}
+
+/* Stroke */
+
+.jane-highlighted .jane-button--stroke {
+  color: #171717;
+  background: transparent;
+  border: 1px solid #171717;
+}
+
+.jane-highlighted .jane-button--stroke:hover {
+  color: #ffffff;
+  background: #171717;
+}
+
+/* Link */
+
+.jane-highlighted .jane-button--link {
+  min-height: 0;
+  padding: 4px 0;
+
+  color: #171717;
+  background: transparent;
+  border: 0;
+
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.jane-highlighted .jane-button--link:hover {
+  opacity: 0.6;
+}
+
+/* Button on image */
+
+.jane-highlighted .jane-highlighted__visual > .jane-button {
+  position: absolute;
+  z-index: 8;
+
+  left: 4%;
+  bottom: 6%;
+}
+
+/* Button below image */
+
+.jane-highlighted .jane-highlighted__button-wrap {
+  position: relative;
+  padding: 18px 36px 0;
+}
+
+.jane-highlighted .jane-highlighted__button-wrap .jane-button {
+  position: relative;
+}
+
+.jane-highlighted .jane-highlighted__button-wrap.jane-align-center {
+  text-align: center;
+}
+
+.jane-highlighted .jane-highlighted__button-wrap.jane-align-right {
+  text-align: right;
+}
+
+/* ==================================================
+   PLACEHOLDER
+================================================== */
+
+.jane-highlighted .jane-highlighted__placeholder {
+  min-height: 260px;
+  text-align: center;
+  background: #eee;
+}
+
+.jane-highlighted .jane-highlighted__placeholder svg {
+  width: 100%;
+  max-height: 400px;
+}
+
+/* ==================================================
+   FADE ANIMATION
+================================================== */
+
+.jane-highlighted [data-jane-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.jane-highlighted [data-jane-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================================================
+   MOBILE RESPONSIVE
+================================================== */
+
+@media screen and (max-width: 749px) {
+
+  /* Section */
+
+  .jane-highlighted {
+    padding-top: var(--jane-pad-top, 0px);
+    padding-bottom: var(--jane-pad-bottom, 0px);
+  }
+
+  .jane-highlighted .jane-highlighted__heading--outside {
+    padding-inline: 20px;
+    margin-bottom: 16px;
+  }
+
+  /* Image */
+
+  .jane-highlighted .jane-highlighted__visual {
+    width: 100%;
+  }
+
+  .jane-highlighted .jane-ratio-adapt {
+    aspect-ratio: var(--jane-image-ratio, 2.1 / 1);
+  }
+
+  .jane-highlighted .jane-ratio-wide,
+  .jane-highlighted .jane-ratio-landscape {
+    aspect-ratio: 3 / 4;
+  }
+
+  .jane-highlighted .jane-highlighted__image {
+    object-fit: var(--jane-mobile-image-fit, contain);
+  }
+
+  /* Heading */
+
+  .jane-highlighted .jane-highlighted__heading--inside {
+    top: 5%;
+    left: 5%;
+    width: 90%;
+  }
+
+  .jane-highlighted .jane-highlighted__title {
+    font-size: var(--jane-title-size-mobile, 20px);
+    margin-bottom: 6px;
+  }
+
+  .jane-highlighted .jane-highlighted__description {
+    font-size: var(--jane-body-size-mobile, 14px);
+  }
+
+  /* Hotspots */
+
+  .jane-highlighted .jane-hotspot {
+    left: var(--hotspot-mobile-x);
+    top: var(--hotspot-mobile-y);
+
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+
+  .jane-highlighted .jane-hotspot__dot {
+    width: 23px !important;
+    height: 23px !important;
+    min-width: 23px !important;
+    min-height: 23px !important;
+    flex-basis: 23px !important;
+  }
+
+  /* Popup */
+
+  .jane-highlighted .jane-highlighted__bullet-content {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+  }
+
+  .jane-highlighted .jane-bullet-card {
+    left: var(--card-mobile-x);
+    top: var(--card-mobile-y);
+
+    width: 90%;
+    max-width: 90%;
+    min-height: auto;
+
+    padding: 14px;
+    gap: 12px;
+
+    border-radius: 10px;
+
+    transform: translate(-50%, -115%);
+  }
+
+  .jane-highlighted .jane-bullet-card__image {
+    width: 75px;
+    height: 85px;
+    flex: 0 0 75px;
+  }
+
+  .jane-highlighted .jane-bullet-card__title {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .jane-highlighted .jane-bullet-card__description {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Button */
+
+  .jane-highlighted .jane-highlighted__visual > .jane-button {
+    left: 5%;
+    bottom: 4%;
+  }
+
+  .jane-highlighted .jane-highlighted__button-wrap {
+    padding: 14px 20px 0;
+  }
+}
+
+/* ==================================================
+   ACCESSIBILITY
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .jane-highlighted *,
+  .jane-highlighted *::before,
+  .jane-highlighted *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

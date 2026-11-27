@@ -213,7 +213,7 @@ class="jane-hotspot"
             {% if block.type == 'bullet' %}
 
               <article
-class="jane-bullet-card{% if bullet_index == 0 %} is-active{% endif %}"
+                class="jane-bullet-card"
                 data-jane-card
                 data-index="{{ bullet_index }}"
                 style="
@@ -273,7 +273,7 @@ class="jane-bullet-card{% if bullet_index == 0 %} is-active{% endif %}"
 
     {% endif %}
 
-    {% if section.settings.button_position == 'image' and section.settings.button_position == 'below' %}
+    {% if section.settings.button_label != blank and section.settings.button_position == 'below' %}
       <div class="jane-highlighted__button-wrap jane-align-{{ section.settings.button_alignment }}">
         <a
           class="jane-button jane-button--{{ section.settings.button_type }}"
