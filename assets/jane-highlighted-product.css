@@ -318,6 +318,9 @@ object-fit: contain;
   color: #171717;
   overflow-wrap: break-word;
 }
+.jane-bullet-card__title{
+    font-size: 16px;
+}
 .jane-highlighted .jane-bullet-card__description {
   font-family: inherit;
   font-size: 14px;
