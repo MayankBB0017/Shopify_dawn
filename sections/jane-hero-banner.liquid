@@ -78,6 +78,8 @@
                   assign panel_button_text_color = block.settings.left_button_text_color
                   assign panel_button_label = block.settings.left_button_label
                   assign panel_button_link = block.settings.left_button_link
+                  assign panel_button_label_2 = block.settings.left_button_label_2
+                  assign panel_button_link_2 = block.settings.left_button_link_2
                   assign panel_position = block.settings.left_position
                   assign panel_alignment = block.settings.left_alignment
                   assign panel_text_color = block.settings.left_text_color
@@ -98,6 +100,8 @@
                   assign panel_button_text_color = block.settings.right_button_text_color
                   assign panel_button_label = block.settings.right_button_label
                   assign panel_button_link = block.settings.right_button_link
+                  assign panel_button_label_2 = block.settings.right_button_label_2
+                  assign panel_button_link_2 = block.settings.right_button_link_2
                   assign panel_position = block.settings.right_position
                   assign panel_alignment = block.settings.right_alignment
                   assign panel_text_color = block.settings.right_text_color
@@ -182,10 +186,19 @@
                   {%- if panel_description != blank -%}
                     <div class="jane-hero__description rte">{{ panel_description }}</div>
                   {%- endif -%}
-                  {%- if panel_button_label != blank -%}
-                    <a class="jane-hero__button" href="{{ panel_button_link | default: '#' }}">
-                      {{ panel_button_label | escape }}
-                    </a>
+                  {%- if panel_button_label != blank or panel_button_label_2 != blank -%}
+                    <div class="jane-hero__buttons">
+                      {%- if panel_button_label != blank -%}
+                        <a class="jane-hero__button" href="{{ panel_button_link | default: '#' }}">
+                          {{ panel_button_label | escape }}
+                        </a>
+                      {%- endif -%}
+                      {%- if panel_button_label_2 != blank -%}
+                        <a class="jane-hero__button" href="{{ panel_button_link_2 | default: '#' }}">
+                          {{ panel_button_label_2 | escape }}
+                        </a>
+                      {%- endif -%}
+                    </div>
                   {%- endif -%}
                 </div>
               </div>
@@ -614,7 +627,17 @@
         {
           "type": "url",
           "id": "left_button_link",
-          "label": "Left button link"
+          "label": "Left button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "left_button_label_2",
+          "label": "Left button 2 label"
+        },
+        {
+          "type": "url",
+          "id": "left_button_link_2",
+          "label": "Left button 2 link"
         },
         {
           "type": "header",
@@ -825,7 +848,17 @@
         {
           "type": "url",
           "id": "right_button_link",
-          "label": "Right button link"
+          "label": "Right button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "right_button_label_2",
+          "label": "Right button 2 label"
+        },
+        {
+          "type": "url",
+          "id": "right_button_link_2",
+          "label": "Right button 2 link"
         }
       ]
     }
