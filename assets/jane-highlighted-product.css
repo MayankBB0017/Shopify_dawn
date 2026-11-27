@@ -381,19 +381,15 @@
    JANE HOTSPOT - NORMAL STATE
 ===================================== */
 
-.jane-highlighted .jane-hotspot {
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  min-height: 32px !important;
-  padding: 0 !important;
-  border: 1px solid #171717 !important;
+.jane-highlighted .jane-hotspot__dot {
+  width: 23px !important;
+  height: 23px !important;
+  min-width: 23px !important;
+  min-height: 23px !important;
+  flex: 0 0 23px;
+  display: block;
   border-radius: 50% !important;
-  background: transparent !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
+  background: #171717 !important;
   aspect-ratio: 1 / 1;
 }
 
