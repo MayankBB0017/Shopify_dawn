@@ -336,7 +336,7 @@
         "text_alignment": "left",
         "title_tag": "h1",
         "title_preset": "h2",
-        "title_preset_mobile": "h4",
+        "title_preset_mobile": "h5",
         "body_preset": "body_regular",
         "body_preset_mobile": "body_regular",
         "title_color": "#171717",
