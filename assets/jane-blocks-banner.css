@@ -837,3 +837,14 @@
     flex: none !important;
   }
 }
+.jbb__title-link {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.jbb__title-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
