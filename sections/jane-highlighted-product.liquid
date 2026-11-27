@@ -165,10 +165,10 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
           {% if block.type == 'bullet' %}
 
             <button
-              class="jane-hotspot{% if bullet_index == 0 %} is-active{% endif %}"
+              class="jane-hotspot"
               type="button"
               aria-label="{{ block.settings.bullet_title | escape }}"
-              aria-expanded="{% if bullet_index == 0 %}true{% else %}false{% endif %}"
+              aria-expanded="false"
               data-jane-hotspot
               data-index="{{ bullet_index }}"
               style="
@@ -213,7 +213,7 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
             {% if block.type == 'bullet' %}
 
               <article
-                class="jane-bullet-card{% if bullet_index == 0 %} is-active{% endif %}"
+                class="jane-bullet-card"
                 data-jane-card
                 data-index="{{ bullet_index }}"
                 style="
@@ -293,6 +293,7 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
 </section>
 
 <script>
+
 (() => {
   const root = document.getElementById('JaneHighlighted-{{ section.id }}');
 
@@ -302,6 +303,7 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
 
   const hotspots = [...root.querySelectorAll('[data-jane-hotspot]')];
   const cards = [...root.querySelectorAll('[data-jane-card]')];
+  const visual = root.querySelector('[data-jane-visual]');
 
   const activate = (index) => {
     hotspots.forEach((item) => {
@@ -319,21 +321,58 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
     });
   };
 
-  hotspots.forEach((item) => {
-    item.addEventListener('click', () => {
-      activate(item.dataset.index);
+  const hideAll = () => {
+    hotspots.forEach((item) => {
+      item.classList.remove('is-active');
+      item.setAttribute('aria-expanded', 'false');
     });
 
+    cards.forEach((item) => {
+      item.classList.remove('is-active');
+    });
+  };
+
+  const isMobile = () =>
+    window.matchMedia('(max-width: 749px)').matches;
+
+  hotspots.forEach((item) => {
     item.addEventListener('mouseenter', () => {
-      if (window.matchMedia('(min-width: 750px)').matches) {
+      if (!isMobile()) {
+        activate(item.dataset.index);
+      }
+    });
+
+    item.addEventListener('click', () => {
+      if (isMobile()) {
+        const index = item.dataset.index;
+        const alreadyActive = item.classList.contains('is-active');
+
+        if (alreadyActive) {
+          hideAll();
+        } else {
+          activate(index);
+        }
+      } else {
         activate(item.dataset.index);
       }
     });
 
     item.addEventListener('focus', () => {
-      activate(item.dataset.index);
+      if (!isMobile()) {
+        activate(item.dataset.index);
+      }
     });
   });
+
+  if (visual) {
+    visual.addEventListener('mouseleave', () => {
+      if (!isMobile()) {
+        hideAll();
+      }
+    });
+  }
+
+  /* Fade animation */
 
   const mobile = window.matchMedia('(max-width: 749px)');
 
@@ -383,6 +422,7 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
     mobile.addListener(updateAnimation);
   }
 })();
+
 </script>
 
 {% schema %}
