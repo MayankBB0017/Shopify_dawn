@@ -340,7 +340,7 @@
         "title_color": "#171717",
         "text_color": "#171717",
         "desktop_image": "shopify://shop_images/Rectangle_4143_3fffef1b-604c-4cb7-a583-3d423dc6011b.png",
-        "image_ratio": "wide",
+        "image_ratio": "adapt",
         "image_fit": "cover",
         "mobile_image_fit": "contain",
         "image_position": "center center",
