@@ -566,7 +566,7 @@ object-fit: contain;
 .jane-highlighted .jane-bullet-card {
   position: absolute;
   left: 50%;
-  top: 8.5%;
+  top: 3.5%;
   width: 316px;
   max-width: calc(100% - 24px);
   height: 122px;

@@ -912,9 +912,3 @@
     flex: none !important;
   }
 }
-/* Mobile - Move product box slightly up */
-@media screen and (max-width: 749px) {
-  .jbb .jbb__content {
-    transform: translateY(-20px);
-  }
-}
