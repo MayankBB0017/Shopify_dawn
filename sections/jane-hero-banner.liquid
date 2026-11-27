@@ -75,15 +75,16 @@
                   assign title_size_mobile = block.settings.left_title_size_mobile
                   assign body_size_desktop = block.settings.left_body_size_desktop
                   assign body_size_mobile = block.settings.left_body_size_mobile
-                  assign panel_button_text_color = block.settings.left_button_text_color
-                  assign panel_button_bg_color = block.settings.left_button_bg_color
-                  assign panel_button_border_color = block.settings.left_button_border_color
-                  assign panel_button_border_width = block.settings.left_button_border_width
-                  assign panel_button_style = block.settings.left_button_style
                   assign panel_button_label = block.settings.left_button_label
                   assign panel_button_link = block.settings.left_button_link
                   assign panel_button_label_2 = block.settings.left_button_label_2
                   assign panel_button_link_2 = block.settings.left_button_link_2
+                  assign button_1_bg = block.settings.left_button_1_bg
+                  assign button_1_text = block.settings.left_button_1_text
+                  assign button_1_border = block.settings.left_button_1_border
+                  assign button_2_bg = block.settings.left_button_2_bg
+                  assign button_2_text = block.settings.left_button_2_text
+                  assign button_2_border = block.settings.left_button_2_border
                   assign panel_position = block.settings.left_position
                   assign panel_alignment = block.settings.left_alignment
                   assign panel_text_color = block.settings.left_text_color
@@ -101,15 +102,16 @@
                   assign title_size_mobile = block.settings.right_title_size_mobile
                   assign body_size_desktop = block.settings.right_body_size_desktop
                   assign body_size_mobile = block.settings.right_body_size_mobile
-                  assign panel_button_text_color = block.settings.right_button_text_color
-                  assign panel_button_bg_color = block.settings.right_button_bg_color
-                  assign panel_button_border_color = block.settings.right_button_border_color
-                  assign panel_button_border_width = block.settings.right_button_border_width
-                  assign panel_button_style = block.settings.right_button_style
                   assign panel_button_label = block.settings.right_button_label
                   assign panel_button_link = block.settings.right_button_link
                   assign panel_button_label_2 = block.settings.right_button_label_2
                   assign panel_button_link_2 = block.settings.right_button_link_2
+                  assign button_1_bg = block.settings.right_button_1_bg
+                  assign button_1_text = block.settings.right_button_1_text
+                  assign button_1_border = block.settings.right_button_1_border
+                  assign button_2_bg = block.settings.right_button_2_bg
+                  assign button_2_text = block.settings.right_button_2_text
+                  assign button_2_border = block.settings.right_button_2_border
                   assign panel_position = block.settings.right_position
                   assign panel_alignment = block.settings.right_alignment
                   assign panel_text_color = block.settings.right_text_color
@@ -161,7 +163,7 @@
 
               <div
                 class="jane-hero__panel jane-hero__panel--{{ panel_name }} jane-hero__position--{{ panel_position }} jane-hero__align--{{ panel_alignment }}"
-                style="--jhb-panel-overlay: {{ panel_overlay | divided_by: 100.0 }}; --jhb-panel-text: {{ panel_text_color }}; --jhb-panel-title-desktop: {{ title_desktop_px }}px; --jhb-panel-title-mobile: {{ title_mobile_px }}px; --jhb-panel-body-desktop: {{ body_desktop_px }}px; --jhb-panel-body-mobile: {{ body_mobile_px }}px; --jhb-panel-button-text: {{ panel_button_text_color }}; --jhb-panel-button-bg: {{ panel_button_bg_color }}; --jhb-panel-button-border: {{ panel_button_border_color }}; --jhb-panel-button-border-width: {{ panel_button_border_width }}px;"
+                style="--jhb-panel-overlay: {{ panel_overlay | divided_by: 100.0 }}; --jhb-panel-text: {{ panel_text_color }}; --jhb-panel-title-desktop: {{ title_desktop_px }}px; --jhb-panel-title-mobile: {{ title_mobile_px }}px; --jhb-panel-body-desktop: {{ body_desktop_px }}px; --jhb-panel-body-mobile: {{ body_mobile_px }}px;"
               >
                 <div class="jane-hero__media">
                   {%- comment -%} Desktop: video takes priority; image is fallback when video is empty. {%- endcomment -%}
@@ -197,12 +199,12 @@
                   {%- if panel_button_label != blank or panel_button_label_2 != blank -%}
                     <div class="jane-hero__buttons">
                       {%- if panel_button_label != blank -%}
-                        <a class="jane-hero__button{% if panel_button_style == 'transparent' %} jane-hero__button--transparent{% endif %}" href="{{ panel_button_link | default: '#' }}">
+                        <a class="jane-hero__button" style="background-color: {{ button_1_bg }}; color: {{ button_1_text }}; border-color: {{ button_1_border }};" href="{{ panel_button_link | default: '#' }}">
                           {{ panel_button_label | escape }}
                         </a>
                       {%- endif -%}
                       {%- if panel_button_label_2 != blank -%}
-                        <a class="jane-hero__button{% if panel_button_style == 'transparent' %} jane-hero__button--transparent{% endif %}" href="{{ panel_button_link_2 | default: '#' }}">
+                        <a class="jane-hero__button" style="background-color: {{ button_2_bg }}; color: {{ button_2_text }}; border-color: {{ button_2_border }};" href="{{ panel_button_link_2 | default: '#' }}">
                           {{ panel_button_label_2 | escape }}
                         </a>
                       {%- endif -%}
@@ -240,8 +242,7 @@
   {%- endif -%}
 </section>
 
-{% schema %}
-{
+{% schema %}{
   "name": "JANÉ split hero",
   "tag": "section",
   "class": "section jane-hero-section",
@@ -427,10 +428,6 @@
       "name": "Slide",
       "settings": [
         {
-          "type": "header",
-          "content": "LEFT SIDE — media"
-        },
-        {
           "type": "image_picker",
           "id": "left_image",
           "label": "Left desktop image"
@@ -560,41 +557,39 @@
         },
         {
           "type": "color",
-          "id": "left_button_text_color",
-          "label": "Left button text color",
+          "id": "left_button_1_bg",
+          "label": "Left button 1 background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "left_button_1_text",
+          "label": "Left button 1 text color",
           "default": "#000000"
         },
         {
           "type": "color",
-          "id": "left_button_bg_color",
-          "label": "Left button background color",
+          "id": "left_button_1_border",
+          "label": "Left button 1 border color",
           "default": "#FFFFFF"
         },
         {
           "type": "color",
-          "id": "left_button_border_color",
-          "label": "Left button border color",
+          "id": "left_button_2_bg",
+          "label": "Left button 2 background color",
           "default": "#FFFFFF"
         },
         {
-          "type": "range",
-          "id": "left_button_border_width",
-          "label": "Left button border width",
-          "min": 0,
-          "max": 4,
-          "step": 1,
-          "unit": "px",
-          "default": 1
+          "type": "color",
+          "id": "left_button_2_text",
+          "label": "Left button 2 text color",
+          "default": "#000000"
         },
         {
-          "type": "select",
-          "id": "left_button_style",
-          "label": "Left buttons style",
-          "options": [
-            { "value": "filled", "label": "Filled" },
-            { "value": "transparent", "label": "Transparent / Outline" }
-          ],
-          "default": "filled"
+          "type": "color",
+          "id": "left_button_2_border",
+          "label": "Left button 2 border color",
+          "default": "#FFFFFF"
         },
         {
           "type": "select",
@@ -678,10 +673,6 @@
           "type": "url",
           "id": "left_button_link_2",
           "label": "Left button 2 link"
-        },
-        {
-          "type": "header",
-          "content": "RIGHT SIDE — media"
         },
         {
           "type": "image_picker",
@@ -813,41 +804,39 @@
         },
         {
           "type": "color",
-          "id": "right_button_text_color",
-          "label": "Right button text color",
+          "id": "right_button_1_bg",
+          "label": "Right button 1 background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "right_button_1_text",
+          "label": "Right button 1 text color",
           "default": "#000000"
         },
         {
           "type": "color",
-          "id": "right_button_bg_color",
-          "label": "Right button background color",
+          "id": "right_button_1_border",
+          "label": "Right button 1 border color",
           "default": "#FFFFFF"
         },
         {
           "type": "color",
-          "id": "right_button_border_color",
-          "label": "Right button border color",
+          "id": "right_button_2_bg",
+          "label": "Right button 2 background color",
           "default": "#FFFFFF"
         },
         {
-          "type": "range",
-          "id": "right_button_border_width",
-          "label": "Right button border width",
-          "min": 0,
-          "max": 4,
-          "step": 1,
-          "unit": "px",
-          "default": 1
+          "type": "color",
+          "id": "right_button_2_text",
+          "label": "Right button 2 text color",
+          "default": "#000000"
         },
         {
-          "type": "select",
-          "id": "right_button_style",
-          "label": "Right buttons style",
-          "options": [
-            { "value": "filled", "label": "Filled" },
-            { "value": "transparent", "label": "Transparent / Outline" }
-          ],
-          "default": "filled"
+          "type": "color",
+          "id": "right_button_2_border",
+          "label": "Right button 2 border color",
+          "default": "#FFFFFF"
         },
         {
           "type": "select",
@@ -946,5 +935,4 @@
       ]
     }
   ]
-}
-{% endschema %}
+}{% endschema %}
