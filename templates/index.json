@@ -243,6 +243,35 @@
             "mobile_padding_left": 0
           }
         },
+        "banner_iEL3Qm": {
+          "type": "banner",
+          "settings": {
+            "desktop_media_type": "image",
+            "desktop_image": "shopify://shop_images/Frame_5407_468b8849-0c73-4e92-9729-78776987536d.png",
+            "mobile_media_type": "inherit",
+            "video_autoplay": true,
+            "video_loop": true,
+            "video_controls": false,
+            "title": "",
+            "description": "",
+            "desktop_text_color": "#ffffff",
+            "mobile_text_color": "#ffffff",
+            "desktop_position": "bottom-left",
+            "mobile_position": "bottom-left",
+            "button_label": "",
+            "link": "",
+            "open_new_tab": false,
+            "button_position": "inline",
+            "padding_top": 0,
+            "padding_right": 0,
+            "padding_bottom": 0,
+            "padding_left": 0,
+            "mobile_padding_top": 0,
+            "mobile_padding_right": 0,
+            "mobile_padding_bottom": 0,
+            "mobile_padding_left": 0
+          }
+        },
         "banner_6HzXdz": {
           "type": "banner",
           "settings": {
@@ -330,40 +359,11 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_iEL3Qm": {
-          "type": "banner",
-          "settings": {
-            "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Frame_5407_468b8849-0c73-4e92-9729-78776987536d.png",
-            "mobile_media_type": "inherit",
-            "video_autoplay": true,
-            "video_loop": true,
-            "video_controls": false,
-            "title": "",
-            "description": "",
-            "desktop_text_color": "#ffffff",
-            "mobile_text_color": "#ffffff",
-            "desktop_position": "bottom-left",
-            "mobile_position": "bottom-left",
-            "button_label": "",
-            "link": "",
-            "open_new_tab": false,
-            "button_position": "inline",
-            "padding_top": 0,
-            "padding_right": 0,
-            "padding_bottom": 0,
-            "padding_left": 0,
-            "mobile_padding_top": 0,
-            "mobile_padding_right": 0,
-            "mobile_padding_bottom": 0,
-            "mobile_padding_left": 0
-          }
-        },
         "banner_Chmqyd": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Card_a81f3de0-1391-4611-a5dd-1fd1f2893ce0.png",
+            "desktop_image": "shopify://shop_images/Frame_5407.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
@@ -391,10 +391,10 @@
       },
       "block_order": [
         "banner_Kt3jBd",
+        "banner_iEL3Qm",
         "banner_6HzXdz",
         "banner_apib6Q",
         "banner_xPxWYa",
-        "banner_iEL3Qm",
         "banner_Chmqyd"
       ],
       "name": "JANÉ - Blocks Banner",
