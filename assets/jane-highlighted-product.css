@@ -554,21 +554,14 @@ object-fit: contain;
     padding: 0;
   }
 
-  .jane-highlighted .jane-bullet-card {
-    left: var(--card-mobile-x);
-    top: var(--card-mobile-y);
-
-    width: 90%;
-    max-width: 90%;
-    min-height: auto;
-
-    padding: 14px;
-    gap: 12px;
-
-    border-radius: 10px;
-
-    transform: translate(-50%, -115%);
-  }
+  .jane-highlighted .jane-bullet-card__image {
+  width: 60px;
+  height: 70px;
+  min-width: 60px;
+  min-height: 70px;
+  flex: 0 0 60px;
+  object-fit: contain;
+}
 
   .jane-highlighted .jane-bullet-card__image {
     width: 75px;
