@@ -1,49 +1,71 @@
-/* JANÉ Hero Banner slider */
+/* JANÉ Split Hero slider — controls are only present when there are 2+ slides */
 (() => {
-  class JaneHero extends HTMLElement {
-    connectedCallback() {
-      if (this.initialized) return;
-      this.initialized = true;
-      this.slides = Array.from(this.querySelectorAll('[data-jane-slide]'));
-      this.dots = Array.from(this.querySelectorAll('[data-jane-dot]'));
-      this.current = 0;
-      this.timer = null;
-      this.autoplay = this.dataset.autoplay === 'true';
-      this.delay = Math.max(3000, Number(this.dataset.autoplaySpeed) || 5000);
-      this.querySelector('[data-jane-prev]')?.addEventListener('click', () => this.go(this.current - 1, true));
-      this.querySelector('[data-jane-next]')?.addEventListener('click', () => this.go(this.current + 1, true));
-      this.dots.forEach((dot) => dot.addEventListener('click', () => this.go(Number(dot.dataset.janeDot), true)));
-      this.addEventListener('mouseenter', () => this.pause());
-      this.addEventListener('mouseleave', () => this.start());
-      this.addEventListener('focusin', () => this.pause());
-      this.addEventListener('focusout', () => this.start());
-      document.addEventListener('visibilitychange', () => document.hidden ? this.pause() : this.start());
-      this.start();
+  const initJaneHero = (root) => {
+    if (!root || root.dataset.janeInitialized === 'true') return;
+    root.dataset.janeInitialized = 'true';
+
+    const slides = Array.from(root.querySelectorAll('[data-jane-slide]'));
+    const controls = root.querySelector('[data-jane-controls]');
+    const dots = Array.from(root.querySelectorAll('[data-jane-dot]'));
+
+    // A single block is a static two-panel hero: no slider, arrows, dots or autoplay.
+    if (slides.length <= 1) {
+      controls?.remove();
+      slides[0]?.classList.add('is-active');
+      slides[0]?.setAttribute('aria-hidden', 'false');
+      return;
     }
-    go(index, userAction = false) {
-      if (!this.slides.length) return;
-      this.current = (index + this.slides.length) % this.slides.length;
-      this.slides.forEach((slide, i) => {
-        const active = i === this.current;
+
+    let current = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
+    let timer = null;
+    const autoplay = root.dataset.autoplay === 'true';
+    const delay = Math.max(3000, Number(root.dataset.autoplaySpeed) || 5000);
+
+    const show = (index) => {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const active = i === current;
         slide.classList.toggle('is-active', active);
         slide.setAttribute('aria-hidden', active ? 'false' : 'true');
       });
-      this.dots.forEach((dot, i) => {
-        dot.classList.toggle('is-active', i === this.current);
-        dot.setAttribute('aria-current', i === this.current ? 'true' : 'false');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === current);
+        if (i === current) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
       });
-      if (userAction) { this.pause(); this.start(); }
-    }
-    pause() { if (this.timer) window.clearInterval(this.timer); this.timer = null; }
-    start() {
-      this.pause();
-      if (!this.autoplay || this.slides.length < 2 || document.hidden) return;
-      this.timer = window.setInterval(() => this.go(this.current + 1), this.delay);
-    }
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    };
+    const start = () => {
+      stop();
+      if (!autoplay || document.hidden) return;
+      timer = window.setInterval(() => show(current + 1), delay);
+    };
+
+    root.querySelector('[data-jane-prev]')?.addEventListener('click', () => { show(current - 1); start(); });
+    root.querySelector('[data-jane-next]')?.addEventListener('click', () => { show(current + 1); start(); });
+    dots.forEach((dot) => dot.addEventListener('click', () => { show(Number(dot.dataset.janeDot)); start(); }));
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    show(current);
+    start();
+  };
+
+  const initAll = (scope = document) => {
+    if (scope.matches?.('[data-jane-hero]')) initJaneHero(scope);
+    scope.querySelectorAll?.('[data-jane-hero]').forEach(initJaneHero);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initAll());
+  } else {
+    initAll();
   }
-  if (!customElements.get('jane-hero')) customElements.define('jane-hero', JaneHero);
-  document.querySelectorAll('[data-jane-hero]').forEach((section) => {
-    if (!(section instanceof JaneHero)) Object.setPrototypeOf(section, JaneHero.prototype);
-    if (!section.initialized) JaneHero.prototype.connectedCallback.call(section);
-  });
+  document.addEventListener('shopify:section:load', (event) => initAll(event.target));
 })();
