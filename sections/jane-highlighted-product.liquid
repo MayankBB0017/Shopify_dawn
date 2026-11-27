@@ -105,7 +105,21 @@
         {% endif %}
       </div>
     {% endif %}
+{% if has_heading and section.settings.heading_position == 'inside' %}
+  <div class="jane-highlighted__heading jane-highlighted__heading--mobile jane-align-{{ section.settings.text_alignment }}">
+    {% if section_title != blank %}
+      <{{ section.settings.title_tag }} class="jane-highlighted__title">
+        {{ section_title | escape }}
+      </{{ section.settings.title_tag }}>
+    {% endif %}
 
+    {% if section_description != blank %}
+      <div class="jane-highlighted__description rte">
+        {{ section_description }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
     {% if desktop_image != blank %}
 
       <div
