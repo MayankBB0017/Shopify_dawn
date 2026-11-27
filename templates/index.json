@@ -439,8 +439,8 @@
             "product": "bikini-balconette-butterfly-braga-clasica-lazo-4",
             "bullet_title": "Freno de pie",
             "bullet_description": "<p>Freno fácil de accionar y desbloquear pulsando con la planta del pie.</p>",
-            "desktop_x": 44,
-            "desktop_y": 86,
+            "desktop_x": 9,
+            "desktop_y": 57,
             "mobile_x": 50,
             "mobile_y": 72
           }
@@ -451,8 +451,8 @@
             "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
             "bullet_title": "Capota",
             "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de aireación.</p>",
-            "desktop_x": 56,
-            "desktop_y": 42,
+            "desktop_x": 22,
+            "desktop_y": 89,
             "mobile_x": 50,
             "mobile_y": 82
           }
