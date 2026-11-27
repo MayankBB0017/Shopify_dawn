@@ -218,7 +218,7 @@
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
+            "desktop_video": "shopify://files/videos/Hero-banner.mp4",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
