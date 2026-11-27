@@ -36,7 +36,7 @@
             "left_button_2_bg_color": "#ffffff",
             "left_button_2_border_color": "#ffffff",
             "left_button_2_border_width": 1,
-            "left_button_2_text_color": "#FFFFFF",
+            "left_button_2_text_color": "#ffffff",
             "right_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "right_title": "Carrito Keep full equipped",
             "right_description": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>",
@@ -276,7 +276,7 @@
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
+            "desktop_image": "shopify://shop_images/Header.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
@@ -305,7 +305,7 @@
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
+            "desktop_image": "shopify://shop_images/64c691100296c42f3c988851cccf311988fe8467.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
