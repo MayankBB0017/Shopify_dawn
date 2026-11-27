@@ -54,10 +54,10 @@
               {%- for pane in (1..2) -%}
                 {%- liquid
                   if pane == 1
-                    assign pane_image = block.settings.left_image
-                    assign pane_mobile_image = block.settings.left_mobile_image
-                    assign pane_video = block.settings.left_video
-                    assign pane_mobile_video = block.settings.left_mobile_video
+                    assign pane_image = block.settings.left_image | default: block.settings.desktop_image
+                    assign pane_mobile_image = block.settings.left_mobile_image | default: block.settings.mobile_image | default: pane_image
+                    assign pane_video = block.settings.left_video | default: block.settings.desktop_video
+                    assign pane_mobile_video = block.settings.left_mobile_video | default: block.settings.mobile_video | default: pane_video
                     assign pane_title = block.settings.left_title
                     assign pane_description = block.settings.left_description
                     assign pane_overlay = block.settings.left_overlay
@@ -175,6 +175,10 @@
                   {{ mobile_video | video_tag: image_size: '1200x', autoplay: true, loop: true, muted: true, controls: false, class: 'jane-hero__video jane-hero__video--mobile' }}
                 {%- elsif mobile_image != blank -%}
                   {{ mobile_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '375, 550, 750, 1000, 1200, 1400', class: 'jane-hero__image jane-hero__image--mobile', alt: mobile_image.alt | escape }}
+                {%- elsif desktop_video != blank -%}
+                  {{ desktop_video | video_tag: image_size: '1200x', autoplay: true, loop: true, muted: true, controls: false, class: 'jane-hero__video jane-hero__video--mobile' }}
+                {%- elsif desktop_image != blank -%}
+                  {{ desktop_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '375, 550, 750, 1000, 1200, 1400', class: 'jane-hero__image jane-hero__image--mobile', alt: desktop_image.alt | escape }}
                 {%- endif -%}
               </div>
               <div class="jane-hero__overlay{% if block.settings.gradient_overlay %} has-gradient{% endif %}" style="--jhb-overlay: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
