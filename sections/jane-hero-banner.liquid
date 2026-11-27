@@ -6,6 +6,34 @@
 {{ 'jane-hero-banner.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'jane-hero-banner.js' | asset_url }}" defer="defer"></script>
 
+{% style %}
+  #JaneHero-{{ section.id }} {
+    padding-top: {{ section.settings.space_top_desktop }}px;
+    padding-bottom: {{ section.settings.space_bottom_desktop }}px;
+  }
+  #JaneHero-{{ section.id }} .jane-hero__title {
+    font-size: var(--jhb-panel-title-desktop);
+  }
+  #JaneHero-{{ section.id }} .jane-hero__description {
+    font-size: var(--jhb-panel-body-desktop);
+  }
+  #JaneHero-{{ section.id }} .jane-hero__button {
+    color: var(--jhb-panel-button-text);
+  }
+  @media screen and (max-width: 749px) {
+    #JaneHero-{{ section.id }} {
+      padding-top: {{ section.settings.space_top_mobile }}px;
+      padding-bottom: {{ section.settings.space_bottom_mobile }}px;
+    }
+    #JaneHero-{{ section.id }} .jane-hero__title {
+      font-size: var(--jhb-panel-title-mobile);
+    }
+    #JaneHero-{{ section.id }} .jane-hero__description {
+      font-size: var(--jhb-panel-body-mobile);
+    }
+  }
+{% endstyle %}
+
 <section
   id="JaneHero-{{ section.id }}"
   class="jane-hero jane-hero--{{ section.settings.layout }} jane-hero--desktop-{{ section.settings.desktop_height }} jane-hero--mobile-{{ section.settings.mobile_height }}"
@@ -42,6 +70,11 @@
                   assign panel_mobile_video = block.settings.left_mobile_video
                   assign panel_title = block.settings.left_title
                   assign panel_description = block.settings.left_description
+                  assign title_size_desktop = block.settings.left_title_size_desktop
+                  assign title_size_mobile = block.settings.left_title_size_mobile
+                  assign body_size_desktop = block.settings.left_body_size_desktop
+                  assign body_size_mobile = block.settings.left_body_size_mobile
+                  assign panel_button_text_color = block.settings.left_button_text_color
                   assign panel_button_label = block.settings.left_button_label
                   assign panel_button_link = block.settings.left_button_link
                   assign panel_position = block.settings.left_position
@@ -57,6 +90,11 @@
                   assign panel_mobile_video = block.settings.right_mobile_video
                   assign panel_title = block.settings.right_title
                   assign panel_description = block.settings.right_description
+                  assign title_size_desktop = block.settings.right_title_size_desktop
+                  assign title_size_mobile = block.settings.right_title_size_mobile
+                  assign body_size_desktop = block.settings.right_body_size_desktop
+                  assign body_size_mobile = block.settings.right_body_size_mobile
+                  assign panel_button_text_color = block.settings.right_button_text_color
                   assign panel_button_label = block.settings.right_button_label
                   assign panel_button_link = block.settings.right_button_link
                   assign panel_position = block.settings.right_position
@@ -65,11 +103,52 @@
                   assign panel_overlay = block.settings.right_overlay
                   assign panel_gradient = block.settings.right_gradient
                 endif
+
+                case title_size_desktop
+                  when 'h1'
+                    assign title_desktop_px = 48
+                  when 'h2'
+                    assign title_desktop_px = 40
+                  when 'h3'
+                    assign title_desktop_px = 32
+                  when 'h4'
+                    assign title_desktop_px = 24
+                  else
+                    assign title_desktop_px = 18
+                endcase
+                case title_size_mobile
+                  when 'h1'
+                    assign title_mobile_px = 36
+                  when 'h2'
+                    assign title_mobile_px = 32
+                  when 'h3'
+                    assign title_mobile_px = 28
+                  when 'h4'
+                    assign title_mobile_px = 22
+                  else
+                    assign title_mobile_px = 18
+                endcase
+                case body_size_desktop
+                  when 'big'
+                    assign body_desktop_px = 18
+                  when 'small'
+                    assign body_desktop_px = 12
+                  else
+                    assign body_desktop_px = 16
+                endcase
+                case body_size_mobile
+                  when 'big'
+                    assign body_mobile_px = 18
+                  when 'small'
+                    assign body_mobile_px = 12
+                  else
+                    assign body_mobile_px = 16
+                endcase
               -%}
 
               <div
                 class="jane-hero__panel jane-hero__panel--{{ panel_name }} jane-hero__position--{{ panel_position }} jane-hero__align--{{ panel_alignment }}"
-                style="--jhb-panel-overlay: {{ panel_overlay | divided_by: 100.0 }}; --jhb-panel-text: {{ panel_text_color }};"
+                style="--jhb-panel-overlay: {{ panel_overlay | divided_by: 100.0 }}; --jhb-panel-text: {{ panel_text_color }}; --jhb-panel-title-desktop: {{ title_desktop_px }}px; --jhb-panel-title-mobile: {{ title_mobile_px }}px; --jhb-panel-body-desktop: {{ body_desktop_px }}px; --jhb-panel-body-mobile: {{ body_mobile_px }}px; --jhb-panel-button-text: {{ panel_button_text_color }};"
               >
                 <div class="jane-hero__media">
                   {%- comment -%} Desktop: video takes priority; image is fallback when video is empty. {%- endcomment -%}
@@ -150,8 +229,14 @@
       "id": "layout",
       "label": "Desktop layout",
       "options": [
-        { "value": "split", "label": "50 / 50 split" },
-        { "value": "full", "label": "Full width (left panel only)" }
+        {
+          "value": "split",
+          "label": "50 / 50 split"
+        },
+        {
+          "value": "full",
+          "label": "Full width (left panel only)"
+        }
       ],
       "default": "split"
     },
@@ -160,10 +245,22 @@
       "id": "desktop_height",
       "label": "Desktop height",
       "options": [
-        { "value": "small", "label": "Small — 420px" },
-        { "value": "medium", "label": "Medium — 560px" },
-        { "value": "large", "label": "Large — 700px" },
-        { "value": "screen", "label": "Full screen" }
+        {
+          "value": "small",
+          "label": "Small — 420px"
+        },
+        {
+          "value": "medium",
+          "label": "Medium — 560px"
+        },
+        {
+          "value": "large",
+          "label": "Large — 700px"
+        },
+        {
+          "value": "screen",
+          "label": "Full screen"
+        }
       ],
       "default": "large"
     },
@@ -172,69 +269,576 @@
       "id": "mobile_height",
       "label": "Mobile panel height",
       "options": [
-        { "value": "small", "label": "Small — 320px" },
-        { "value": "medium", "label": "Medium — 420px" },
-        { "value": "large", "label": "Large — 520px" },
-        { "value": "screen", "label": "Full screen" }
+        {
+          "value": "small",
+          "label": "Small — 320px"
+        },
+        {
+          "value": "medium",
+          "label": "Medium — 420px"
+        },
+        {
+          "value": "large",
+          "label": "Large — 520px"
+        },
+        {
+          "value": "screen",
+          "label": "Full screen"
+        }
       ],
       "default": "medium"
     },
-    { "type": "checkbox", "id": "autoplay", "label": "Autoplay slides (only when 2+ blocks)", "default": false },
-    { "type": "range", "id": "autoplay_speed", "label": "Autoplay interval", "min": 3, "max": 12, "step": 1, "unit": "s", "default": 5 },
-    { "type": "range", "id": "panel_gap", "label": "Gap between panels", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 0 },
-    { "type": "range", "id": "content_padding", "label": "Content padding", "min": 16, "max": 80, "step": 4, "unit": "px", "default": 32 },
-    { "type": "range", "id": "title_size", "label": "Title size desktop", "min": 24, "max": 72, "step": 2, "unit": "px", "default": 44 },
-    { "type": "range", "id": "title_size_mobile", "label": "Title size mobile", "min": 20, "max": 48, "step": 2, "unit": "px", "default": 32 },
-    { "type": "range", "id": "body_size", "label": "Description size", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 }
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay slides (only when 2+ blocks)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay interval",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "panel_gap",
+      "label": "Gap between panels",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size desktop",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size mobile",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Spacing Section"
+    },
+    {
+      "type": "range",
+      "id": "space_top_desktop",
+      "label": "Space Top Desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "space_bottom_desktop",
+      "label": "Space Bottom Desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "space_top_mobile",
+      "label": "Space Top Mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "space_bottom_mobile",
+      "label": "Space Bottom Mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
   ],
   "blocks": [
     {
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "header", "content": "LEFT SIDE — media" },
-        { "type": "image_picker", "id": "left_image", "label": "Left desktop image" },
-        { "type": "video", "id": "left_video", "label": "Left desktop video" },
-        { "type": "image_picker", "id": "left_mobile_image", "label": "Left mobile image (optional)" },
-        { "type": "video", "id": "left_mobile_video", "label": "Left mobile video (optional)" },
-        { "type": "text", "id": "left_title", "label": "Left title", "default": "Esto es vida" },
-        { "type": "richtext", "id": "left_description", "label": "Left description", "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>" },
-        { "type": "select", "id": "left_position", "label": "Left content position", "options": [
-          { "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" }
-        ], "default": "bottom" },
-        { "type": "select", "id": "left_alignment", "label": "Left text alignment", "options": [
-          { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }
-        ], "default": "left" },
-        { "type": "color", "id": "left_text_color", "label": "Left text color", "default": "#FFFFFF" },
-        { "type": "range", "id": "left_overlay", "label": "Left overlay opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 20 },
-        { "type": "checkbox", "id": "left_gradient", "label": "Left gradient overlay", "default": true },
-        { "type": "text", "id": "left_button_label", "label": "Left button label", "default": "COMPRAR" },
-        { "type": "url", "id": "left_button_link", "label": "Left button link" },
-
-        { "type": "header", "content": "RIGHT SIDE — media" },
-        { "type": "image_picker", "id": "right_image", "label": "Right desktop image" },
-        { "type": "video", "id": "right_video", "label": "Right desktop video" },
-        { "type": "image_picker", "id": "right_mobile_image", "label": "Right mobile image (optional)" },
-        { "type": "video", "id": "right_mobile_video", "label": "Right mobile video (optional)" },
-        { "type": "text", "id": "right_title", "label": "Right title", "default": "Carrito Keep full equipped" },
-        { "type": "richtext", "id": "right_description", "label": "Right description", "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>" },
-        { "type": "select", "id": "right_position", "label": "Right content position", "options": [
-          { "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" }
-        ], "default": "bottom" },
-        { "type": "select", "id": "right_alignment", "label": "Right text alignment", "options": [
-          { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }
-        ], "default": "left" },
-        { "type": "color", "id": "right_text_color", "label": "Right text color", "default": "#FFFFFF" },
-        { "type": "range", "id": "right_overlay", "label": "Right overlay opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 20 },
-        { "type": "checkbox", "id": "right_gradient", "label": "Right gradient overlay", "default": true },
-        { "type": "text", "id": "right_button_label", "label": "Right button label", "default": "COMPRAR" },
-        { "type": "url", "id": "right_button_link", "label": "Right button link" }
+        {
+          "type": "header",
+          "content": "LEFT SIDE — media"
+        },
+        {
+          "type": "image_picker",
+          "id": "left_image",
+          "label": "Left desktop image"
+        },
+        {
+          "type": "video",
+          "id": "left_video",
+          "label": "Left desktop video"
+        },
+        {
+          "type": "image_picker",
+          "id": "left_mobile_image",
+          "label": "Left mobile image (optional)"
+        },
+        {
+          "type": "video",
+          "id": "left_mobile_video",
+          "label": "Left mobile video (optional)"
+        },
+        {
+          "type": "text",
+          "id": "left_title",
+          "label": "Left title",
+          "default": "Esto es vida"
+        },
+        {
+          "type": "richtext",
+          "id": "left_description",
+          "label": "Left description",
+          "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>"
+        },
+        {
+          "type": "select",
+          "id": "left_title_size_desktop",
+          "label": "Left title font size desktop",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "select",
+          "id": "left_title_size_mobile",
+          "label": "Left title font size mobile",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            }
+          ],
+          "default": "h3"
+        },
+        {
+          "type": "select",
+          "id": "left_body_size_desktop",
+          "label": "Left content font size desktop",
+          "options": [
+            {
+              "value": "big",
+              "label": "Body Big"
+            },
+            {
+              "value": "regular",
+              "label": "Body Regular"
+            },
+            {
+              "value": "small",
+              "label": "Body Small"
+            }
+          ],
+          "default": "regular"
+        },
+        {
+          "type": "select",
+          "id": "left_body_size_mobile",
+          "label": "Left content font size mobile",
+          "options": [
+            {
+              "value": "big",
+              "label": "Body Big"
+            },
+            {
+              "value": "regular",
+              "label": "Body Regular"
+            },
+            {
+              "value": "small",
+              "label": "Body Small"
+            }
+          ],
+          "default": "small"
+        },
+        {
+          "type": "color",
+          "id": "left_button_text_color",
+          "label": "Left button text color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "left_position",
+          "label": "Left content position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "select",
+          "id": "left_alignment",
+          "label": "Left text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "left_text_color",
+          "label": "Left text color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "left_overlay",
+          "label": "Left overlay opacity",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "default": 20
+        },
+        {
+          "type": "checkbox",
+          "id": "left_gradient",
+          "label": "Left gradient overlay",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "left_button_label",
+          "label": "Left button label",
+          "default": "COMPRAR"
+        },
+        {
+          "type": "url",
+          "id": "left_button_link",
+          "label": "Left button link"
+        },
+        {
+          "type": "header",
+          "content": "RIGHT SIDE — media"
+        },
+        {
+          "type": "image_picker",
+          "id": "right_image",
+          "label": "Right desktop image"
+        },
+        {
+          "type": "video",
+          "id": "right_video",
+          "label": "Right desktop video"
+        },
+        {
+          "type": "image_picker",
+          "id": "right_mobile_image",
+          "label": "Right mobile image (optional)"
+        },
+        {
+          "type": "video",
+          "id": "right_mobile_video",
+          "label": "Right mobile video (optional)"
+        },
+        {
+          "type": "text",
+          "id": "right_title",
+          "label": "Right title",
+          "default": "Carrito Keep full equipped"
+        },
+        {
+          "type": "richtext",
+          "id": "right_description",
+          "label": "Right description",
+          "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>"
+        },
+        {
+          "type": "select",
+          "id": "right_title_size_desktop",
+          "label": "Right title font size desktop",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "select",
+          "id": "right_title_size_mobile",
+          "label": "Right title font size mobile",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            }
+          ],
+          "default": "h3"
+        },
+        {
+          "type": "select",
+          "id": "right_body_size_desktop",
+          "label": "Right content font size desktop",
+          "options": [
+            {
+              "value": "big",
+              "label": "Body Big"
+            },
+            {
+              "value": "regular",
+              "label": "Body Regular"
+            },
+            {
+              "value": "small",
+              "label": "Body Small"
+            }
+          ],
+          "default": "regular"
+        },
+        {
+          "type": "select",
+          "id": "right_body_size_mobile",
+          "label": "Right content font size mobile",
+          "options": [
+            {
+              "value": "big",
+              "label": "Body Big"
+            },
+            {
+              "value": "regular",
+              "label": "Body Regular"
+            },
+            {
+              "value": "small",
+              "label": "Body Small"
+            }
+          ],
+          "default": "small"
+        },
+        {
+          "type": "color",
+          "id": "right_button_text_color",
+          "label": "Right button text color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "right_position",
+          "label": "Right content position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "select",
+          "id": "right_alignment",
+          "label": "Right text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "right_text_color",
+          "label": "Right text color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "right_overlay",
+          "label": "Right overlay opacity",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "default": 20
+        },
+        {
+          "type": "checkbox",
+          "id": "right_gradient",
+          "label": "Right gradient overlay",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "right_button_label",
+          "label": "Right button label",
+          "default": "COMPRAR"
+        },
+        {
+          "type": "url",
+          "id": "right_button_link",
+          "label": "Right button link"
+        }
       ]
     }
   ],
   "max_blocks": 5,
   "presets": [
-    { "name": "JANÉ split hero", "blocks": [{ "type": "slide" }] }
+    {
+      "name": "JANÉ split hero",
+      "blocks": [
+        {
+          "type": "slide"
+        }
+      ]
+    }
   ]
 }
 {% endschema %}
