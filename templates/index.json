@@ -86,9 +86,14 @@
             "desktop_image": "shopify://shop_images/Card.png",
             "image_alt": "",
             "eyebrow": "",
+            "title": "",
+            "heading_tag": "h2",
+            "title_size_desktop": 32,
+            "title_size_mobile": 22,
             "description": "",
             "button_label": "",
             "link": "",
+            "open_new_tab": false,
             "content_position": "bottom-left"
           }
         },
@@ -142,20 +147,65 @@
             "open_new_tab": false,
             "content_position": "bottom-left"
           }
+        },
+        "banner_iEL3Qm": {
+          "type": "banner",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Card.png",
+            "image_alt": "",
+            "eyebrow": "",
+            "title": "",
+            "heading_tag": "h2",
+            "title_size_desktop": 32,
+            "title_size_mobile": 22,
+            "description": "",
+            "button_label": "",
+            "link": "",
+            "open_new_tab": false,
+            "content_position": "bottom-left"
+          }
+        },
+        "banner_Chmqyd": {
+          "type": "banner",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Card.png",
+            "image_alt": "",
+            "eyebrow": "",
+            "title": "",
+            "heading_tag": "h2",
+            "title_size_desktop": 32,
+            "title_size_mobile": 22,
+            "description": "",
+            "button_label": "",
+            "link": "",
+            "open_new_tab": false,
+            "content_position": "bottom-left"
+          }
         }
       },
       "block_order": [
         "banner_Kt3jBd",
         "banner_6HzXdz",
         "banner_apib6Q",
-        "banner_xPxWYa"
+        "banner_xPxWYa",
+        "banner_iEL3Qm",
+        "banner_Chmqyd"
       ],
       "name": "JANÉ - Blocks Banner",
       "settings": {
+        "heading": "Discover JANÉ",
+        "description": "",
+        "desktop_layout": "two",
+        "mobile_layout": "stacked",
+        "show_arrows": true,
         "image_ratio": "adapt",
+        "gap": 8,
+        "radius": 4,
+        "show_overlay": true,
         "overlay_opacity": 15,
         "title_size_desktop": 36,
         "title_size_mobile": 24,
+        "title_color": "#171717",
         "text_color": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 0
