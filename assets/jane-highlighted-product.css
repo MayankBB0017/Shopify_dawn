@@ -638,3 +638,21 @@ object-fit: contain;
     display: none;
   }
 }
+/* Full Width Banner */
+#JaneHighlighted-{{ section.id }} {
+  width: 100%;
+  max-width: 100%;
+}
+
+#JaneHighlighted-{{ section.id }} .jane-highlighted__inner {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+}
+
+#JaneHighlighted-{{ section.id }} .jane-highlighted__visual {
+  width: 100%;
+  max-width: 100%;
+}
