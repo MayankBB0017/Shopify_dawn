@@ -18,9 +18,18 @@
     font-size: var(--jhb-panel-body-desktop);
   }
   #JaneHero-{{ section.id }} .jane-hero__button {
-    color: var(--jhb-panel-button-text);
+    color: var(--jhb-button-text, #000000);
+    background: var(--jhb-button-bg, #ffffff);
+    border: var(--jhb-button-border-width, 1px) solid var(--jhb-button-border, #ffffff);
     font-size: 16px !important;
   }
+  #JaneHero-{{ section.id }} .jane-hero__button--border {
+    /* Border / Outline button: background remains customizable in the editor. */
+  }
+  #JaneHero-{{ section.id }} .jane-hero__button--background {
+    /* Filled button: background, border and text are independently customizable. */
+  }
+  #JaneHero-{{ section.id }} .jane-hero__buttons { gap: 12px; }
   @media screen and (max-width: 749px) {
     #JaneHero-{{ section.id }} {
       padding-top: {{ section.settings.space_top_mobile }}px;
@@ -71,24 +80,18 @@
                   assign panel_mobile_video = block.settings.left_mobile_video
                   assign panel_title = block.settings.left_title
                   assign panel_description = block.settings.left_description
-                  assign title_size_desktop = block.settings.left_title_size_desktop
-                  assign title_size_mobile = block.settings.left_title_size_mobile
-                  assign body_size_desktop = block.settings.left_body_size_desktop
-                  assign body_size_mobile = block.settings.left_body_size_mobile
+                  assign title_size_desktop = section.settings.left_title_size_desktop
+                  assign title_size_mobile = section.settings.left_title_size_mobile
+                  assign body_size_desktop = section.settings.left_body_size_desktop
+                  assign body_size_mobile = section.settings.left_body_size_mobile
                   assign panel_button_label = block.settings.left_button_label
                   assign panel_button_link = block.settings.left_button_link
                   assign panel_button_label_2 = block.settings.left_button_label_2
                   assign panel_button_link_2 = block.settings.left_button_link_2
-                  assign button_1_bg = block.settings.left_button_1_bg
-                  assign button_1_text = block.settings.left_button_1_text
-                  assign button_1_border = block.settings.left_button_1_border
-                  assign button_2_bg = block.settings.left_button_2_bg
-                  assign button_2_text = block.settings.left_button_2_text
-                  assign button_2_border = block.settings.left_button_2_border
                   assign panel_position = block.settings.left_position
                   assign panel_alignment = block.settings.left_alignment
                   assign panel_text_color = block.settings.left_text_color
-                  assign panel_overlay = block.settings.left_overlay
+                  assign panel_overlay = section.settings.left_overlay
                   assign panel_gradient = block.settings.left_gradient
                 else
                   assign panel_name = 'right'
@@ -98,24 +101,18 @@
                   assign panel_mobile_video = block.settings.right_mobile_video
                   assign panel_title = block.settings.right_title
                   assign panel_description = block.settings.right_description
-                  assign title_size_desktop = block.settings.right_title_size_desktop
-                  assign title_size_mobile = block.settings.right_title_size_mobile
-                  assign body_size_desktop = block.settings.right_body_size_desktop
-                  assign body_size_mobile = block.settings.right_body_size_mobile
+                  assign title_size_desktop = section.settings.right_title_size_desktop
+                  assign title_size_mobile = section.settings.right_title_size_mobile
+                  assign body_size_desktop = section.settings.right_body_size_desktop
+                  assign body_size_mobile = section.settings.right_body_size_mobile
                   assign panel_button_label = block.settings.right_button_label
                   assign panel_button_link = block.settings.right_button_link
                   assign panel_button_label_2 = block.settings.right_button_label_2
                   assign panel_button_link_2 = block.settings.right_button_link_2
-                  assign button_1_bg = block.settings.right_button_1_bg
-                  assign button_1_text = block.settings.right_button_1_text
-                  assign button_1_border = block.settings.right_button_1_border
-                  assign button_2_bg = block.settings.right_button_2_bg
-                  assign button_2_text = block.settings.right_button_2_text
-                  assign button_2_border = block.settings.right_button_2_border
                   assign panel_position = block.settings.right_position
                   assign panel_alignment = block.settings.right_alignment
                   assign panel_text_color = block.settings.right_text_color
-                  assign panel_overlay = block.settings.right_overlay
+                  assign panel_overlay = section.settings.right_overlay
                   assign panel_gradient = block.settings.right_gradient
                 endif
 
@@ -198,16 +195,54 @@
                   {%- endif -%}
                   {%- if panel_button_label != blank or panel_button_label_2 != blank -%}
                     <div class="jane-hero__buttons">
-                      {%- if panel_button_label != blank -%}
-                        <a class="jane-hero__button" style="background-color: {{ button_1_bg }}; color: {{ button_1_text }}; border-color: {{ button_1_border }};" href="{{ panel_button_link | default: '#' }}">
-                          {{ panel_button_label | escape }}
-                        </a>
-                      {%- endif -%}
-                      {%- if panel_button_label_2 != blank -%}
-                        <a class="jane-hero__button" style="background-color: {{ button_2_bg }}; color: {{ button_2_text }}; border-color: {{ button_2_border }};" href="{{ panel_button_link_2 | default: '#' }}">
-                          {{ panel_button_label_2 | escape }}
-                        </a>
-                      {%- endif -%}
+                      {%- for button_index in (1..2) -%}
+                        {%- liquid
+                          if panel_name == 'left'
+                            if button_index == 1
+                              assign button_label = block.settings.left_button_label
+                              assign button_link = block.settings.left_button_link
+                              assign button_type = block.settings.left_button_1_type
+                              assign button_bg = block.settings.left_button_1_bg_color
+                              assign button_border = block.settings.left_button_1_border_color
+                              assign button_border_width = block.settings.left_button_1_border_width
+                              assign button_text = block.settings.left_button_1_text_color
+                            else
+                              assign button_label = block.settings.left_button_label_2
+                              assign button_link = block.settings.left_button_link_2
+                              assign button_type = block.settings.left_button_2_type
+                              assign button_bg = block.settings.left_button_2_bg_color
+                              assign button_border = block.settings.left_button_2_border_color
+                              assign button_border_width = block.settings.left_button_2_border_width
+                              assign button_text = block.settings.left_button_2_text_color
+                            endif
+                          else
+                            if button_index == 1
+                              assign button_label = block.settings.right_button_label
+                              assign button_link = block.settings.right_button_link
+                              assign button_type = block.settings.right_button_1_type
+                              assign button_bg = block.settings.right_button_1_bg_color
+                              assign button_border = block.settings.right_button_1_border_color
+                              assign button_border_width = block.settings.right_button_1_border_width
+                              assign button_text = block.settings.right_button_1_text_color
+                            else
+                              assign button_label = block.settings.right_button_label_2
+                              assign button_link = block.settings.right_button_link_2
+                              assign button_type = block.settings.right_button_2_type
+                              assign button_bg = block.settings.right_button_2_bg_color
+                              assign button_border = block.settings.right_button_2_border_color
+                              assign button_border_width = block.settings.right_button_2_border_width
+                              assign button_text = block.settings.right_button_2_text_color
+                            endif
+                          endif
+                        -%}
+                        {%- if button_label != blank -%}
+                          <a
+                            class="jane-hero__button jane-hero__button--{{ button_type }}"
+                            href="{{ button_link | default: '#' }}"
+                            style="--jhb-button-bg: {{ button_bg }}; --jhb-button-border: {{ button_border }}; --jhb-button-border-width: {{ button_border_width }}px; --jhb-button-text: {{ button_text }};"
+                          >{{ button_label | escape }}</a>
+                        {%- endif -%}
+                      {%- endfor -%}
                     </div>
                   {%- endif -%}
                 </div>
@@ -242,7 +277,8 @@
   {%- endif -%}
 </section>
 
-{% schema %}{
+{% schema %}
+{
   "name": "JANÉ split hero",
   "tag": "section",
   "class": "section jane-hero-section",
@@ -420,6 +456,218 @@
       "step": 4,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "select",
+      "id": "left_title_size_desktop",
+      "label": "Left title font size desktop",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "left_title_size_mobile",
+      "label": "Left title font size mobile",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "select",
+      "id": "left_body_size_desktop",
+      "label": "Left content font size desktop",
+      "options": [
+        {
+          "value": "big",
+          "label": "Body Big"
+        },
+        {
+          "value": "regular",
+          "label": "Body Regular"
+        },
+        {
+          "value": "small",
+          "label": "Body Small"
+        }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "select",
+      "id": "left_body_size_mobile",
+      "label": "Left content font size mobile",
+      "options": [
+        {
+          "value": "big",
+          "label": "Body Big"
+        },
+        {
+          "value": "regular",
+          "label": "Body Regular"
+        },
+        {
+          "value": "small",
+          "label": "Body Small"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "range",
+      "id": "left_overlay",
+      "label": "Left overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "right_title_size_desktop",
+      "label": "Right title font size desktop",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "right_title_size_mobile",
+      "label": "Right title font size mobile",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "select",
+      "id": "right_body_size_desktop",
+      "label": "Right content font size desktop",
+      "options": [
+        {
+          "value": "big",
+          "label": "Body Big"
+        },
+        {
+          "value": "regular",
+          "label": "Body Regular"
+        },
+        {
+          "value": "small",
+          "label": "Body Small"
+        }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "select",
+      "id": "right_body_size_mobile",
+      "label": "Right content font size mobile",
+      "options": [
+        {
+          "value": "big",
+          "label": "Body Big"
+        },
+        {
+          "value": "regular",
+          "label": "Body Regular"
+        },
+        {
+          "value": "small",
+          "label": "Body Small"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "range",
+      "id": "right_overlay",
+      "label": "Right overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 20
     }
   ],
   "blocks": [
@@ -427,6 +675,10 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
+        {
+          "type": "header",
+          "content": "LEFT SIDE — media"
+        },
         {
           "type": "image_picker",
           "id": "left_image",
@@ -458,138 +710,6 @@
           "id": "left_description",
           "label": "Left description",
           "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>"
-        },
-        {
-          "type": "select",
-          "id": "left_title_size_desktop",
-          "label": "Left title font size desktop",
-          "options": [
-            {
-              "value": "h1",
-              "label": "H1"
-            },
-            {
-              "value": "h2",
-              "label": "H2"
-            },
-            {
-              "value": "h3",
-              "label": "H3"
-            },
-            {
-              "value": "h4",
-              "label": "H4"
-            },
-            {
-              "value": "h5",
-              "label": "H5"
-            }
-          ],
-          "default": "h2"
-        },
-        {
-          "type": "select",
-          "id": "left_title_size_mobile",
-          "label": "Left title font size mobile",
-          "options": [
-            {
-              "value": "h1",
-              "label": "H1"
-            },
-            {
-              "value": "h2",
-              "label": "H2"
-            },
-            {
-              "value": "h3",
-              "label": "H3"
-            },
-            {
-              "value": "h4",
-              "label": "H4"
-            },
-            {
-              "value": "h5",
-              "label": "H5"
-            }
-          ],
-          "default": "h3"
-        },
-        {
-          "type": "select",
-          "id": "left_body_size_desktop",
-          "label": "Left content font size desktop",
-          "options": [
-            {
-              "value": "big",
-              "label": "Body Big"
-            },
-            {
-              "value": "regular",
-              "label": "Body Regular"
-            },
-            {
-              "value": "small",
-              "label": "Body Small"
-            }
-          ],
-          "default": "regular"
-        },
-        {
-          "type": "select",
-          "id": "left_body_size_mobile",
-          "label": "Left content font size mobile",
-          "options": [
-            {
-              "value": "big",
-              "label": "Body Big"
-            },
-            {
-              "value": "regular",
-              "label": "Body Regular"
-            },
-            {
-              "value": "small",
-              "label": "Body Small"
-            }
-          ],
-          "default": "small"
-        },
-        {
-          "type": "color",
-          "id": "left_button_1_bg",
-          "label": "Left button 1 background color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "left_button_1_text",
-          "label": "Left button 1 text color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "left_button_1_border",
-          "label": "Left button 1 border color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "left_button_2_bg",
-          "label": "Left button 2 background color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "left_button_2_text",
-          "label": "Left button 2 text color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "left_button_2_border",
-          "label": "Left button 2 border color",
-          "default": "#FFFFFF"
         },
         {
           "type": "select",
@@ -638,16 +758,6 @@
           "default": "#FFFFFF"
         },
         {
-          "type": "range",
-          "id": "left_overlay",
-          "label": "Left overlay opacity",
-          "min": 0,
-          "max": 80,
-          "step": 5,
-          "unit": "%",
-          "default": 20
-        },
-        {
           "type": "checkbox",
           "id": "left_gradient",
           "label": "Left gradient overlay",
@@ -673,6 +783,98 @@
           "type": "url",
           "id": "left_button_link_2",
           "label": "Left button 2 link"
+        },
+        {
+          "type": "select",
+          "id": "left_button_1_type",
+          "label": "Left Button 1 type",
+          "options": [
+            {
+              "value": "background",
+              "label": "Background / Filled"
+            },
+            {
+              "value": "border",
+              "label": "Border / Outline"
+            }
+          ],
+          "default": "background"
+        },
+        {
+          "type": "color",
+          "id": "left_button_1_bg_color",
+          "label": "Left Button 1 background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "left_button_1_border_color",
+          "label": "Left Button 1 border color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "left_button_1_border_width",
+          "label": "Left Button 1 border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "color",
+          "id": "left_button_1_text_color",
+          "label": "Left Button 1 text color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "left_button_2_type",
+          "label": "Left Button 2 type",
+          "options": [
+            {
+              "value": "background",
+              "label": "Background / Filled"
+            },
+            {
+              "value": "border",
+              "label": "Border / Outline"
+            }
+          ],
+          "default": "background"
+        },
+        {
+          "type": "color",
+          "id": "left_button_2_bg_color",
+          "label": "Left Button 2 background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "left_button_2_border_color",
+          "label": "Left Button 2 border color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "left_button_2_border_width",
+          "label": "Left Button 2 border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "color",
+          "id": "left_button_2_text_color",
+          "label": "Left Button 2 text color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "RIGHT SIDE — media"
         },
         {
           "type": "image_picker",
@@ -705,138 +907,6 @@
           "id": "right_description",
           "label": "Right description",
           "default": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>"
-        },
-        {
-          "type": "select",
-          "id": "right_title_size_desktop",
-          "label": "Right title font size desktop",
-          "options": [
-            {
-              "value": "h1",
-              "label": "H1"
-            },
-            {
-              "value": "h2",
-              "label": "H2"
-            },
-            {
-              "value": "h3",
-              "label": "H3"
-            },
-            {
-              "value": "h4",
-              "label": "H4"
-            },
-            {
-              "value": "h5",
-              "label": "H5"
-            }
-          ],
-          "default": "h2"
-        },
-        {
-          "type": "select",
-          "id": "right_title_size_mobile",
-          "label": "Right title font size mobile",
-          "options": [
-            {
-              "value": "h1",
-              "label": "H1"
-            },
-            {
-              "value": "h2",
-              "label": "H2"
-            },
-            {
-              "value": "h3",
-              "label": "H3"
-            },
-            {
-              "value": "h4",
-              "label": "H4"
-            },
-            {
-              "value": "h5",
-              "label": "H5"
-            }
-          ],
-          "default": "h3"
-        },
-        {
-          "type": "select",
-          "id": "right_body_size_desktop",
-          "label": "Right content font size desktop",
-          "options": [
-            {
-              "value": "big",
-              "label": "Body Big"
-            },
-            {
-              "value": "regular",
-              "label": "Body Regular"
-            },
-            {
-              "value": "small",
-              "label": "Body Small"
-            }
-          ],
-          "default": "regular"
-        },
-        {
-          "type": "select",
-          "id": "right_body_size_mobile",
-          "label": "Right content font size mobile",
-          "options": [
-            {
-              "value": "big",
-              "label": "Body Big"
-            },
-            {
-              "value": "regular",
-              "label": "Body Regular"
-            },
-            {
-              "value": "small",
-              "label": "Body Small"
-            }
-          ],
-          "default": "small"
-        },
-        {
-          "type": "color",
-          "id": "right_button_1_bg",
-          "label": "Right button 1 background color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "right_button_1_text",
-          "label": "Right button 1 text color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "right_button_1_border",
-          "label": "Right button 1 border color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "right_button_2_bg",
-          "label": "Right button 2 background color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "right_button_2_text",
-          "label": "Right button 2 text color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "right_button_2_border",
-          "label": "Right button 2 border color",
-          "default": "#FFFFFF"
         },
         {
           "type": "select",
@@ -885,16 +955,6 @@
           "default": "#FFFFFF"
         },
         {
-          "type": "range",
-          "id": "right_overlay",
-          "label": "Right overlay opacity",
-          "min": 0,
-          "max": 80,
-          "step": 5,
-          "unit": "%",
-          "default": 20
-        },
-        {
           "type": "checkbox",
           "id": "right_gradient",
           "label": "Right gradient overlay",
@@ -920,6 +980,94 @@
           "type": "url",
           "id": "right_button_link_2",
           "label": "Right button 2 link"
+        },
+        {
+          "type": "select",
+          "id": "right_button_1_type",
+          "label": "Right Button 1 type",
+          "options": [
+            {
+              "value": "background",
+              "label": "Background / Filled"
+            },
+            {
+              "value": "border",
+              "label": "Border / Outline"
+            }
+          ],
+          "default": "background"
+        },
+        {
+          "type": "color",
+          "id": "right_button_1_bg_color",
+          "label": "Right Button 1 background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "right_button_1_border_color",
+          "label": "Right Button 1 border color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "right_button_1_border_width",
+          "label": "Right Button 1 border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "color",
+          "id": "right_button_1_text_color",
+          "label": "Right Button 1 text color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "right_button_2_type",
+          "label": "Right Button 2 type",
+          "options": [
+            {
+              "value": "background",
+              "label": "Background / Filled"
+            },
+            {
+              "value": "border",
+              "label": "Border / Outline"
+            }
+          ],
+          "default": "background"
+        },
+        {
+          "type": "color",
+          "id": "right_button_2_bg_color",
+          "label": "Right Button 2 background color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "right_button_2_border_color",
+          "label": "Right Button 2 border color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "right_button_2_border_width",
+          "label": "Right Button 2 border width",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "color",
+          "id": "right_button_2_text_color",
+          "label": "Right Button 2 text color",
+          "default": "#000000"
         }
       ]
     }
@@ -935,4 +1083,5 @@
       ]
     }
   ]
-}{% endschema %}
+}
+{% endschema %}
