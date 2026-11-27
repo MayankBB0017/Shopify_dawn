@@ -416,7 +416,7 @@
         "show_gradient": true,
         "overlay_opacity": 15,
         "gradient_direction": "bottom",
-        "section_title_size_desktop": "h2",
+        "section_title_size_desktop": "h3",
         "section_title_size_mobile": "h3",
         "title_size_desktop": "36",
         "title_size_mobile": "24",
@@ -426,7 +426,7 @@
         "hover_effect": "zoom",
         "fade_desktop": false,
         "fade_mobile": false,
-        "section_padding_top": 24,
+        "section_padding_top": 52,
         "section_padding_bottom": 24
       }
     },
