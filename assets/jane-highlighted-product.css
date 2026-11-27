@@ -109,3 +109,43 @@
   @media (prefers-reduced-motion: reduce) {
     .jane-highlighted *, .jane-highlighted *::before, .jane-highlighted *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   }
+
+/* Bullet descriptions positioned over image */
+
+.jane-highlighted .jane-highlighted__visual {
+  position: relative;
+}
+
+.jane-highlighted .jane-highlighted__bullet-content {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: block;
+  padding: 0;
+  pointer-events: none;
+}
+
+.jane-highlighted .jane-bullet-card {
+  position: absolute;
+  left: var(--card-x);
+  top: var(--card-y);
+  transform: translate(-50%, -50%);
+  width: 270px;
+  max-width: 30%;
+  pointer-events: auto;
+}
+
+.jane-highlighted .jane-bullet-card:not(.is-active) {
+  display: none;
+}
+
+/* Mobile positioning */
+
+@media (max-width: 749px) {
+  .jane-highlighted .jane-bullet-card {
+    left: var(--card-mobile-x);
+    top: var(--card-mobile-y);
+    width: 90%;
+    max-width: 320px;
+  }
+}
