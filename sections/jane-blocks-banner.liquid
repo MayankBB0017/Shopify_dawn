@@ -86,20 +86,7 @@
           {{ block.shopify_attributes }}
         >
 
-          {% comment %}The full banner image/card links to the selected Shopify destination.{% endcomment %}
-          {% if block.settings.link != blank %}
-            <a
-              class="jbb__card"
-              href="{{ block.settings.link }}"
-              {% if block.settings.open_new_tab %}
-                target="_blank"
-                rel="noopener noreferrer"
-              {% endif %}
-              aria-label="{{ card_label | escape }}"
-            >
-          {% else %}
-            <div class="jbb__card">
-          {% endif %}
+          <div class="jbb__card">
 
               <div class="jbb__media jbb__media--{{ section.settings.image_ratio }}">
 
@@ -194,9 +181,24 @@
                   <div class="jbb__content jbb__content--desktop-{{ block.settings.desktop_position }} jbb__content--mobile-{{ block.settings.mobile_position }}">
 
                     {% if block.settings.title != blank %}
-                      <h3 class="jbb__title jbb__title--desktop-{{ section.settings.title_size_desktop }} jbb__title--mobile-{{ section.settings.title_size_mobile }}">
-                        {{ block.settings.title | escape }}
-                      </h3>
+                      {% if block.settings.link != blank %}
+                        <a
+                          class="jbb__title-link"
+                          href="{{ block.settings.link }}"
+                          {% if block.settings.open_new_tab %}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          {% endif %}
+                        >
+                          <h3 class="jbb__title jbb__title--desktop-{{ section.settings.title_size_desktop }} jbb__title--mobile-{{ section.settings.title_size_mobile }}">
+                            {{ block.settings.title | escape }}
+                          </h3>
+                        </a>
+                      {% else %}
+                        <h3 class="jbb__title jbb__title--desktop-{{ section.settings.title_size_desktop }} jbb__title--mobile-{{ section.settings.title_size_mobile }}">
+                          {{ block.settings.title | escape }}
+                        </h3>
+                      {% endif %}
                     {% endif %}
 
                     {% if block.settings.description != blank %}
@@ -227,11 +229,7 @@
 
               </div>
 
-          {% if block.settings.link != blank %}
-            </a>
-          {% else %}
-            </div>
-          {% endif %}
+          </div>
 
         </article>
 
