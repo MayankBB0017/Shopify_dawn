@@ -376,3 +376,133 @@
   display: block;
   min-height: 1px;
 }
+
+/* =====================================
+   JANE HOTSPOT - NORMAL STATE
+===================================== */
+
+.jane-highlighted .jane-hotspot {
+  width: 74px;
+  height: 74px;
+  padding: 0;
+  border: 1px solid #171717;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.2s ease;
+}
+
+.jane-highlighted .jane-hotspot__dot {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #171717;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+/* =====================================
+   HOVER STATE - WHITE DOT
+===================================== */
+
+.jane-highlighted .jane-hotspot:hover,
+.jane-highlighted .jane-hotspot.is-active {
+  border-color: #ffffff;
+}
+
+.jane-highlighted .jane-hotspot:hover .jane-hotspot__dot,
+.jane-highlighted .jane-hotspot.is-active .jane-hotspot__dot {
+  background: #ffffff;
+}
+
+/* =====================================
+   PRODUCT INFORMATION POPUP
+===================================== */
+
+.jane-highlighted .jane-bullet-card {
+  position: absolute;
+  left: var(--card-x);
+  top: var(--card-y);
+  transform: translate(-50%, -50%);
+  width: 588px;
+  max-width: 55%;
+  min-height: 180px;
+  padding: 28px 35px;
+  background: #ffffff;
+  border: none;
+  border-radius: 15px;
+  display: none;
+  align-items: center;
+  gap: 28px;
+  pointer-events: auto;
+  z-index: 6;
+  box-shadow: none;
+}
+
+.jane-highlighted .jane-bullet-card.is-active {
+  display: flex;
+}
+
+.jane-highlighted .jane-bullet-card__image {
+  width: 138px;
+  height: 163px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.jane-highlighted .jane-bullet-card__title {
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 500;
+  margin: 0 0 14px;
+  color: #171717;
+}
+
+.jane-highlighted .jane-bullet-card__description {
+  font-size: 23px;
+  line-height: 1.35;
+  color: #171717;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media screen and (max-width: 749px) {
+  .jane-highlighted .jane-hotspot {
+    width: 48px;
+    height: 48px;
+  }
+
+  .jane-highlighted .jane-hotspot__dot {
+    width: 34px;
+    height: 34px;
+  }
+
+  .jane-highlighted .jane-bullet-card {
+    width: 90%;
+    max-width: 90%;
+    min-height: auto;
+    padding: 14px;
+    gap: 12px;
+    border-radius: 10px;
+  }
+
+  .jane-highlighted .jane-bullet-card__image {
+    width: 75px;
+    height: 85px;
+  }
+
+  .jane-highlighted .jane-bullet-card__title {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .jane-highlighted .jane-bullet-card__description {
+    font-size: 14px;
+  }
+}
