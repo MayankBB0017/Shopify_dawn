@@ -243,36 +243,7 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_iEL3Qm": {
-          "type": "banner",
-          "settings": {
-            "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Frame_5407_468b8849-0c73-4e92-9729-78776987536d.png",
-            "mobile_media_type": "inherit",
-            "video_autoplay": true,
-            "video_loop": true,
-            "video_controls": false,
-            "title": "",
-            "description": "",
-            "desktop_text_color": "#ffffff",
-            "mobile_text_color": "#ffffff",
-            "desktop_position": "bottom-left",
-            "mobile_position": "bottom-left",
-            "button_label": "",
-            "link": "",
-            "open_new_tab": false,
-            "button_position": "inline",
-            "padding_top": 0,
-            "padding_right": 0,
-            "padding_bottom": 0,
-            "padding_left": 0,
-            "mobile_padding_top": 0,
-            "mobile_padding_right": 0,
-            "mobile_padding_bottom": 0,
-            "mobile_padding_left": 0
-          }
-        },
-        "banner_6HzXdz": {
+        "banner_Qwrfph": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
@@ -281,7 +252,7 @@
             "video_autoplay": true,
             "video_loop": true,
             "video_controls": false,
-            "title": "",
+            "title": "Mochilas portabebés",
             "description": "",
             "desktop_text_color": "#ffffff",
             "mobile_text_color": "#ffffff",
@@ -301,16 +272,16 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_apib6Q": {
+        "banner_Dd3LKE": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Card_4b5c5436-a647-4c7c-b504-81f917fb5b12.png",
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
             "video_controls": false,
-            "title": "",
+            "title": "Mochilas portabebés",
             "description": "",
             "desktop_text_color": "#ffffff",
             "mobile_text_color": "#ffffff",
@@ -330,16 +301,16 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_xPxWYa": {
+        "banner_wy7QAf": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Frame_5407_a17b0e80-3014-4ef1-abda-301574ef1ad4.png",
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
             "video_controls": false,
-            "title": "",
+            "title": "Mochilas portabebés",
             "description": "",
             "desktop_text_color": "#ffffff",
             "mobile_text_color": "#ffffff",
@@ -359,16 +330,45 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_Chmqyd": {
+        "banner_VrCmKF": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Tender_Moment_by_the_Window.png",
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
             "video_controls": false,
-            "title": "",
+            "title": "Mochilas portabebés",
+            "description": "",
+            "desktop_text_color": "#ffffff",
+            "mobile_text_color": "#ffffff",
+            "desktop_position": "bottom-left",
+            "mobile_position": "bottom-left",
+            "button_label": "",
+            "link": "",
+            "open_new_tab": false,
+            "button_position": "inline",
+            "padding_top": 0,
+            "padding_right": 0,
+            "padding_bottom": 0,
+            "padding_left": 0,
+            "mobile_padding_top": 0,
+            "mobile_padding_right": 0,
+            "mobile_padding_bottom": 0,
+            "mobile_padding_left": 0
+          }
+        },
+        "banner_pkYQrU": {
+          "type": "banner",
+          "settings": {
+            "desktop_media_type": "image",
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
+            "mobile_media_type": "inherit",
+            "video_autoplay": true,
+            "video_loop": true,
+            "video_controls": false,
+            "title": "Mochilas portabebés",
             "description": "",
             "desktop_text_color": "#ffffff",
             "mobile_text_color": "#ffffff",
@@ -391,11 +391,11 @@
       },
       "block_order": [
         "banner_Kt3jBd",
-        "banner_iEL3Qm",
-        "banner_6HzXdz",
-        "banner_apib6Q",
-        "banner_xPxWYa",
-        "banner_Chmqyd"
+        "banner_Qwrfph",
+        "banner_Dd3LKE",
+        "banner_wy7QAf",
+        "banner_VrCmKF",
+        "banner_pkYQrU"
       ],
       "name": "JANÉ - Blocks Banner",
       "settings": {
