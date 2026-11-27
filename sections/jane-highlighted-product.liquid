@@ -1,0 +1,621 @@
+
+{% comment %}
+  JANÉ – Highlighted Product
+  File: sections/jane-highlighted-product.liquid
+{% endcomment %}
+
+{{ 'jane-highlighted-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image | default: desktop_image
+  assign section_title = section.settings.title
+  assign section_description = section.settings.description
+
+  assign has_heading = false
+  if section_title != blank or section_description != blank
+    assign has_heading = true
+  endif
+
+  assign title_size_desktop = 20
+  case section.settings.title_preset
+    when 'h1'
+      assign title_size_desktop = 48
+    when 'h2'
+      assign title_size_desktop = 36
+    when 'h3'
+      assign title_size_desktop = 30
+    when 'h4'
+      assign title_size_desktop = 24
+    when 'h5'
+      assign title_size_desktop = 20
+  endcase
+
+  assign title_size_mobile_value = 20
+  case section.settings.title_preset_mobile
+    when 'h1'
+      assign title_size_mobile_value = 34
+    when 'h2'
+      assign title_size_mobile_value = 28
+    when 'h3'
+      assign title_size_mobile_value = 24
+    when 'h4'
+      assign title_size_mobile_value = 20
+    when 'h5'
+      assign title_size_mobile_value = 18
+  endcase
+
+  assign body_size_desktop = 14
+  case section.settings.body_preset
+    when 'body_big'
+      assign body_size_desktop = 16
+    when 'body_regular'
+      assign body_size_desktop = 14
+    when 'body_small'
+      assign body_size_desktop = 12
+  endcase
+
+  assign body_size_mobile_value = 14
+  case section.settings.body_preset_mobile
+    when 'body_big'
+      assign body_size_mobile_value = 16
+    when 'body_regular'
+      assign body_size_mobile_value = 14
+    when 'body_small'
+      assign body_size_mobile_value = 12
+  endcase
+-%}
+
+<section
+  id="JaneHighlighted-{{ section.id }}"
+  class="jane-highlighted color-{{ section.settings.color_scheme }}"
+  data-jane-section
+  data-fade-desktop="{{ section.settings.fade_desktop }}"
+  data-fade-mobile="{{ section.settings.fade_mobile }}"
+  style="
+    --jane-max-width: {{ section.settings.content_max_width }}px;
+    --jane-pad-top: {{ section.settings.padding_top }}px;
+    --jane-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --jane-title-color: {{ section.settings.title_color }};
+    --jane-body-color: {{ section.settings.text_color }};
+    --jane-title-size: {{ title_size_desktop }}px;
+    --jane-title-size-mobile: {{ title_size_mobile_value }}px;
+    --jane-body-size: {{ body_size_desktop }}px;
+    --jane-body-size-mobile: {{ body_size_mobile_value }}px;
+    --jane-overlay: {{ section.settings.image_overlay | divided_by: 100.0 }};
+    --jane-image-fit: {{ section.settings.image_fit }};
+    --jane-mobile-image-fit: {{ section.settings.mobile_image_fit }};
+  "
+>
+  <div class="jane-highlighted__inner">
+
+    {% if has_heading and section.settings.heading_position == 'outside' %}
+      <div class="jane-highlighted__heading jane-highlighted__heading--outside jane-align-{{ section.settings.text_alignment }}">
+        {% if section_title != blank %}
+          <{{ section.settings.title_tag }} class="jane-highlighted__title">
+            {{ section_title | escape }}
+          </{{ section.settings.title_tag }}>
+        {% endif %}
+
+        {% if section_description != blank %}
+          <div class="jane-highlighted__description rte">
+            {{ section_description }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if desktop_image != blank %}
+
+      <div
+        class="jane-highlighted__visual jane-ratio-{{ section.settings.image_ratio }}"
+        data-jane-visual
+      >
+        <picture class="jane-highlighted__picture">
+
+          {% if mobile_image != blank %}
+            <source
+              media="(max-width: 749px)"
+              srcset="
+                {{ mobile_image | image_url: width: 480 }} 480w,
+                {{ mobile_image | image_url: width: 750 }} 750w,
+                {{ mobile_image | image_url: width: 1100 }} 1100w
+              "
+              sizes="100vw"
+            >
+          {% endif %}
+
+          {{
+            desktop_image
+            | image_url: width: 2400
+            | image_tag:
+              class: 'jane-highlighted__image',
+              widths: '750, 1100, 1500, 2000, 2400',
+              sizes: '100vw',
+              loading: 'lazy',
+              alt: desktop_image.alt | default: section_title | escape
+          }}
+
+        </picture>
+
+        {% if section.settings.image_overlay > 0 %}
+          <span
+            class="jane-highlighted__image-overlay"
+            aria-hidden="true"
+          ></span>
+        {% endif %}
+
+        {% if has_heading and section.settings.heading_position == 'inside' %}
+          <div class="jane-highlighted__heading jane-highlighted__heading--inside jane-align-{{ section.settings.text_alignment }}">
+
+            {% if section_title != blank %}
+              <{{ section.settings.title_tag }} class="jane-highlighted__title">
+                {{ section_title | escape }}
+              </{{ section.settings.title_tag }}>
+            {% endif %}
+
+            {% if section_description != blank %}
+              <div class="jane-highlighted__description rte">
+                {{ section_description }}
+              </div>
+            {% endif %}
+
+          </div>
+        {% endif %}
+
+        {% for block in section.blocks %}
+          {% if block.type == 'bullet' %}
+            <button
+              class="jane-hotspot{% if forloop.first %} is-active{% endif %}"
+              type="button"
+              aria-label="{{ block.settings.bullet_title | default: block.settings.bullet_description | escape }}"
+              aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+              data-jane-hotspot
+              data-index="{{ forloop.index0 }}"
+              style="
+                --hotspot-x: {{ block.settings.desktop_x }}%;
+                --hotspot-y: {{ block.settings.desktop_y }}%;
+                --hotspot-mobile-x: {{ block.settings.mobile_x }}%;
+                --hotspot-mobile-y: {{ block.settings.mobile_y }}%;
+              "
+              {{ block.shopify_attributes }}
+            >
+              <span class="jane-hotspot__dot" aria-hidden="true"></span>
+            </button>
+          {% endif %}
+        {% endfor %}
+
+        {% if section.settings.button_label != blank and section.settings.button_position == 'image' %}
+          <a
+            class="jane-button jane-button--{{ section.settings.button_type }}"
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% else %}
+              role="link"
+              aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {% endif %}
+
+      </div>
+
+      {% assign bullet_count = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'bullet' %}
+          {% assign bullet_count = bullet_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+
+      {% if bullet_count > 0 %}
+        <div
+          class="jane-highlighted__bullet-content"
+          data-jane-bullet-content
+        >
+          {% for block in section.blocks %}
+            {% if block.type == 'bullet' %}
+
+              <article
+                class="jane-bullet-card{% if forloop.first %} is-active{% endif %}"
+                data-jane-card
+                data-index="{{ forloop.index0 }}"
+                {{ block.shopify_attributes }}
+              >
+
+                {% if block.settings.bullet_image != blank %}
+                  {{
+                    block.settings.bullet_image
+                    | image_url: width: 240
+                    | image_tag:
+                      class: 'jane-bullet-card__image',
+                      widths: '80, 120, 160, 240',
+                      sizes: '120px',
+                      loading: 'lazy',
+                      alt: block.settings.bullet_title | escape
+                  }}
+                {% endif %}
+
+                <div class="jane-bullet-card__copy">
+
+                  {% if block.settings.bullet_title != blank %}
+                    <h3 class="jane-bullet-card__title">
+                      {{ block.settings.bullet_title | escape }}
+                    </h3>
+                  {% endif %}
+
+                  {% if block.settings.bullet_description != blank %}
+                    <div class="jane-bullet-card__description rte">
+                      {{ block.settings.bullet_description }}
+                    </div>
+                  {% endif %}
+
+                </div>
+              </article>
+
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    {% else %}
+
+      <div class="jane-highlighted__placeholder">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        <p>Add a desktop image in the section settings.</p>
+      </div>
+
+    {% endif %}
+
+    {% if section.settings.button_label != blank and section.settings.button_position == 'below' %}
+      <div class="jane-highlighted__button-wrap jane-align-{{ section.settings.button_alignment }}">
+        <a
+          class="jane-button jane-button--{{ section.settings.button_type }}"
+          {% if section.settings.button_link != blank %}
+            href="{{ section.settings.button_link }}"
+          {% else %}
+            role="link"
+            aria-disabled="true"
+          {% endif %}
+        >
+          {{ section.settings.button_label | escape }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.getElementById('JaneHighlighted-{{ section.id }}');
+
+    if (!root || root.dataset.janeInitialized === 'true') return;
+
+    root.dataset.janeInitialized = 'true';
+
+    const hotspots = [...root.querySelectorAll('[data-jane-hotspot]')];
+    const cards = [...root.querySelectorAll('[data-jane-card]')];
+
+    const activate = (index) => {
+      hotspots.forEach((item) => {
+        const active = item.dataset.index === String(index);
+
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-expanded', active ? 'true' : 'false');
+      });
+
+      cards.forEach((item) => {
+        item.classList.toggle(
+          'is-active',
+          item.dataset.index === String(index)
+        );
+      });
+    };
+
+    hotspots.forEach((item) => {
+      item.addEventListener('click', () => {
+        activate(item.dataset.index);
+      });
+
+      item.addEventListener('mouseenter', () => {
+        if (window.matchMedia('(min-width: 750px)').matches) {
+          activate(item.dataset.index);
+        }
+      });
+
+      item.addEventListener('focus', () => {
+        activate(item.dataset.index);
+      });
+    });
+
+    const mobile = window.matchMedia('(max-width: 749px)');
+
+    const updateAnimation = () => {
+      const enabled = mobile.matches
+        ? root.dataset.fadeMobile === 'true'
+        : root.dataset.fadeDesktop === 'true';
+
+      const targets = [
+        root.querySelector('.jane-highlighted__heading'),
+        root.querySelector('.jane-highlighted__visual'),
+        root.querySelector('.jane-highlighted__bullet-content'),
+        root.querySelector('.jane-highlighted__button-wrap')
+      ].filter(Boolean);
+
+      targets.forEach((el) => {
+        el.removeAttribute('data-jane-animate');
+        el.classList.remove('is-visible');
+
+        if (enabled) {
+          el.setAttribute('data-jane-animate', '');
+        }
+      });
+
+      if (!enabled) return;
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        targets.forEach((el) => observer.observe(el));
+      } else {
+        targets.forEach((el) => el.classList.add('is-visible'));
+      }
+    };
+
+    updateAnimation();
+
+    if (mobile.addEventListener) {
+      mobile.addEventListener('change', updateAnimation);
+    } else {
+      mobile.addListener(updateAnimation);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "JANÉ Highlighted",
+  "tag": "section",
+  "class": "section-jane-highlighted-product",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Nuevo lanzamiento" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Carrito Muum</p>" },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "label": "Title and description position",
+      "default": "inside",
+      "options": [
+        { "value": "inside", "label": "Inside image" },
+        { "value": "outside", "label": "Outside image" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_tag",
+      "label": "Title HTML heading",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_preset",
+      "label": "Font size title – desktop",
+      "default": "h5",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_preset_mobile",
+      "label": "Font size title – mobile",
+      "default": "h5",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "body_preset",
+      "label": "Font size content – desktop",
+      "default": "body_regular",
+      "options": [
+        { "value": "body_big", "label": "Body Big" },
+        { "value": "body_regular", "label": "Body Regular" },
+        { "value": "body_small", "label": "Body Small" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "body_preset_mobile",
+      "label": "Font size content – mobile",
+      "default": "body_regular",
+      "options": [
+        { "value": "body_big", "label": "Body Big" },
+        { "value": "body_regular", "label": "Body Regular" },
+        { "value": "body_small", "label": "Body Small" }
+      ]
+    },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#171717" },
+    { "type": "color", "id": "text_color", "label": "Description color", "default": "#171717" },
+
+    { "type": "header", "content": "Images and layout" },
+    { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (optional)" },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Desktop image ratio",
+      "default": "wide",
+      "options": [
+        { "value": "adapt", "label": "Original image ratio" },
+        { "value": "wide", "label": "Wide (2.1:1)" },
+        { "value": "landscape", "label": "Landscape (16:9)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Desktop image fit",
+      "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_fit",
+      "label": "Mobile image fit",
+      "default": "contain",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "default": "center center",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ]
+    },
+    { "type": "range", "id": "image_overlay", "label": "Image overlay opacity (%)", "min": 0, "max": 40, "step": 1, "default": 0 },
+    { "type": "range", "id": "content_max_width", "label": "Section content max width (px)", "min": 800, "max": 2000, "step": 20, "default": 1600 },
+    { "type": "range", "id": "padding_top", "label": "Top padding (px)", "min": 0, "max": 160, "step": 4, "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (px)", "min": 0, "max": 160, "step": 4, "default": 0 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button text", "default": "Descubrir" },
+    { "type": "url", "id": "button_link", "label": "Button URL" },
+    {
+      "type": "select",
+      "id": "button_type",
+      "label": "Button type",
+      "default": "stroke",
+      "options": [
+        { "value": "filled", "label": "Filled" },
+        { "value": "stroke", "label": "Stroke" },
+        { "value": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_position",
+      "label": "Button position",
+      "default": "image",
+      "options": [
+        { "value": "image", "label": "On image" },
+        { "value": "below", "label": "Below image" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_alignment",
+      "label": "Button alignment (below image)",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "header", "content": "Fade-in animation" },
+    { "type": "checkbox", "id": "fade_desktop", "label": "Enable fade-in animation on desktop", "default": false },
+    { "type": "checkbox", "id": "fade_mobile", "label": "Enable fade-in animation on mobile", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Product bullet",
+      "settings": [
+        { "type": "image_picker", "id": "bullet_image", "label": "Bullet image" },
+        { "type": "text", "id": "bullet_title", "label": "Bullet title", "default": "Freno de pie" },
+        { "type": "richtext", "id": "bullet_description", "label": "Bullet description", "default": "<p>Freno fácil de accionar y desbloquear pulsando con la planta del pie.</p>" },
+
+        { "type": "header", "content": "Desktop coordinates" },
+        { "type": "range", "id": "desktop_x", "label": "Desktop horizontal position (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "range", "id": "desktop_y", "label": "Desktop vertical position (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+
+        { "type": "header", "content": "Mobile coordinates" },
+        { "type": "range", "id": "mobile_x", "label": "Mobile horizontal position (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "range", "id": "mobile_y", "label": "Mobile vertical position (%)", "min": 0, "max": 100, "step": 1, "default": 50 }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "JANÉ – Highlighted Product",
+      "blocks": [
+        {
+          "type": "bullet",
+          "settings": {
+            "bullet_title": "Freno de pie",
+            "bullet_description": "<p>Freno fácil de accionar y desbloquear pulsando con la planta del pie.</p>",
+            "desktop_x": 44,
+            "desktop_y": 86,
+            "mobile_x": 50,
+            "mobile_y": 72
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "bullet_title": "Capota",
+            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de aireación.</p>",
+            "desktop_x": 56,
+            "desktop_y": 42,
+            "mobile_x": 50,
+            "mobile_y": 82
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
