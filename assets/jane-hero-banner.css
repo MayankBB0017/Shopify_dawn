@@ -387,3 +387,24 @@
     width: fit-content;
   }
 }
+@media screen and (max-width: 749px) {
+  .jane-hero__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .jane-hero__button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+
+  .jane-hero__content {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
