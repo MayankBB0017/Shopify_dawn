@@ -1,4 +1,3 @@
-
 {% comment %}
   JANÉ Highlighted Product
   File: sections/jane-highlighted-product.liquid
@@ -254,8 +253,20 @@ aria-label="{% if block.settings.bullet_title != blank %}{{ block.settings.bulle
                   }}
                 {% endif %}
 
-                {% if block.settings.bullet_title != blank or block.settings.bullet_description != blank %}
-                  <div class="jane-bullet-card__copy">
+                <div class="jane-bullet-card__copy">
+                  {% if selected_product != blank %}
+                    {% if selected_product.title != blank %}
+                      <h3 class="jane-bullet-card__title">
+                        {{ selected_product.title | escape }}
+                      </h3>
+                    {% endif %}
+
+                    {% if selected_product.description != blank %}
+                      <div class="jane-bullet-card__description rte">
+                        {{ selected_product.description }}
+                      </div>
+                    {% endif %}
+                  {% else %}
                     {% if block.settings.bullet_title != blank %}
                       <h3 class="jane-bullet-card__title">
                         {{ block.settings.bullet_title | escape }}
@@ -267,8 +278,8 @@ aria-label="{% if block.settings.bullet_title != blank %}{{ block.settings.bulle
                         {{ block.settings.bullet_description }}
                       </div>
                     {% endif %}
-                  </div>
-                {% endif %}
+                  {% endif %}
+                </div>
               </article>
 
               {% assign bullet_index = bullet_index | plus: 1 %}
