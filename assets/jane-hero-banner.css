@@ -368,3 +368,9 @@
     scroll-behavior: auto;
   }
 }
+
+#JaneHero-{{ section.id }} .jane-hero__button--border {
+  background: transparent !important;
+  border: var(--jhb-button-border-width, 1px) solid var(--jhb-button-border, #ffffff);
+  color: var(--jhb-button-text, #ffffff);
+}
