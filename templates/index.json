@@ -217,7 +217,7 @@
         "banner_Kt3jBd": {
           "type": "banner",
           "settings": {
-            "desktop_media_type": "image",
+            "desktop_media_type": "video",
             "desktop_video": "shopify://files/videos/Hero-banner.mp4",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
