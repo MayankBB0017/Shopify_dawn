@@ -181,7 +181,7 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
             <button
 class="jane-hotspot"
               type="button"
-              aria-label="{{ block.settings.bullet_title | escape }}"
+aria-label="{% if block.settings.product != blank %}{{ block.settings.product.title | escape }}{% else %}{{ block.settings.bullet_title | escape }}{% endif %}"
               aria-expanded="false"
               data-jane-hotspot
               data-index="{{ bullet_index }}"
@@ -239,34 +239,76 @@ class="jane-hotspot"
                 {{ block.shopify_attributes }}
               >
 
-                {% if block.settings.bullet_image != blank %}
-                  {{
-                    block.settings.bullet_image
-                    | image_url: width: 320
-                    | image_tag:
-                      class: 'jane-bullet-card__image',
-                      widths: '80, 120, 160, 240, 320',
-                      sizes: '120px',
-                      loading: 'lazy',
-                      alt: block.settings.bullet_title | escape
-                  }}
-                {% endif %}
+                {% assign selected_product = block.settings.product %}
 
-                <div class="jane-bullet-card__copy">
+                {% if selected_product != blank %}
 
-                  {% if block.settings.bullet_title != blank %}
+                  {% if selected_product.featured_image != blank %}
+                    {{
+                      selected_product.featured_image
+                      | image_url: width: 320
+                      | image_tag:
+                        class: 'jane-bullet-card__image',
+                        widths: '80, 120, 160, 240, 320',
+                        sizes: '120px',
+                        loading: 'lazy',
+                        alt: selected_product.title | escape
+                    }}
+                  {% endif %}
+
+                  <div class="jane-bullet-card__copy">
                     <h3 class="jane-bullet-card__title">
-                      {{ block.settings.bullet_title | escape }}
+                      {{ selected_product.title | escape }}
                     </h3>
-                  {% endif %}
 
-                  {% if block.settings.bullet_description != blank %}
-                    <div class="jane-bullet-card__description rte">
-                      {{ block.settings.bullet_description }}
+                    <div class="jane-bullet-card__price">
+                      {% if selected_product.compare_at_price > selected_product.price %}
+                        <s>{{ selected_product.compare_at_price | money }}</s>
+                      {% endif %}
+                      <span>{{ selected_product.price | money }}</span>
                     </div>
+
+                    {% if selected_product.description != blank %}
+                      <div class="jane-bullet-card__description">
+                        {{ selected_product.description | strip_html | truncate: 110 }}
+                      </div>
+                    {% endif %}
+
+                    <a href="{{ selected_product.url }}" class="jane-button jane-button--link">
+                      View product
+                    </a>
+                  </div>
+
+                {% else %}
+
+                  {% if block.settings.bullet_image != blank %}
+                    {{
+                      block.settings.bullet_image
+                      | image_url: width: 320
+                      | image_tag:
+                        class: 'jane-bullet-card__image',
+                        widths: '80, 120, 160, 240, 320',
+                        sizes: '120px',
+                        loading: 'lazy',
+                        alt: block.settings.bullet_title | escape
+                    }}
                   {% endif %}
 
-                </div>
+                  <div class="jane-bullet-card__copy">
+                    {% if block.settings.bullet_title != blank %}
+                      <h3 class="jane-bullet-card__title">
+                        {{ block.settings.bullet_title | escape }}
+                      </h3>
+                    {% endif %}
+
+                    {% if block.settings.bullet_description != blank %}
+                      <div class="jane-bullet-card__description rte">
+                        {{ block.settings.bullet_description }}
+                      </div>
+                    {% endif %}
+                  </div>
+
+                {% endif %}
               </article>
 
               {% assign bullet_index = bullet_index | plus: 1 %}
@@ -725,6 +767,11 @@ class="jane-hotspot"
       "type": "bullet",
       "name": "Product bullet",
       "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select product"
+        },
         {
           "type": "image_picker",
           "id": "bullet_image",
