@@ -306,9 +306,9 @@
             "bullet_title": "Freno de pie",
             "bullet_description": "<p>Freno fácil de accionar y desbloquear pulsando con la planta del pie.</p>",
             "desktop_x": 44,
-            "desktop_y": 100,
-            "mobile_x": 50,
-            "mobile_y": 21
+            "desktop_y": 90,
+            "mobile_x": 12,
+            "mobile_y": 40
           }
         },
         "bullet_HYNhFi": {
