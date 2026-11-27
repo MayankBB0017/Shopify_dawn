@@ -322,11 +322,50 @@
             "mobile_x": 50,
             "mobile_y": 82
           }
+        },
+        "bullet_XDinVT": {
+          "type": "bullet",
+          "settings": {
+            "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
+            "bullet_title": "Capota",
+            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de.</p>",
+            "desktop_x": 20,
+            "desktop_y": 42,
+            "mobile_x": 50,
+            "mobile_y": 82
+          }
+        },
+        "bullet_7zdJBg": {
+          "type": "bullet",
+          "settings": {
+            "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
+            "bullet_title": "Capota",
+            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de.</p>",
+            "desktop_x": 96,
+            "desktop_y": 42,
+            "mobile_x": 50,
+            "mobile_y": 82
+          }
+        },
+        "bullet_RPQjwN": {
+          "type": "bullet",
+          "settings": {
+            "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
+            "bullet_title": "Capota",
+            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de.</p>",
+            "desktop_x": 37,
+            "desktop_y": 42,
+            "mobile_x": 50,
+            "mobile_y": 82
+          }
         }
       },
       "block_order": [
         "bullet_eqTdUN",
-        "bullet_HYNhFi"
+        "bullet_HYNhFi",
+        "bullet_XDinVT",
+        "bullet_7zdJBg",
+        "bullet_RPQjwN"
       ],
       "name": "JANÉ – Highlighted Product",
       "settings": {
