@@ -403,7 +403,7 @@
         "section_description": "",
         "section_title_color": "#171717",
         "desktop_layout": "two-plus-four",
-        "mobile_layout": "two",
+        "mobile_layout": "one",
         "show_carousel_arrows": true,
         "image_ratio": "adapt",
         "top_image_ratio": "1.5",
