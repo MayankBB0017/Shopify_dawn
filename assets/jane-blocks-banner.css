@@ -1,9 +1,4 @@
 
-/* =========================================
-   JANÉ - BLOCKS BANNER
-   COMPLETE RESPONSIVE CSS
-========================================= */
-
 .jbb {
   padding-top: var(--jbb-section-pt, 24px);
   padding-bottom: var(--jbb-section-pb, 24px);
@@ -33,10 +28,6 @@
 .jbb__section-description > *:last-child {
   margin-bottom: 0;
 }
-
-/* =========================================
-   SECTION HEADING TYPOGRAPHY
-========================================= */
 
 .jbb__section-title--desktop-h1 {
   font-size: clamp(36px, 4vw, 56px);
@@ -90,25 +81,17 @@
   grid-column: span 1;
 }
 
-/* =========================================
-   2 TOP + 4 BOTTOM
-========================================= */
-
 .jbb--desktop-two-plus-four .jbb__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-flow: row;
 }
 
-/* First two blocks */
-
 .jbb--desktop-two-plus-four .jbb__item:nth-child(1),
 .jbb--desktop-two-plus-four .jbb__item:nth-child(2) {
   grid-column: span 2;
   grid-row: auto;
 }
-
-/* Remaining four blocks */
 
 .jbb--desktop-two-plus-four .jbb__item:nth-child(n+3) {
   grid-column: span 1;
@@ -927,5 +910,11 @@
     width: 100% !important;
     min-width: 0 !important;
     flex: none !important;
+  }
+}
+/* Mobile - Move product box slightly up */
+@media screen and (max-width: 749px) {
+  .jbb .jbb__content {
+    transform: translateY(-20px);
   }
 }
