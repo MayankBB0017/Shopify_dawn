@@ -45,7 +45,7 @@
             "right_text_color": "#ffffff",
             "right_gradient": true,
             "right_button_label": "COMPRAR",
-            "right_button_link": "shopify://products/img1",
+            "right_button_link": "shopify://collections/accessories",
             "right_button_label_2": "",
             "right_button_link_2": "shopify://collections/accessories",
             "right_button_1_type": "background",
