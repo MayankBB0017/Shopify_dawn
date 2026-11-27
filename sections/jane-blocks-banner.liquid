@@ -252,8 +252,8 @@
 </section>
 
 {% comment %}
-  Each banner card is clickable when its block Link setting is filled.
-  Select a Shopify collection, product, page, or paste a URL in that setting.
+  Only the banner title is clickable. Choose its destination in the Title link
+  setting directly below the Title field in the Content group.
 {% endcomment %}
 
 {% schema %}
@@ -671,6 +671,17 @@
           "label": "Title"
         },
         {
+          "type": "url",
+          "id": "link",
+          "label": "Title link (Collection / Product / Page)"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open title link in new tab",
+          "default": false
+        },
+        {
           "type": "richtext",
           "id": "description",
           "label": "Description"
@@ -731,17 +742,6 @@
           "type": "text",
           "id": "button_label",
           "label": "Button label"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Card / button link"
-        },
-        {
-          "type": "checkbox",
-          "id": "open_new_tab",
-          "label": "Open link in new tab",
-          "default": false
         },
         {
           "type": "select",
