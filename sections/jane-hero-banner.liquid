@@ -76,6 +76,7 @@
                   assign body_size_desktop = block.settings.left_body_size_desktop
                   assign body_size_mobile = block.settings.left_body_size_mobile
                   assign panel_button_text_color = block.settings.left_button_text_color
+                  assign panel_button_style = block.settings.left_button_style
                   assign panel_button_label = block.settings.left_button_label
                   assign panel_button_link = block.settings.left_button_link
                   assign panel_button_label_2 = block.settings.left_button_label_2
@@ -98,6 +99,7 @@
                   assign body_size_desktop = block.settings.right_body_size_desktop
                   assign body_size_mobile = block.settings.right_body_size_mobile
                   assign panel_button_text_color = block.settings.right_button_text_color
+                  assign panel_button_style = block.settings.right_button_style
                   assign panel_button_label = block.settings.right_button_label
                   assign panel_button_link = block.settings.right_button_link
                   assign panel_button_label_2 = block.settings.right_button_label_2
@@ -189,12 +191,12 @@
                   {%- if panel_button_label != blank or panel_button_label_2 != blank -%}
                     <div class="jane-hero__buttons">
                       {%- if panel_button_label != blank -%}
-                        <a class="jane-hero__button" href="{{ panel_button_link | default: '#' }}">
+                        <a class="jane-hero__button{% if panel_button_style == 'transparent' %} jane-hero__button--transparent{% endif %}" href="{{ panel_button_link | default: '#' }}">
                           {{ panel_button_label | escape }}
                         </a>
                       {%- endif -%}
                       {%- if panel_button_label_2 != blank -%}
-                        <a class="jane-hero__button" href="{{ panel_button_link_2 | default: '#' }}">
+                        <a class="jane-hero__button{% if panel_button_style == 'transparent' %} jane-hero__button--transparent{% endif %}" href="{{ panel_button_link_2 | default: '#' }}">
                           {{ panel_button_label_2 | escape }}
                         </a>
                       {%- endif -%}
@@ -558,6 +560,16 @@
         },
         {
           "type": "select",
+          "id": "left_button_style",
+          "label": "Left buttons style",
+          "options": [
+            { "value": "filled", "label": "Filled" },
+            { "value": "transparent", "label": "Transparent / Outline" }
+          ],
+          "default": "filled"
+        },
+        {
+          "type": "select",
           "id": "left_position",
           "label": "Left content position",
           "options": [
@@ -776,6 +788,16 @@
           "id": "right_button_text_color",
           "label": "Right button text color",
           "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "right_button_style",
+          "label": "Right buttons style",
+          "options": [
+            { "value": "filled", "label": "Filled" },
+            { "value": "transparent", "label": "Transparent / Outline" }
+          ],
+          "default": "filled"
         },
         {
           "type": "select",
