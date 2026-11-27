@@ -88,6 +88,7 @@
         "slide_FHTCRE": {
           "type": "slide",
           "settings": {
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "title": "Esto es vida",
             "description": "<p>Seguridad, confort y diseño en cada etapa de su crecimiento</p>",
             "content_position": "bottom-left",
