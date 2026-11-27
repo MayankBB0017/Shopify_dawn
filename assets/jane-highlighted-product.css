@@ -416,6 +416,7 @@ object-fit: contain;
 /* Button on image */
 
 .jane-highlighted .jane-highlighted__visual > .jane-button {
+        font-size: 14px;
   position: absolute;
   z-index: 8;
     text-transform: uppercase;
