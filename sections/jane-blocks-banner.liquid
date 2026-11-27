@@ -176,6 +176,7 @@
 
       {% if section.settings.mobile_layout == 'carousel' and section.settings.show_arrows %}
         <div class="jbb__controls">
+
           <button
             type="button"
             class="jbb__arrow jbb__arrow--prev"
@@ -193,6 +194,7 @@
           >
             &#8594;
           </button>
+
         </div>
       {% endif %}
 
@@ -206,12 +208,13 @@
   "tag": "section",
   "class": "section-jane-blocks-banner",
   "max_blocks": 6,
+
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Section heading",
-      "default": "Discover JANÉ"
+      "default": "Products typology"
     },
     {
       "type": "richtext",
@@ -227,13 +230,32 @@
       "id": "desktop_layout",
       "label": "Desktop image layout",
       "options": [
-        { "value": "two", "label": "2 images - Equal" },
-        { "value": "three", "label": "3 images - Equal" },
-        { "value": "four", "label": "4 images - Equal" },
-        { "value": "featured-left", "label": "Featured image left" },
-        { "value": "featured-right", "label": "Featured image right" }
+        {
+          "value": "two-plus-four",
+          "label": "2 Top + 4 Bottom"
+        },
+        {
+          "value": "two",
+          "label": "2 Images - Equal"
+        },
+        {
+          "value": "three",
+          "label": "3 Images - Equal"
+        },
+        {
+          "value": "four",
+          "label": "4 Images - Equal"
+        },
+        {
+          "value": "featured-left",
+          "label": "Featured Image Left"
+        },
+        {
+          "value": "featured-right",
+          "label": "Featured Image Right"
+        }
       ],
-      "default": "two"
+      "default": "two-plus-four"
     },
     {
       "type": "header",
@@ -244,11 +266,20 @@
       "id": "mobile_layout",
       "label": "Mobile image layout",
       "options": [
-        { "value": "stacked", "label": "Stacked - 1 column" },
-        { "value": "two", "label": "2 columns" },
-        { "value": "carousel", "label": "Carousel" }
+        {
+          "value": "stacked",
+          "label": "Stacked - 1 Column"
+        },
+        {
+          "value": "two",
+          "label": "2 Columns"
+        },
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        }
       ],
-      "default": "stacked"
+      "default": "two"
     },
     {
       "type": "checkbox",
@@ -265,10 +296,22 @@
       "id": "image_ratio",
       "label": "Image ratio",
       "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "square", "label": "Square 1:1" },
-        { "value": "portrait", "label": "Portrait 4:5" },
-        { "value": "landscape", "label": "Landscape 16:9" }
+        {
+          "value": "adapt",
+          "label": "Adapt to Image"
+        },
+        {
+          "value": "square",
+          "label": "Square 1:1"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape 16:9"
+        }
       ],
       "default": "adapt"
     },
@@ -282,16 +325,16 @@
       "unit": "px",
       "default": 8
     },
-   {
-  "type": "range",
-  "id": "radius",
-  "label": "Image corner radius",
-  "min": 0,
-  "max": 24,
-  "step": 2,
-  "unit": "px",
-  "default": 4
-},
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
     {
       "type": "checkbox",
       "id": "show_overlay",
@@ -369,6 +412,7 @@
       "default": 24
     }
   ],
+
   "blocks": [
     {
       "type": "banner",
@@ -404,9 +448,18 @@
           "id": "heading_tag",
           "label": "Title HTML tag",
           "options": [
-            { "value": "h1", "label": "H1" },
-            { "value": "h2", "label": "H2" },
-            { "value": "h3", "label": "H3" }
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            }
           ],
           "default": "h2"
         },
@@ -456,30 +509,61 @@
           "id": "content_position",
           "label": "Text position",
           "options": [
-            { "value": "top-left", "label": "Top left" },
-            { "value": "top-center", "label": "Top center" },
-            { "value": "center-left", "label": "Center left" },
-            { "value": "center", "label": "Center" },
-            { "value": "bottom-left", "label": "Bottom left" },
-            { "value": "bottom-center", "label": "Bottom center" }
+            {
+              "value": "top-left",
+              "label": "Top Left"
+            },
+            {
+              "value": "top-center",
+              "label": "Top Center"
+            },
+            {
+              "value": "center-left",
+              "label": "Center Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom Left"
+            },
+            {
+              "value": "bottom-center",
+              "label": "Bottom Center"
+            }
           ],
           "default": "bottom-left"
         }
       ]
     }
   ],
+
   "presets": [
-  {
-    "name": "JANÉ - Blocks Banner",
-    "blocks": [
-      { "type": "banner" },
-      { "type": "banner" },
-      { "type": "banner" },
-      { "type": "banner" },
-      { "type": "banner" },
-      { "type": "banner" }
-    ]
-  }
-]
+    {
+      "name": "JANÉ - Blocks Banner",
+      "blocks": [
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
