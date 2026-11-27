@@ -1,103 +1,208 @@
 
 /* =========================================
-   JANÉ BLOCKS BANNER JS
+   JANÉ - BLOCKS BANNER
+   JavaScript
 ========================================= */
 
 (() => {
+  'use strict';
 
-  function initJaneBlocksBanner(root = document) {
+  /* INITIALIZE SECTION */
 
-    const sections = root.querySelectorAll(
-      '[data-jbb-section]:not([data-jbb-initialized])'
-    );
+  const initSection = (section) => {
 
-    sections.forEach((section) => {
+    if (!section || section.dataset.jbbInitialized === 'true') {
+      return;
+    }
 
-      section.setAttribute('data-jbb-initialized', 'true');
+    section.dataset.jbbInitialized = 'true';
 
-      const track = section.querySelector('[data-jbb-track]');
-      const prev = section.querySelector('[data-jbb-prev]');
-      const next = section.querySelector('[data-jbb-next]');
+    const track = section.querySelector('[data-jbb-track]');
+    const prev = section.querySelector('[data-jbb-prev]');
+    const next = section.querySelector('[data-jbb-next]');
 
-      if (!track) return;
+    /* =====================================
+       MOBILE CAROUSEL
+    ===================================== */
 
-      /* Image loading */
+    const scrollAmount = () => {
 
-      const images = section.querySelectorAll('.jbb__image');
+      if (!track) return 300;
 
-      images.forEach((image) => {
+      const card = track.querySelector('.jbb__item');
 
-        if (image.complete && image.naturalWidth > 0) {
-          image.classList.add('is-loaded');
-          return;
-        }
-
-        image.addEventListener('load', () => {
-          image.classList.add('is-loaded');
-        }, { once: true });
-
-        image.addEventListener('error', () => {
-          image.classList.add('is-error');
-        }, { once: true });
-
-      });
-
-      /* Carousel navigation */
-
-      const getScrollAmount = () => {
-        const item = track.querySelector('.jbb__item');
-
-        if (!item) return track.clientWidth;
-
-        const styles = window.getComputedStyle(track);
-        const gap = parseFloat(styles.gap) || 0;
-
-        return item.getBoundingClientRect().width + gap;
-      };
-
-      if (prev) {
-        prev.addEventListener('click', () => {
-          track.scrollBy({
-            left: -getScrollAmount(),
-            behavior: 'smooth'
-          });
-        });
+      if (!card) {
+        return track.clientWidth || 300;
       }
 
-      if (next) {
-        next.addEventListener('click', () => {
-          track.scrollBy({
-            left: getScrollAmount(),
-            behavior: 'smooth'
+      const gap = parseFloat(
+        window.getComputedStyle(track).gap
+      ) || 0;
+
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    prev?.addEventListener('click', () => {
+      track?.scrollBy({
+        left: -scrollAmount(),
+        behavior: 'smooth'
+      });
+    });
+
+    next?.addEventListener('click', () => {
+      track?.scrollBy({
+        left: scrollAmount(),
+        behavior: 'smooth'
+      });
+    });
+
+    /* =====================================
+       FADE IN ANIMATION
+    ===================================== */
+
+    const fadeObserver = () => {
+
+      const isDesktop = window.matchMedia(
+        '(min-width: 750px)'
+      ).matches;
+
+      const shouldFade = isDesktop
+        ? section.classList.contains('jbb--fade-desktop')
+        : section.classList.contains('jbb--fade-mobile');
+
+      if (
+        !shouldFade ||
+        !('IntersectionObserver' in window)
+      ) {
+        section.classList.add('is-visible');
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              section.classList.add('is-visible');
+
+              observer.unobserve(section);
+            }
+
           });
-        });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+      observer.observe(section);
+    };
+
+    fadeObserver();
+
+    /* =====================================
+       VIDEO AUTOPLAY
+    ===================================== */
+
+    section.querySelectorAll('video[autoplay]').forEach((video) => {
+
+      video.muted = true;
+      video.playsInline = true;
+
+      const playVideo = () => {
+        video.play().catch(() => {});
+      };
+
+      if ('IntersectionObserver' in window) {
+
+        const videoObserver = new IntersectionObserver(
+          (entries) => {
+
+            entries.forEach((entry) => {
+
+              if (entry.isIntersecting) {
+                playVideo();
+              } else {
+                video.pause();
+              }
+
+            });
+
+          },
+          {
+            threshold: 0.15
+          }
+        );
+
+        videoObserver.observe(video);
+
+      } else {
+
+        playVideo();
+
       }
 
     });
 
-  }
+  };
 
-  /* Initial page load */
+  /* =====================================
+     INITIALIZE ALL SECTIONS
+  ===================================== */
+
+  const init = (root = document) => {
+
+    if (root.matches?.('[data-jbb-section]')) {
+      initSection(root);
+    }
+
+    root.querySelectorAll?.('[data-jbb-section]').forEach(
+      initSection
+    );
+
+  };
+
+  /* =====================================
+     DOCUMENT READY
+  ===================================== */
 
   if (document.readyState === 'loading') {
 
     document.addEventListener(
       'DOMContentLoaded',
-      () => initJaneBlocksBanner()
+      () => init()
     );
 
   } else {
 
-    initJaneBlocksBanner();
+    init();
 
   }
 
-  /* Shopify Theme Editor */
+  /* =====================================
+     SHOPIFY THEME EDITOR EVENTS
+  ===================================== */
 
   document.addEventListener(
     'shopify:section:load',
+    (event) => init(event.target)
+  );
+
+  document.addEventListener(
+    'shopify:section:unload',
     (event) => {
-      initJaneBlocksBanner(event.target);
+
+      event.target
+        .querySelectorAll?.('[data-jbb-section]')
+        .forEach((section) => {
+
+          section.dataset.jbbInitialized = 'false';
+
+        });
+
     }
   );
 
