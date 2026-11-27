@@ -310,17 +310,14 @@ object-fit: contain;
   min-width: 0;
 }
 
-.jane-highlighted .jane-bullet-card__title {
-  margin: 0 0 14px;
-
+.jane-highlighted .jane-bullet-card__description {
   font-family: inherit;
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.2;
-
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.35;
   color: #171717;
+  overflow-wrap: break-word;
 }
-
 .jane-highlighted .jane-bullet-card__description {
   font-family: inherit;
   font-size: 23px;
