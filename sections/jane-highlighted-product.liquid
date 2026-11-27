@@ -1,4 +1,3 @@
-
 {% comment %}
   JANÉ Highlighted Product
   File: sections/jane-highlighted-product.liquid
@@ -181,7 +180,7 @@ style="--jane-image-ratio: {{ desktop_image.aspect_ratio }};"
             <button
 class="jane-hotspot"
               type="button"
-aria-label="{% if block.settings.product != blank %}{{ block.settings.product.title | escape }}{% else %}{{ block.settings.bullet_title | escape }}{% endif %}"
+aria-label="{{ block.settings.bullet_title | default: 'Feature' | escape }}"
               aria-expanded="false"
               data-jane-hotspot
               data-index="{{ bullet_index }}"
@@ -239,61 +238,7 @@ aria-label="{% if block.settings.product != blank %}{{ block.settings.product.ti
                 {{ block.shopify_attributes }}
               >
 
-                {% assign selected_product = block.settings.product %}
-
-                {% if selected_product != blank %}
-
-                  {% if selected_product.featured_image != blank %}
-                    {{
-                      selected_product.featured_image
-                      | image_url: width: 320
-                      | image_tag:
-                        class: 'jane-bullet-card__image',
-                        widths: '80, 120, 160, 240, 320',
-                        sizes: '120px',
-                        loading: 'lazy',
-                        alt: selected_product.title | escape
-                    }}
-                  {% endif %}
-
-                  <div class="jane-bullet-card__copy">
-                    <h3 class="jane-bullet-card__title">
-                      {{ selected_product.title | escape }}
-                    </h3>
-
-                    <div class="jane-bullet-card__price">
-                      {% if selected_product.compare_at_price > selected_product.price %}
-                        <s>{{ selected_product.compare_at_price | money }}</s>
-                      {% endif %}
-                      <span>{{ selected_product.price | money }}</span>
-                    </div>
-
-                    {% if selected_product.description != blank %}
-                      <div class="jane-bullet-card__description">
-                        {{ selected_product.description | strip_html | truncate: 110 }}
-                      </div>
-                    {% endif %}
-
-                    <a href="{{ selected_product.url }}" class="jane-button jane-button--link">
-                      View product
-                    </a>
-                  </div>
-
-                {% else %}
-
-                  {% if block.settings.bullet_image != blank %}
-                    {{
-                      block.settings.bullet_image
-                      | image_url: width: 320
-                      | image_tag:
-                        class: 'jane-bullet-card__image',
-                        widths: '80, 120, 160, 240, 320',
-                        sizes: '120px',
-                        loading: 'lazy',
-                        alt: block.settings.bullet_title | escape
-                    }}
-                  {% endif %}
-
+                {% if block.settings.bullet_title != blank or block.settings.bullet_description != blank %}
                   <div class="jane-bullet-card__copy">
                     {% if block.settings.bullet_title != blank %}
                       <h3 class="jane-bullet-card__title">
@@ -307,7 +252,6 @@ aria-label="{% if block.settings.product != blank %}{{ block.settings.product.ti
                       </div>
                     {% endif %}
                   </div>
-
                 {% endif %}
               </article>
 
@@ -767,16 +711,6 @@ aria-label="{% if block.settings.product != blank %}{{ block.settings.product.ti
       "type": "bullet",
       "name": "Product bullet",
       "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Select product"
-        },
-        {
-          "type": "image_picker",
-          "id": "bullet_image",
-          "label": "Bullet image"
-        },
         {
           "type": "text",
           "id": "bullet_title",
