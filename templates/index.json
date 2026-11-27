@@ -243,7 +243,7 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_Qwrfph": {
+        "banner_V7R4Qg": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
@@ -272,7 +272,7 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_Dd3LKE": {
+        "banner_NcgyhA": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
@@ -301,11 +301,11 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_wy7QAf": {
+        "banner_kexnFV": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Frame_5407_a17b0e80-3014-4ef1-abda-301574ef1ad4.png",
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
@@ -330,11 +330,11 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_VrCmKF": {
+        "banner_CcgpDL": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Card_4b5c5436-a647-4c7c-b504-81f917fb5b12.png",
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
@@ -359,11 +359,11 @@
             "mobile_padding_left": 0
           }
         },
-        "banner_pkYQrU": {
+        "banner_XawwFY": {
           "type": "banner",
           "settings": {
             "desktop_media_type": "image",
-            "desktop_image": "shopify://shop_images/Frame_5407_62e067fd-e318-4243-806d-70a621177de1.png",
+            "desktop_image": "shopify://shop_images/Modern_Beige_Baby_Stroller_Product_Shot.png",
             "mobile_media_type": "inherit",
             "video_autoplay": true,
             "video_loop": true,
@@ -391,11 +391,11 @@
       },
       "block_order": [
         "banner_Kt3jBd",
-        "banner_Qwrfph",
-        "banner_Dd3LKE",
-        "banner_wy7QAf",
-        "banner_VrCmKF",
-        "banner_pkYQrU"
+        "banner_V7R4Qg",
+        "banner_NcgyhA",
+        "banner_kexnFV",
+        "banner_CcgpDL",
+        "banner_XawwFY"
       ],
       "name": "JANÉ - Blocks Banner",
       "settings": {
@@ -429,117 +429,12 @@
         "section_padding_top": 52,
         "section_padding_bottom": 24
       }
-    },
-    "jane_highlighted_product_8NUJWa": {
-      "type": "jane-highlighted-product",
-      "blocks": {
-        "bullet_eqTdUN": {
-          "type": "bullet",
-          "settings": {
-            "product": "bikini-balconette-butterfly-braga-clasica-lazo-4",
-            "bullet_title": "Freno de pie",
-            "bullet_description": "<p>Freno fácil de accionar y desbloquear pulsando con la planta del pie.</p>",
-            "desktop_x": 44,
-            "desktop_y": 90,
-            "mobile_x": 12,
-            "mobile_y": 40
-          }
-        },
-        "bullet_HYNhFi": {
-          "type": "bullet",
-          "settings": {
-            "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
-            "bullet_title": "Capota",
-            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de.</p>",
-            "desktop_x": 56,
-            "desktop_y": 42,
-            "mobile_x": 50,
-            "mobile_y": 82
-          }
-        },
-        "bullet_XDinVT": {
-          "type": "bullet",
-          "settings": {
-            "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
-            "bullet_title": "Capota",
-            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de.</p>",
-            "desktop_x": 20,
-            "desktop_y": 42,
-            "mobile_x": 50,
-            "mobile_y": 82
-          }
-        },
-        "bullet_7zdJBg": {
-          "type": "bullet",
-          "settings": {
-            "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
-            "bullet_title": "Capota",
-            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de.</p>",
-            "desktop_x": 96,
-            "desktop_y": 42,
-            "mobile_x": 50,
-            "mobile_y": 82
-          }
-        },
-        "bullet_RPQjwN": {
-          "type": "bullet",
-          "settings": {
-            "product": "bikini-balconette-butterfly-braga-clasica-lazo-1",
-            "bullet_title": "Capota",
-            "bullet_description": "<p>Capota extensible repelente al agua con protección solar UPF 50 y rejilla de.</p>",
-            "desktop_x": 37,
-            "desktop_y": 42,
-            "mobile_x": 50,
-            "mobile_y": 82
-          }
-        }
-      },
-      "block_order": [
-        "bullet_eqTdUN",
-        "bullet_HYNhFi",
-        "bullet_XDinVT",
-        "bullet_7zdJBg",
-        "bullet_RPQjwN"
-      ],
-      "name": "JANÉ – Highlighted Product",
-      "settings": {
-        "title": "Nuevo lanzamiento",
-        "description": "<p>Carrito Muum</p>",
-        "heading_position": "inside",
-        "text_alignment": "left",
-        "title_tag": "h1",
-        "title_preset": "h2",
-        "title_preset_mobile": "h5",
-        "body_preset": "body_regular",
-        "body_preset_mobile": "body_regular",
-        "title_color": "#171717",
-        "text_color": "#171717",
-        "desktop_image": "shopify://shop_images/Rectangle_4143_3fffef1b-604c-4cb7-a583-3d423dc6011b.png",
-        "mobile_image": "shopify://shop_images/Rectangle_4143_1.png",
-        "image_ratio": "adapt",
-        "image_fit": "cover",
-        "mobile_image_fit": "contain",
-        "image_position": "center center",
-        "image_overlay": 0,
-        "content_max_width": 1600,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "color_scheme": "",
-        "button_label": "Descubrir",
-        "button_link": "",
-        "button_type": "stroke",
-        "button_position": "image",
-        "button_alignment": "left",
-        "fade_desktop": false,
-        "fade_mobile": false
-      }
     }
   },
   "order": [
     "jane_hero_banner_rthWrX",
     "image_banner",
     "177021381514078c66",
-    "jane_blocks_banner_8gnddD",
-    "jane_highlighted_product_8NUJWa"
+    "jane_blocks_banner_8gnddD"
   ]
 }
