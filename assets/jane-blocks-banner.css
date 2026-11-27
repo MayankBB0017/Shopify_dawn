@@ -167,3 +167,84 @@
 @media (prefers-reduced-motion: reduce) {
   .jbb *, .jbb *::before, .jbb *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* =========================================
+   JANÉ - FINAL DESKTOP 2 TOP + 4 BOTTOM
+========================================= */
+
+@media screen and (min-width: 750px) {
+
+  section.jbb.jbb--desktop-two-plus-four .jbb__grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    gap: var(--jbb-gap, 8px) !important;
+    width: 100% !important;
+  }
+
+  /* TOP TWO BLOCKS */
+
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__grid > .jbb__item:nth-child(1),
+
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__grid > .jbb__item:nth-child(2) {
+    grid-column: span 2 !important;
+    grid-row: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* BOTTOM FOUR BLOCKS */
+
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__grid > .jbb__item:nth-child(n+3) {
+    grid-column: span 1 !important;
+    grid-row: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* TOP IMAGE SIZE */
+
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__grid > .jbb__item:nth-child(-n+2) .jbb__media {
+    aspect-ratio: 3 / 2 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* BOTTOM IMAGE SIZE */
+
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__grid > .jbb__item:nth-child(n+3) .jbb__media {
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* MEDIA */
+
+  section.jbb.jbb--desktop-two-plus-four .jbb__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__media-desktop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__media-desktop .jbb__image,
+  section.jbb.jbb--desktop-two-plus-four
+  .jbb__media-desktop .jbb__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+}
