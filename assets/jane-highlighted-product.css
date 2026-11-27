@@ -397,8 +397,8 @@
 }
 
 .jane-highlighted .jane-hotspot__dot {
-  width: 52px;
-  height: 52px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: #171717;
   border: none;
