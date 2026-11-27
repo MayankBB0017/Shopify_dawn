@@ -503,8 +503,9 @@ object-fit: contain;
   }
 
   .jane-highlighted .jane-highlighted__image {
-    object-fit: var(--jane-mobile-image-fit, contain);
-  }
+  object-fit: cover;
+  object-position: center;
+}
 
   /* Heading */
 
