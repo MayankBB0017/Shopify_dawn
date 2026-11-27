@@ -93,7 +93,7 @@
             "description": "",
             "desktop_text_color": "#ffffff",
             "mobile_text_color": "#ffffff",
-            "desktop_position": "top-left",
+            "desktop_position": "bottom-left",
             "mobile_position": "bottom-left",
             "button_label": "",
             "link": "",
